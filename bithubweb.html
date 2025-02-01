@@ -53,29 +53,29 @@
 
         /* Kafelki wyboru */
         .container-buttons {
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            margin-bottom: 20px; 
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
             margin-top: 40px;
         }
 
         .tile {
-            padding: 12px; 
-            font-size: 16px; 
-            font-weight: bold; 
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
             border-radius: 10px;
-            cursor: pointer; 
-            width: 160px; 
+            cursor: pointer;
+            width: 160px;
             text-align: center;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
             transition: all 0.3s ease-in-out;
             background: rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
             color: #333;
         }
@@ -189,14 +189,18 @@
             font-weight: bold;
             color: #333;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
-<body>
+<body onload="showHomePage()">
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#" onclick="showHomePage()">
                 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -209,7 +213,7 @@
                             MATCHPRICE
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showMatchJSONPage()">MATCH JSON</a></li>
                             <li><a class="dropdown-item" href="#">MATCH CSV</a></li>
                             <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
                             <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
@@ -223,43 +227,62 @@
         </div>
     </nav>
 
-    <!-- PRZYCISKI GŁÓWNE -->
-    <div class="container-buttons">
-        <div class="tile spizarnia" onclick="setCategory('spizarnia')">MATCH SPIŻARNIA</div>
-        <div class="tile wabar" onclick="setCategory('wabar')">MATCH WABAR</div>
-        <div class="tile lemonex" onclick="setCategory('lemonex')">MATCH LEMONEX</div>
-        <div class="tile rofood" onclick="setCategory('rofood')">MATCH ROFOOD</div>
+    <!-- STRONA GŁÓWNA -->
+    <div id="homePage">
+        <h1>Strona w budowie</h1>
     </div>
 
-    <h2 id="currentMatch">Wybierz kategorię</h2>
-
-    <!-- SEKCJA IMPORTU PLIKU -->
-    <div id="importSection" class="hidden-section upload-container">
-        <div id="uploadArea" class="upload-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
-            <p>Przeciągnij i upuść plik tutaj lub kliknij, aby wybrać plik</p>
-            <input type="file" id="jsonFile" accept=".json" style="display: none;" onchange="handleFileSelect(event)">
-            <button class="btn-secondary" onclick="document.getElementById('jsonFile').click()">Wybierz plik</button>
+    <!-- MATCH JSON PAGE -->
+    <div id="matchJSONPage" class="hidden">
+        <!-- PRZYCISKI GŁÓWNE -->
+        <div class="container-buttons">
+            <div class="tile spizarnia" onclick="setCategory('spizarnia')">MATCH SPIŻARNIA</div>
+            <div class="tile wabar" onclick="setCategory('wabar')">MATCH WABAR</div>
+            <div class="tile lemonex" onclick="setCategory('lemonex')">MATCH LEMONEX</div>
+            <div class="tile rofood" onclick="setCategory('rofood')">MATCH ROFOOD</div>
         </div>
 
-        <!-- Przyciski -->
-        <div class="button-group">
-            <button class="btn-primary" onclick="processJSON()">Przetwórz</button>
-            <button class="btn-secondary" onclick="downloadXLS()">Pobierz XLS</button>
+        <h2 id="currentMatch">Wybierz kategorię</h2>
+
+        <!-- SEKCJA IMPORTU PLIKU -->
+        <div id="importSection" class="hidden-section upload-container">
+            <div id="uploadArea" class="upload-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                <p>Przeciągnij i upuść plik tutaj lub kliknij, aby wybrać plik</p>
+                <input type="file" id="jsonFile" accept=".json" style="display: none;" onchange="handleFileSelect(event)">
+                <button class="btn-secondary" onclick="document.getElementById('jsonFile').click()">Wybierz plik</button>
+            </div>
+
+            <!-- Przyciski -->
+            <div class="button-group">
+                <button class="btn-primary" onclick="processJSON()">Przetwórz</button>
+                <button class="btn-secondary" onclick="downloadXLS()">Pobierz XLS</button>
+            </div>
         </div>
-    </div>
 
-    <!-- TABELA -->
-    <div class="table-container" id="tableContainer">
-        <div id="resultsTable"></div>
-    </div>
+        <!-- TABELA -->
+        <div class="table-container" id="tableContainer">
+            <div id="resultsTable"></div>
+        </div>
 
-    <!-- ŚREDNI RABAT -->
-    <div class="summary-container" id="summaryContainer" style="display: none;">Średni rabat: 0%</div>
+        <!-- ŚREDNI RABAT -->
+        <div class="summary-container" id="summaryContainer" style="display: none;">Średni rabat: 0%</div>
+    </div>
 
     <script>
         let databases = {};
         let currentDatabase = [];
         let tabulatorInstance;
+
+        function showHomePage() {
+            document.getElementById('homePage').classList.remove('hidden');
+            document.getElementById('matchJSONPage').classList.add('hidden');
+        }
+
+        function showMatchJSONPage() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('matchJSONPage').classList.remove('hidden');
+            initializeTable();
+        }
 
         async function setCategory(category) {
             try {
@@ -272,7 +295,9 @@
                 document.querySelectorAll('.tile').forEach(tile => tile.classList.remove('active'));
                 document.querySelector(`.tile.${category}`).classList.add('active');
                 console.log(`Załadowano bazę danych: ${category}`, currentDatabase);
-                initializeTable();
+                if (tabulatorInstance) {
+                    searchAndMatch([]);
+                }
             } catch (error) {
                 console.error("Błąd wczytywania JSON:", error);
                 alert("Nie udało się załadować danych JSON!");
