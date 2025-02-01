@@ -216,6 +216,8 @@
         <div class="tile rofood" onclick="setCategory('rofood')">MATCH ROFOOD</div>
     </div>
 
+    <h2 id="currentMatch">Wybierz kategorię</h2>
+
     <!-- SEKCJA IMPORTU PLIKU -->
     <div id="importSection" class="hidden-section upload-container">
         <div id="uploadArea" class="upload-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
@@ -242,6 +244,7 @@
     <script>
         let databases = {};
         let currentDatabase = [];
+        let tabulatorInstance;
 
         async function setCategory(category) {
             try {
@@ -250,6 +253,8 @@
                 databases[category] = await response.json();
                 currentDatabase = databases[category];
                 document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
+                document.querySelectorAll('.tile').forEach(tile => tile.classList.remove('active'));
+                document.querySelector(`.tile.${category}`).classList.add('active');
                 console.log(`Załadowano bazę danych: ${category}`, currentDatabase);
             } catch (error) {
                 console.error("Błąd wczytywania JSON:", error);
@@ -344,8 +349,8 @@
                     paginationSize: 10,
                     columns: [
                         { title: "#", field: "id", formatter: "rownum", headerSort: false, width: 50 },
-                        { title: "Kod (MM)", field: "MM", sorter: "number", width: 100, headerFilter: "input" }, // Filtr TYLKO tutaj
-                        { title: "Nazwa", field: "NAZWA", sorter: "string", headerFilter: "input" }, // Filtr TYLKO tutaj
+                        { title: "Kod (MM)", field: "MM", sorter: "number", width: 100, headerFilter: "input" },
+                        { title: "Nazwa", field: "NAZWA", sorter: "string", headerFilter: "input" },
                         { title: "Cena", field: "CENA", sorter: "number", formatter: "money", formatterParams: { decimal: ".", thousand: ",", precision: 2 } },
                         { 
                             title: "Rabat", 
@@ -370,7 +375,6 @@
         }
 
         function displaySummary(matches) {
-            // Calculate average discount
             let totalDiscount = 0;
             matches.forEach(entry => {
                 totalDiscount += parseFloat(entry.RABAT);
