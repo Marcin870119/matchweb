@@ -39,6 +39,7 @@
         .tabulator .tabulator-row:nth-child(even) { background-color: #f2f2f2; }
         .tabulator .tabulator-cell { padding: 10px; }
         .summary-container { margin-top: 20px; font-size: 16px; font-weight: bold; color: #333; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -101,7 +102,6 @@
 
     <script>
         let csvTabulatorInstance;
-        let currentDatabase = [];
 
         function handleCSVFileSelect(event) {
             const file = event.target.files[0];
@@ -123,7 +123,8 @@
         }
 
         function readCSVFile(file) {
-            const config = {
+            Papa.parse(file, {
+                delimiter: "", // auto-detect
                 header: true,
                 skipEmptyLines: true,
                 complete: function(results) {
@@ -134,18 +135,6 @@
                     alert('Błąd podczas wczytywania pliku CSV!');
                     console.error(error);
                 }
-            };
-
-            // Check for semicolon separator
-            Papa.parse(file, {
-                ...config,
-                delimiter: ';'
-            });
-
-            // Parse again with comma separator if the first parse returns no data
-            Papa.parse(file, {
-                ...config,
-                delimiter: ','
             });
         }
 
@@ -154,17 +143,12 @@
             let matchedData = [];
 
             data.forEach(entry => {
-                if (!entry['wartosc'] || !entry['wartosc (5)']) return;
-
-                let sp = replaceCharacters(entry['wartosc'].toString().trim().toUpperCase());
-                let cena = parseFloat(entry['wartosc (5)'].replace(',', '.'));
-
-                currentDatabase.forEach(item => {
-                    let db_sp = replaceCharacters((item.WABAR || item.SP || '').toString().trim().toUpperCase());
-                    if (db_sp === sp) {
-                        const rabat = ((1 - (cena / parseFloat(item['CENA 100 MM']))) * 100).toFixed(2);
-                        matchedData.push({ MM: item.MM, NAZWA: replaceCharacters(item.NAZWA), CENA: cena.toFixed(2), RABAT: rabat });
-                    }
+                // Przykładowa logika do przetwarzania danych CSV
+                matchedData.push({
+                    MM: entry["MM"],
+                    NAZWA: entry["NAZWA"],
+                    CENA: parseFloat(entry["CENA"]),
+                    RABAT: parseFloat(entry["RABAT"])
                 });
             });
 
