@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.5.0/js/tabulator.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.5.0/css/tabulator.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="main.js" defer></script>
 
     <style>
         body { font-family: 'Arial', sans-serif; text-align: center; background-color: #F5F5F5; margin-top: 20px; }
@@ -40,6 +39,7 @@
         .tabulator .tabulator-row:nth-child(even) { background-color: #f2f2f2; }
         .tabulator .tabulator-cell { padding: 10px; }
         .summary-container { margin-top: 20px; font-size: 16px; font-weight: bold; color: #333; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -102,6 +102,7 @@
 
     <script>
         let csvTabulatorInstance;
+        let currentDatabase = [];
 
         function handleCSVFileSelect(event) {
             const file = event.target.files[0];
@@ -123,8 +124,9 @@
         }
 
         function readCSVFile(file) {
-            Papa.parse(file, {
+            const config = {
                 header: true,
+                skipEmptyLines: true,
                 complete: function(results) {
                     console.log('Wczytane dane CSV:', results.data);
                     processCSVData(results.data);
@@ -133,6 +135,18 @@
                     alert('Błąd podczas wczytywania pliku CSV!');
                     console.error(error);
                 }
+            };
+
+            // Check for semicolon separator
+            Papa.parse(file, {
+                ...config,
+                delimiter: ';'
+            });
+
+            // Parse again with comma separator if the first parse returns no data
+            Papa.parse(file, {
+                ...config,
+                delimiter: ','
             });
         }
 
