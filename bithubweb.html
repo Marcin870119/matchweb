@@ -57,28 +57,21 @@
     </table>
 
     <script>
-        let databases = {
-            spizarnia: [],
-            wabar: [
-                { "MM": 3310, "NAZWA": "JBB BOCZEK Z BECZKI OK 1KG", "WABAR": "WĘD000841", "CENA 100 MM": 20.15 },
-                { "MM": 7347, "NAZWA": "SIERPC SER ZOLTY W BLOKU KROLEWSKI 3,7KG", "WABAR": "NAB000028", "CENA 100 MM": 21.22 }
-            ],
-            lemonex: [
-                { "MM": 5001, "NAZWA": "LEMONEX SOK JABŁKOWY 1L", "SP": 32012, "CENA 100 MM": 3.55 }
-            ],
-            rofood: [
-                { "MM": 6613, "NAZWA": "PIATNICA SMETANA 18% 400ML", "Rofood": "PIĄTNICA Śmietana 18% 0,4L/12", "CENA 100 MM": 3.25 },
-                { "MM": 3310, "NAZWA": "JBB BOCZEK Z BECZKI OK 1KG", "Rofood": "JBB Boczek Z BECZKI ok. 1kg", "CENA 100 MM": 18.4 },
-                { "MM": 7347, "NAZWA": "SIERPC SER ZOLTY W BLOKU KROLEWSKI 3,7KG", "Rofood": "SIERPC Ser KRÓLEWSKI blok 4,5kg", "CENA 100 MM": 20.13 }
-            ]
-        };
-
+        let databases = {};
         let currentDatabase = [];
 
-        function setCategory(category) {
-            currentDatabase = databases[category] || [];
-            document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
-            console.log(`Załadowano bazę danych: ${category}`);
+        async function setCategory(category) {
+            try {
+                const response = await fetch(`${category}.json`);
+                if (!response.ok) throw new Error("Błąd wczytywania pliku JSON");
+                databases[category] = await response.json();
+                currentDatabase = databases[category];
+                document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
+                console.log(`Załadowano bazę danych: ${category}`, currentDatabase);
+            } catch (error) {
+                console.error("Błąd wczytywania JSON:", error);
+                alert("Nie udało się załadować danych JSON!");
+            }
         }
 
         function processCSV() {
