@@ -257,9 +257,48 @@
                 document.querySelectorAll('.tile').forEach(tile => tile.classList.remove('active'));
                 document.querySelector(`.tile.${category}`).classList.add('active');
                 console.log(`Załadowano bazę danych: ${category}`, currentDatabase);
+                initializeTable();
             } catch (error) {
                 console.error("Błąd wczytywania JSON:", error);
                 alert("Nie udało się załadować danych JSON!");
+            }
+        }
+
+        function initializeTable() {
+            if (!tabulatorInstance) {
+                tabulatorInstance = new Tabulator("#resultsTable", {
+                    layout: "fitColumns",
+                    pagination: "local",
+                    paginationSize: 10,
+                    columns: [
+                        { title: "#", field: "id", formatter: "rownum", headerSort: false, width: 50 },
+                        { title: "Kod (MM)", field: "MM", sorter: "number", width: 100, headerFilter: "input" },
+                        { title: "Nazwa", field: "NAZWA", sorter: "string", headerFilter: "input" },
+                        { title: "Cena", field: "CENA", sorter: "number", formatter: "money", formatterParams: { decimal: ".", thousand: ",", precision: 2 } },
+                        { 
+                            title: "Rabat", 
+                            field: "RABAT", 
+                            sorter: "number", 
+                            headerFilter: "list", 
+                            headerFilterParams: { values: { "": "Wszystkie", "zielony": "Zielony", "żółty": "Żółty", "czerwony": "Czerwony" } },
+                            headerFilterFunc: customFilter,
+                            formatter: function(cell) { 
+                                let value = parseFloat(cell.getValue());
+                                let color = getColor(value);
+                                let colorCode = color === "czerwony" ? "red" : color === "żółty" ? "#FFD700" : "green";
+                                return `<span style="color: ${colorCode}; font-weight: bold;">${value}%</span>`;
+                            }
+                        }
+                    ],
+                    data: []  // Ustawienie pustych danych podczas inicjalizacji
+                });
+
+                tabulatorInstance.on("tableBuilt", function() {
+                    console.log("Tabela została zainicjalizowana.");
+                    if (currentDatabase.length > 0) {
+                        searchAndMatch(currentDatabase);
+                    }
+                });
             }
         }
 
@@ -349,34 +388,6 @@
             console.log("Wyświetlanie wyników:", matches);
             if (tabulatorInstance) {
                 tabulatorInstance.setData(matches);
-            } else {
-                tabulatorInstance = new Tabulator("#resultsTable", {
-                    layout: "fitColumns",
-                    pagination: "local",
-                    paginationSize: 10,
-                    columns: [
-                        { title: "#", field: "id", formatter: "rownum", headerSort: false, width: 50 },
-                        { title: "Kod (MM)", field: "MM", sorter: "number", width: 100, headerFilter: "input" },
-                        { title: "Nazwa", field: "NAZWA", sorter: "string", headerFilter: "input" },
-                        { title: "Cena", field: "CENA", sorter: "number", formatter: "money", formatterParams: { decimal: ".", thousand: ",", precision: 2 } },
-                        { 
-                            title: "Rabat", 
-                            field: "RABAT", 
-                            sorter: "number", 
-                            headerFilter: "select", 
-                            headerFilterParams: { values: { "": "Wszystkie", "zielony": "Zielony", "żółty": "Żółty", "czerwony": "Czerwony" } },
-                            headerFilterFunc: customFilter,
-                            formatter: function(cell) { 
-                                let value = parseFloat(cell.getValue());
-                                let color = getColor(value);
-                                let colorCode = color === "czerwony" ? "red" : color === "żółty" ? "#FFD700" : "green";
-                                return `<span style="color: ${colorCode}; font-weight: bold;">${value}%</span>`;
-                            }
-                        }
-                    ]
-                });
-
-                tabulatorInstance.setData(matches);
             }
             document.getElementById('summaryContainer').style.display = 'block';
         }
@@ -397,6 +408,9 @@
                 alert("Brak danych do pobrania!");
             }
         }
+
+        // Inicjalizacja Tabulatora przy pierwszym załadowaniu strony
+        initializeTable();
     </script>
 
 </body>
