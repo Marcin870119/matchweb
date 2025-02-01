@@ -250,7 +250,8 @@
             try {
                 const response = await fetch(`https://raw.githubusercontent.com/Marcin870119/matchweb/main/${category}.json`);
                 if (!response.ok) throw new Error("Błąd wczytywania pliku JSON");
-                databases[category] = await response.json();
+                const data = await response.json();
+                databases[category] = data;
                 currentDatabase = databases[category];
                 document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
                 document.querySelectorAll('.tile').forEach(tile => tile.classList.remove('active'));
@@ -324,6 +325,9 @@
             });
 
             console.log("Przetworzone dane:", matchedData);
+            if (matchedData.length === 0) {
+                console.warn("Brak danych do wyświetlenia.");
+            }
             displayResults(matchedData);
             displaySummary(matchedData);
         }
