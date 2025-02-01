@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MATCH SYSTEM</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
         h1 { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
@@ -36,6 +37,14 @@
 
     <h2 id="currentMatch">Wybierz kategorię</h2>
 
+    <input type="file" id="jsonFile" accept=".json">
+    <button class="btn-primary" onclick="processJSON()">Przetwórz JSON</button>
+    <button class="btn-secondary" onclick="downloadXLS()">Pobierz XLS</button>
+
+    <h3>Import CSV: (dla WABARU)</h3>
+    <input type="file" id="csvFile" accept=".csv">
+    <button class="btn-secondary" onclick="processCSV()">Przetwórz CSV</button>
+
     <h3>Wyniki</h3>
     <table id="resultsTable">
         <tr>
@@ -48,17 +57,84 @@
     </table>
 
     <script>
-        let databases = {};
+        let currentDatabase = [];
+        const repoUrl = "https://marcin870119.github.io/matchweb/";
 
         function setCategory(category) {
-            fetch(`${category}.json`)
+            fetch(`${repoUrl}${category}.json`)
                 .then(response => response.json())
                 .then(data => {
-                    databases[category] = data;
-                    displayResults(databases[category]);
+                    currentDatabase = data;
                     document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
+                    console.log(`Załadowano bazę danych: ${category}`, currentDatabase);
                 })
-                .catch(error => console.error('Błąd wczytywania JSON:', error));
+                .catch(error => {
+                    console.error("Błąd wczytywania JSON:", error);
+                    alert("Nie udało się załadować bazy danych!");
+                });
+        }
+
+        function processJSON() {
+            const fileInput = document.getElementById('jsonFile');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Wybierz plik JSON!");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const jsonData = JSON.parse(event.target.result);
+                    console.log("Wczytane dane:", jsonData);
+                    searchAndMatch(jsonData);
+                } catch (error) {
+                    alert("Błąd podczas wczytywania pliku JSON!");
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function processCSV() {
+            const fileInput = document.getElementById('csvFile');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Wybierz plik CSV!");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                Papa.parse(event.target.result, {
+                    header: true,
+                    delimiter: ",",
+                    complete: function(results) {
+                        console.log("Wczytane dane CSV:", results.data);
+                        searchAndMatch(results.data);
+                    }
+                });
+            };
+            reader.readAsText(file);
+        }
+
+        function searchAndMatch(data) {
+            let matchedData = [];
+
+            data.forEach(entry => {
+                if (!entry["wartosc"] || !entry["wartosc (5)"]) return;
+
+                let sp = entry["wartosc"].toString().trim().toUpperCase();
+                let cena = parseFloat(entry["wartosc (5)"].replace(',', '.'));
+
+                currentDatabase.forEach(item => {
+                    let db_sp = (item.WABAR || item.SP || "").toString().trim().toUpperCase();
+                    if (db_sp === sp) {
+                        const rabat = ((1 - (cena / parseFloat(item["CENA 100 MM"]))) * 100).toFixed(2);
+                        matchedData.push({ MM: item.MM, NAZWA: item.NAZWA, CENA: cena.toFixed(2), RABAT: rabat });
+                    }
+                });
+            });
+
+            displayResults(matchedData);
         }
 
         function displayResults(matches) {
@@ -70,9 +146,19 @@
                 row.insertCell(0).textContent = index + 1;
                 row.insertCell(1).textContent = match.MM;
                 row.insertCell(2).textContent = match.NAZWA;
-                row.insertCell(3).textContent = match["CENA 100 MM"];
+                row.insertCell(3).textContent = match.CENA;
+                row.insertCell(4).textContent = match.RABAT + "%";
             });
         }
+
+        function downloadXLS() {
+            let table = document.getElementById('resultsTable');
+            let ws = XLSX.utils.table_to_sheet(table);
+            let wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Wyniki");
+            XLSX.writeFile(wb, "wyniki.xlsx");
+        }
     </script>
+
 </body>
 </html>
