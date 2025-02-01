@@ -305,6 +305,7 @@
         }
 
         function searchAndMatch(jsonData) {
+            console.log("Rozpoczęcie przetwarzania danych...");
             let matchedData = [];
 
             jsonData.forEach(entry => {
@@ -322,6 +323,7 @@
                 });
             });
 
+            console.log("Przetworzone dane:", matchedData);
             displayResults(matchedData);
             displaySummary(matchedData);
         }
