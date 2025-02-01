@@ -18,7 +18,8 @@
         .lemonex { background-color: #28A745; } .rofood { background-color: #007BFF; }
         table { width: 80%; margin: 20px auto; border-collapse: collapse; }
         th, td { border: 1px solid black; padding: 10px; text-align: center; }
-        th { background-color: #f4f4f4; }
+        th { background-color: #f4f4f4; position: relative; }
+        th input { width: 100%; padding: 5px; box-sizing: border-box; }
         button { padding: 10px 15px; margin: 10px; border: none; cursor: pointer; font-size: 16px; }
         .btn-primary { background-color: #007BFF; color: white; }
         .btn-secondary { background-color: #28A745; color: white; }
@@ -47,13 +48,23 @@
 
     <h3>Wyniki</h3>
     <table id="resultsTable">
-        <tr>
-            <th>#</th>
-            <th>Kod (MM)</th>
-            <th>Nazwa</th>
-            <th>Cena</th>
-            <th>Rabat</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th><input type="text" id="filterMM" onkeyup="filterTable(1)" placeholder="Filtruj Kod (MM)"></th>
+                <th><input type="text" id="filterNazwa" onkeyup="filterTable(2)" placeholder="Filtruj Nazwa"></th>
+                <th><input type="text" id="filterCena" onkeyup="filterTable(3)" placeholder="Filtruj Cena"></th>
+                <th><input type="text" id="filterRabat" onkeyup="filterTable(4)" placeholder="Filtruj Rabat"></th>
+            </tr>
+            <tr>
+                <th>#</th>
+                <th>Kod (MM)</th>
+                <th>Nazwa</th>
+                <th>Cena</th>
+                <th>Rabat</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
     </table>
 
     <script>
@@ -94,27 +105,6 @@
             });
         }
 
-        function processJSON() {
-            const fileInput = document.getElementById('jsonFile');
-            const file = fileInput.files[0];
-            if (!file) {
-                alert("Wybierz plik JSON!");
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                try {
-                    const jsonData = JSON.parse(event.target.result);
-                    console.log("Wczytane dane JSON:", jsonData);
-                    searchAndMatch(jsonData);
-                } catch (error) {
-                    alert("Błąd podczas wczytywania pliku JSON!");
-                    console.error(error);
-                }
-            };
-            reader.readAsText(file);
-        }
-
         function searchAndMatch(jsonData) {
             let matchedData = [];
             jsonData.forEach(entry => {
@@ -134,17 +124,30 @@
         }
 
         function displayResults(matches) {
-            const table = document.getElementById("resultsTable");
-            while (table.rows.length > 1) table.deleteRow(1);
-
+            const tbody = document.querySelector("#resultsTable tbody");
+            tbody.innerHTML = "";
             matches.forEach((match, index) => {
-                let row = table.insertRow();
+                let row = tbody.insertRow();
                 row.insertCell(0).textContent = index + 1;
                 row.insertCell(1).textContent = match.MM;
                 row.insertCell(2).textContent = match.NAZWA;
                 row.insertCell(3).textContent = match.CENA;
                 row.insertCell(4).textContent = match.RABAT + "%";
             });
+        }
+
+        function filterTable(column) {
+            let input = document.getElementById(`filter${["", "MM", "Nazwa", "Cena", "Rabat"][column]}`);
+            let filter = input.value.toUpperCase();
+            let table = document.getElementById("resultsTable");
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 2; i < rows.length; i++) {
+                let cell = rows[i].getElementsByTagName("td")[column];
+                if (cell) {
+                    rows[i].style.display = cell.textContent.toUpperCase().includes(filter) ? "" : "none";
+                }
+            }
         }
     </script>
 
