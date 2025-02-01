@@ -16,6 +16,10 @@
         .navbar-nav .nav-link { font-size: 14px; font-weight: 500; color: rgba(255, 255, 255, 0.8); padding: 6px 12px; transition: color 0.3s ease-in-out; }
         .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: white; }
         .dropdown-menu a:hover { background-color: #343A40; color: white; }
+        .container-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; margin-top: 40px; }
+        .tile { padding: 12px; font-size: 16px; font-weight: bold; border-radius: 10px; cursor: pointer; width: 160px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.3s ease-in-out; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); color: #333; }
+        .tile:hover, .tile.active { background: #343A40; color: white; transform: scale(1.05); box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.2); }
+        .tile.active { background: #007BFF; color: white; }
         .upload-container { display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 20px; }
         .upload-area { border: 2px dashed #ccc; border-radius: 10px; padding: 30px; width: 50%; text-align: center; background: white; transition: 0.3s; }
         .upload-area.dragover { border-color: #198754; background: #f3f3f3; }
@@ -64,8 +68,16 @@
 
     <!-- MATCH CSV PAGE -->
     <div id="matchCSVPage">
+        <!-- KAFELKI WYBORU -->
+        <div class="container-buttons">
+            <div class="tile" onclick="setCategory('spizarnia')">MATCH SPIŻARNIA</div>
+            <div class="tile" onclick="setCategory('wabar')">MATCH WABAR</div>
+            <div class="tile" onclick="setCategory('lemonex')">MATCH LEMONEX</div>
+            <div class="tile" onclick="setCategory('rofood')">MATCH ROFOOD</div>
+        </div>
+
         <!-- SEKCJA IMPORTU PLIKU -->
-        <div id="importSection" class="upload-container">
+        <div id="importSection" class="upload-container hidden">
             <div id="uploadArea" class="upload-area" ondrop="handleCSVFileDrop(event)" ondragover="handleCSVDragOver(event)">
                 <p>Przeciągnij i upuść plik tutaj lub kliknij, aby wybrać plik</p>
                 <input type="file" id="csvFile" accept=".csv" style="display: none;" onchange="handleCSVFileSelect(event)">
@@ -74,7 +86,7 @@
         </div>
 
         <!-- TABELA -->
-        <div class="table-container" id="tableContainer">
+        <div class="table-container hidden" id="tableContainer">
             <table class="table table-striped" id="csvTable">
                 <thead></thead>
                 <tbody></tbody>
@@ -82,7 +94,7 @@
         </div>
 
         <!-- Przyciski -->
-        <div class="button-group">
+        <div class="button-group hidden" id="processButtonGroup">
             <button class="btn-primary" onclick="processCSV()">Przetwórz</button>
         </div>
     </div>
@@ -90,19 +102,27 @@
     <script>
         let csvData = [];
         let databases = {};
+        let currentCategory = '';
 
         async function fetchDatabase(category) {
-            const response = await fetch(`https://raw.githubusercontent.com/Marcin870119/matchweb/main/${category}.json`);
-            if (!response.ok) throw new Error("Błąd wczytywania pliku JSON");
-            const data = await response.json();
-            databases[category] = data;
+            try {
+                const response = await fetch(`https://raw.githubusercontent.com/Marcin870119/matchweb/main/${category}.json`);
+                if (!response.ok) throw new Error("Błąd wczytywania pliku JSON");
+                const data = await response.json();
+                databases[category] = data;
+            } catch (error) {
+                alert(`Błąd wczytywania pliku JSON dla kategorii: ${category}`);
+                console.error(error);
+            }
         }
 
-        async function fetchAllDatabases() {
-            await fetchDatabase('spizarnia');
-            await fetchDatabase('wabar');
-            await fetchDatabase('lemonex');
-            await fetchDatabase('rofood');
+        function setCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.tile').forEach(tile => tile.classList.remove('active'));
+            document.querySelector(`.tile[onclick="setCategory('${category}')"]`).classList.add('active');
+            document.getElementById('importSection').classList.remove('hidden');
+            document.getElementById('tableContainer').classList.add('hidden');
+            document.getElementById('processButtonGroup').classList.add('hidden');
         }
 
         function handleCSVFileSelect(event) {
@@ -131,8 +151,11 @@
                 skipEmptyLines: true,
                 complete: function(results) {
                     console.log('Wczytane dane CSV:', results.data);
-                    csvData = results.data; // Store CSV data
-                    displayCSVData(results.data);
+                    csvData = results.data.map(row => ({
+                        INDEKS: row['INDEKS'],
+                        CENA: row['CENA NETTO BEZ RABATU']
+                    }));
+                    displayCSVData(csvData);
                 },
                 error: function(error) {
                     alert('Błąd podczas wczytywania pliku CSV!');
@@ -156,8 +179,7 @@
                 const headerRow = document.createElement('tr');
                 headers.forEach(header => {
                     const th = document.createElement('th');
-                    th.innerHTML = `${header} <span class="close-btn" onclick="closeColumn('${header}')">&times;</span>`;
-                    th.setAttribute('data-header', header); // Add data-header attribute
+                    th.textContent = header;
                     headerRow.appendChild(th);
                 });
                 thead.appendChild(headerRow);
@@ -168,46 +190,35 @@
                     headers.forEach(header => {
                         const td = document.createElement('td');
                         td.textContent = row[header];
-                        td.setAttribute('data-header', header); // Add data-header attribute
                         tr.appendChild(td);
                     });
                     tbody.appendChild(tr);
                 });
+
+                document.getElementById('tableContainer').classList.remove('hidden');
+                document.getElementById('processButtonGroup').classList.remove('hidden');
             }
         }
 
-        function closeColumn(header) {
-            // Hide the column header
-            const th = document.querySelector(`th[data-header='${header}']`);
-            if (th) th.style.display = 'none';
-
-            // Hide the column cells
-            const tds = document.querySelectorAll(`td[data-header='${header}']`);
-            tds.forEach(td => td.style.display = 'none');
-        }
-
         async function processCSV() {
-            await fetchAllDatabases();
+            await fetchDatabase(currentCategory);
             const results = [];
 
             csvData.forEach(entry => {
                 const index = entry['INDEKS'];
-                const price = parseFloat(entry['CENA NETTO']);
+                const price = parseFloat(entry['CENA']);
 
                 if (!index || isNaN(price)) return;
 
-                for (const category in databases) {
-                    const db = databases[category];
-                    db.forEach(item => {
-                        if (item.WABAR == index || item.SP == index) {
-                            results.push({
-                                MM: item.MM,
-                                NAZWA: item.NAZWA,
-                                CENA: price
-                            });
-                        }
-                    });
-                }
+                databases[currentCategory].forEach(item => {
+                    if (item.WABAR == index || item.SP == index) {
+                        results.push({
+                            MM: item.MM,
+                            NAZWA: item.NAZWA,
+                            CENA: price
+                        });
+                    }
+                });
             });
 
             displayResults(results);
