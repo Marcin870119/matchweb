@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MATCH SYSTEM</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
         h1 { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
@@ -36,10 +37,13 @@
 
     <h2 id="currentMatch">Wybierz kategorię</h2>
 
-    <!-- Importowanie JSON lokalnie -->
     <input type="file" id="jsonFile" accept=".json">
-    <button class="btn-primary" onclick="processJSON()">Przetwórz JSON</button>
+    <button class="btn-primary" onclick="processJSON()">Przetwórz</button>
     <button class="btn-secondary" onclick="downloadXLS()">Pobierz XLS</button>
+
+    <h3>Import CSV: (dla WABARU i ROFOODU)</h3>
+    <input type="file" id="csvFile" accept=".csv">
+    <button class="btn-secondary" onclick="processCSV()">Przetwórz CSV</button>
 
     <h3>Wyniki</h3>
     <table id="resultsTable">
@@ -53,55 +57,58 @@
     </table>
 
     <script>
+        let databases = {
+            spizarnia: [],
+            wabar: [
+                { "MM": 3310, "NAZWA": "JBB BOCZEK Z BECZKI OK 1KG", "WABAR": "WĘD000841", "CENA 100 MM": 20.15 },
+                { "MM": 7347, "NAZWA": "SIERPC SER ZOLTY W BLOKU KROLEWSKI 3,7KG", "WABAR": "NAB000028", "CENA 100 MM": 21.22 }
+            ],
+            lemonex: [
+                { "MM": 5001, "NAZWA": "LEMONEX SOK JABŁKOWY 1L", "SP": 32012, "CENA 100 MM": 3.55 }
+            ],
+            rofood: [
+                { "MM": 6613, "NAZWA": "PIATNICA SMETANA 18% 400ML", "Rofood": "PIĄTNICA Śmietana 18% 0,4L/12", "CENA 100 MM": 3.25 },
+                { "MM": 3310, "NAZWA": "JBB BOCZEK Z BECZKI OK 1KG", "Rofood": "JBB Boczek Z BECZKI ok. 1kg", "CENA 100 MM": 18.4 },
+                { "MM": 7347, "NAZWA": "SIERPC SER ZOLTY W BLOKU KROLEWSKI 3,7KG", "Rofood": "SIERPC Ser KRÓLEWSKI blok 4,5kg", "CENA 100 MM": 20.13 }
+            ]
+        };
+
         let currentDatabase = [];
 
         function setCategory(category) {
+            currentDatabase = databases[category] || [];
             document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
             console.log(`Załadowano bazę danych: ${category}`);
-
-            // Pobierz dane JSON z GitHub Pages
-            const jsonUrl = `https://marcin870119.github.io/matchweb/${category}.json`;
-            fetch(jsonUrl)
-                .then(response => response.json())
-                .then(data => {
-                    currentDatabase = data;
-                    console.log(`Załadowano ${category}.json`, currentDatabase);
-                })
-                .catch(error => console.error(`Błąd ładowania ${category}.json`, error));
         }
 
-        function processJSON() {
-            const fileInput = document.getElementById('jsonFile');
+        function processCSV() {
+            const fileInput = document.getElementById('csvFile');
             const file = fileInput.files[0];
             if (!file) {
-                alert("Wybierz plik JSON!");
+                alert("Wybierz plik CSV!");
                 return;
             }
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                try {
-                    const jsonData = JSON.parse(event.target.result);
-                    console.log("Wczytane dane:", jsonData);
-                    searchAndMatch(jsonData);
-                } catch (error) {
-                    alert("Błąd podczas wczytywania pliku JSON!");
-                    console.error(error);
+            Papa.parse(file, {
+                header: true,
+                delimiter: ";",
+                complete: function(results) {
+                    console.log("Wczytane dane CSV:", results.data);
+                    searchAndMatch(results.data);
+                },
+                error: function(error) {
+                    console.error("Błąd przy wczytywaniu CSV:", error);
                 }
-            };
-            reader.readAsText(file);
+            });
         }
 
         function searchAndMatch(jsonData) {
             let matchedData = [];
-
             jsonData.forEach(entry => {
-                if (!entry["wartosc"] || !entry["wartosc (5)"]) return;
-
-                let sp = entry["wartosc"].toString().trim().toUpperCase();
-                let cena = parseFloat(entry["wartosc (5)"].replace(',', '.'));
+                let sp = (entry["Indeks"] || "").toString().trim().toUpperCase();
+                let cena = parseFloat((entry["Cena netto bez rabatu"] || "0").replace(',', '.'));
 
                 currentDatabase.forEach(item => {
-                    let db_sp = (item.WABAR || item.SP || "").toString().trim().toUpperCase();
+                    let db_sp = (item.WABAR || item.SP || item.Rofood || "").toString().trim().toUpperCase();
                     if (db_sp === sp) {
                         const rabat = ((1 - (cena / parseFloat(item["CENA 100 MM"]))) * 100).toFixed(2);
                         matchedData.push({ MM: item.MM, NAZWA: item.NAZWA, CENA: cena.toFixed(2), RABAT: rabat });
@@ -124,14 +131,6 @@
                 row.insertCell(3).textContent = match.CENA;
                 row.insertCell(4).textContent = match.RABAT + "%";
             });
-        }
-
-        function downloadXLS() {
-            let table = document.getElementById('resultsTable');
-            let ws = XLSX.utils.table_to_sheet(table);
-            let wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Wyniki");
-            XLSX.writeFile(wb, "wyniki.xlsx");
         }
     </script>
 
