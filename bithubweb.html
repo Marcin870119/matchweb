@@ -19,7 +19,6 @@
         table { width: 80%; margin: 20px auto; border-collapse: collapse; }
         th, td { border: 1px solid black; padding: 10px; text-align: center; }
         th { background-color: #f4f4f4; }
-        th input { width: 100%; padding: 5px; box-sizing: border-box; }
         button { padding: 10px 15px; margin: 10px; border: none; cursor: pointer; font-size: 16px; }
         .btn-primary { background-color: #007BFF; color: white; }
         .btn-secondary { background-color: #28A745; color: white; }
@@ -48,46 +47,72 @@
 
     <h3>Wyniki</h3>
     <table id="resultsTable">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th><input type="text" onkeyup="filterTable(1)" placeholder="Filtruj Kod (MM)"></th>
-                <th><input type="text" onkeyup="filterTable(2)" placeholder="Filtruj Nazwa"></th>
-                <th><input type="text" onkeyup="filterTable(3)" placeholder="Filtruj Cena"></th>
-                <th><input type="text" onkeyup="filterTable(4)" placeholder="Filtruj Rabat"></th>
-            </tr>
-            <tr>
-                <th>#</th>
-                <th>Kod (MM)</th>
-                <th>Nazwa</th>
-                <th>Cena</th>
-                <th>Rabat</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
+        <tr>
+            <th>#</th>
+            <th>Kod (MM)</th>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            <th>Rabat</th>
+        </tr>
     </table>
 
     <script>
-        let databases = {
-            spizarnia: [],
-            wabar: [
-                { "MM": 3310, "NAZWA": "JBB BOCZEK Z BECZKI OK 1KG", "WABAR": "WĘD000841", "CENA 100 MM": 20.15 },
-                { "MM": 7347, "NAZWA": "SIERPC SER ZOLTY W BLOKU KROLEWSKI 3,7KG", "WABAR": "NAB000028", "CENA 100 MM": 21.22 }
-            ],
-            lemonex: [
-                { "MM": 5001, "NAZWA": "LEMONEX SOK JABŁKOWY 1L", "SP": 32012, "CENA 100 MM": 3.55 }
-            ],
-            rofood: [
-                { "MM": 7001, "NAZWA": "ROFOOD CHLEB ŻYTNI 500G", "SP": 45021, "CENA 100 MM": 4.50 }
-            ]
-        };
-
+        let databases = {};
         let currentDatabase = [];
 
-        function setCategory(category) {
-            currentDatabase = databases[category] || [];
-            document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
-            console.log(`Załadowano bazę danych: ${category}`);
+        async function setCategory(category) {
+            try {
+                const response = await fetch(`${category}.json`);
+                if (!response.ok) throw new Error("Błąd wczytywania pliku JSON");
+                databases[category] = await response.json();
+                currentDatabase = databases[category];
+                document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
+                console.log(`Załadowano bazę danych: ${category}`, currentDatabase);
+            } catch (error) {
+                console.error("Błąd wczytywania JSON:", error);
+                alert("Nie udało się załadować danych JSON!");
+            }
+        }
+
+        function processCSV() {
+            const fileInput = document.getElementById('csvFile');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Wybierz plik CSV!");
+                return;
+            }
+            Papa.parse(file, {
+                header: true,
+                delimiter: ";",
+                complete: function(results) {
+                    console.log("Wczytane dane CSV:", results.data);
+                    searchAndMatch(results.data);
+                },
+                error: function(error) {
+                    console.error("Błąd przy wczytywaniu CSV:", error);
+                }
+            });
+        }
+
+        function processJSON() {
+            const fileInput = document.getElementById('jsonFile');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Wybierz plik JSON!");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const jsonData = JSON.parse(event.target.result);
+                    console.log("Wczytane dane JSON:", jsonData);
+                    searchAndMatch(jsonData);
+                } catch (error) {
+                    alert("Błąd podczas wczytywania pliku JSON!");
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
         }
 
         function searchAndMatch(jsonData) {
@@ -109,29 +134,17 @@
         }
 
         function displayResults(matches) {
-            const tbody = document.querySelector("#resultsTable tbody");
-            tbody.innerHTML = "";
+            const table = document.getElementById("resultsTable");
+            while (table.rows.length > 1) table.deleteRow(1);
+
             matches.forEach((match, index) => {
-                let row = tbody.insertRow();
+                let row = table.insertRow();
                 row.insertCell(0).textContent = index + 1;
                 row.insertCell(1).textContent = match.MM;
                 row.insertCell(2).textContent = match.NAZWA;
                 row.insertCell(3).textContent = match.CENA;
                 row.insertCell(4).textContent = match.RABAT + "%";
             });
-        }
-
-        function filterTable(column) {
-            let input = event.target.value.toUpperCase();
-            let table = document.getElementById("resultsTable");
-            let rows = table.getElementsByTagName("tr");
-
-            for (let i = 2; i < rows.length; i++) {
-                let cell = rows[i].getElementsByTagName("td")[column];
-                if (cell) {
-                    rows[i].style.display = cell.textContent.toUpperCase().includes(input) ? "" : "none";
-                }
-            }
         }
     </script>
 
