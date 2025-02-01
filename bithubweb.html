@@ -46,6 +46,11 @@
             color: white;
         }
 
+        .dropdown-menu a:hover {
+            background-color: #343A40;
+            color: white;
+        }
+
         /* Kafelki wyboru */
         .container-buttons {
             display: flex; 
@@ -199,7 +204,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">Strona główna</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            MATCHPRICE
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#">Zamówienia</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Raporty</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
