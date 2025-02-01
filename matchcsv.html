@@ -147,13 +147,12 @@
         function readCSVFile(file) {
             Papa.parse(file, {
                 delimiter: "", // auto-detect
-                header: true,
                 skipEmptyLines: true,
                 complete: function(results) {
                     console.log('Wczytane dane CSV:', results.data);
                     csvData = results.data.map(row => ({
-                        INDEKS: row['INDEKS'],
-                        CENA: row['CENA NETTO BEZ RABATU']
+                        INDEKS: row[2],  // Kolumna 3
+                        CENA: row[6]     // Kolumna 7
                     }));
                     displayCSVData(csvData);
                 },
