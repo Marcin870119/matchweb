@@ -147,12 +147,13 @@
         function readCSVFile(file) {
             Papa.parse(file, {
                 delimiter: "", // auto-detect
+                header: false,
                 skipEmptyLines: true,
                 complete: function(results) {
                     console.log('Wczytane dane CSV:', results.data);
                     csvData = results.data.map(row => ({
-                        INDEKS: row[2],  // Kolumna 3
-                        CENA: row[6]     // Kolumna 7
+                        INDEKS: row[2], // Kolumna 3
+                        CENA: row[6]    // Kolumna 7
                     }));
                     displayCSVData(csvData);
                 },
@@ -174,7 +175,7 @@
 
             if (data.length > 0) {
                 // Create table headers
-                const headers = Object.keys(data[0]);
+                const headers = ['#'].concat(Object.keys(data[0]));
                 const headerRow = document.createElement('tr');
                 headers.forEach(header => {
                     const th = document.createElement('th');
@@ -184,9 +185,12 @@
                 thead.appendChild(headerRow);
 
                 // Create table rows
-                data.forEach(row => {
+                data.forEach((row, index) => {
                     const tr = document.createElement('tr');
-                    headers.forEach(header => {
+                    const tdIndex = document.createElement('td');
+                    tdIndex.textContent = index + 1;
+                    tr.appendChild(tdIndex);
+                    headers.slice(1).forEach(header => {
                         const td = document.createElement('td');
                         td.textContent = row[header];
                         tr.appendChild(td);
@@ -200,26 +204,39 @@
         }
 
         async function processCSV() {
+            console.log('Proces rozpoczęty');
             await fetchDatabase(currentCategory);
             const results = [];
 
             csvData.forEach(entry => {
-                const index = entry['INDEKS'];
+                const index = entry['INDEKS'].trim().toUpperCase();
                 const price = parseFloat(entry['CENA']);
 
-                if (!index || isNaN(price)) return;
+                if (!index || isNaN(price)) {
+                    console.log(`Pominięto niewłaściwy wiersz: ${JSON.stringify(entry)}`);
+                    return;
+                }
 
                 databases[currentCategory].forEach(item => {
-                    if (item.WABAR == index || item.SP == index) {
-                        results.push({
-                            MM: item.MM,
-                            NAZWA: item.NAZWA,
-                            CENA: price
-                        });
+                    // Elastyczne porównanie indeksów
+                    const itemIndex = (item.WABAR || item.SP || '').trim().toUpperCase();
+                    if (itemIndex === index) {
+                        const itemPrice = parseFloat(item.CENA_NETTO);
+                        if (!isNaN(itemPrice) && itemPrice !== 0) {
+                            const discount = ((itemPrice - price) / itemPrice * 100).toFixed(2);
+                            results.push({
+                                MM: item.MM,
+                                NAZWA: item.NAZWA,
+                                CENA: price,
+                                RABAT: `${discount}%`
+                            });
+                            console.log(`Znaleziono dopasowanie: ${JSON.stringify(item)}`);
+                        }
                     }
                 });
             });
 
+            console.log('Wyniki przetwarzania:', results);
             displayResults(results);
         }
 
@@ -233,7 +250,7 @@
             tbody.innerHTML = '';
 
             // Create table headers
-            const headers = ['MM', 'NAZWA', 'CENA'];
+            const headers = ['#', 'MM', 'NAZWA', 'CENA', 'RABAT'];
             const headerRow = document.createElement('tr');
             headers.forEach(header => {
                 const th = document.createElement('th');
@@ -243,9 +260,12 @@
             thead.appendChild(headerRow);
 
             // Create table rows
-            results.forEach(row => {
+            results.forEach((row, index) => {
                 const tr = document.createElement('tr');
-                headers.forEach(header => {
+                const tdIndex = document.createElement('td');
+                tdIndex.textContent = index + 1;
+                tr.appendChild(tdIndex);
+                headers.slice(1).forEach(header => {
                     const td = document.createElement('td');
                     td.textContent = row[header];
                     tr.appendChild(td);
