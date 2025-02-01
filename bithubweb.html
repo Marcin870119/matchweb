@@ -29,7 +29,7 @@
     <h1>MATCH SYSTEM</h1>
 
     <div class="container">
-        <div class="tile spizarnia" onclick="setCategory('spizarnia')">MATCH SPIZARNIA</div>
+        <div class="tile spizarnia" onclick="setCategory('spizarnia')">MATCH SPIŻARNIA</div>
         <div class="tile wabar" onclick="setCategory('wabar')">MATCH WABAR</div>
         <div class="tile lemonex" onclick="setCategory('lemonex')">MATCH LEMONEX</div>
         <div class="tile rofood" onclick="setCategory('rofood')">MATCH ROFOOD</div>
@@ -56,13 +56,15 @@
         </tr>
     </table>
 
+    <div class="summary-container" id="summaryContainer" style="display: none;">Średni rabat: 0%</div>
+
     <script>
         let databases = {};
         let currentDatabase = [];
 
         async function setCategory(category) {
             try {
-                const response = await fetch(`${category}.json`);
+                const response = await fetch(`https://raw.githubusercontent.com/USERNAME/REPOSITORY/BRANCH/${category}.json`);
                 if (!response.ok) throw new Error("Błąd wczytywania pliku JSON");
                 databases[category] = await response.json();
                 currentDatabase = databases[category];
@@ -117,6 +119,7 @@
 
         function searchAndMatch(jsonData) {
             let matchedData = [];
+
             jsonData.forEach(entry => {
                 let sp = (entry["Indeks"] || entry["wartosc"] || "").toString().trim().toUpperCase();
                 let cena = parseFloat((entry["Cena netto bez rabatu"] || entry["wartosc (5)"] || "0").replace(',', '.'));
@@ -131,6 +134,7 @@
             });
 
             displayResults(matchedData);
+            displaySummary(matchedData);
         }
 
         function displayResults(matches) {
@@ -145,6 +149,21 @@
                 row.insertCell(3).textContent = match.CENA;
                 row.insertCell(4).textContent = match.RABAT + "%";
             });
+
+            document.getElementById('summaryContainer').style.display = 'block';
+        }
+
+        function displaySummary(matches) {
+            let totalDiscount = 0;
+            matches.forEach(entry => {
+                totalDiscount += parseFloat(entry.RABAT);
+            });
+            const averageDiscount = (totalDiscount / matches.length).toFixed(2);
+            document.getElementById('summaryContainer').innerText = `Średni rabat: ${averageDiscount}%`;
+        }
+
+        function downloadXLS() {
+            // Implementacja pobierania pliku XLS
         }
     </script>
 
