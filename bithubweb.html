@@ -41,7 +41,7 @@
     <button class="btn-primary" onclick="processJSON()">Przetwórz</button>
     <button class="btn-secondary" onclick="downloadXLS()">Pobierz XLS</button>
 
-    <h3>Import CSV: (dla WABARU i ROFOODU)</h3>
+    <h3>Import CSV</h3>
     <input type="file" id="csvFile" accept=".csv">
     <button class="btn-secondary" onclick="processCSV()">Przetwórz CSV</button>
 
@@ -94,11 +94,32 @@
             });
         }
 
+        function processJSON() {
+            const fileInput = document.getElementById('jsonFile');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Wybierz plik JSON!");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const jsonData = JSON.parse(event.target.result);
+                    console.log("Wczytane dane JSON:", jsonData);
+                    searchAndMatch(jsonData);
+                } catch (error) {
+                    alert("Błąd podczas wczytywania pliku JSON!");
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
+        }
+
         function searchAndMatch(jsonData) {
             let matchedData = [];
             jsonData.forEach(entry => {
-                let sp = (entry["Indeks"] || "").toString().trim().toUpperCase();
-                let cena = parseFloat((entry["Cena netto bez rabatu"] || "0").replace(',', '.'));
+                let sp = (entry["Indeks"] || entry["wartosc"] || "").toString().trim().toUpperCase();
+                let cena = parseFloat((entry["Cena netto bez rabatu"] || entry["wartosc (5)"] || "0").replace(',', '.'));
 
                 currentDatabase.forEach(item => {
                     let db_sp = (item.WABAR || item.SP || item.Rofood || "").toString().trim().toUpperCase();
