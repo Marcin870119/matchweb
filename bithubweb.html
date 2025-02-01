@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MATCH SYSTEM</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
         h1 { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
@@ -37,13 +36,10 @@
 
     <h2 id="currentMatch">Wybierz kategorię</h2>
 
+    <!-- Importowanie JSON lokalnie -->
     <input type="file" id="jsonFile" accept=".json">
     <button class="btn-primary" onclick="processJSON()">Przetwórz JSON</button>
     <button class="btn-secondary" onclick="downloadXLS()">Pobierz XLS</button>
-
-    <h3>Import CSV: (dla WABARU)</h3>
-    <input type="file" id="csvFile" accept=".csv">
-    <button class="btn-secondary" onclick="processCSV()">Przetwórz CSV</button>
 
     <h3>Wyniki</h3>
     <table id="resultsTable">
@@ -58,20 +54,20 @@
 
     <script>
         let currentDatabase = [];
-        const repoUrl = "https://marcin870119.github.io/matchweb/";
 
         function setCategory(category) {
-            fetch(`${repoUrl}${category}.json`)
+            document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
+            console.log(`Załadowano bazę danych: ${category}`);
+
+            // Pobierz dane JSON z GitHub Pages
+            const jsonUrl = `https://marcin870119.github.io/matchweb/${category}.json`;
+            fetch(jsonUrl)
                 .then(response => response.json())
                 .then(data => {
                     currentDatabase = data;
-                    document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
-                    console.log(`Załadowano bazę danych: ${category}`, currentDatabase);
+                    console.log(`Załadowano ${category}.json`, currentDatabase);
                 })
-                .catch(error => {
-                    console.error("Błąd wczytywania JSON:", error);
-                    alert("Nie udało się załadować bazy danych!");
-                });
+                .catch(error => console.error(`Błąd ładowania ${category}.json`, error));
         }
 
         function processJSON() {
@@ -95,31 +91,10 @@
             reader.readAsText(file);
         }
 
-        function processCSV() {
-            const fileInput = document.getElementById('csvFile');
-            const file = fileInput.files[0];
-            if (!file) {
-                alert("Wybierz plik CSV!");
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                Papa.parse(event.target.result, {
-                    header: true,
-                    delimiter: ",",
-                    complete: function(results) {
-                        console.log("Wczytane dane CSV:", results.data);
-                        searchAndMatch(results.data);
-                    }
-                });
-            };
-            reader.readAsText(file);
-        }
-
-        function searchAndMatch(data) {
+        function searchAndMatch(jsonData) {
             let matchedData = [];
 
-            data.forEach(entry => {
+            jsonData.forEach(entry => {
                 if (!entry["wartosc"] || !entry["wartosc (5)"]) return;
 
                 let sp = entry["wartosc"].toString().trim().toUpperCase();
