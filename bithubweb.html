@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATCH SYSTEM</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        h1 { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+        .container { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .tile {
+            padding: 15px; font-size: 18px; font-weight: bold; border: 2px solid #000;
+            border-radius: 8px; cursor: pointer; width: 180px; text-align: center;
+        }
+        .spizarnia { background-color: #FFD700; } .wabar { background-color: #FF5733; }
+        .lemonex { background-color: #28A745; } .rofood { background-color: #007BFF; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; text-align: center; }
+        th { background-color: #f4f4f4; }
+        button { padding: 10px 15px; margin: 10px; border: none; cursor: pointer; font-size: 16px; }
+        .btn-primary { background-color: #007BFF; color: white; }
+        .btn-secondary { background-color: #28A745; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>MATCH SYSTEM</h1>
+
+    <div class="container">
+        <div class="tile spizarnia" onclick="setCategory('spizarnia')">MATCH SPIZARNIA</div>
+        <div class="tile wabar" onclick="setCategory('wabar')">MATCH WABAR</div>
+        <div class="tile lemonex" onclick="setCategory('lemonex')">MATCH LEMONEX</div>
+        <div class="tile rofood" onclick="setCategory('rofood')">MATCH ROFOOD</div>
+    </div>
+
+    <h2 id="currentMatch">Wybierz kategorię</h2>
+
+    <input type="file" id="jsonFile" accept=".json">
+    <button class="btn-primary" onclick="processJSON()">Przetwórz</button>
+    <button class="btn-secondary" onclick="downloadXLS()">Pobierz XLS</button>
+
+    <h3>Import CSV: (dla WABARU)</h3>
+    <input type="file" id="csvFile" accept=".csv">
+    <button class="btn-secondary" onclick="processCSV()">Przetwórz CSV</button>
+
+    <h3>Wyniki</h3>
+    <table id="resultsTable">
+        <tr>
+            <th>#</th>
+            <th>Kod (MM)</th>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            <th>Rabat</th>
+        </tr>
+    </table>
+
+    <script>
+        let databases = {
+            spizarnia: [],
+            wabar: [
+                { "MM": 3310, "NAZWA": "JBB BOCZEK Z BECZKI OK 1KG", "WABAR": "WĘD000841", "CENA 100 MM": 20.15 },
+                { "MM": 7347, "NAZWA": "SIERPC SER ZOLTY W BLOKU KROLEWSKI 3,7KG", "WABAR": "NAB000028", "CENA 100 MM": 21.22 }
+            ],
+            lemonex: [
+                { "MM": 5001, "NAZWA": "LEMONEX SOK JABŁKOWY 1L", "SP": 32012, "CENA 100 MM": 3.55 }
+            ],
+            rofood: [
+                { "MM": 7001, "NAZWA": "ROFOOD CHLEB ŻYTNI 500G", "SP": 45021, "CENA 100 MM": 4.50 }
+            ]
+        };
+
+        let currentDatabase = [];
+
+        function setCategory(category) {
+            currentDatabase = databases[category] || [];
+            document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
+            console.log(`Załadowano bazę danych: ${category}`);
+        }
+
+        function processCSV() {
+            const fileInput = document.getElementById('csvFile');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Wybierz plik CSV!");
+                return;
+            }
+            Papa.parse(file, {
+                header: true,
+                delimiter: ";",
+                complete: function(results) {
+                    console.log("Wczytane dane CSV:", results.data);
+                    searchAndMatch(results.data);
+                },
+                error: function(error) {
+                    console.error("Błąd przy wczytywaniu CSV:", error);
+                }
+            });
+        }
+
+        function searchAndMatch(jsonData) {
+            let matchedData = [];
+            jsonData.forEach(entry => {
+                let sp = (entry["Indeks"] || "").toString().trim().toUpperCase();
+                let cena = parseFloat((entry["Cena netto bez rabatu"] || "0").replace(',', '.'));
+                
+                currentDatabase.forEach(item => {
+                    let db_sp = (item.WABAR || item.SP || "").toString().trim().toUpperCase();
+                    if (db_sp === sp) {
+                        const rabat = ((1 - (cena / parseFloat(item["CENA 100 MM"]))) * 100).toFixed(2);
+                        matchedData.push({ MM: item.MM, NAZWA: item.NAZWA, CENA: cena.toFixed(2), RABAT: rabat });
+                    }
+                });
+            });
+
+            displayResults(matchedData);
+        }
+
+        function displayResults(matches) {
+            const table = document.getElementById("resultsTable");
+            while (table.rows.length > 1) table.deleteRow(1);
+
+            matches.forEach((match, index) => {
+                let row = table.insertRow();
+                row.insertCell(0).textContent = index + 1;
+                row.insertCell(1).textContent = match.MM;
+                row.insertCell(2).textContent = match.NAZWA;
+                row.insertCell(3).textContent = match.CENA;
+                row.insertCell(4).textContent = match.RABAT + "%";
+            });
+        }
+    </script>
+
+</body>
+</html>
