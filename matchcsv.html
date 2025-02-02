@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
     <style>
         body { font-family: 'Arial', sans-serif; text-align: center; background-color: #F5F5F5; margin-top: 20px; }
@@ -24,7 +25,7 @@
         .upload-area { border: 2px dashed #ccc; border-radius: 10px; padding: 30px; width: 50%; text-align: center; background: white; transition: 0.3s; }
         .upload-area.dragover { border-color: #198754; background: #f3f3f3; }
         .upload-area p { font-size: 16px; color: #555; margin-bottom: 10px; }
-        .button-group { display: flex; gap: 15px; margin-top: 15px; }
+        .button-group { display: flex; gap: 15px; margin-top: 15px; justify-content: center; }
         button { padding: 12px 18px; border: none; cursor: pointer; font-size: 16px; border-radius: 8px; transition: all 0.3s ease-in-out; }
         .btn-primary { background-color: #343A40; color: white; }
         .btn-secondary { background-color: #198754; color: white; }
@@ -85,17 +86,18 @@
             </div>
         </div>
 
+        <!-- Przyciski -->
+        <div class="button-group hidden" id="processButtonGroup">
+            <button class="btn-primary" onclick="processCSV()">Przetwórz dane</button>
+            <button class="btn-secondary" onclick="exportToExcel()">Zapisz do pliku Excel</button>
+        </div>
+
         <!-- TABELA -->
         <div class="table-container hidden" id="tableContainer">
             <table class="table table-striped" id="csvTable">
                 <thead></thead>
                 <tbody></tbody>
             </table>
-        </div>
-
-        <!-- Przyciski -->
-        <div class="button-group hidden" id="processButtonGroup">
-            <button class="btn-primary" onclick="processCSV()">Przetwórz</button>
         </div>
     </div>
 
@@ -204,7 +206,6 @@
         }
 
         async function processCSV() {
-            console.log('Proces rozpoczęty');
             await fetchDatabase(currentCategory);
             const results = [];
 
@@ -212,31 +213,28 @@
                 const index = entry['INDEKS'].trim().toUpperCase();
                 const price = parseFloat(entry['CENA']);
 
-                if (!index || isNaN(price)) {
-                    console.log(`Pominięto niewłaściwy wiersz: ${JSON.stringify(entry)}`);
-                    return;
-                }
+                if (!index || isNaN(price)) return;
 
                 databases[currentCategory].forEach(item => {
                     // Elastyczne porównanie indeksów
-                    const itemIndex = (item.WABAR || item.SP || '').trim().toUpperCase();
-                    if (itemIndex === index) {
-                        const itemPrice = parseFloat(item.CENA_NETTO);
-                        if (!isNaN(itemPrice) && itemPrice !== 0) {
-                            const discount = ((itemPrice - price) / itemPrice * 100).toFixed(2);
+                    const itemIndex = item.WABAR || item.SP;
+                    if (itemIndex && (itemIndex.trim().toUpperCase() === index)) {
+                        const originalPrice = parseFloat(item["CENA 100 MM"]); // Użyjemy ceny 100 MM bez przeliczania
+                        if (!isNaN(originalPrice) && originalPrice !== 0) {
+                            // Obliczanie rabatu w procentach
+                            const discount = ((originalPrice - price) / originalPrice * 100).toFixed(2);
                             results.push({
                                 MM: item.MM,
                                 NAZWA: item.NAZWA,
                                 CENA: price,
-                                RABAT: `${discount}%`
+                                "CENA 100": originalPrice.toFixed(2), // Dodanie kolumny "CENA 100"
+                                RABAT: discount
                             });
-                            console.log(`Znaleziono dopasowanie: ${JSON.stringify(item)}`);
                         }
                     }
                 });
             });
 
-            console.log('Wyniki przetwarzania:', results);
             displayResults(results);
         }
 
@@ -250,7 +248,7 @@
             tbody.innerHTML = '';
 
             // Create table headers
-            const headers = ['#', 'MM', 'NAZWA', 'CENA', 'RABAT'];
+            const headers = ['#', 'MM', 'NAZWA', 'CENA', 'CENA 100', 'RABAT'];
             const headerRow = document.createElement('tr');
             headers.forEach(header => {
                 const th = document.createElement('th');
@@ -272,6 +270,12 @@
                 });
                 tbody.appendChild(tr);
             });
+        }
+
+        function exportToExcel() {
+            const table = document.getElementById('csvTable');
+            const wb = XLSX.utils.table_to_book(table, {sheet: "Sheet1"});
+            XLSX.writeFile(wb, 'table.xlsx');
         }
     </script>
 
