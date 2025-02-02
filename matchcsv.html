@@ -54,8 +54,8 @@
                             MATCHPRICE
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" onclick="showMatchCSVPage()">MATCH JSON</a></li>
-                            <li><a class="dropdown-item" href="matchcsv.html">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showMatchJSONPage()">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showMatchCSVPage()">MATCH CSV</a></li>
                             <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
                             <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
                         </ul>
@@ -71,6 +71,12 @@
     <!-- STRONA GŁÓWNA -->
     <div id="homePage">
         <h1>Strona w budowie</h1>
+    </div>
+
+    <!-- MATCH JSON PAGE -->
+    <div id="matchJSONPage" class="hidden">
+        <!-- Zawartość strony MATCH JSON -->
+        <h1>Strona MATCH JSON</h1>
     </div>
 
     <!-- MATCH CSV PAGE -->
@@ -127,11 +133,19 @@
 
         function showHomePage() {
             document.getElementById('homePage').classList.remove('hidden');
+            document.getElementById('matchJSONPage').classList.add('hidden');
+            document.getElementById('matchCSVPage').classList.add('hidden');
+        }
+
+        function showMatchJSONPage() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('matchJSONPage').classList.remove('hidden');
             document.getElementById('matchCSVPage').classList.add('hidden');
         }
 
         function showMatchCSVPage() {
             document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('matchJSONPage').classList.add('hidden');
             document.getElementById('matchCSVPage').classList.remove('hidden');
         }
 
