@@ -249,7 +249,7 @@
                 let cena = parseFloat(entry["wartosc (5)"].replace(',', '.'));
 
                 currentDatabase.forEach(item => {
-                    let db_sp = replaceCharacters((item.WABAR || item.SP || "").toString().trim().toUpperCase());
+                    let db_sp = replaceCharacters((item.WABAR || item.SP || item.Rofood || "").toString().trim().toUpperCase());
                     if (db_sp === sp) {
                         const rabat = ((1 - (cena / parseFloat(item["CENA 100 MM"]))) * 100).toFixed(2);
                         matchedData.push({ MM: item.MM, NAZWA: replaceCharacters(item.NAZWA), CENA: cena.toFixed(2), RABAT: rabat });
