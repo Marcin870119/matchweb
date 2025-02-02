@@ -36,12 +36,12 @@
         .close-btn { cursor: pointer; color: red; margin-left: 5px; }
     </style>
 </head>
-<body onload="showHomePage()">
+<body>
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" onclick="showHomePage()">
+            <a class="navbar-brand" href="bithubweb.html">
                 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -54,13 +54,13 @@
                             MATCHPRICE
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" onclick="showMatchJSONPage()">MATCH JSON</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="showMatchCSVPage()">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="bithubweb.html">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="matchcsv.html">MATCH CSV</a></li>
                             <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
                             <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">NARZĘDZIA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Zamówienia</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Raporty</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
                 </ul>
@@ -68,19 +68,8 @@
         </div>
     </nav>
 
-    <!-- STRONA GŁÓWNA -->
-    <div id="homePage">
-        <h1>Strona w budowie</h1>
-    </div>
-
-    <!-- MATCH JSON PAGE -->
-    <div id="matchJSONPage" class="hidden">
-        <!-- Zawartość strony MATCH JSON -->
-        <h1>Strona MATCH JSON</h1>
-    </div>
-
     <!-- MATCH CSV PAGE -->
-    <div id="matchCSVPage" class="hidden">
+    <div id="matchCSVPage">
         <!-- KAFELKI WYBORU -->
         <div class="container-buttons">
             <div class="tile" onclick="setCategory('spizarnia')">MATCH SPIŻARNIA</div>
@@ -130,24 +119,6 @@
         let csvData = [];
         let databases = {};
         let currentCategory = '';
-
-        function showHomePage() {
-            document.getElementById('homePage').classList.remove('hidden');
-            document.getElementById('matchJSONPage').classList.add('hidden');
-            document.getElementById('matchCSVPage').classList.add('hidden');
-        }
-
-        function showMatchJSONPage() {
-            document.getElementById('homePage').classList.add('hidden');
-            document.getElementById('matchJSONPage').classList.remove('hidden');
-            document.getElementById('matchCSVPage').classList.add('hidden');
-        }
-
-        function showMatchCSVPage() {
-            document.getElementById('homePage').classList.add('hidden');
-            document.getElementById('matchJSONPage').classList.add('hidden');
-            document.getElementById('matchCSVPage').classList.remove('hidden');
-        }
 
         async function fetchDatabase(category) {
             try {
