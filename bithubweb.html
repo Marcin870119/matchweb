@@ -62,7 +62,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#" onclick="showMatchJSONPage()">MATCH JSON</a></li>
-                            <li><a class="dropdown-item" href="matchcsv.html">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showMatchCSVPage()">MATCH CSV</a></li>
                             <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
                             <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
                         </ul>
@@ -116,26 +116,78 @@
         <div class="summary-container" id="summaryContainer" style="display: none;">Średni rabat: 0%</div>
     </div>
 
+    <!-- MATCH CSV PAGE -->
+    <div id="matchCSVPage" class="hidden">
+        <!-- KAFELKI WYBORU -->
+        <div class="container-buttons">
+            <div class="tile" onclick="setCategory('spizarnia')">MATCH SPIŻARNIA</div>
+            <div class="tile" onclick="setCategory('wabar')">MATCH WABAR</div>
+            <div class="tile" onclick="setCategory('lemonex')">MATCH LEMONEX</div>
+            <div class="tile" onclick="setCategory('rofood')">MATCH ROFOOD</div>
+        </div>
+
+        <!-- SEKCJA IMPORTU PLIKU -->
+        <div id="importSection" class="upload-container">
+            <div id="uploadArea" class="upload-area" ondrop="handleCSVFileDrop(event)" ondragover="handleCSVDragOver(event)">
+                <p>Przeciągnij i upuść plik tutaj lub kliknij, aby wybrać plik</p>
+                <input type="file" id="csvFile" accept=".csv" style="display: none;" onchange="handleCSVFileSelect(event)">
+                <button class="btn-secondary" onclick="document.getElementById('csvFile').click()">Wybierz plik</button>
+            </div>
+        </div>
+
+        <!-- Przyciski -->
+        <div class="button-group" id="processButtonGroup">
+            <button class="btn-primary" onclick="processCSV()">Przetwórz dane</button>
+            <button class="btn-secondary" onclick="exportToExcel()">Zapisz do pliku Excel</button>
+        </div>
+
+        <!-- TABELKI -->
+        <div class="tables-container">
+            <!-- Wczytane dane CSV -->
+            <div class="table-wrapper">
+                <h5>Wczytane dane CSV</h5>
+                <table class="table table-striped" id="csvTable">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- Przetworzone dane -->
+            <div class="table-wrapper">
+                <h5>Przetworzone dane</h5>
+                <table class="table table-striped" id="processedTable">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <script>
         let databases = {};
         let currentDatabase = [];
         let tabulatorInstance;
+        let csvData = [];
+        let currentCategory = '';
 
         function showHomePage() {
             document.getElementById('homePage').classList.remove('hidden');
             document.getElementById('matchJSONPage').classList.add('hidden');
+            document.getElementById('matchCSVPage').classList.add('hidden');
         }
 
         function showMatchJSONPage() {
             document.getElementById('homePage').classList.add('hidden');
             document.getElementById('matchJSONPage').classList.remove('hidden');
-            initializeTable();
+            document.getElementById('matchCSVPage').classList.add('hidden');
+            initializeJSONTable();
         }
 
         function showMatchCSVPage() {
             document.getElementById('homePage').classList.add('hidden');
             document.getElementById('matchJSONPage').classList.add('hidden');
-            // Assuming there is a separate section or logic for MATCH CSV
+            document.getElementById('matchCSVPage').classList.remove('hidden');
+            initializeCSVTable();
         }
 
         async function setCategory(category) {
@@ -145,6 +197,7 @@
                 const data = await response.json();
                 databases[category] = data;
                 currentDatabase = databases[category];
+                currentCategory = category;
                 document.getElementById("currentMatch").innerText = `MATCH ${category.toUpperCase()}`;
                 document.querySelectorAll('.tile').forEach(tile => tile.classList.remove('active'));
                 document.querySelector(`.tile.${category}`).classList.add('active');
@@ -158,7 +211,7 @@
             }
         }
 
-        function initializeTable() {
+        function initializeJSONTable() {
             if (!tabulatorInstance) {
                 tabulatorInstance = new Tabulator("#resultsTable", {
                     layout: "fitColumns",
@@ -190,10 +243,14 @@
                 tabulatorInstance.on("tableBuilt", function() {
                     console.log("Tabela została zainicjalizowana.");
                     if (currentDatabase.length > 0) {
-                        searchAndMatch(currentDatabase);
+                        searchAndMatch([]);
                     }
                 });
             }
+        }
+
+        function initializeCSVTable() {
+            // Inicjalizacja tabeli CSV, jeśli to potrzebne
         }
 
         function handleFileSelect(event) {
@@ -251,61 +308,4 @@
                 currentDatabase.forEach(item => {
                     let db_sp = replaceCharacters((item.WABAR || item.SP || item.Rofood || "").toString().trim().toUpperCase());
                     if (db_sp === sp) {
-                        const rabat = ((1 - (cena / parseFloat(item["CENA 100 MM"]))) * 100).toFixed(2);
-                        matchedData.push({ MM: item.MM, NAZWA: replaceCharacters(item.NAZWA), CENA: cena.toFixed(2), RABAT: rabat });
-                    }
-                });
-            });
-
-            console.log("Przetworzone dane:", matchedData);
-            if (matchedData.length === 0) {
-                console.warn("Brak danych do wyświetlenia.");
-            }
-            displayResults(matchedData);
-            displaySummary(matchedData);
-        }
-
-        function getColor(value) {
-            if (value > 70) return "czerwony";
-            if (value > 60) return "żółty";
-            return "zielony";
-        }
-
-        function customFilter(headerValue, rowValue, rowData) {
-            if (!headerValue) return true;
-            const value = parseFloat(rowData['RABAT']);
-            const color = getColor(value);
-            return color === headerValue;
-        }
-
-        function displayResults(matches) {
-            console.log("Wyświetlanie wyników:", matches);
-            if (tabulatorInstance) {
-                tabulatorInstance.setData(matches);
-            }
-            document.getElementById('summaryContainer').style.display = 'block';
-        }
-
-        function displaySummary(matches) {
-            let totalDiscount = 0;
-            matches.forEach(entry => {
-                totalDiscount += parseFloat(entry.RABAT);
-            });
-            const averageDiscount = (totalDiscount / matches.length).toFixed(2);
-            document.getElementById('summaryContainer').innerText = `Średni rabat: ${averageDiscount}%`;
-        }
-
-        function downloadXLS() {
-            if (tabulatorInstance) {
-                tabulatorInstance.download("xlsx", "wyniki.xlsx", { sheetName: "Dane" });
-            } else {
-                alert("Brak danych do pobrania!");
-            }
-        }
-
-        // Inicjalizacja Tabulatora przy pierwszym załadowaniu strony
-        initializeTable();
-    </script>
-
-</body>
-</html>
+                        const rabat = ((1 - (cena / parseFloat(item["C
