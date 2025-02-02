@@ -239,13 +239,13 @@
             const results = [];
 
             csvData.forEach(entry => {
-                const index = entry['INDEKS'].trim().toUpperCase();
+                const index = entry['INDEKS'] ? entry['INDEKS'].trim().toUpperCase() : '';
                 const price = parseFloat(entry['CENA']);
 
                 if (!index || isNaN(price)) return;
 
                 databases[currentCategory].forEach(item => {
-                    const itemIndex = currentCategory === 'spizarnia' ? item.SP : (item.WABAR || item.SP || item.Rofood);
+                    const itemIndex = currentCategory === 'rofood' ? item.Rofood : (item.WABAR || item.SP);
                     if (itemIndex && (itemIndex.toString().trim().toUpperCase() === index)) {
                         const originalPrice = parseFloat(item["CENA 100 MM"]);
                         if (!isNaN(originalPrice) && originalPrice !== 0) {
