@@ -54,7 +54,7 @@
                             MATCHPRICE
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="bithubweb.html">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="bithubweb.html" onclick="showMatchJSONPage()">MATCH JSON</a></li>
                             <li><a class="dropdown-item" href="matchcsv.html">MATCH CSV</a></li>
                             <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
                             <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
@@ -299,6 +299,10 @@
             const table = document.getElementById('processedTable');
             const wb = XLSX.utils.table_to_book(table, {sheet: "Sheet1"});
             XLSX.writeFile(wb, 'table.xlsx');
+        }
+
+        function showMatchJSONPage() {
+            window.location.href = "bithubweb.html";
         }
     </script>
 
