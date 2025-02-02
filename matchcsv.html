@@ -30,7 +30,8 @@
         .btn-primary { background-color: #343A40; color: white; }
         .btn-secondary { background-color: #198754; color: white; }
         button:hover { transform: scale(1.05); opacity: 0.9; }
-        .table-container { margin-top: 20px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); }
+        .tables-container { display: flex; justify-content: space-between; gap: 20px; margin-top: 20px; }
+        .table-wrapper { width: 48%; max-height: 400px; overflow-y: auto; background: white; padding: 10px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); }
         .hidden { display: none; }
         .close-btn { cursor: pointer; color: red; margin-left: 5px; }
     </style>
@@ -92,12 +93,25 @@
             <button class="btn-secondary" onclick="exportToExcel()">Zapisz do pliku Excel</button>
         </div>
 
-        <!-- TABELA -->
-        <div class="table-container hidden" id="tableContainer">
-            <table class="table table-striped" id="csvTable">
-                <thead></thead>
-                <tbody></tbody>
-            </table>
+        <!-- TABELKI -->
+        <div class="tables-container hidden" id="tablesContainer">
+            <!-- Wczytane dane CSV -->
+            <div class="table-wrapper">
+                <h5>Wczytane dane CSV</h5>
+                <table class="table table-striped" id="csvTable">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- Przetworzone dane -->
+            <div class="table-wrapper">
+                <h5>Przetworzone dane</h5>
+                <table class="table table-striped" id="processedTable">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -123,7 +137,7 @@
             document.querySelectorAll('.tile').forEach(tile => tile.classList.remove('active'));
             document.querySelector(`.tile[onclick="setCategory('${category}')"]`).classList.add('active');
             document.getElementById('importSection').classList.remove('hidden');
-            document.getElementById('tableContainer').classList.add('hidden');
+            document.getElementById('tablesContainer').classList.add('hidden');
             document.getElementById('processButtonGroup').classList.add('hidden');
         }
 
@@ -153,10 +167,19 @@
                 skipEmptyLines: true,
                 complete: function(results) {
                     console.log('Wczytane dane CSV:', results.data);
-                    csvData = results.data.map(row => ({
-                        INDEKS: row[2], // Kolumna 3
-                        CENA: row[6]    // Kolumna 7
-                    }));
+                    csvData = results.data.map(row => {
+                        if (currentCategory === 'spizarnia') {
+                            return {
+                                INDEKS: row[0], // Kolumna 1
+                                CENA: row[3]    // Kolumna 4
+                            };
+                        } else {
+                            return {
+                                INDEKS: row[2], // Kolumna 3
+                                CENA: row[6]    // Kolumna 7
+                            };
+                        }
+                    });
                     displayCSVData(csvData);
                 },
                 error: function(error) {
@@ -200,7 +223,7 @@
                     tbody.appendChild(tr);
                 });
 
-                document.getElementById('tableContainer').classList.remove('hidden');
+                document.getElementById('tablesContainer').classList.remove('hidden');
                 document.getElementById('processButtonGroup').classList.remove('hidden');
             }
         }
@@ -216,18 +239,16 @@
                 if (!index || isNaN(price)) return;
 
                 databases[currentCategory].forEach(item => {
-                    // Elastyczne porównanie indeksów
-                    const itemIndex = item.WABAR || item.SP;
-                    if (itemIndex && (itemIndex.trim().toUpperCase() === index)) {
-                        const originalPrice = parseFloat(item["CENA 100 MM"]); // Użyjemy ceny 100 MM bez przeliczania
+                    const itemIndex = currentCategory === 'spizarnia' ? item.SP : (item.WABAR || item.SP);
+                    if (itemIndex && (itemIndex.toString().trim().toUpperCase() === index)) {
+                        const originalPrice = parseFloat(item["CENA 100 MM"]);
                         if (!isNaN(originalPrice) && originalPrice !== 0) {
-                            // Obliczanie rabatu w procentach
                             const discount = ((originalPrice - price) / originalPrice * 100).toFixed(2);
                             results.push({
                                 MM: item.MM,
                                 NAZWA: item.NAZWA,
                                 CENA: price,
-                                "CENA 100": originalPrice.toFixed(2), // Dodanie kolumny "CENA 100"
+                                "CENA 100": originalPrice.toFixed(2),
                                 RABAT: discount
                             });
                         }
@@ -235,11 +256,11 @@
                 });
             });
 
-            displayResults(results);
+            displayProcessedData(results);
         }
 
-        function displayResults(results) {
-            const table = document.getElementById('csvTable');
+        function displayProcessedData(data) {
+            const table = document.getElementById('processedTable');
             const thead = table.querySelector('thead');
             const tbody = table.querySelector('tbody');
 
@@ -247,33 +268,35 @@
             thead.innerHTML = '';
             tbody.innerHTML = '';
 
-            // Create table headers
-            const headers = ['#', 'MM', 'NAZWA', 'CENA', 'CENA 100', 'RABAT'];
-            const headerRow = document.createElement('tr');
-            headers.forEach(header => {
-                const th = document.createElement('th');
-                th.textContent = header;
-                headerRow.appendChild(th);
-            });
-            thead.appendChild(headerRow);
-
-            // Create table rows
-            results.forEach((row, index) => {
-                const tr = document.createElement('tr');
-                const tdIndex = document.createElement('td');
-                tdIndex.textContent = index + 1;
-                tr.appendChild(tdIndex);
-                headers.slice(1).forEach(header => {
-                    const td = document.createElement('td');
-                    td.textContent = row[header];
-                    tr.appendChild(td);
+            if (data.length > 0) {
+                // Create table headers
+                const headers = ['#'].concat(Object.keys(data[0]));
+                const headerRow = document.createElement('tr');
+                headers.forEach(header => {
+                    const th = document.createElement('th');
+                    th.textContent = header;
+                    headerRow.appendChild(th);
                 });
-                tbody.appendChild(tr);
-            });
+                thead.appendChild(headerRow);
+
+                // Create table rows
+                data.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    const tdIndex = document.createElement('td');
+                    tdIndex.textContent = index + 1;
+                    tr.appendChild(tdIndex);
+                    headers.slice(1).forEach(header => {
+                        const td = document.createElement('td');
+                        td.textContent = row[header];
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                });
+            }
         }
 
         function exportToExcel() {
-            const table = document.getElementById('csvTable');
+            const table = document.getElementById('processedTable');
             const wb = XLSX.utils.table_to_book(table, {sheet: "Sheet1"});
             XLSX.writeFile(wb, 'table.xlsx');
         }
