@@ -132,6 +132,12 @@
             initializeTable();
         }
 
+        function showMatchCSVPage() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('matchJSONPage').classList.add('hidden');
+            // Assuming there is a separate section or logic for MATCH CSV
+        }
+
         async function setCategory(category) {
             try {
                 const response = await fetch(`https://raw.githubusercontent.com/Marcin870119/matchweb/main/${category}.json`);
