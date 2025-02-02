@@ -77,7 +77,15 @@
 
     <!-- STRONA GŁÓWNA -->
     <div id="homePage">
-        <h1>Strona w budowie</h1>
+        <div class="container-buttons">
+            <div class="tile" onclick="showSubTiles()">MATCHPRICE</div>
+        </div>
+        <div id="subTilesContainer" class="container-buttons hidden">
+            <div class="tile" onclick="navigateTo('matchjson.html')">MATCH JSON</div>
+            <div class="tile" onclick="navigateTo('matchcsv.html')">MATCH CSV</div>
+            <div class="tile" onclick="navigateTo('matchpdf.html')">MATCH PDF</div>
+            <div class="tile" onclick="navigateTo('matchocr.html')">MATCH OCR</div>
+        </div>
     </div>
 
     <!-- MATCH JSON PAGE -->
@@ -124,6 +132,14 @@
         function showHomePage() {
             document.getElementById('homePage').classList.remove('hidden');
             document.getElementById('matchJSONPage').classList.add('hidden');
+        }
+
+        function showSubTiles() {
+            document.getElementById('subTilesContainer').classList.toggle('hidden');
+        }
+
+        function navigateTo(page) {
+            window.location.href = page;
         }
 
         function showMatchJSONPage() {
