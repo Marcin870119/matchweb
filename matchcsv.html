@@ -173,6 +173,11 @@
                                 INDEKS: row[0], // Kolumna 1
                                 CENA: row[3]    // Kolumna 4
                             };
+                        } else if (currentCategory === 'rofood') {
+                            return {
+                                INDEKS: row[3], // Kolumna 4
+                                CENA: row[9]    // Kolumna 10
+                            };
                         } else {
                             return {
                                 INDEKS: row[2], // Kolumna 3
@@ -239,7 +244,7 @@
                 if (!index || isNaN(price)) return;
 
                 databases[currentCategory].forEach(item => {
-                    const itemIndex = currentCategory === 'spizarnia' ? item.SP : (item.WABAR || item.SP);
+                    const itemIndex = currentCategory === 'spizarnia' ? item.SP : (item.WABAR || item.SP || item.Rofood);
                     if (itemIndex && (itemIndex.toString().trim().toUpperCase() === index)) {
                         const originalPrice = parseFloat(item["CENA 100 MM"]);
                         if (!isNaN(originalPrice) && originalPrice !== 0) {
