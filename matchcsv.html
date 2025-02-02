@@ -167,7 +167,7 @@
                 skipEmptyLines: true,
                 complete: function(results) {
                     console.log('Wczytane dane CSV:', results.data);
-                    csvData = results.data.map(row => {
+                    csvData = results.data.map((row, index) => {
                         if (currentCategory === 'spizarnia') {
                             return {
                                 INDEKS: row[0], // Kolumna 1
@@ -175,8 +175,9 @@
                             };
                         } else if (currentCategory === 'rofood') {
                             return {
-                                INDEKS: row[3], // Kolumna 4
-                                CENA: row[9]    // Kolumna 10
+                                NUMERACJA: index + 1, // Numeracja
+                                INDEKS: row[9],       // Kolumna 10
+                                CENA: row[3]          // Kolumna 4
                             };
                         } else {
                             return {
