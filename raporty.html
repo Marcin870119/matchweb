@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,49 +13,190 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
     <style>
-        body { 
-            font-family: 'Arial', sans-serif; 
-            background-color: #F5F5F5; 
-            margin-top: 20px; 
-            min-height: 300vh;  /* Zwiększona minimalna wysokość ciała strony */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        .navbar { height: 50px; padding: 5px 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .navbar-brand { display: flex; align-items: center; font-size: 16px; font-weight: bold; }
-        .navbar-brand img { height: 30px; margin-right: 5px; }
-        .navbar-nav .nav-link { font-size: 14px; font-weight: 500; color: rgba(255, 255, 255, 0.8); padding: 6px 12px; transition: color 0.3s ease-in-out; }
-        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: white; }
-        .dropdown-menu a:hover { background-color: #343A40; color: white; }
-        .container { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
-        .tile { padding: 20px; font-size: 20px; font-weight: bold; border-radius: 10px; text-align: center; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); color: #333; margin-bottom: 20px; width: 60%; cursor: pointer; }
-        .json-output { margin-top: 20px; text-align: left; white-space: pre-wrap; }
-        .json-table { 
-            width: 100%; 
-            max-height: 300px; 
-            overflow-y: auto; 
-            background: white; 
-            padding: 10px; 
-            border-radius: 10px; 
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-            font-size: 12px; 
+
+        .navbar {
+            height: 50px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            font-size: 10px;  /* Zmniejszono rozmiar czcionki tabeli */
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
         }
-        th, td { 
-            padding: 4px 8px; 
-            border: 1px solid #ddd; 
-            word-wrap: break-word;  /* Dodano łamanie słów */
+
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 5px;
         }
-        th { background-color: #f8f8f8; font-weight: bold; }
-        tbody tr:hover { background-color: #f1f1f1; cursor: pointer; }
-        .json-table-wrapper { 
-            max-width: 100%; 
-            overflow-x: auto;  /* Dodano poziome przewijanie */
+
+        .navbar-nav .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 6px 12px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: white;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #343A40;
+            color: white;
+        }
+
+        .wrapper {
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 180px;
+            background-color: #2C3E50;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar a {
+            color: #ECF0F1;
+            text-decoration: none;
+            display: block;
+            padding: 6px 10px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 4px;
+        }
+
+        .sidebar a:hover {
+            background-color: #1ABC9C;
+            color: white;
+        }
+
+        .sidebar a.active {
+            background-color: #16A085;
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        .tile {
+            padding: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 10px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            color: #333;
+            margin-bottom: 20px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .json-output {
+            margin-top: 20px;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .json-table-wrapper {
+            width: 50%;
+            overflow: auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .details-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 400px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .footer {
+            background-color: #2C3E50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .spacer {
+            height: 600px; /* Adjust this height to increase the scrollable space */
         }
     </style>
 </head>
+
 <body>
 
     <!-- NAVBAR -->
@@ -87,38 +229,45 @@
         </div>
     </nav>
 
-    <!-- CONTENT -->
-    <div class="container">
-        <div class="tile" onclick="loadSalesData()">Sprzedaż po producentach</div>
+    <!-- WRAPPER -->
+    <div class="wrapper">
 
-        <div class="flex-container hidden" id="dataContainer">
-            <div class="json-table ui-widget-content" id="jsonTableWrapper">
-                <h5>Lista Klientów</h5>
-                <table id="clientTable" class="display nowrap">
-                    <thead>
-                        <tr>
-                            <th>Kod odbiorcy</th>
-                            <th>Odbiorca</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <a href="#" class="active" onclick="loadSalesData()">SPRZEDAŻ PO PRODUCENTACH</a>
+            <a href="#">RABATY KLIENTÓW</a>
+            <a href="#">TOP 305 INDEKSÓW</a>
+        </div>
 
-            <div class="json-table-wrapper">
-                <div class="json-table ui-widget-content hidden" id="detailsTableWrapper">
-                    <h5>Szczegóły Sprzedaży</h5>
-                    <table id="detailsTable" class="display nowrap">
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="container">
+                <div class="tile" onclick="loadSalesData()">Sprzedaż po producentach</div>
+
+                <!-- Lista klientów -->
+                <div class="json-table-wrapper" id="clientTableWrapper">
+                    <h5>Lista Klientów</h5>
+                    <table id="clientTable" class="display nowrap" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Kraj</th>
-                                <th>Kod odb</th>
+                                <th>Kod odbiorcy</th>
                                 <th>Odbiorca</th>
-                                <th>PH</th>
-                                <th>Region</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <!-- Szczegóły sprzedaży -->
+                <div class="details-table-wrapper hidden" id="detailsTableWrapper">
+                    <h5>Szczegóły Sprzedaży</h5>
+                    <table id="detailsTable" class="display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Odbiorca</th>
                                 <th>Rabat podst.</th>
                                 <th>Rabat na producenta</th>
-                                <th>Kod producenta</th>
                                 <th>Producent skrót</th>
                                 <th>Grupa</th>
                                 <th>lip 24</th>
@@ -134,17 +283,39 @@
                     </table>
                 </div>
             </div>
+
+            <div class="spacer"></div>
+
         </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        Strona stworzona przez MSZCorporation
     </div>
 
     <script>
+        $(function () {
+            // Umożliwienie przeciągania elementu .details-table-wrapper
+            $("#detailsTableWrapper").draggable({
+                handle: "h5" // Element, za który można przeciągać
+            });
+        });
+
         let salesData = [];
 
         function loadSalesData() {
             fetch('https://raw.githubusercontent.com/Marcin870119/matchweb/main/perproducent.json')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     salesData = data;
+                    console.log('Loaded sales data:', data);  // Debugging line
                     displayClientList(data);
                 })
                 .catch(error => {
@@ -179,8 +350,11 @@
                 tableBody.appendChild(tr);
             });
 
-            $('#clientTable').DataTable();
-            document.getElementById('dataContainer').classList.remove('hidden');
+            $('#clientTable').DataTable({
+                scrollY: '200px',
+                scrollCollapse: true,
+                paging: false
+            });
         }
 
         function displayClientDetails(kodOdb) {
@@ -191,9 +365,10 @@
 
             clientDetails.forEach(row => {
                 const tr = document.createElement('tr');
-                Object.keys(row).forEach(key => {
+                const keys = ['Odbiorca', 'Rabat podst.', 'Rabat na producenta', 'Producent skrót', 'Grupa', 'lip 24', 'sie 24', 'wrz 24', 'paź 24', 'lis 24', 'gru 24', 'sty 25'];
+                keys.forEach(key => {
                     const td = document.createElement('td');
-                    td.textContent = row[key];
+                    td.textContent = typeof row[key] === 'number' ? row[key].toFixed(2) : row[key];
                     tr.appendChild(td);
                 });
                 tableBody.appendChild(tr);
@@ -203,11 +378,19 @@
                 $('#detailsTable').DataTable().clear().destroy();
             }
             $('#detailsTable').DataTable({
-                scrollX: true  // Dodano poziome przewijanie dla DataTables
+                scrollY: '200px',
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
+                autoWidth: false,
+                columnDefs: [
+                    { width: '100px', targets: '_all' }
+                ]
             });
             document.getElementById('detailsTableWrapper').classList.remove('hidden');
         }
     </script>
 
 </body>
+
 </html>
