@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATCH SYSTEM - RAPORTY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background-color: #F5F5F5; 
+            margin-top: 20px; 
+            min-height: 300vh;  /* Zwiększona minimalna wysokość ciała strony */
+        }
+        .navbar { height: 50px; padding: 5px 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .navbar-brand { display: flex; align-items: center; font-size: 16px; font-weight: bold; }
+        .navbar-brand img { height: 30px; margin-right: 5px; }
+        .navbar-nav .nav-link { font-size: 14px; font-weight: 500; color: rgba(255, 255, 255, 0.8); padding: 6px 12px; transition: color 0.3s ease-in-out; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: white; }
+        .dropdown-menu a:hover { background-color: #343A40; color: white; }
+        .container { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
+        .tile { padding: 20px; font-size: 20px; font-weight: bold; border-radius: 10px; text-align: center; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); color: #333; margin-bottom: 20px; width: 60%; cursor: pointer; }
+        .json-output { margin-top: 20px; text-align: left; white-space: pre-wrap; }
+        .json-table { 
+            width: 100%; 
+            max-height: 300px; 
+            overflow-y: auto; 
+            background: white; 
+            padding: 10px; 
+            border-radius: 10px; 
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+            font-size: 12px; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 10px;  /* Zmniejszono rozmiar czcionki tabeli */
+        }
+        th, td { 
+            padding: 4px 8px; 
+            border: 1px solid #ddd; 
+            word-wrap: break-word;  /* Dodano łamanie słów */
+        }
+        th { background-color: #f8f8f8; font-weight: bold; }
+        tbody tr:hover { background-color: #f1f1f1; cursor: pointer; }
+        .json-table-wrapper { 
+            max-width: 100%; 
+            overflow-x: auto;  /* Dodano poziome przewijanie */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="bithubweb.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            MATCHPRICE
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="bithubweb.html" onclick="showMatchJSONPage()">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="matchcsv.html">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="narzedzia.html">NARZĘDZIA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="raporty.html">RAPORTY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="container">
+        <div class="tile" onclick="loadSalesData()">Sprzedaż po producentach</div>
+
+        <div class="flex-container hidden" id="dataContainer">
+            <div class="json-table ui-widget-content" id="jsonTableWrapper">
+                <h5>Lista Klientów</h5>
+                <table id="clientTable" class="display nowrap">
+                    <thead>
+                        <tr>
+                            <th>Kod odbiorcy</th>
+                            <th>Odbiorca</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="json-table-wrapper">
+                <div class="json-table ui-widget-content hidden" id="detailsTableWrapper">
+                    <h5>Szczegóły Sprzedaży</h5>
+                    <table id="detailsTable" class="display nowrap">
+                        <thead>
+                            <tr>
+                                <th>Kraj</th>
+                                <th>Kod odb</th>
+                                <th>Odbiorca</th>
+                                <th>PH</th>
+                                <th>Region</th>
+                                <th>Rabat podst.</th>
+                                <th>Rabat na producenta</th>
+                                <th>Kod producenta</th>
+                                <th>Producent skrót</th>
+                                <th>Grupa</th>
+                                <th>lip 24</th>
+                                <th>sie 24</th>
+                                <th>wrz 24</th>
+                                <th>paź 24</th>
+                                <th>lis 24</th>
+                                <th>gru 24</th>
+                                <th>sty 25</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let salesData = [];
+
+        function loadSalesData() {
+            fetch('https://raw.githubusercontent.com/Marcin870119/matchweb/main/perproducent.json')
+                .then(response => response.json())
+                .then(data => {
+                    salesData = data;
+                    displayClientList(data);
+                })
+                .catch(error => {
+                    console.error('Błąd podczas wczytywania danych:', error);
+                    alert('Błąd podczas wczytywania danych!');
+                });
+        }
+
+        function displayClientList(data) {
+            const uniqueClients = [];
+            const clientMap = new Map();
+
+            data.forEach(row => {
+                if (!clientMap.has(row['Kod odb'])) {
+                    clientMap.set(row['Kod odb'], row['Odbiorca']);
+                    uniqueClients.push({ kod: row['Kod odb'], odbiorca: row['Odbiorca'] });
+                }
+            });
+
+            const tableBody = document.querySelector("#clientTable tbody");
+            tableBody.innerHTML = "";
+
+            uniqueClients.forEach(client => {
+                const tr = document.createElement('tr');
+                tr.onclick = () => displayClientDetails(client.kod);
+                const tdKod = document.createElement('td');
+                tdKod.textContent = client.kod;
+                const tdOdbiorca = document.createElement('td');
+                tdOdbiorca.textContent = client.odbiorca;
+                tr.appendChild(tdKod);
+                tr.appendChild(tdOdbiorca);
+                tableBody.appendChild(tr);
+            });
+
+            $('#clientTable').DataTable();
+            document.getElementById('dataContainer').classList.remove('hidden');
+        }
+
+        function displayClientDetails(kodOdb) {
+            const clientDetails = salesData.filter(row => row['Kod odb'] === kodOdb);
+
+            const tableBody = document.querySelector("#detailsTable tbody");
+            tableBody.innerHTML = "";
+
+            clientDetails.forEach(row => {
+                const tr = document.createElement('tr');
+                Object.keys(row).forEach(key => {
+                    const td = document.createElement('td');
+                    td.textContent = row[key];
+                    tr.appendChild(td);
+                });
+                tableBody.appendChild(tr);
+            });
+
+            if ($.fn.dataTable.isDataTable('#detailsTable')) {
+                $('#detailsTable').DataTable().clear().destroy();
+            }
+            $('#detailsTable').DataTable({
+                scrollX: true  // Dodano poziome przewijanie dla DataTables
+            });
+            document.getElementById('detailsTableWrapper').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
