@@ -298,6 +298,7 @@
         });
 
         let salesData = [];
+        let dataTable;
 
         function loadSalesData() {
             fetch('https://raw.githubusercontent.com/Marcin870119/matchweb/main/perproducent.json')
@@ -364,11 +365,11 @@
                 tableBody.appendChild(tr);
             });
 
-            if ($.fn.dataTable.isDataTable('#detailsTable')) {
-                $('#detailsTable').DataTable().clear().destroy();
+            if (dataTable) {
+                dataTable.clear().destroy();
             }
 
-            $('#detailsTable').DataTable({
+            dataTable = $('#detailsTable').DataTable({
                 scrollY: '200px',
                 scrollX: true,
                 scrollCollapse: true,
