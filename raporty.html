@@ -350,6 +350,8 @@
                 if (this.value) {
                     console.log(`Selected client: ${this.value}`);  // Debugging line
                     displayClientDetails(this.value);
+                } else {
+                    clearData();
                 }
             });
         }
