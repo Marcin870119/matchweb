@@ -54,14 +54,14 @@
                             MATCHPRICE
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="bithubweb.html" onclick="showMatchJSONPage()">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="bithubweb.html">MATCH JSON</a></li>
                             <li><a class="dropdown-item" href="matchcsv.html">MATCH CSV</a></li>
-                            <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
-                            <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
+                            <li><a class="dropdown-item" href="matchpdf.html">MATCH PDF</a></li>
+                            <li><a class="dropdown-item" href="matchocr.html">MATCH OCR</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">NARZĘDZIA</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Raporty</a></li>
+                    <li class="nav-item"><a class="nav-link" href="narzedzia.html">NARZĘDZIA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="raporty.html">RAPORTY</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
                 </ul>
             </div>
@@ -305,10 +305,6 @@
             const table = document.getElementById('processedTable');
             const wb = XLSX.utils.table_to_book(table, {sheet: "Sheet1"});
             XLSX.writeFile(wb, 'table.xlsx');
-        }
-
-        function showMatchJSONPage() {
-            window.location.href = "bithubweb.html";
         }
     </script>
 
