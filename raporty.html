@@ -304,8 +304,6 @@
         });
 
         let salesData = [];
-        let clientTable;
-        let detailsTable;
 
         function loadSalesData() {
             fetch('https://raw.githubusercontent.com/Marcin870119/matchweb/main/perproducent.json')
@@ -356,7 +354,7 @@
                 $('#clientTable').DataTable().clear().destroy();
             }
 
-            clientTable = $('#clientTable').DataTable({
+            $('#clientTable').DataTable({
                 scrollY: '200px',
                 scrollCollapse: true,
                 paging: false
@@ -384,7 +382,7 @@
                 $('#detailsTable').DataTable().clear().destroy();
             }
 
-            detailsTable = $('#detailsTable').DataTable({
+            $('#detailsTable').DataTable({
                 scrollY: '200px',
                 scrollX: true,
                 scrollCollapse: true,
