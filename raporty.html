@@ -194,6 +194,11 @@
         .spacer {
             height: 600px; /* Adjust this height to increase the scrollable space */
         }
+
+        .btn-clear {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
@@ -252,6 +257,9 @@
                         <option value="">Wybierz klienta...</option>
                     </select>
                 </div>
+
+                <!-- Przycisk Wyczyść dane -->
+                <button id="clearButton" class="btn btn-danger btn-clear">Wyczyść dane</button>
 
                 <!-- Szczegóły sprzedaży -->
                 <div class="details-table-wrapper hidden" id="detailsTableWrapper">
@@ -365,7 +373,7 @@
                 tableBody.appendChild(tr);
             });
 
-            if (dataTable) {
+            if ($.fn.dataTable.isDataTable('#detailsTable')) {
                 dataTable.clear().destroy();
             }
 
@@ -383,9 +391,22 @@
             document.getElementById('detailsTableWrapper').classList.remove('hidden');
         }
 
+        function clearData() {
+            const tableBody = document.querySelector("#detailsTable tbody");
+            tableBody.innerHTML = "";
+
+            if ($.fn.dataTable.isDataTable('#detailsTable')) {
+                dataTable.clear().draw();
+            }
+
+            document.getElementById('detailsTableWrapper').classList.add('hidden');
+            document.getElementById('clientSelect').value = '';
+        }
+
         // Initial call to load sales data when the page loads
         $(document).ready(function() {
             loadSalesData();
+            document.getElementById('clearButton').addEventListener('click', clearData);
         });
     </script>
 
