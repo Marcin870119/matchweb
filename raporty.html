@@ -111,8 +111,8 @@
         }
 
         .tile {
-            padding: 20px;
-            font-size: 20px;
+            padding: 10px;
+            font-size: 16px;
             font-weight: bold;
             border-radius: 10px;
             text-align: center;
@@ -124,16 +124,18 @@
             margin-bottom: 20px;
             width: 100%;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .json-output {
-            margin-top: 20px;
-            text-align: left;
-            white-space: pre-wrap;
+        .tile img {
+            height: 20px;
+            margin-right: 8px;
         }
 
         .json-table-wrapper {
-            width: 50%;
+            width: 30%;
             overflow: auto;
             background: white;
             padding: 10px;
@@ -141,6 +143,17 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             max-height: 400px;
             margin-top: 20px;
+        }
+
+        .json-table-wrapper h5 {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        select.form-select {
+            font-size: 12px;
+            padding: 4px 8px;
         }
 
         table {
@@ -177,6 +190,7 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             position: relative;
             margin-top: 20px;
+            resize: both;
         }
 
         .footer {
@@ -193,11 +207,6 @@
 
         .spacer {
             height: 600px; /* Adjust this height to increase the scrollable space */
-        }
-
-        .btn-clear {
-            margin-top: 10px;
-            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -248,18 +257,18 @@
         <div class="content">
 
             <div class="container">
-                <div class="tile" onclick="loadSalesData()">Sprzedaż po producentach</div>
+                <div class="tile" onclick="loadSalesData()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="icon">
+                    Sprzedaż po producentach
+                </div>
 
                 <!-- Lista klientów -->
                 <div class="json-table-wrapper" id="clientTableWrapper">
-                    <h5>Wybierz Klienta</h5>
+                    <h5>WYBIERZ KLIENTA</h5>
                     <select id="clientSelect" class="form-select">
                         <option value="">Wybierz klienta...</option>
                     </select>
                 </div>
-
-                <!-- Przycisk Wyczyść dane -->
-                <button id="clearButton" class="btn btn-danger btn-clear">Wyczyść dane</button>
 
                 <!-- Szczegóły sprzedaży -->
                 <div class="details-table-wrapper hidden" id="detailsTableWrapper">
@@ -388,7 +397,8 @@
                 autoWidth: false,
                 columnDefs: [
                     { width: '100px', targets: '_all' }
-                ]
+                ],
+                info: false // Remove "Showing 1 to X of X entries"
             });
 
             document.getElementById('detailsTableWrapper').classList.remove('hidden');
@@ -408,7 +418,6 @@
         // Initial call to load sales data when the page loads
         $(document).ready(function() {
             loadSalesData();
-            document.getElementById('clearButton').addEventListener('click', clearData);
         });
     </script>
 
