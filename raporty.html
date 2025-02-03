@@ -304,6 +304,8 @@
         });
 
         let salesData = [];
+        let clientTable;
+        let detailsTable;
 
         function loadSalesData() {
             fetch('https://raw.githubusercontent.com/Marcin870119/matchweb/main/perproducent.json')
@@ -350,11 +352,14 @@
                 tableBody.appendChild(tr);
             });
 
-            $('#clientTable').DataTable({
+            if ($.fn.dataTable.isDataTable('#clientTable')) {
+                $('#clientTable').DataTable().clear().destroy();
+            }
+
+            clientTable = $('#clientTable').DataTable({
                 scrollY: '200px',
                 scrollCollapse: true,
-                paging: false,
-                destroy: true
+                paging: false
             });
         }
 
@@ -378,7 +383,8 @@
             if ($.fn.dataTable.isDataTable('#detailsTable')) {
                 $('#detailsTable').DataTable().clear().destroy();
             }
-            $('#detailsTable').DataTable({
+
+            detailsTable = $('#detailsTable').DataTable({
                 scrollY: '200px',
                 scrollX: true,
                 scrollCollapse: true,
@@ -390,6 +396,11 @@
             });
             document.getElementById('detailsTableWrapper').classList.remove('hidden');
         }
+
+        // Initial call to load sales data when the page loads
+        $(document).ready(function() {
+            loadSalesData();
+        });
     </script>
 
 </body>
