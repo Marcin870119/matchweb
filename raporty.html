@@ -247,16 +247,10 @@
 
                 <!-- Lista klientów -->
                 <div class="json-table-wrapper" id="clientTableWrapper">
-                    <h5>Lista Klientów</h5>
-                    <table id="clientTable" class="display nowrap" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Kod odbiorcy</th>
-                                <th>Odbiorca</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                    <h5>Wybierz Klienta</h5>
+                    <select id="clientSelect" class="form-select">
+                        <option value="">Wybierz klienta...</option>
+                    </select>
                 </div>
 
                 <!-- Szczegóły sprzedaży -->
@@ -307,16 +301,11 @@
 
         function loadSalesData() {
             fetch('https://raw.githubusercontent.com/Marcin870119/matchweb/main/perproducent.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
                     salesData = data;
                     console.log('Loaded sales data:', data);  // Debugging line
-                    displayClientList(data);
+                    populateClientSelect(data);
                 })
                 .catch(error => {
                     console.error('Błąd podczas wczytywania danych:', error);
@@ -324,40 +313,29 @@
                 });
         }
 
-        function displayClientList(data) {
-            const uniqueClients = [];
+        function populateClientSelect(data) {
+            const clientSelect = document.getElementById('clientSelect');
+            clientSelect.innerHTML = '<option value="">Wybierz klienta...</option>';
+
             const clientMap = new Map();
 
             data.forEach(row => {
                 if (!clientMap.has(row['Kod odb'])) {
                     clientMap.set(row['Kod odb'], row['Odbiorca']);
-                    uniqueClients.push({ kod: row['Kod odb'], odbiorca: row['Odbiorca'] });
                 }
             });
 
-            const tableBody = document.querySelector("#clientTable tbody");
-            tableBody.innerHTML = "";
-
-            uniqueClients.forEach(client => {
-                const tr = document.createElement('tr');
-                tr.onclick = () => displayClientDetails(client.kod);
-                const tdKod = document.createElement('td');
-                tdKod.textContent = client.kod;
-                const tdOdbiorca = document.createElement('td');
-                tdOdbiorca.textContent = client.odbiorca;
-                tr.appendChild(tdKod);
-                tr.appendChild(tdOdbiorca);
-                tableBody.appendChild(tr);
+            clientMap.forEach((odbiorca, kod) => {
+                const option = document.createElement('option');
+                option.value = kod;
+                option.text = `${kod} - ${odbiorca}`;
+                clientSelect.appendChild(option);
             });
 
-            if ($.fn.dataTable.isDataTable('#clientTable')) {
-                $('#clientTable').DataTable().clear().destroy();
-            }
-
-            $('#clientTable').DataTable({
-                scrollY: '200px',
-                scrollCollapse: true,
-                paging: false
+            clientSelect.addEventListener('change', function() {
+                if (this.value) {
+                    displayClientDetails(this.value);
+                }
             });
         }
 
@@ -392,6 +370,7 @@
                     { width: '100px', targets: '_all' }
                 ]
             });
+
             document.getElementById('detailsTableWrapper').classList.remove('hidden');
         }
 
