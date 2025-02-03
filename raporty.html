@@ -301,7 +301,12 @@
 
         function loadSalesData() {
             fetch('https://raw.githubusercontent.com/Marcin870119/matchweb/main/perproducent.json')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     salesData = data;
                     console.log('Loaded sales data:', data);  // Debugging line
@@ -334,13 +339,16 @@
 
             clientSelect.addEventListener('change', function() {
                 if (this.value) {
+                    console.log(`Selected client: ${this.value}`);  // Debugging line
                     displayClientDetails(this.value);
                 }
             });
         }
 
         function displayClientDetails(kodOdb) {
-            const clientDetails = salesData.filter(row => row['Kod odb'] === kodOdb);
+            const clientDetails = salesData.filter(row => row['Kod odb'] == kodOdb);
+
+            console.log('Client details:', clientDetails);  // Debugging line
 
             const tableBody = document.querySelector("#detailsTable tbody");
             tableBody.innerHTML = "";
