@@ -349,6 +349,7 @@
             clientSelect.addEventListener('change', function() {
                 if (this.value) {
                     console.log(`Selected client: ${this.value}`);  // Debugging line
+                    clearData(); // Clear previous data before displaying new details
                     displayClientDetails(this.value);
                 } else {
                     clearData();
@@ -398,11 +399,10 @@
             tableBody.innerHTML = "";
 
             if ($.fn.dataTable.isDataTable('#detailsTable')) {
-                dataTable.clear().draw();
+                dataTable.clear().destroy();
             }
 
             document.getElementById('detailsTableWrapper').classList.add('hidden');
-            document.getElementById('clientSelect').value = '';
         }
 
         // Initial call to load sales data when the page loads
