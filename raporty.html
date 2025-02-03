@@ -353,7 +353,8 @@
             $('#clientTable').DataTable({
                 scrollY: '200px',
                 scrollCollapse: true,
-                paging: false
+                paging: false,
+                destroy: true
             });
         }
 
@@ -389,11 +390,6 @@
             });
             document.getElementById('detailsTableWrapper').classList.remove('hidden');
         }
-
-        // Initial call to load sales data when the page loads
-        $(document).ready(function() {
-            loadSalesData();
-        });
     </script>
 
 </body>
