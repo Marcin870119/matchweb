@@ -299,7 +299,7 @@
                 clientSelect.appendChild(option);
             });
 
-            clientSelect.addEventListener('change', function() {
+            clientSelect.addEventListener('change', function () {
                 if (this.value) {
                     console.log(`Selected client: ${this.value}`);
                     clearData();
@@ -355,8 +355,9 @@
         }
 
         function displayAdditionalDetails(rowData) {
-            const odbiorca = rowData[0];
-            const additionalDetails = additionalSalesData.filter(row => row['__1'] == odbiorca);
+            const odbiorca = rowData[0].trim();
+            const kodKh = document.getElementById('clientSelect').value.trim();
+            const additionalDetails = additionalSalesData.filter(row => row['__1'].trim() === odbiorca && row[''].toString().trim() === kodKh);
 
             console.log('Additional details:', additionalDetails);
 
@@ -365,7 +366,7 @@
 
             additionalDetails.forEach(row => {
                 const tr = document.createElement('tr');
-                const keys = ['__1', '__2', '2024__1', '2024__2', '2024__3', '2024__4', '2025__1', '2025__2', '2025__3', '2025__4', '2025__5'];
+                const keys = ['__1', '__2', '2024', '2025', '2024__1', '2024__2', '2024__3', '2024__4', '2025__1', '2025__2', '2025__3', '2025__4'];
                 keys.forEach(key => {
                     const td = document.createElement('td');
                     td.textContent = row[key] || '';
@@ -506,16 +507,16 @@
                             <tr>
                                 <th>KOD KH</th>
                                 <th>NAZWA KH</th>
-                                <th>49</th>
-                                <th>50</th>
-                                <th>51</th>
-                                <th>52</th>
-                                <th>53</th>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>4</th>
-                                <th>5</th>
+                                <th>2024</th>
+                                <th>2025</th>
+                                <th>2024__1</th>
+                                <th>2024__2</th>
+                                <th>2024__3</th>
+                                <th>2024__4</th>
+                                <th>2025__1</th>
+                                <th>2025__2</th>
+                                <th>2025__3</th>
+                                <th>2025__4</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -535,5 +536,6 @@
     </div>
 
 </body>
+
 
 </html>
