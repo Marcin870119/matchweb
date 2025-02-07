@@ -397,7 +397,7 @@
             const tableBody = document.querySelector("#detailsTable tbody");
             tableBody.innerHTML = "";
 
-            if ($.fn.dataTable.isDataTable('#detailsTable')) {
+            if (dataTable) {
                 dataTable.clear().destroy();
             }
 
@@ -406,7 +406,7 @@
             const additionalTableBody = document.querySelector("#additionalDetailsTable tbody");
             additionalTableBody.innerHTML = "";
 
-            if ($.fn.dataTable.isDataTable('#additionalDetailsTable')) {
+            if (additionalDataTable) {
                 additionalDataTable.clear().destroy();
             }
 
