@@ -33,6 +33,47 @@ body {
     background-color: #343A40; 
     color: white; 
 }
+.wrapper {
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 180px;
+    background-color: #2C3E50;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+.sidebar a {
+    color: #ECF0F1;
+    text-decoration: none;
+    display: block;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+.sidebar a:hover {
+    background-color: #1ABC9C;
+    color: white;
+}
+.sidebar a.active {
+    background-color: #16A085;
+    color: white;
+}
+.content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 .container { 
     margin-top: 40px; 
     display: flex; 
