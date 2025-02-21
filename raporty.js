@@ -186,4 +186,5 @@ function clearData() {
         additionalDataTable.clear().destroy();
     }
 
-    document.getElementBy
+    document.getElementById('additionalDetailsWrapper').classList.add('hidden');
+}
