@@ -44,31 +44,46 @@
         </div>
     </nav>
 
-    <!-- CONTENT -->
-    <div class="container">
-        <div class="tile">CSV - JSON CONVERTER</div>
-        <div class="upload-container">
-            <div id="uploadArea" class="upload-area" ondrop="handleCSVFileDrop(event)" ondragover="handleCSVDragOver(event)">
-                <p>Przeciągnij i upuść plik tutaj lub kliknij, aby wybrać plik</p>
-                <input type="file" id="csvFile" accept=".csv" style="display: none;" onchange="handleCSVFileSelect(event)">
-                <button class="btn-secondary" onclick="document.getElementById('csvFile').click()">Wybierz plik</button>
-            </div>
-            <div class="button-group">
-                <button class="btn-primary" onclick="processCSV()">Przetwórz dane</button>
-                <button class="btn-primary" onclick="saveJSON()">Zapisz dane do JSON</button>
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <a href="narzedzia.html" class="active">NARZĘDZIA</a>
+            <a href="#">RABATY KLIENTÓW</a>
+            <a href="#">TOP 305 INDEKSÓW</a>
+            <a href="https://marcin870119.github.io/matchweb/wyceny.html">CENNIK</a>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <div class="container">
+                <div class="tile">CSV - JSON CONVERTER</div>
+                <div class="upload-container">
+                    <div id="uploadArea" class="upload-area" ondrop="handleCSVFileDrop(event)" ondragover="handleCSVDragOver(event)">
+                        <p>Przeciągnij i upuść plik tutaj lub kliknij, aby wybrać plik</p>
+                        <input type="file" id="csvFile" accept=".csv" style="display: none;" onchange="handleCSVFileSelect(event)">
+                        <button class="btn-secondary" onclick="document.getElementById('csvFile').click()">Wybierz plik</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="processCSV()">Przetwórz dane</button>
+                        <button class="btn-primary" onclick="saveJSON()">Zapisz dane do JSON</button>
+                    </div>
+                </div>
+
+                <div class="flex-container hidden" id="dataContainer">
+                    <div class="csv-table ui-widget-content" id="csvTableWrapper">
+                        <h5>Wczytane dane CSV</h5>
+                        <div id="csvTableContainer"></div>
+                    </div>
+                    <div class="json-table ui-widget-content" id="jsonTableWrapper">
+                        <h5>Przetworzone dane JSON</h5>
+                        <pre id="jsonOutput"></pre>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="flex-container hidden" id="dataContainer">
-            <div class="csv-table ui-widget-content" id="csvTableWrapper">
-                <h5>Wczytane dane CSV</h5>
-                <div id="csvTableContainer"></div>
-            </div>
-            <div class="json-table ui-widget-content" id="jsonTableWrapper">
-                <h5>Przetworzone dane JSON</h5>
-                <pre id="jsonOutput"></pre>
-            </div>
-        </div>
     </div>
 
     <script src="narzedzia.js"></script>
