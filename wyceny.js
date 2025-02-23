@@ -8,12 +8,12 @@ $(function () {
 
 // ✅ Konfiguracja Firebase (podmień na swoje dane!)
 const firebaseConfig = {
-    apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
-    authDomain: "webmatcher-94f0e.firebaseapp.com",
+    apiKey: "TWÓJ_API_KEY",
+    authDomain: "TWÓJ_AUTH_DOMAIN",
     projectId: "webmatcher-94f0e",
-    storageBucket: "webmatcher-94f0e.firebasestorage.app",
-    messagingSenderId: "970664630623",
-    appId: "G-RMMBEY655B"
+    storageBucket: "TWÓJ_STORAGE_BUCKET",
+    messagingSenderId: "TWÓJ_MESSAGING_SENDER_ID",
+    appId: "TWÓJ_APP_ID"
 };
 
 // ✅ Inicjalizacja Firebase
@@ -158,4 +158,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 priceMessage.style.color = 'red';
             } else {
                 const adjustedPrice = (minPrice * 1.02).toFixed(2);
-                priceMessage.textContent = `Sugerowana cena: ${adjustedPrice
+                priceMessage.textContent = `Sugerowana cena: ${adjustedPrice}`;
+                priceMessage.style.color = 'orange';
+            }
+        } else {
+            priceMessage.textContent = 'Nie znaleziono minimalnej ceny dla tego indeksu.';
+            priceMessage.style.color = 'black';
+        }
+    }
+});
