@@ -19,6 +19,7 @@ const db = getFirestore(app);
 // Pobranie referencji do elementów HTML
 const searchInput = document.getElementById('search');
 const dropdown = document.getElementById('dropdown');
+const dropdownButton = document.getElementById('dropdownButton'); // Zakładam, że masz ten przycisk w HTML
 const resultTable = document.getElementById('resultTable').querySelector('tbody');
 const priceInput = document.getElementById('price');
 const priceMessage = document.getElementById('priceMessage');
@@ -33,15 +34,15 @@ let selectedItem = null;
 async function fetchFirestoreData() {
     try {
         const querySnapshot = await getDocs(collection(db, "products"));
-        console.log("querySnapshot:", querySnapshot); // Sprawdź, co zwraca Firestore
+        console.log("querySnapshot:", querySnapshot);
 
         items = querySnapshot.docs.map(doc => {
             const data = doc.data();
-            console.log("Dokument:", doc.id, "Dane:", data); // Sprawdź dane każdego dokumentu
+            console.log("Dokument:", doc.id, "Dane:", data);
 
             if (!data.INDEKS || !data.NAZWA) {
                 console.error("❌ Błąd: Dokument w 'products' nie ma INDEKSU lub NAZWY:", doc.id, data);
-                return null; // Pomijamy błędny dokument
+                return null;
             }
             return { id: doc.id, ...data };
         }).filter(item => item !== null);
@@ -56,21 +57,54 @@ async function fetchFirestoreData() {
 
     } catch (error) {
         console.error("❌ Błąd podczas pobierania danych Firestore:", error);
-        // Wyświetl komunikat dla użytkownika, np.:
-        // priceMessage.textContent = "Błąd podczas ładowania danych. Spróbuj ponownie później.";
-        // priceMessage.style.color = "red";
     }
 }
 
-fetchFirestoreData(); // Wywołanie *po* definicji
+fetchFirestoreData();
 
-// Obsługa wyszukiwania
+// Funkcja do wypełnienia dropdowna
+function populateDropdown(items) {
+    console.log("populateDropdown - items:", items);
+    dropdown.innerHTML = '<option value="">Wybierz produkt</option>';
+    items.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = `${item.INDEKS} - ${item.NAZWA}`;
+        dropdown.appendChild(option);
+    });
+    dropdown.style.display = 'none'; // Domyślnie schowany
+}
+
+// Funkcja do filtrowania dropdowna
+function filterDropdown(items, searchTerm) {
+    console.log("filterDropdown - items:", items, "searchTerm:", searchTerm);
+    const filteredItems = items.filter(item =>
+        item.INDEKS.toString().toLowerCase().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
+    );
+    console.log("filterDropdown - filteredItems:", filteredItems);
+
+    if (filteredItems.length > 0) {
+        populateDropdown(filteredItems);
+        dropdown.style.display = 'block'; // Pokaż dropdown po filtrowaniu
+    } else {
+        dropdown.innerHTML = '<option value="">Brak wyników</option>';
+        dropdown.style.display = 'block'; // Pokaż komunikat
+    }
+}
+
+// Obsługa kliknięcia na input wyszukiwania
+searchInput.addEventListener('click', () => {
+    if (dropdown.style.display === 'none' && items.length > 0) {
+        populateDropdown(items); // Wypełnij dropdown pełną listą
+        dropdown.style.display = 'block'; // Pokaż dropdown
+    }
+});
+
+// Obsługa wpisywania w polu wyszukiwania
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
-    console.log("Wyszukiwanie - searchTerm:", searchTerm); // Sprawdź wpisywany tekst
+    console.log("Wyszukiwanie - searchTerm:", searchTerm);
     filterDropdown(items, searchTerm);
-    //Nie chowaj dropdowna po wpisaniu, dropdown ma się chować tylko przy wybraniu opcji
-    // dropdown.style.display = searchTerm.length > 0 ? 'block' : 'none';
 });
 
 // Obsługa wyboru produktu
@@ -92,40 +126,12 @@ dropdown.addEventListener('change', () => {
     }
 });
 
-// Funkcja do wypełnienia dropdowna
-function populateDropdown(items) {
-    console.log("populateDropdown - items:", items);
-    dropdown.innerHTML = '<option value="">Wybierz produkt</option>';
-    items.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.id;
-        option.textContent = `${item.INDEKS} - ${item.NAZWA}`;
-        dropdown.appendChild(option);
-    });
-
-    if (items.length > 0) {
-        dropdown.style.display = 'block'; // Otwórz dropdown, jeśli są dane
-    } else {
-        dropdown.style.display = 'none'; // Upewnij się, że dropdown jest schowany, gdy nie ma danych
+// Obsługa kliknięcia poza dropdownem (chowanie)
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !dropdown.contains(e.target) && !dropdownButton.contains(e.target)) {
+        dropdown.style.display = 'none';
     }
-}
-
-// Funkcja do filtrowania dropdowna
-function filterDropdown(items, searchTerm) {
-      console.log("filterDropdown - items:", items, "searchTerm:", searchTerm); // Sprawdź dane i szukany tekst
-    const filteredItems = items.filter(item =>
-        item.INDEKS.toString().toLowerCase().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
-    );
-    console.log("filterDropdown - filteredItems:", filteredItems); // Sprawdź przefiltrowane dane
-
-    if (filteredItems.length > 0) {
-        populateDropdown(filteredItems);
-        dropdown.style.display = 'block'; // Otwórz dropdown po filtrowaniu
-    } else {
-      dropdown.innerHTML = '<option value="">Brak wyników</option>'; // Dodaj opcję "Brak wyników"
-      dropdown.style.display = 'block'; // Pokaż komunikat
-    }
-}
+});
 
 // Funkcja do wyświetlania wybranego produktu w tabeli
 function displaySelectedItem(item) {
@@ -134,12 +140,10 @@ function displaySelectedItem(item) {
         return;
     }
 
-    // Sprawdzanie, czy DataTables istnieje
     if ($.fn.DataTable.isDataTable('#resultTable')) {
         $('#resultTable').DataTable().clear().destroy();
     }
 
-    // Aktualizacja tabeli (z obsługą brakujących danych)
     resultTable.innerHTML = `
         <tr>
             <td>${item.INDEKS || "Brak danych"}</td>
@@ -154,7 +158,6 @@ function displaySelectedItem(item) {
         </tr>
     `;
 
-    // Inicjalizacja DataTables
     $('#resultTable').DataTable({
         scrollY: '200px',
         scrollX: true,
@@ -165,31 +168,28 @@ function displaySelectedItem(item) {
         columnDefs: [{ width: '150px', targets: '_all' }]
     });
 
-    selectedItem = item; // Zaktualizuj selectedItem
+    selectedItem = item;
 }
 
 // Pobranie cen minimalnych
 async function fetchMinPrices() {
     try {
-        const querySnapshot = await getDocs(collection(db, "minPrices"));  // Upewnij się, że kolekcja "minPrices" istnieje
+        const querySnapshot = await getDocs(collection(db, "minPrices"));
         minPrices = querySnapshot.docs.reduce((acc, doc) => {
             const data = doc.data();
-            if(!data.INDEKS || data['Cena minimalna'] === undefined) { //Sprawdzenie poprawności danych
+            if (!data.INDEKS || data['Cena minimalna'] === undefined) {
                 console.warn("Nieprawidłowy format danych dla minimalnej ceny:", doc.id, data);
-                return acc; //Pomiń niepoprawny rekord
+                return acc;
             }
-
             acc[data.INDEKS] = data['Cena minimalna'];
             return acc;
         }, {});
         console.log("✅ Pobrane ceny minimalne:", minPrices);
     } catch (error) {
         console.error("❌ Błąd podczas pobierania cen minimalnych:", error);
-        // Dodaj tutaj obsługę błędu
     }
 }
 
-// Wywołanie PO definicji funkcji
 fetchMinPrices();
 
 // Obsługa sprawdzania ceny
