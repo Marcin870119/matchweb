@@ -8,12 +8,12 @@ $(function () {
 
 // ✅ Konfiguracja Firebase (podmień na swoje dane!)
 const firebaseConfig = {
-    apiKey: "TWÓJ_API_KEY",
-    authDomain: "TWÓJ_AUTH_DOMAIN",
+    apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+    authDomain: "webmatcher-94f0e.firebaseapp.com",
     projectId: "webmatcher-94f0e",
-    storageBucket: "TWÓJ_STORAGE_BUCKET",
-    messagingSenderId: "TWÓJ_MESSAGING_SENDER_ID",
-    appId: "TWÓJ_APP_ID"
+    storageBucket: "webmatcher-94f0e.firebasestorage.app",
+    messagingSenderId: "970664630623",
+    appId: "G-RMMBEY655B"
 };
 
 // ✅ Inicjalizacja Firebase
