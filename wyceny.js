@@ -3,12 +3,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/fireba
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "TWOJ_API_KEY",
-    authDomain: "TWOJ_AUTH_DOMAIN",
-    projectId: "TWOJ_PROJECT_ID",
-    storageBucket: "TWOJ_STORAGE_BUCKET",
-    messagingSenderId: "TWOJ_MESSAGING_SENDER_ID",
-    appId: "TWOJ_APP_ID"
+    apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+    authDomain: "webmatcher-94f0e.firebaseapp.com",
+    projectId: "webmatcher-94f0e",
+    storageBucket: "webmatcher-94f0e.firebasestorage.app",
+    messagingSenderId: "970664630623",
+    appId: "G-RMMBEY655B"
 };
 
 // Inicjalizacja aplikacji Firebase
