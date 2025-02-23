@@ -8,15 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="wyceny.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="wyceny.css"> <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1A202C;">
         <div class="container-fluid">
             <a class="navbar-brand" href="bithubweb.html">
@@ -46,15 +44,12 @@
         </div>
     </nav>
 
-    <!-- WRAPPER -->
     <div class="wrapper">
-        <!-- SIDEBAR -->
         <div class="sidebar">
             <a href="wyceny.html" class="active">WYCENY</a>
             <a href="https://marcin870119.github.io/matchweb/narzedzia.html">CSV - JSON CONVERTER</a>
         </div>
 
-        <!-- CONTENT -->
         <div class="content">
             <div class="container">
                 <div class="tile">
@@ -62,17 +57,16 @@
                     Wyceny
                 </div>
 
-                <!-- Sekcja wyszukiwania i dropdownu -->
                 <div class="cennik-search">
                     <label for="search">Wyszukaj po numerze indeksu lub nazwie:</label>
-                    <input type="text" id="search" placeholder="Wpisz numer indeksu lub nazwę...">
-                    <button id="dropdownButton"></button>
-                    <div class="dropdown-container" id="dropdownContainer">
-                        <select id="dropdown" size="10"></select>
+                    <div class="input-group"> {/* Używamy Bootstrapowego input-group dla lepszego układu */}
+                        <input type="text" id="search" class="form-control" placeholder="Wpisz numer indeksu lub nazwę...">
+                        <div class="dropdown-container">
+                            <select id="dropdown" class="form-select"></select> {/* Dodajemy klasę form-select Bootstrapa */}
+                        </div>
                     </div>
                 </div>
 
-                <!-- Tabela wyników -->
                 <div class="details-table-wrapper" id="resultTableWrapper">
                     <h5>Wyniki wyszukiwania</h5>
                     <table id="resultTable" class="display nowrap" style="width:100%">
@@ -93,7 +87,6 @@
                     </table>
                 </div>
 
-                <!-- Sekcja sprawdzania ceny -->
                 <div class="price-checker">
                     <label for="price">Wpisz cenę:</label>
                     <input type="text" id="price" placeholder="Wpisz cenę...">
@@ -104,14 +97,11 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <div class="footer">
         Strona stworzona przez MSZCorporation
     </div>
 
-    <!-- ✅ Poprawiony kod JavaScript -->
     <script type="module" src="wyceny.js"></script>
-
 </body>
 
 </html>
