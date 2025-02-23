@@ -16,10 +16,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Pobranie referencji do elementów HTML (upewnij się, że te ID istnieją w HTML!)
+// Pobranie referencji do elementów HTML
 const searchInput = document.getElementById('search');
 const dropdown = document.getElementById('dropdown');
-const resultTable = document.getElementById('resultTable').querySelector('tbody'); // Upewnij się, że #resultTable istnieje
+const resultTable = document.getElementById('resultTable').querySelector('tbody');
 const priceInput = document.getElementById('price');
 const priceMessage = document.getElementById('priceMessage');
 const calculateButton = document.getElementById('calculateButton');
@@ -32,49 +32,60 @@ let selectedItem = null;
 // Funkcja do pobrania danych z Firestore
 async function fetchFirestoreData() {
     try {
-        const querySnapshot = await getDocs(collection(db, "products")); // Upewnij się, że kolekcja "products" istnieje
+        const querySnapshot = await getDocs(collection(db, "products"));
+        console.log("querySnapshot:", querySnapshot); // Sprawdź, co zwraca Firestore
+
         items = querySnapshot.docs.map(doc => {
-            // Dodaj ID dokumentu *i* sprawdź, czy dane są poprawne
             const data = doc.data();
+            console.log("Dokument:", doc.id, "Dane:", data); // Sprawdź dane każdego dokumentu
+
             if (!data.INDEKS || !data.NAZWA) {
                 console.error("❌ Błąd: Dokument w 'products' nie ma INDEKSU lub NAZWY:", doc.id, data);
                 return null; // Pomijamy błędny dokument
             }
             return { id: doc.id, ...data };
-        }).filter(item => item !== null); // Usuń null (błędne dokumenty)
+        }).filter(item => item !== null);
 
-        console.log("🔥 Pobrane dane z Firestore:", items);
+        console.log("🔥 Pobrane dane z Firestore (po przetworzeniu):", items);
+
+        if (items.length === 0) {
+            console.warn("⚠️ Tablica items jest pusta. Sprawdź kolekcję 'products' w Firestore.");
+        }
+
         populateDropdown(items);
 
     } catch (error) {
         console.error("❌ Błąd podczas pobierania danych Firestore:", error);
-        // Dodaj tutaj obsługę błędu, np. wyświetlenie komunikatu dla użytkownika
+        // Wyświetl komunikat dla użytkownika, np.:
+        // priceMessage.textContent = "Błąd podczas ładowania danych. Spróbuj ponownie później.";
+        // priceMessage.style.color = "red";
     }
 }
 
-// Inicjalizacja danych - WYWOŁANIE PO DEFINICJI FUNKCJI
-fetchFirestoreData();
+fetchFirestoreData(); // Wywołanie *po* definicji
 
 // Obsługa wyszukiwania
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
+    console.log("Wyszukiwanie - searchTerm:", searchTerm); // Sprawdź wpisywany tekst
     filterDropdown(items, searchTerm);
-    dropdown.style.display = searchTerm.length > 0 ? 'block' : 'none';
+    //Nie chowaj dropdowna po wpisaniu, dropdown ma się chować tylko przy wybraniu opcji
+    // dropdown.style.display = searchTerm.length > 0 ? 'block' : 'none';
 });
 
 // Obsługa wyboru produktu
 dropdown.addEventListener('change', () => {
     const selectedId = dropdown.value;
-    console.log("Wybrano ID:", selectedId); // Debugowanie
+    console.log("Wybrano ID:", selectedId);
 
     if (selectedId) {
         selectedItem = items.find(item => item.id === selectedId);
-        console.log("Znaleziono produkt:", selectedItem); // Debugowanie
+        console.log("Znaleziono produkt:", selectedItem);
 
-        if (selectedItem) { // Dodatkowe sprawdzenie
+        if (selectedItem) {
             displaySelectedItem(selectedItem);
             searchInput.value = `${selectedItem.INDEKS} - ${selectedItem.NAZWA}`;
-            dropdown.style.display = 'none';
+            dropdown.style.display = 'none'; // Schowaj dropdown po wyborze
         } else {
             console.error("❌ Nie znaleziono produktu o ID:", selectedId);
         }
@@ -83,24 +94,40 @@ dropdown.addEventListener('change', () => {
 
 // Funkcja do wypełnienia dropdowna
 function populateDropdown(items) {
-    dropdown.innerHTML = '<option value="">Wybierz produkt</option>'; // Pusta opcja
+    console.log("populateDropdown - items:", items);
+    dropdown.innerHTML = '<option value="">Wybierz produkt</option>';
     items.forEach(item => {
         const option = document.createElement('option');
         option.value = item.id;
         option.textContent = `${item.INDEKS} - ${item.NAZWA}`;
         dropdown.appendChild(option);
     });
+
+    if (items.length > 0) {
+        dropdown.style.display = 'block'; // Otwórz dropdown, jeśli są dane
+    } else {
+        dropdown.style.display = 'none'; // Upewnij się, że dropdown jest schowany, gdy nie ma danych
+    }
 }
 
 // Funkcja do filtrowania dropdowna
 function filterDropdown(items, searchTerm) {
+      console.log("filterDropdown - items:", items, "searchTerm:", searchTerm); // Sprawdź dane i szukany tekst
     const filteredItems = items.filter(item =>
         item.INDEKS.toString().toLowerCase().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
     );
-    populateDropdown(filteredItems);
+    console.log("filterDropdown - filteredItems:", filteredItems); // Sprawdź przefiltrowane dane
+
+    if (filteredItems.length > 0) {
+        populateDropdown(filteredItems);
+        dropdown.style.display = 'block'; // Otwórz dropdown po filtrowaniu
+    } else {
+      dropdown.innerHTML = '<option value="">Brak wyników</option>'; // Dodaj opcję "Brak wyników"
+      dropdown.style.display = 'block'; // Pokaż komunikat
+    }
 }
 
-// Funkcja do wyświetlania wybranego produktu
+// Funkcja do wyświetlania wybranego produktu w tabeli
 function displaySelectedItem(item) {
     if (!item) {
         console.warn("❌ displaySelectedItem: Nie przekazano produktu.");
