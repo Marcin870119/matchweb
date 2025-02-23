@@ -40,11 +40,23 @@ async function fetchFirestoreData() {
             const data = doc.data();
             console.log("Dokument:", doc.id, "Dane:", data);
 
+            // Upewnij się, że INDEKS i NAZWA istnieją, konwertuj INDEKS na liczbę, jeśli to możliwe
             if (!data.INDEKS || !data.NAZWA) {
                 console.error("❌ Błąd: Dokument w 'products_minimal_prices' nie ma INDEKSU lub NAZWY:", doc.id, data);
                 return null;
             }
-            return { id: doc.id, ...data };
+            return { 
+                id: doc.id, 
+                INDEKS: typeof data.INDEKS === 'string' ? parseInt(data.INDEKS) : data.INDEKS,
+                NAZWA: data.NAZWA,
+                SKROT_PRODUCENTA: data.SKROT_PRODUCENTA || "Brak danych",
+                GRUPA_NAZWA: data.GRUPA_NAZWA || "Brak danych",
+                JM_NAZWA: data.JM_NAZWA || "Brak danych",
+                OPK_ZB_IL: data.OPK_ZB_IL || "Brak danych",
+                IL_PALETA_T: data.IL_PALETA_T || "Brak danych",
+                IL_WARSTWA_T: data.IL_WARSTWA_T || "Brak danych",
+                CEN100_UK: data.CEN100_UK || "Brak danych"
+            };
         }).filter(item => item !== null);
 
         console.log("🔥 Pobrane dane z Firestore (po przetworzeniu):", items);
@@ -79,7 +91,8 @@ function populateDropdown(items) {
 function filterDropdown(items, searchTerm) {
     console.log("filterDropdown - items:", items, "searchTerm:", searchTerm);
     const filteredItems = items.filter(item =>
-        item.INDEKS.toString().toLowerCase().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
+        item.INDEKS.toString().toLowerCase().includes(searchTerm) || 
+        item.NAZWA.toLowerCase().includes(searchTerm)
     );
     console.log("filterDropdown - filteredItems:", filteredItems);
 
@@ -177,11 +190,20 @@ async function fetchMinPrices() {
         const querySnapshot = await getDocs(collection(db, "products_minimal_prices"));
         minPrices = querySnapshot.docs.reduce((acc, doc) => {
             const data = doc.data();
+            console.log("Dokument z ceną minimalną:", doc.id, "Dane:", data);
             if (!data.INDEKS || data['Cena minimalna'] === undefined) {
                 console.warn("Nieprawidłowy format danych dla minimalnej ceny:", doc.id, data);
                 return acc;
             }
-            acc[data.INDEKS] = data['Cena minimalna'];
+            // Konwersja INDEKS na liczbę, jeśli to możliwe, lub pozostaw jako string
+            const indexKey = typeof data.INDEKS === 'string' ? parseInt(data.INDEKS) : data.INDEKS;
+            // Konwersja Cena minimalna na liczbę
+            const minPriceValue = typeof data['Cena minimalna'] === 'string' ? parseFloat(data['Cena minimalna']) : data['Cena minimalna'];
+            if (isNaN(minPriceValue)) {
+                console.warn("Cena minimalna nie jest liczbą dla dokumentu:", doc.id, data);
+                return acc;
+            }
+            acc[indexKey] = minPriceValue;
             return acc;
         }, {});
         console.log("✅ Pobrane ceny minimalne:", minPrices);
@@ -209,6 +231,7 @@ calculateButton.addEventListener('click', () => {
 
 // Funkcja do sprawdzania ceny
 function checkPrice(price, index) {
+    console.log("Sprawdzanie ceny - price:", price, "index:", index, "minPrice:", minPrices[index]);
     const minPrice = minPrices[index];
 
     if (minPrice !== undefined) {
