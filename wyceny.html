@@ -1,117 +1,218 @@
-<!DOCTYPE html>
-<html lang="pl">
+// Inicjalizacja Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATCH SYSTEM - NARZĘDZIA - WYCENY</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="wyceny.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+// KONFIGURACJA FIREBASE - Wklej SWOJE dane!
+const firebaseConfig = {
+    apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+    authDomain: "webmatcher-94f0e.firebaseapp.com",
+    projectId: "webmatcher-94f0e",
+    storageBucket: "webmatcher-94f0e.firebasestorage.app",
+    messagingSenderId: "970664630623",
+    appId: "G-RMMBEY655B"
+};
 
-<body>
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1A202C;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="bithubweb.html">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
-                            MATCHPRICE
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #2D3748;">
-                            <li><a class="dropdown-item" href="bithubweb.html" style="color: white;">MATCH JSON</a></li>
-                            <li><a class="dropdown-item" href="matchcsv.html" style="color: white;">MATCH CSV</a></li>
-                            <li><a class="dropdown-item" href="#" style="color: white;">MATCH PDF</a></li>
-                            <li><a class="dropdown-item" href="#" style="color: white;">MATCH OCR</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link active" href="narzedzia.html" style="color: white;">NARZĘDZIA</a></li>
-                    <li class="nav-item"><a class="nav-link" href="raporty.html" style="color: white;">RAPORTY</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: white;">Ustawienia</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+// Inicjalizacja aplikacji Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    <!-- WRAPPER -->
-    <div class="wrapper">
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <a href="wyceny.html" class="active">WYCENY</a>
-            <a href="https://marcin870119.github.io/matchweb/narzedzia.html">CSV - JSON CONVERTER</a>
-        </div>
+// Pobranie referencji do elementów HTML (upewnij się, że te ID istnieją w HTML!)
+const searchInput = document.getElementById('search');
+const dropdown = document.getElementById('dropdown');
+const resultTable = document.getElementById('resultTable').querySelector('tbody'); // Upewnij się, że #resultTable istnieje
+const priceInput = document.getElementById('price');
+const priceMessage = document.getElementById('priceMessage');
+const calculateButton = document.getElementById('calculateButton');
 
-        <!-- CONTENT -->
-        <div class="content">
-            <div class="container">
-                <div class="tile">
-                    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="icon">
-                    Wyceny
-                </div>
+// Zmienne globalne
+let items = [];
+let minPrices = {};
+let selectedItem = null;
 
-                <!-- Sekcja wyszukiwania i dropdownu -->
-                <div class="cennik-search">
-                    <label for="search">Wyszukaj po numerze indeksu lub nazwie:</label>
-                    <input type="text" id="search" placeholder="Wpisz numer indeksu lub nazwę...">
-                    <button id="dropdownButton"></button>
-                    <div class="dropdown-container" id="dropdownContainer">
-                        <select id="dropdown" size="10"></select>
-                    </div>
-                </div>
+// Funkcja do pobrania danych z Firestore
+async function fetchFirestoreData() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "products")); // Upewnij się, że kolekcja "products" istnieje
+        items = querySnapshot.docs.map(doc => {
+            // Dodaj ID dokumentu *i* sprawdź, czy dane są poprawne
+            const data = doc.data();
+            if (!data.INDEKS || !data.NAZWA) {
+                console.error("❌ Błąd: Dokument w 'products' nie ma INDEKSU lub NAZWY:", doc.id, data);
+                return null; // Pomijamy błędny dokument
+            }
+            return { id: doc.id, ...data };
+        }).filter(item => item !== null); // Usuń null (błędne dokumenty)
 
-                <!-- Tabela wyników -->
-                <div class="details-table-wrapper" id="resultTableWrapper">
-                    <h5>Wyniki wyszukiwania</h5>
-                    <table id="resultTable" class="display nowrap" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>INDEKS</th>
-                                <th>NAZWA</th>
-                                <th>SKROT_PRODUCENTA</th>
-                                <th>GRUPA_NAZWA</th>
-                                <th>JM_NAZWA</th>
-                                <th>OPK_ZB_IL</th>
-                                <th>IL_PALETA_T</th>
-                                <th>IL_WARSTWA_T</th>
-                                <th>CEN100_UK</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+        console.log("🔥 Pobrane dane z Firestore:", items); //To MUSI się wyświetlić z danymi
 
-                <!-- Sekcja sprawdzania ceny -->
-                <div class="price-checker">
-                    <label for="price">Wpisz cenę:</label>
-                    <input type="text" id="price" placeholder="Wpisz cenę...">
-                    <button id="calculateButton">Oblicz</button>
-                    <div id="priceMessage"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+        if(items.length === 0) { //Dodatkowy komunikat, jeśli tablica items jest pusta.
+            console.warn("⚠️ Tablica items jest pusta. Sprawdź czy kolekcja 'products' w Firestore zawiera poprawne dane.");
+        }
 
-    <!-- FOOTER -->
-    <div class="footer">
-        Strona stworzona przez MSZCorporation
-    </div>
+        populateDropdown(items);
 
-    <!-- ✅ Poprawiony kod JavaScript -->
-    <script type="module" src="wyceny.js"></script>
+    } catch (error) {
+        console.error("❌ Błąd podczas pobierania danych Firestore:", error);
+        // Dodaj tutaj obsługę błędu, np. wyświetlenie komunikatu dla użytkownika
+    }
+}
 
-</body>
+// Inicjalizacja danych - WYWOŁANIE PO DEFINICJI FUNKCJI
+fetchFirestoreData();
 
-</html>
+// Obsługa wyszukiwania
+searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    filterDropdown(items, searchTerm);
+    dropdown.style.display = searchTerm.length > 0 ? 'block' : 'none';
+});
+
+// Obsługa wyboru produktu
+dropdown.addEventListener('change', () => {
+    const selectedId = dropdown.value;
+    console.log("Wybrano ID:", selectedId); // Debugowanie
+
+    if (selectedId) {
+        selectedItem = items.find(item => item.id === selectedId);
+        console.log("Znaleziono produkt:", selectedItem); // Debugowanie
+
+        if (selectedItem) { // Dodatkowe sprawdzenie
+            displaySelectedItem(selectedItem);
+            searchInput.value = `${selectedItem.INDEKS} - ${selectedItem.NAZWA}`;
+            dropdown.style.display = 'none';
+        } else {
+            console.error("❌ Nie znaleziono produktu o ID:", selectedId);
+        }
+    }
+});
+
+// Funkcja do wypełnienia dropdowna
+function populateDropdown(items) {
+    console.log("populateDropdown - items:", items); // Sprawdź, czy dane trafiają do funkcji
+    dropdown.innerHTML = '<option value="">Wybierz produkt</option>'; // Pusta opcja
+    items.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = `${item.INDEKS} - ${item.NAZWA}`;
+        dropdown.appendChild(option);
+    });
+     if (items.length > 0) { //Otwórz dropdown automatycznie, *jeśli* są dane.
+       dropdown.style.display = 'block';
+    }
+}
+
+// Funkcja do filtrowania dropdowna
+function filterDropdown(items, searchTerm) {
+      console.log("filterDropdown - items:", items, "searchTerm:", searchTerm); // Sprawdź dane i szukany tekst
+    const filteredItems = items.filter(item =>
+        item.INDEKS.toString().toLowerCase().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
+    );
+
+    console.log("filterDropdown - filteredItems:", filteredItems); // Sprawdź przefiltrowane dane
+    populateDropdown(filteredItems);
+}
+
+// Funkcja do wyświetlania wybranego produktu
+function displaySelectedItem(item) {
+    if (!item) {
+        console.warn("❌ displaySelectedItem: Nie przekazano produktu.");
+        return;
+    }
+
+    // Sprawdzanie, czy DataTables istnieje
+    if ($.fn.DataTable.isDataTable('#resultTable')) {
+        $('#resultTable').DataTable().clear().destroy();
+    }
+
+    // Aktualizacja tabeli (z obsługą brakujących danych)
+    resultTable.innerHTML = `
+        <tr>
+            <td>${item.INDEKS || "Brak danych"}</td>
+            <td>${item.NAZWA || "Brak danych"}</td>
+            <td>${item.SKROT_PRODUCENTA || "Brak danych"}</td>
+            <td>${item.GRUPA_NAZWA || "Brak danych"}</td>
+            <td>${item.JM_NAZWA || "Brak danych"}</td>
+            <td>${item.OPK_ZB_IL || "Brak danych"}</td>
+            <td>${item.IL_PALETA_T || "Brak danych"}</td>
+            <td>${item.IL_WARSTWA_T || "Brak danych"}</td>
+            <td>${item.CEN100_UK || "Brak danych"}</td>
+        </tr>
+    `;
+
+    // Inicjalizacja DataTables
+    $('#resultTable').DataTable({
+        scrollY: '200px',
+        scrollX: true,
+        scrollCollapse: true,
+        paging: false,
+        autoWidth: false,
+        info: false,
+        columnDefs: [{ width: '150px', targets: '_all' }]
+    });
+
+    selectedItem = item; // Zaktualizuj selectedItem
+}
+
+// Pobranie cen minimalnych
+async function fetchMinPrices() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "minPrices"));  // Upewnij się, że kolekcja "minPrices" istnieje
+        minPrices = querySnapshot.docs.reduce((acc, doc) => {
+            const data = doc.data();
+            if(!data.INDEKS || data['Cena minimalna'] === undefined) { //Sprawdzenie poprawności danych
+                console.warn("Nieprawidłowy format danych dla minimalnej ceny:", doc.id, data);
+                return acc; //Pomiń niepoprawny rekord
+            }
+
+            acc[data.INDEKS] = data['Cena minimalna'];
+            return acc;
+        }, {});
+        console.log("✅ Pobrane ceny minimalne:", minPrices);
+    } catch (error) {
+        console.error("❌ Błąd podczas pobierania cen minimalnych:", error);
+        // Dodaj tutaj obsługę błędu
+    }
+}
+
+// Wywołanie PO definicji funkcji
+fetchMinPrices();
+
+// Obsługa sprawdzania ceny
+calculateButton.addEventListener('click', () => {
+    let price = parseFloat(priceInput.value);
+    if (!isNaN(price)) {
+        price = price.toFixed(2);
+        priceInput.value = price;
+        if (selectedItem) {
+            checkPrice(price, selectedItem.INDEKS);
+        } else {
+            priceMessage.textContent = 'Nie wybrano produktu.';
+            priceMessage.style.color = 'black';
+        }
+    }
+});
+
+// Funkcja do sprawdzania ceny
+function checkPrice(price, index) {
+    const minPrice = minPrices[index];
+
+    if (minPrice !== undefined) {
+        if (parseFloat(price) === 0) {
+            priceMessage.textContent = 'Skontakuj się z Twoim opiekunem.';
+            priceMessage.style.color = 'red';
+        } else if (parseFloat(price) >= parseFloat(minPrice)) {
+            priceMessage.textContent = 'Cena jest odpowiednia.';
+            priceMessage.style.color = 'green';
+        } else if (parseFloat(price) < parseFloat(minPrice) * 0.9) {
+            priceMessage.textContent = 'Skontakuj się z Twoim opiekunem.';
+            priceMessage.style.color = 'red';
+        } else {
+            const adjustedPrice = (parseFloat(minPrice) * 1.02).toFixed(2);
+            priceMessage.textContent = `Sugerowana cena: ${adjustedPrice}`;
+            priceMessage.style.color = 'orange';
+        }
+    } else {
+        priceMessage.textContent = 'Nie znaleziono minimalnej ceny dla tego indeksu.';
+        priceMessage.style.color = 'black';
+    }
+}
