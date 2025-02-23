@@ -1,115 +1,249 @@
 <!DOCTYPE html>
-<html lang="pl">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATCH SYSTEM - NARZĘDZIA - WYCENY</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="wyceny.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Sprawdzarka cen</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        /* Dodaj tutaj swoje style, jeśli są potrzebne */
+        #dropdown {
+            width: 100%; /* Dopasuj do szerokości inputa */
+        }
+    </style>
 </head>
-
 <body>
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1A202C;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="bithubweb.html">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
-                            MATCHPRICE
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #2D3748;">
-                            <li><a class="dropdown-item" href="bithubweb.html" style="color: white;">MATCH JSON</a></li>
-                            <li><a class="dropdown-item" href="matchcsv.html" style="color: white;">MATCH CSV</a></li>
-                            <li><a class="dropdown-item" href="#" style="color: white;">MATCH PDF</a></li>
-                            <li><a class="dropdown-item" href="#" style="color: white;">MATCH OCR</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link active" href="narzedzia.html" style="color: white;">NARZĘDZIA</a></li>
-                    <li class="nav-item"><a class="nav-link" href="raporty.html" style="color: white;">RAPORTY</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: white;">Ustawienia</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <h1>Sprawdzarka cen</h1>
 
-    <!-- WRAPPER -->
-    <div class="wrapper">
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <a href="wyceny.html" class="active">WYCENY</a>
-            <a href="https://marcin870119.github.io/matchweb/narzedzia.html">CSV - JSON CONVERTER</a>
-        </div>
+    <div>
+        <label for="search">Wyszukaj produkt:</label>
+        <input type="text" id="search" placeholder="Wpisz indeks lub nazwę...">
+        <select id="dropdown" style="display: none;"></select> </div>
 
-        <!-- CONTENT -->
-        <div class="content">
-            <div class="container">
-                <div class="tile">
-                    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="icon">
-                    Wyceny
-                </div>
+    <h2>Wybrany produkt</h2>
+    <table id="resultTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Indeks</th>
+                <th>Nazwa</th>
+                <th>Producent</th>
+                <th>Grupa</th>
+                <th>JM</th>
+                <th>Opak. zbiorcze</th>
+                <th>Paleta</th>
+                <th>Warstwa</th>
+                <th>Cena</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
 
-                <!-- Sekcja wyszukiwania i dropdownu -->
-                <div class="cennik-search">
-                    <label for="search">Wyszukaj po numerze indeksu lub nazwie:</label>
-                    <input type="text" id="search" placeholder="Wpisz numer indeksu lub nazwę...">
-                    <button id="dropdownButton"></button>
-                    <div class="dropdown-container" id="dropdownContainer">
-                        <select id="dropdown" size="10"></select>
-                    </div>
-                </div>
-
-                <!-- Tabela wyników -->
-                <div class="details-table-wrapper" id="resultTableWrapper">
-                    <h5>Wyniki wyszukiwania</h5>
-                    <table id="resultTable" class="display nowrap" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>INDEKS</th>
-                                <th>NAZWA</th>
-                                <th>SKROT_PRODUCENTA</th>
-                                <th>GRUPA_NAZWA</th>
-                                <th>JM_NAZWA</th>
-                                <th>OPK_ZB_IL</th>
-                                <th>IL_PALETA_T</th>
-                                <th>IL_WARSTWA_T</th>
-                                <th>CEN100_UK</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
-                <!-- Sekcja sprawdzania ceny -->
-                <div class="price-checker">
-                    <label for="price">Wpisz cenę:</label>
-                    <input type="text" id="price" placeholder="Wpisz cenę...">
-                    <button id="calculateButton">Oblicz</button>
-                    <div id="priceMessage"></div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <label for="price">Wprowadź cenę:</label>
+        <input type="number" id="price" step="0.01">
+        <button id="calculateButton">Sprawdź</button>
     </div>
+    <p id="priceMessage"></p>
 
-    <!-- FOOTER -->
-    <div class="footer">
-        Strona stworzona przez MSZCorporation
-    </div>
 
-    <script src="wyceny.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script type="module">
+        // Inicjalizacja Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
+        // Konfiguracja Firebase (wklej SWOJE dane!)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+
+        // Inicjalizacja aplikacji Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Pobranie referencji do elementów HTML
+        const searchInput = document.getElementById('search');
+        //const dropdownButton = document.getElementById('dropdownButton'); // Nie jest używane, więc usuwam
+        const dropdown = document.getElementById('dropdown');
+        const resultTable = document.getElementById('resultTable').querySelector('tbody');
+        const priceInput = document.getElementById('price');
+        const priceMessage = document.getElementById('priceMessage');
+        const calculateButton = document.getElementById('calculateButton');
+
+        let items = [];
+        let minPrices = {};
+        let selectedItem = null; // Zmienna do przechowywania wybranego produktu
+
+
+        // Funkcja do pobrania danych z Firestore
+        async function fetchFirestoreData() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "products"));
+                items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); // Dodaj ID do danych
+                console.log("🔥 Pobrane dane z Firestore:", items);
+                populateDropdown(items);
+            } catch (error) {
+                console.error("❌ Błąd podczas pobierania danych Firestore:", error);
+            }
+        }
+
+
+
+        // Inicjalizacja danych
+        fetchFirestoreData();
+
+        // Obsługa wyszukiwania
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filterDropdown(items, searchTerm);
+            dropdown.style.display = searchTerm.length > 0 ? 'block' : 'none';
+        });
+
+      // Obsługa wyboru produktu z listy rozwijanej
+        dropdown.addEventListener('change', () => {
+            const selectedId = dropdown.value;
+            if (selectedId) {
+                selectedItem = items.find(item => item.id === selectedId);
+                displaySelectedItem(selectedItem);
+                searchInput.value = `${selectedItem.INDEKS} - ${selectedItem.NAZWA}`; // Wstaw nazwę do inputa
+                dropdown.style.display = 'none'; // Schowaj dropdown po wyborze
+            }
+        });
+
+
+        // Funkcja do wypełnienia dropdowna produktami
+        function populateDropdown(items) {
+             dropdown.innerHTML = '<option value="">Wybierz produkt</option>'; // Dodaj pustą opcję
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id; // Użyj ID jako wartości
+                option.textContent = `${item.INDEKS} - ${item.NAZWA}`;
+                dropdown.appendChild(option);
+            });
+        }
+
+        // Funkcja do filtrowania dropdowna
+        function filterDropdown(items, searchTerm) {
+            const filteredItems = items.filter(item =>
+                item.INDEKS.toString().toLowerCase().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
+            );
+            populateDropdown(filteredItems);
+        }
+
+
+
+        // Funkcja do wyświetlania wybranego produktu w tabeli
+        function displaySelectedItem(item) {
+            if (!item) {
+                console.warn("❌ Nie znaleziono danych dla podanego indeksu.");
+                return;
+            }
+
+            console.log("🔹 Wybrany produkt:", item);
+
+            // Usuwanie poprzednich danych
+            if ($.fn.DataTable.isDataTable('#resultTable')) { // Sprawdź, czy DataTable już istnieje
+                 $('#resultTable').DataTable().clear().destroy();
+            }
+
+            // Aktualizacja tabeli z nowymi danymi
+            resultTable.innerHTML = `
+                <tr>
+                    <td>${item.INDEKS || "Brak danych"}</td>
+                    <td>${item.NAZWA || "Brak danych"}</td>
+                    <td>${item.SKROT_PRODUCENTA || "Brak danych"}</td>
+                    <td>${item.GRUPA_NAZWA || "Brak danych"}</td>
+                    <td>${item.JM_NAZWA || "Brak danych"}</td>
+                    <td>${item.OPK_ZB_IL || "Brak danych"}</td>
+                    <td>${item.IL_PALETA_T || "Brak danych"}</td>
+                    <td>${item.IL_WARSTWA_T || "Brak danych"}</td>
+                    <td>${item.CEN100_UK || "Brak danych"}</td>
+                </tr>
+            `;
+
+            // Ponowna inicjalizacja DataTables
+            $('#resultTable').DataTable({
+                scrollY: '200px',
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
+                autoWidth: false,
+                info: false,
+                // destroy: true,  // Już to sprawdzamy wyżej
+                columnDefs: [{ width: '150px', targets: '_all' }]
+            });
+        }
+
+
+
+       // Pobranie cen minimalnych
+        async function fetchMinPrices() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "minPrices"));
+                minPrices = querySnapshot.docs.reduce((acc, doc) => {
+                    acc[doc.data().INDEKS] = doc.data()['Cena minimalna'];  //Poprawione
+                    return acc;
+                }, {});
+                console.log("✅ Pobrane ceny minimalne:", minPrices);
+            } catch (error) {
+                console.error("❌ Błąd podczas pobierania cen minimalnych:", error);
+            }
+        }
+
+        // Pobranie cen minimalnych
+        fetchMinPrices();
+
+
+        // Obsługa sprawdzania ceny
+        calculateButton.addEventListener('click', () => {
+            let price = parseFloat(priceInput.value);
+            if (!isNaN(price)) {
+                price = price.toFixed(2);
+                priceInput.value = price;
+                if (selectedItem) {
+                    checkPrice(price, selectedItem.INDEKS);
+                } else {
+                    priceMessage.textContent = 'Nie wybrano produktu.';
+                    priceMessage.style.color = 'black';
+                }
+            }
+        });
+
+// Funkcja do sprawdzania ceny
+        function checkPrice(price, index) {
+            const minPrice = minPrices[index];
+
+            if (minPrice !== undefined) { // Sprawdzaj czy minPrice jest zdefiniowane, a nie czy jest truthy
+                if (parseFloat(price) === 0) { // Porównuj sparsowane wartości
+                    priceMessage.textContent = 'Skontakuj się z Twoim opiekunem.';
+                    priceMessage.style.color = 'red';
+                } else if (parseFloat(price) >= parseFloat(minPrice)) { // Porównuj sparsowane wartości
+                    priceMessage.textContent = 'Cena jest odpowiednia.';
+                    priceMessage.style.color = 'green';
+                } else if (parseFloat(price) < parseFloat(minPrice) * 0.9) { // Porównuj sparsowane wartości
+                    priceMessage.textContent = 'Skontakuj się z Twoim opiekunem.';
+                    priceMessage.style.color = 'red';
+                } else {
+                    const adjustedPrice = (parseFloat(minPrice) * 1.02).toFixed(2);
+                    priceMessage.textContent = `Sugerowana cena: ${adjustedPrice}`;
+                    priceMessage.style.color = 'orange';
+                }
+            } else {
+                priceMessage.textContent = 'Nie znaleziono minimalnej ceny dla tego indeksu.';
+                priceMessage.style.color = 'black';
+            }
+        }
+
+
+    </script>
 </body>
-
 </html>
