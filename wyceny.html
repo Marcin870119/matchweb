@@ -1,233 +1,117 @@
 <!DOCTYPE html>
-
 <html lang="pl">
 
-
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>MATCH SYSTEM - NARZĘDZIA - WYCENY</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-
-    <link rel="stylesheet" href="wyceny.css">
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATCH SYSTEM - NARZĘDZIA - WYCENY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="wyceny.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-
-
 <body>
-
-    <!-- NAVBAR -->
-
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1A202C;">
-
-        <div class="container-fluid">
-
-            <a class="navbar-brand" href="bithubweb.html">
-
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
-
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-
-                <span class="navbar-toggler-icon"></span>
-
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-
-                <ul class="navbar-nav">
-
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
-
-                            MATCHPRICE
-
-                        </a>
-
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #2D3748;">
-
-                            <li><a class="dropdown-item" href="bithubweb.html" style="color: white;">MATCH JSON</a></li>
-
-                            <li><a class="dropdown-item" href="matchcsv.html" style="color: white;">MATCH CSV</a></li>
-
-                            <li><a class="dropdown-item" href="#" style="color: white;">MATCH PDF</a></li>
-
-                            <li><a class="dropdown-item" href="#" style="color: white;">MATCH OCR</a></li>
-
-                        </ul>
-
-                    </li>
-
-                    <li class="nav-item"><a class="nav-link active" href="narzedzia.html" style="color: white;">NARZĘDZIA</a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="raporty.html" style="color: white;">RAPORTY</a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: white;">Ustawienia</a></li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </nav>
-
-
-
-    <!-- WRAPPER -->
-
-    <div class="wrapper">
-
-        <!-- SIDEBAR -->
-
-        <div class="sidebar">
-
-            <a href="wyceny.html" class="active">WYCENY</a>
-
-            <a href="https://marcin870119.github.io/matchweb/narzedzia.html">CSV - JSON CONVERTER</a>
-
-        </div>
-
-
-
-        <!-- CONTENT -->
-
-        <div class="content">
-
-            <div class="container">
-
-                <div class="tile">
-
-                    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="icon">
-
-                    Wyceny
-
-                </div>
-
-
-
-                <!-- Sekcja wyszukiwania i dropdownu -->
-
-                <div class="cennik-search">
-
-                    <label for="search">Wyszukaj po numerze indeksu lub nazwie:</label>
-
-                    <input type="text" id="search" placeholder="Wpisz numer indeksu lub nazwę...">
-
-                    <button id="dropdownButton"></button>
-
-                    <div class="dropdown-container" id="dropdownContainer">
-
-                        <select id="dropdown" size="10"></select>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- Tabela wyników -->
-
-                <div class="details-table-wrapper" id="resultTableWrapper">
-
-                    <h5>Wyniki wyszukiwania</h5>
-
-                    <table id="resultTable" class="display nowrap" style="width:100%">
-
-                        <thead>
-
-                            <tr>
-
-                                <th>INDEKS</th>
-
-                                <th>NAZWA</th>
-
-                                <th>SKROT_PRODUCENTA</th>
-
-                                <th>GRUPA_NAZWA</th>
-
-                                <th>JM_NAZWA</th>
-
-                                <th>OPK_ZB_IL</th>
-
-                                <th>IL_PALETA_T</th>
-
-                                <th>IL_WARSTWA_T</th>
-
-                                <th>CEN100_UK</th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody></tbody>
-
-                    </table>
-
-                </div>
-
-
-
-                <!-- Sekcja sprawdzania ceny -->
-
-                <div class="price-checker">
-
-                    <label for="price">Wpisz cenę:</label>
-
-                    <input type="text" id="price" placeholder="Wpisz cenę...">
-
-                    <button id="calculateButton">Oblicz</button>
-
-                    <div id="priceMessage"></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- FOOTER -->
-
-    <div class="footer">
-
-        Strona stworzona przez MSZCorporation
-
-    </div>
-
-
-
-    <!-- ✅ Poprawiony kod JavaScript -->
-
-    <script type="module" src="wyceny.js"></script>
-
-
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1A202C;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="bithubweb.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                            MATCHPRICE
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #2D3748;">
+                            <li><a class="dropdown-item" href="bithubweb.html" style="color: white;">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="matchcsv.html" style="color: white;">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="#" style="color: white;">MATCH PDF</a></li>
+                            <li><a class="dropdown-item" href="#" style="color: white;">MATCH OCR</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="narzedzia.html" style="color: white;">NARZĘDZIA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="raporty.html" style="color: white;">RAPORTY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color: white;">Ustawienia</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WRAPPER -->
+    <div class="wrapper">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <a href="wyceny.html" class="active">WYCENY</a>
+            <a href="https://marcin870119.github.io/matchweb/narzedzia.html">CSV - JSON CONVERTER</a>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <div class="container">
+                <div class="tile">
+                    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="icon">
+                    Wyceny
+                </div>
+
+                <!-- Sekcja wyszukiwania i dropdownu -->
+                <div class="cennik-search">
+                    <label for="search">Wyszukaj po numerze indeksu lub nazwie:</label>
+                    <input type="text" id="search" placeholder="Wpisz numer indeksu lub nazwę...">
+                    <button id="dropdownButton"></button>
+                    <div class="dropdown-container" id="dropdownContainer">
+                        <select id="dropdown" size="10"></select>
+                    </div>
+                </div>
+
+                <!-- Tabela wyników -->
+                <div class="details-table-wrapper" id="resultTableWrapper">
+                    <h5>Wyniki wyszukiwania</h5>
+                    <table id="resultTable" class="display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>INDEKS</th>
+                                <th>NAZWA</th>
+                                <th>SKROT_PRODUCENTA</th>
+                                <th>GRUPA_NAZWA</th>
+                                <th>JM_NAZWA</th>
+                                <th>OPK_ZB_IL</th>
+                                <th>IL_PALETA_T</th>
+                                <th>IL_WARSTWA_T</th>
+                                <th>CEN100_UK</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <!-- Sekcja sprawdzania ceny -->
+                <div class="price-checker">
+                    <label for="price">Wpisz cenę:</label>
+                    <input type="text" id="price" placeholder="Wpisz cenę...">
+                    <button id="calculateButton">Oblicz</button>
+                    <div id="priceMessage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        Strona stworzona przez MSZCorporation
+    </div>
+
+    <!-- ✅ Poprawiony kod JavaScript -->
+    <script type="module" src="wyceny.js"></script>
 
 </body>
-
-
 
 </html>
