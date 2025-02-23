@@ -11,7 +11,7 @@ const firebaseConfig = {
     appId: "G-RMMBEY655B"
 };
 
-// Inicjalizacja aplikacji Firebase
+// Inicjalizacja Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -26,6 +26,7 @@ const calculateButton = document.getElementById('calculateButton');
 
 let items = [];
 let minPrices = {};
+let selectedItem = null; // Przechowywanie wybranego produktu
 
 // Pobierz dane z Firestore
 async function fetchData() {
@@ -36,29 +37,24 @@ async function fetchData() {
         items.push(doc.data());
     });
 
-    console.log("Pobrane dane z Firestore:", items);
+    console.log("✅ Pobrane dane z Firestore:", items);
     populateDropdown(items);
 }
 
-fetchData().catch(error => console.error("Błąd podczas pobierania danych z Firestore:", error));
+fetchData().catch(error => console.error("❌ Błąd pobierania danych z Firestore:", error));
 
-// Wyszukiwanie po numerze indeksu
+// Wyszukiwanie produktów
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     filterDropdown(items, searchTerm);
-
-    if (searchTerm.length > 0) {
-        dropdown.style.display = 'block';
-    } else {
-        dropdown.style.display = 'none';
-    }
+    dropdown.style.display = searchTerm.length > 0 ? 'block' : 'none';
 });
 
 // Obsługa wyboru z dropdown
 dropdown.addEventListener('change', () => {
     const selectedIndex = dropdown.value;
-    if (selectedIndex !== "") {
-        const selectedItem = items.find(item => item.INDEKS == selectedIndex);
+    if (selectedIndex) {
+        selectedItem = items.find(item => item.INDEKS == selectedIndex);
         displaySelectedItem(selectedItem);
         searchInput.value = '';
         dropdown.style.display = 'none';
@@ -80,15 +76,13 @@ document.addEventListener('click', (e) => {
 // Obsługa sprawdzania ceny
 calculateButton.addEventListener('click', () => {
     let price = parseFloat(priceInput.value);
-    if (!isNaN(price)) {
+    if (!isNaN(price) && selectedItem) {
         price = price.toFixed(2);
         priceInput.value = price;
-        const selectedIndex = dropdown.value;
-        if (selectedIndex && !isNaN(price)) {
-            checkPrice(price, selectedIndex);
-        } else {
-            priceMessage.textContent = '';
-        }
+        checkPrice(price, selectedItem.INDEKS);
+    } else {
+        priceMessage.textContent = 'Wybierz produkt i wpisz cenę!';
+        priceMessage.style.color = 'red';
     }
 });
 
@@ -114,12 +108,12 @@ function filterDropdown(items, searchTerm) {
 
 // Funkcja wyświetlania szczegółów produktu
 function displaySelectedItem(item) {
-    console.log("Wybrany element:", item);
-
     if (!item) {
-        console.warn("Nie znaleziono danych dla podanego indeksu.");
+        console.warn("❌ Nie znaleziono danych dla podanego indeksu.");
         return;
     }
+
+    console.log("🔹 Wybrany produkt:", item);
 
     resultTable.innerHTML = `
         <tr>
@@ -150,20 +144,29 @@ function displaySelectedItem(item) {
             { width: '150px', targets: '_all' }
         ]
     });
+
+    // Zapisz wybrany produkt do globalnej zmiennej
+    selectedItem = item;
 }
 
 // Funkcja sprawdzania ceny
 function checkPrice(price, index) {
-    const minPrice = minPrices[index];
+    if (!selectedItem) {
+        priceMessage.textContent = 'Najpierw wybierz produkt!';
+        priceMessage.style.color = 'red';
+        return;
+    }
+
+    const minPrice = selectedItem.CEN100_UK; // Pobieranie ceny z wybranego produktu
     if (minPrice) {
         if (price === 0) {
-            priceMessage.textContent = 'Skontakuj się z Twoim opiekunem.';
+            priceMessage.textContent = 'Skontaktuj się z Twoim opiekunem.';
             priceMessage.style.color = 'red';
         } else if (price >= minPrice) {
             priceMessage.textContent = 'Cena jest odpowiednia.';
             priceMessage.style.color = 'green';
         } else if (price < minPrice * 0.9) {
-            priceMessage.textContent = 'Skontakuj się z Twoim opiekunem.';
+            priceMessage.textContent = 'Cena zbyt niska. Skontaktuj się z opiekunem.';
             priceMessage.style.color = 'red';
         } else {
             const adjustedPrice = (minPrice * 1.02).toFixed(2);
@@ -175,4 +178,3 @@ function checkPrice(price, index) {
         priceMessage.style.color = 'black';
     }
 }
-
