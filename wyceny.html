@@ -43,12 +43,7 @@ async function fetchFirestoreData() {
             return { id: doc.id, ...data };
         }).filter(item => item !== null); // Usuń null (błędne dokumenty)
 
-        console.log("🔥 Pobrane dane z Firestore:", items); //To MUSI się wyświetlić z danymi
-
-        if(items.length === 0) { //Dodatkowy komunikat, jeśli tablica items jest pusta.
-            console.warn("⚠️ Tablica items jest pusta. Sprawdź czy kolekcja 'products' w Firestore zawiera poprawne dane.");
-        }
-
+        console.log("🔥 Pobrane dane z Firestore:", items);
         populateDropdown(items);
 
     } catch (error) {
@@ -88,7 +83,6 @@ dropdown.addEventListener('change', () => {
 
 // Funkcja do wypełnienia dropdowna
 function populateDropdown(items) {
-    console.log("populateDropdown - items:", items); // Sprawdź, czy dane trafiają do funkcji
     dropdown.innerHTML = '<option value="">Wybierz produkt</option>'; // Pusta opcja
     items.forEach(item => {
         const option = document.createElement('option');
@@ -96,19 +90,13 @@ function populateDropdown(items) {
         option.textContent = `${item.INDEKS} - ${item.NAZWA}`;
         dropdown.appendChild(option);
     });
-     if (items.length > 0) { //Otwórz dropdown automatycznie, *jeśli* są dane.
-       dropdown.style.display = 'block';
-    }
 }
 
 // Funkcja do filtrowania dropdowna
 function filterDropdown(items, searchTerm) {
-      console.log("filterDropdown - items:", items, "searchTerm:", searchTerm); // Sprawdź dane i szukany tekst
     const filteredItems = items.filter(item =>
         item.INDEKS.toString().toLowerCase().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
     );
-
-    console.log("filterDropdown - filteredItems:", filteredItems); // Sprawdź przefiltrowane dane
     populateDropdown(filteredItems);
 }
 
