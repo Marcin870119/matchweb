@@ -1,3 +1,37 @@
+// Inicjalizacja Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
+// Twoja konfiguracja Firebase (uzupełnij swoimi danymi)
+const firebaseConfig = {
+    apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+    authDomain: "webmatcher-94f0e.firebaseapp.com",
+    projectId: "webmatcher-94f0e",
+    storageBucket: "webmatcher-94f0e.firebasestorage.app",
+    messagingSenderId: "970664630623",
+    appId: "G-RMMBEY655B"
+};
+
+// Inicjalizacja Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Pobieranie danych z Firestore
+async function loadProducts() {
+    const querySnapshot = await getDocs(collection(db, "products"));
+    items = querySnapshot.docs.map(doc => doc.data()); 
+    populateDropdown(items);
+}
+
+async function loadMinPrices() {
+    const querySnapshot = await getDocs(collection(db, "min_prices"));
+    minPrices = querySnapshot.docs.reduce((acc, doc) => {
+        acc[doc.id] = doc.data().CenaMinimalna;
+        return acc;
+    }, {});
+}
+
+// Inicjalizacja po załadowaniu DOM
 $(function () {
     $("#resultTableWrapper").draggable({ handle: "h5" });
 });
@@ -14,41 +48,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let items = [];
     let minPrices = {};
 
-    fetch('https://marcin870119.github.io/matchweb/cennikmm.json')
-        .then(response => response.json())
-        .then(data => {
-            items = data;
-            populateDropdown(items);
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                filterDropdown(items, searchTerm);
-                if (searchTerm.length > 0) {
-                    dropdown.style.display = 'block';
-                } else {
-                    dropdown.style.display = 'none';
-                }
-            });
-            dropdown.addEventListener('change', () => {
-                const selectedIndex = dropdown.value;
-                if (selectedIndex !== "") {
-                    const selectedItem = items.find(item => item.INDEKS == selectedIndex);
-                    displaySelectedItem(selectedItem);
-                    searchInput.value = '';
-                    dropdown.style.display = 'none';
-                }
-            });
-        })
-        .catch(error => console.error('Błąd ładowania cennika:', error));
+    loadProducts();
+    loadMinPrices();
 
-    fetch('https://marcin870119.github.io/matchweb/mmcenaminmalna.json')
-        .then(response => response.json())
-        .then(data => {
-            minPrices = data.reduce((acc, item) => {
-                acc[item.INDEKS] = item['Cena minimalna'];
-                return acc;
-            }, {});
-        })
-        .catch(error => console.error('Błąd ładowania cen minimalnych:', error));
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        filterDropdown(items, searchTerm);
+        dropdown.style.display = searchTerm.length > 0 ? 'block' : 'none';
+    });
+
+    dropdown.addEventListener('change', () => {
+        const selectedIndex = dropdown.value;
+        if (selectedIndex !== "") {
+            const selectedItem = items.find(item => item.INDEKS == selectedIndex);
+            displaySelectedItem(selectedItem);
+            searchInput.value = '';
+            dropdown.style.display = 'none';
+        }
+    });
 
     calculateButton.addEventListener('click', () => {
         let price = parseFloat(priceInput.value);
