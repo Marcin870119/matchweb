@@ -1,4 +1,4 @@
-// Inicjalizacja Firebase
+// Inicjalizacja Firebase (bez zmian)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
@@ -30,39 +30,27 @@ let items = [];
 let minPrices = {};
 let selectedItem = null;
 
-// Funkcja do pobrania danych z Firestore
+// Funkcja do pobrania danych z Firestore (kolekcja 'products')
 async function fetchFirestoreData() {
     try {
-        const querySnapshot = await getDocs(collection(db, "products_minimal_prices"));
+        const querySnapshot = await getDocs(collection(db, "products"));
         console.log("querySnapshot:", querySnapshot);
 
         items = querySnapshot.docs.map(doc => {
             const data = doc.data();
             console.log("Dokument:", doc.id, "Dane:", data);
 
-            // Upewnij się, że INDEKS i NAZWA istnieją, konwertuj INDEKS na liczbę, jeśli to możliwe
             if (!data.INDEKS || !data.NAZWA) {
-                console.error("❌ Błąd: Dokument w 'products_minimal_prices' nie ma INDEKSU lub NAZWY:", doc.id, data);
+                console.error("❌ Błąd: Dokument w 'products' nie ma INDEKSU lub NAZWY:", doc.id, data);
                 return null;
             }
-            return { 
-                id: doc.id, 
-                INDEKS: typeof data.INDEKS === 'string' ? parseInt(data.INDEKS) : data.INDEKS,
-                NAZWA: data.NAZWA,
-                SKROT_PRODUCENTA: data.SKROT_PRODUCENTA || "Brak danych",
-                GRUPA_NAZWA: data.GRUPA_NAZWA || "Brak danych",
-                JM_NAZWA: data.JM_NAZWA || "Brak danych",
-                OPK_ZB_IL: data.OPK_ZB_IL || "Brak danych",
-                IL_PALETA_T: data.IL_PALETA_T || "Brak danych",
-                IL_WARSTWA_T: data.IL_WARSTWA_T || "Brak danych",
-                CEN100_UK: data.CEN100_UK || "Brak danych"
-            };
+            return { id: doc.id, ...data };
         }).filter(item => item !== null);
 
         console.log("🔥 Pobrane dane z Firestore (po przetworzeniu):", items);
 
         if (items.length === 0) {
-            console.warn("⚠️ Tablica items jest pusta. Sprawdź kolekcję 'products_minimal_prices' w Firestore.");
+            console.warn("⚠️ Tablica items jest pusta. Sprawdź kolekcję 'products' w Firestore.");
         }
 
         populateDropdown(items);
@@ -74,7 +62,7 @@ async function fetchFirestoreData() {
 
 fetchFirestoreData();
 
-// Funkcja do wypełnienia dropdowna
+// Funkcja do wypełnienia dropdowna (bez zmian)
 function populateDropdown(items) {
     console.log("populateDropdown - items:", items);
     dropdown.innerHTML = '<option value="">Wybierz produkt</option>';
@@ -87,12 +75,11 @@ function populateDropdown(items) {
     dropdown.style.display = 'none'; // Domyślnie schowany
 }
 
-// Funkcja do filtrowania dropdowna
+// Funkcja do filtrowania dropdowna (bez zmian)
 function filterDropdown(items, searchTerm) {
     console.log("filterDropdown - items:", items, "searchTerm:", searchTerm);
     const filteredItems = items.filter(item =>
-        item.INDEKS.toString().toLowerCase().includes(searchTerm) || 
-        item.NAZWA.toLowerCase().includes(searchTerm)
+        item.INDEKS.toString().toLowerCase().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
     );
     console.log("filterDropdown - filteredItems:", filteredItems);
 
@@ -105,7 +92,7 @@ function filterDropdown(items, searchTerm) {
     }
 }
 
-// Obsługa kliknięcia na input wyszukiwania
+// Obsługa kliknięcia na input wyszukiwania (bez zmian)
 searchInput.addEventListener('click', () => {
     if (dropdown.style.display === 'none' && items.length > 0) {
         populateDropdown(items); // Wypełnij dropdown pełną listą
@@ -113,14 +100,14 @@ searchInput.addEventListener('click', () => {
     }
 });
 
-// Obsługa wpisywania w polu wyszukiwania
+// Obsługa wpisywania w polu wyszukiwania (bez zmian)
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     console.log("Wyszukiwanie - searchTerm:", searchTerm);
     filterDropdown(items, searchTerm);
 });
 
-// Obsługa wyboru produktu
+// Obsługa wyboru produktu (bez zmian)
 dropdown.addEventListener('change', () => {
     const selectedId = dropdown.value;
     console.log("Wybrano ID:", selectedId);
@@ -139,14 +126,14 @@ dropdown.addEventListener('change', () => {
     }
 });
 
-// Obsługa kliknięcia poza dropdownem (chowanie)
+// Obsługa kliknięcia poza dropdownem (chowanie) (bez zmian)
 document.addEventListener('click', (e) => {
     if (!searchInput.contains(e.target) && !dropdown.contains(e.target) && !dropdownButton.contains(e.target)) {
         dropdown.style.display = 'none';
     }
 });
 
-// Funkcja do wyświetlania wybranego produktu w tabeli
+// Funkcja do wyświetlania wybranego produktu w tabeli (bez zmian)
 function displaySelectedItem(item) {
     if (!item) {
         console.warn("❌ displaySelectedItem: Nie przekazano produktu.");
@@ -184,26 +171,19 @@ function displaySelectedItem(item) {
     selectedItem = item;
 }
 
-// Pobranie cen minimalnych
+// Pobranie cen minimalnych z kolekcji 'products_minimal_prices'
 async function fetchMinPrices() {
     try {
         const querySnapshot = await getDocs(collection(db, "products_minimal_prices"));
         minPrices = querySnapshot.docs.reduce((acc, doc) => {
             const data = doc.data();
-            console.log("Dokument z ceną minimalną:", doc.id, "Dane:", data);
-            if (!data.INDEKS || data['Cena minimalna'] === undefined) {
+            // Sprawdzenie, czy pola są poprawnego typu
+            if (typeof data.INDEKS !== 'number' || typeof data['Cena minimalna'] !== 'number' || typeof data.NAZWA !== 'string') {
                 console.warn("Nieprawidłowy format danych dla minimalnej ceny:", doc.id, data);
                 return acc;
             }
-            // Konwersja INDEKS na liczbę, jeśli to możliwe, lub pozostaw jako string
-            const indexKey = typeof data.INDEKS === 'string' ? parseInt(data.INDEKS) : data.INDEKS;
-            // Konwersja Cena minimalna na liczbę
-            const minPriceValue = typeof data['Cena minimalna'] === 'string' ? parseFloat(data['Cena minimalna']) : data['Cena minimalna'];
-            if (isNaN(minPriceValue)) {
-                console.warn("Cena minimalna nie jest liczbą dla dokumentu:", doc.id, data);
-                return acc;
-            }
-            acc[indexKey] = minPriceValue;
+             // Używamy INDEKSU jako klucza.  INDEKS *musi* być liczbą.
+            acc[data.INDEKS] = data['Cena minimalna'];
             return acc;
         }, {});
         console.log("✅ Pobrane ceny minimalne:", minPrices);
@@ -214,13 +194,14 @@ async function fetchMinPrices() {
 
 fetchMinPrices();
 
-// Obsługa sprawdzania ceny
+// Obsługa sprawdzania ceny (zmodyfikowana)
 calculateButton.addEventListener('click', () => {
     let price = parseFloat(priceInput.value);
     if (!isNaN(price)) {
         price = price.toFixed(2);
         priceInput.value = price;
         if (selectedItem) {
+            // Używamy selectedItem.INDEKS, który *powinien* być liczbą.
             checkPrice(price, selectedItem.INDEKS);
         } else {
             priceMessage.textContent = 'Nie wybrano produktu.';
@@ -229,9 +210,8 @@ calculateButton.addEventListener('click', () => {
     }
 });
 
-// Funkcja do sprawdzania ceny
+// Funkcja do sprawdzania ceny (bez zmian w logice)
 function checkPrice(price, index) {
-    console.log("Sprawdzanie ceny - price:", price, "index:", index, "minPrice:", minPrices[index]);
     const minPrice = minPrices[index];
 
     if (minPrice !== undefined) {
