@@ -33,7 +33,7 @@ let selectedItem = null;
 // Funkcja do pobrania danych z Firestore
 async function fetchFirestoreData() {
     try {
-        const querySnapshot = await getDocs(collection(db, "products"));
+        const querySnapshot = await getDocs(collection(db, "products_minimal_prices"));
         console.log("querySnapshot:", querySnapshot);
 
         items = querySnapshot.docs.map(doc => {
@@ -41,7 +41,7 @@ async function fetchFirestoreData() {
             console.log("Dokument:", doc.id, "Dane:", data);
 
             if (!data.INDEKS || !data.NAZWA) {
-                console.error("❌ Błąd: Dokument w 'products' nie ma INDEKSU lub NAZWY:", doc.id, data);
+                console.error("❌ Błąd: Dokument w 'products_minimal_prices' nie ma INDEKSU lub NAZWY:", doc.id, data);
                 return null;
             }
             return { id: doc.id, ...data };
@@ -50,7 +50,7 @@ async function fetchFirestoreData() {
         console.log("🔥 Pobrane dane z Firestore (po przetworzeniu):", items);
 
         if (items.length === 0) {
-            console.warn("⚠️ Tablica items jest pusta. Sprawdź kolekcję 'products' w Firestore.");
+            console.warn("⚠️ Tablica items jest pusta. Sprawdź kolekcję 'products_minimal_prices' w Firestore.");
         }
 
         populateDropdown(items);
@@ -174,7 +174,7 @@ function displaySelectedItem(item) {
 // Pobranie cen minimalnych
 async function fetchMinPrices() {
     try {
-        const querySnapshot = await getDocs(collection(db, "minPrices"));
+        const querySnapshot = await getDocs(collection(db, "products_minimal_prices"));
         minPrices = querySnapshot.docs.reduce((acc, doc) => {
             const data = doc.data();
             if (!data.INDEKS || data['Cena minimalna'] === undefined) {
