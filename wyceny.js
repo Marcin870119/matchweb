@@ -4,12 +4,12 @@ import { getFirestore, collection, getDocs } from "https://www.gstatic.com/fireb
 
 // KONFIGURACJA FIREBASE - Wklej SWOJE dane!
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY", // ZMIEŃ NA SWOJE
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com", // ZMIEŃ NA SWOJE
-    projectId: "YOUR_PROJECT_ID", // ZMIEŃ NA SWOJE
-    storageBucket: "YOUR_PROJECT_ID.appspot.com", // ZMIEŃ NA SWOJE
-    messagingSenderId: "YOUR_SENDER_ID", // ZMIEŃ NA SWOJE
-    appId: "YOUR_APP_ID" // ZMIEŃ NA SWOJE
+    apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+    authDomain: "webmatcher-94f0e.firebaseapp.com",
+    projectId: "webmatcher-94f0e",
+    storageBucket: "webmatcher-94f0e.firebasestorage.app",
+    messagingSenderId: "970664630623",
+    appId: "G-RMMBEY655B"
 };
 
 // Inicjalizacja aplikacji Firebase
