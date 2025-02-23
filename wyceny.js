@@ -1,8 +1,12 @@
-// Inicjalizacja Firebase
+// ✅ Importowanie modułów Firebase (Upewnij się, że używasz type="module" w HTML!)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
-// Twoja konfiguracja Firebase (uzupełnij swoimi danymi)
+$(function () {
+    $("#resultTableWrapper").draggable({ handle: "h5" });
+});
+
+// ✅ Konfiguracja Firebase (podmień na swoje dane!)
 const firebaseConfig = {
     apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
     authDomain: "webmatcher-94f0e.firebaseapp.com",
@@ -12,31 +16,11 @@ const firebaseConfig = {
     appId: "G-RMMBEY655B"
 };
 
-// Inicjalizacja Firebase
+// ✅ Inicjalizacja Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Pobieranie danych z Firestore
-async function loadProducts() {
-    const querySnapshot = await getDocs(collection(db, "products"));
-    items = querySnapshot.docs.map(doc => doc.data()); 
-    populateDropdown(items);
-}
-
-async function loadMinPrices() {
-    const querySnapshot = await getDocs(collection(db, "min_prices"));
-    minPrices = querySnapshot.docs.reduce((acc, doc) => {
-        acc[doc.id] = doc.data().CenaMinimalna;
-        return acc;
-    }, {});
-}
-
-// Inicjalizacja po załadowaniu DOM
-$(function () {
-    $("#resultTableWrapper").draggable({ handle: "h5" });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const searchInput = document.getElementById('search');
     const dropdownButton = document.getElementById('dropdownButton');
     const dropdown = document.getElementById('dropdown');
@@ -48,8 +32,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let items = [];
     let minPrices = {};
 
-    loadProducts();
-    loadMinPrices();
+    // ✅ Pobieranie danych z Firestore (cennik produktów)
+    async function fetchFirestoreData() {
+        items = [];
+        const querySnapshot = await getDocs(collection(db, "products"));
+        querySnapshot.forEach(doc => {
+            items.push(doc.data());
+        });
+        console.log("🔥 Pobrane dane z Firestore:", items);
+        populateDropdown(items);
+    }
+
+    // ✅ Pobieranie minimalnych cen (jeśli są w osobnej kolekcji)
+    async function fetchMinPrices() {
+        minPrices = {};
+        const querySnapshot = await getDocs(collection(db, "min_prices"));
+        querySnapshot.forEach(doc => {
+            minPrices[doc.data().INDEKS] = doc.data().CENA_MIN;
+        });
+        console.log("💰 Pobrane minimalne ceny:", minPrices);
+    }
+
+    await fetchFirestoreData();
+    await fetchMinPrices();
 
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
@@ -103,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function filterDropdown(items, searchTerm) {
         dropdown.innerHTML = '';
-        const filteredItems = items.filter(item => 
+        const filteredItems = items.filter(item =>
             item.INDEKS.toString().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
         );
         populateDropdown(filteredItems);
@@ -153,12 +158,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 priceMessage.style.color = 'red';
             } else {
                 const adjustedPrice = (minPrice * 1.02).toFixed(2);
-                priceMessage.textContent = `Sugerowana cena: ${adjustedPrice}`;
-                priceMessage.style.color = 'orange';
-            }
-        } else {
-            priceMessage.textContent = 'Nie znaleziono minimalnej ceny dla tego indeksu.';
-            priceMessage.style.color = 'black';
-        }
-    }
-});
+                priceMessage.textContent = `Sugerowana cena: ${adjustedPrice
