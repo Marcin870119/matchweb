@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
+// Konfiguracja Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
     authDomain: "webmatcher-94f0e.firebaseapp.com",
@@ -11,11 +12,11 @@ const firebaseConfig = {
     appId: "G-RMMBEY655B"
 };
 
-// Inicjalizacja Firebase
+// Inicjalizacja aplikacji Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Pobieranie elementów z DOM
+// Pobranie referencji do elementów HTML
 const searchInput = document.getElementById('search');
 const dropdownButton = document.getElementById('dropdownButton');
 const dropdown = document.getElementById('dropdown');
@@ -26,34 +27,34 @@ const calculateButton = document.getElementById('calculateButton');
 
 let items = [];
 let minPrices = {};
-let selectedItem = null; // Przechowywanie wybranego produktu
+let selectedItem = null;  // Zmienna do przechowywania wybranego produktu
 
-// Pobierz dane z Firestore
-async function fetchData() {
-    const querySnapshot = await getDocs(collection(db, "products"));
-    items = [];
-
-    querySnapshot.forEach(doc => {
-        items.push(doc.data());
-    });
-
-    console.log("✅ Pobrane dane z Firestore:", items);
-    populateDropdown(items);
+// Funkcja do pobrania danych z Firestore
+async function fetchFirestoreData() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        items = querySnapshot.docs.map(doc => doc.data());
+        console.log("🔥 Pobrane dane z Firestore:", items);
+        populateDropdown(items);
+    } catch (error) {
+        console.error("❌ Błąd podczas pobierania danych Firestore:", error);
+    }
 }
 
-fetchData().catch(error => console.error("❌ Błąd pobierania danych z Firestore:", error));
+// Inicjalizacja danych
+fetchFirestoreData();
 
-// Wyszukiwanie produktów
+// Obsługa wyszukiwania
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     filterDropdown(items, searchTerm);
     dropdown.style.display = searchTerm.length > 0 ? 'block' : 'none';
 });
 
-// Obsługa wyboru z dropdown
+// Obsługa wyboru produktu
 dropdown.addEventListener('change', () => {
     const selectedIndex = dropdown.value;
-    if (selectedIndex) {
+    if (selectedIndex !== "") {
         selectedItem = items.find(item => item.INDEKS == selectedIndex);
         displaySelectedItem(selectedItem);
         searchInput.value = '';
@@ -61,32 +62,7 @@ dropdown.addEventListener('change', () => {
     }
 });
 
-// Obsługa kliknięcia w dropdown
-dropdownButton.addEventListener('click', () => {
-    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-});
-
-// Ukrywanie dropdown po kliknięciu poza nim
-document.addEventListener('click', (e) => {
-    if (!dropdownButton.contains(e.target) && !dropdown.contains(e.target) && !searchInput.contains(e.target)) {
-        dropdown.style.display = 'none';
-    }
-});
-
-// Obsługa sprawdzania ceny
-calculateButton.addEventListener('click', () => {
-    let price = parseFloat(priceInput.value);
-    if (!isNaN(price) && selectedItem) {
-        price = price.toFixed(2);
-        priceInput.value = price;
-        checkPrice(price, selectedItem.INDEKS);
-    } else {
-        priceMessage.textContent = 'Wybierz produkt i wpisz cenę!';
-        priceMessage.style.color = 'red';
-    }
-});
-
-// Funkcja uzupełniająca dropdown
+// Funkcja do wypełnienia dropdowna produktami
 function populateDropdown(items) {
     dropdown.innerHTML = '';
     items.forEach(item => {
@@ -97,16 +73,16 @@ function populateDropdown(items) {
     });
 }
 
-// Funkcja filtrowania dropdown
+// Funkcja do filtrowania dropdowna
 function filterDropdown(items, searchTerm) {
     dropdown.innerHTML = '';
-    const filteredItems = items.filter(item =>
+    const filteredItems = items.filter(item => 
         item.INDEKS.toString().includes(searchTerm) || item.NAZWA.toLowerCase().includes(searchTerm)
     );
     populateDropdown(filteredItems);
 }
 
-// Funkcja wyświetlania szczegółów produktu
+// Funkcja do wyświetlania wybranego produktu w tabeli
 function displaySelectedItem(item) {
     if (!item) {
         console.warn("❌ Nie znaleziono danych dla podanego indeksu.");
@@ -115,6 +91,10 @@ function displaySelectedItem(item) {
 
     console.log("🔹 Wybrany produkt:", item);
 
+    // Usuwanie poprzednich danych
+    $('#resultTable').DataTable().clear().destroy();
+
+    // Aktualizacja tabeli z nowymi danymi
     resultTable.innerHTML = `
         <tr>
             <td>${item.INDEKS || "Brak danych"}</td>
@@ -129,10 +109,7 @@ function displaySelectedItem(item) {
         </tr>
     `;
 
-    if ($.fn.dataTable.isDataTable('#resultTable')) {
-        $('#resultTable').DataTable().clear().destroy();
-    }
-
+    // Ponowna inicjalizacja DataTables
     $('#resultTable').DataTable({
         scrollY: '200px',
         scrollX: true,
@@ -140,33 +117,57 @@ function displaySelectedItem(item) {
         paging: false,
         autoWidth: false,
         info: false,
-        columnDefs: [
-            { width: '150px', targets: '_all' }
-        ]
+        destroy: true,
+        columnDefs: [{ width: '150px', targets: '_all' }]
     });
 
-    // Zapisz wybrany produkt do globalnej zmiennej
     selectedItem = item;
 }
 
-// Funkcja sprawdzania ceny
-function checkPrice(price, index) {
-    if (!selectedItem) {
-        priceMessage.textContent = 'Najpierw wybierz produkt!';
-        priceMessage.style.color = 'red';
-        return;
+// Pobranie cen minimalnych
+async function fetchMinPrices() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "minPrices"));
+        minPrices = querySnapshot.docs.reduce((acc, doc) => {
+            acc[doc.data().INDEKS] = doc.data()['Cena minimalna'];
+            return acc;
+        }, {});
+        console.log("✅ Pobrane ceny minimalne:", minPrices);
+    } catch (error) {
+        console.error("❌ Błąd podczas pobierania cen minimalnych:", error);
     }
+}
 
-    const minPrice = selectedItem.CEN100_UK; // Pobieranie ceny z wybranego produktu
+// Pobranie cen minimalnych
+fetchMinPrices();
+
+// Obsługa sprawdzania ceny
+calculateButton.addEventListener('click', () => {
+    let price = parseFloat(priceInput.value);
+    if (!isNaN(price)) {
+        price = price.toFixed(2);
+        priceInput.value = price;
+        if (selectedItem) {
+            checkPrice(price, selectedItem.INDEKS);
+        } else {
+            priceMessage.textContent = 'Nie wybrano produktu.';
+            priceMessage.style.color = 'black';
+        }
+    }
+});
+
+// Funkcja do sprawdzania ceny
+function checkPrice(price, index) {
+    const minPrice = minPrices[index];
     if (minPrice) {
         if (price === 0) {
-            priceMessage.textContent = 'Skontaktuj się z Twoim opiekunem.';
+            priceMessage.textContent = 'Skontakuj się z Twoim opiekunem.';
             priceMessage.style.color = 'red';
         } else if (price >= minPrice) {
             priceMessage.textContent = 'Cena jest odpowiednia.';
             priceMessage.style.color = 'green';
         } else if (price < minPrice * 0.9) {
-            priceMessage.textContent = 'Cena zbyt niska. Skontaktuj się z opiekunem.';
+            priceMessage.textContent = 'Skontakuj się z Twoim opiekunem.';
             priceMessage.style.color = 'red';
         } else {
             const adjustedPrice = (minPrice * 1.02).toFixed(2);
