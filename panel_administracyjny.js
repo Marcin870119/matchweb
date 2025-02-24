@@ -6,6 +6,7 @@ import { getDatabase, ref, set, onValue, remove, update } from "https://www.gsta
 const firebaseConfig = {
     apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
     authDomain: "webmatcher-94f0e.firebaseapp.com",
+    databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "webmatcher-94f0e",
     storageBucket: "webmatcher-94f0e.firebasestorage.app",
     messagingSenderId: "970664630623",
