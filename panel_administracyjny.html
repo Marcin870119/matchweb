@@ -49,7 +49,7 @@
             <h2 class="h2">Firebase Data Management</h2>
             <div class="grid">
                 <div class="column">
-                    <div class="element-item">
+                    <div class="element-item element-item-upload">
                         <div class="top-section">
                             <p class="logo logo-small"><img src="https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png" alt="Firebase Logo"></p>
                             <h3 class="name name-small">Upload CSV 1</h3>
@@ -62,19 +62,38 @@
                                 <button id="export-button1" class="button btn-sm">Export Data</button>
                             </div>
                         </div>
+
+                        <div class="preview-container">
+                            <div id="table-wrapper1">
+                                <table class="table table-striped table-bordered preview-table" id="data-table1">
+                                    <thead><tr></tr></thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <button type="button" id="toggle-table1" class="btn btn-secondary btn-sm">Show More</button> </div>
                     </div>
 
                     <div class="element-item">
                         <p class="logo"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828490.png" alt="Actions Logo"></p>
                         <h3 class="name">Akcje 1</h3>
                         <p class="subtitle">Zarządzaj danymi</p>
-                        <div class="element-content">
+                         <div class="element-content">
                             <input type="file" class="form-control file-input" id="fileInput2" accept=".csv">
                             <div class="button-container">
-                                <button  class="button btn-sm">Save Changes</button>
-                                <button  class="button btn-sm">Load Data</button>
-                                <button  class="button btn-sm">Export Data</button>
+                                <button id="save-button2" class="button btn-sm">Save Changes</button>
+                                <button id="load-button2" class="button btn-sm">Load Data</button>
+                                <button id="export-button2" class="button btn-sm">Export Data</button>
                             </div>
+                        </div>
+                          <div class="preview-container">
+                            <div id="table-wrapper2">
+                                <table class="table table-striped table-bordered preview-table" id="data-table2">
+                                    <thead><tr></tr></thead>
+                                    <tbody></tbody>
+                                </table>
+
+                            </div>
+                             <button type="button" id="toggle-table2" class="btn btn-secondary btn-sm">Show More</button>
                         </div>
                     </div>
                 </div>
@@ -85,13 +104,23 @@
                         <h3 class="name">Dane 1</h3>
                         <p class="subtitle">Podgląd i edycja danych</p>
                          <div class="element-content">
-                        <input type="file" class="form-control file-input" id="fileInput3" accept=".csv">
-                        <div class="button-container">
-                            <button class="button btn-sm">Save Changes</button>
-                            <button class="button btn-sm">Load Data</button>
-                            <button class="button btn-sm">Export Data</button>
+                            <input type="file" class="form-control file-input" id="fileInput3" accept=".csv">
+                            <div class="button-container">
+                                <button id="save-button3" class="button btn-sm">Save Changes</button>
+                                <button id="load-button3" class="button btn-sm">Load Data</button>
+                                <button id="export-button3" class="button btn-sm">Export Data</button>
+                            </div>
+
                         </div>
-                    </div>
+                         <div class="preview-container">
+                            <div id="table-wrapper3">
+                                <table class="table table-striped table-bordered preview-table" id="data-table3">
+                                   <thead><tr></tr></thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                             <button type="button" id="toggle-table3" class="btn btn-secondary btn-sm">Show More</button>
+                         </div>
                     </div>
 
                     <div class="element-item">
@@ -99,12 +128,21 @@
                         <h3 class="name">Informacje 1</h3>
                         <p class="subtitle">Dodatkowe opcje</p>
                          <div class="element-content">
-                            <input type="file" class="form-control file-input" id="fileInput4" accept=".csv">
-                              <div class="button-container">
-                                <button  class="button btn-sm">Save Changes</button>
-                                <button class="button btn-sm">Load Data</button>
-                                <button  class="button btn-sm">Export Data</button>
+                                <input type="file" class="form-control file-input" id="fileInput4" accept=".csv">
+                            <div class="button-container">
+                                <button id="save-button4" class="button btn-sm">Save Changes</button>
+                                <button id="load-button4" class="button btn-sm">Load Data</button>
+                                <button id="export-button4" class="button btn-sm">Export Data</button>
                             </div>
+                         </div>
+                         <div class="preview-container">
+                            <div id="table-wrapper4">
+                                <table class="table table-striped table-bordered preview-table" id="data-table4">
+                                    <thead><tr></tr></thead>
+                                     <tbody></tbody>
+                                </table>
+                            </div>
+                             <button type="button" id="toggle-table4" class="btn btn-secondary btn-sm">Show More</button>
                          </div>
                     </div>
                 </div>
