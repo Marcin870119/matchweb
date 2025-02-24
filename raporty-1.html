@@ -1,106 +1,96 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATCH SYSTEM - RAPORTY-1</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@11.0.1/dist/handsontable.full.min.css">
-    <link rel="stylesheet" href="raporty.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handsontable@11.0.1/dist/handsontable.full.min.js"></script>
+    <title>MATCH SYSTEM - RAPORTY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@11.0.1/dist/handsontable.full.min.css" integrity="sha256-qYESABqZf4shrPAmWBr5SgPz+9Z5y5WUsbhgREI5xAg=" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="raporty-1.css">
 </head>
-
 <body>
-
-    <!-- TOP BAR -->
-    <div class="top-bar"></div>
-
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="bithubweb.html">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            MATCHPRICE
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="bithubweb.html" onclick="showMatchJSONPage()">MATCH JSON</a></li>
-                            <li><a class="dropdown-item" href="matchcsv.html">MATCH CSV</a></li>
-                            <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
-                            <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="narzedzia.html">NARZĘDZIA</a></li>
-                    <li class="nav-item"><a class="nav-link" href="raporty.html">RAPORTY</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
-                </ul>
+    <header>
+        <div class="top-bar"></div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main Navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo" style="height: 30px; margin-right:5px;"> MATCH SYSTEM
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                MATCHPRICE
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="navbarDropdownMenu">
+                                <li><a class="dropdown-item" href="#">MATCH JSON</a></li>
+                                <li><a class="dropdown-item" href="#">MATCH CSV</a></li>
+                                <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
+                                <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#">NARZĘDZIA</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" aria-current="page">RAPORTY</a></li>
+                        <li class="nav-item"><a class="nav-link" href="raporty-1.html">Ustawienia</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- WRAPPER -->
-    <div class="wrapper">
-
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <a href="#" class="active" onclick="loadSalesData()">SPRZEDAŻ PO PRODUCENTACH</a>
-            <a href="#">RABATY KLIENTÓW</a>
-            <a href="#">TOP 305 INDEKSÓW</a>
-        </div>
-
-        <!-- CONTENT -->
+    <main class="wrapper">
+        <aside>
+            <nav class="sidebar" aria-label="Sidebar Navigation">
+                <a href="#" class="active">SPRZEDAŻ PO PRODUCENTACH</a>
+                <a href="#">RABATY KLIENTÓW</a>
+                <a href="#">TOP 305 INDEKSÓW</a>
+            </nav>
+        </aside>
         <div class="content">
-
             <div class="container">
-                <div class="tile" onclick="loadSalesData()">
-                    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="icon">
+                <h2 class="tile">
+                    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="icon" style="height: 20px; margin-right: 8px;">
                     SPRZEDAŻ PO PRODUCENTACH
-                </div>
-
-                <!-- Import CSV -->
+                </h2>
                 <div class="import-csv-wrapper">
-                    <h5>IMPORTUJ PLIK CSV</h5>
-                    <input type="file" id="csvFileInput" accept=".csv" class="form-control">
-                    <button id="importCsvButton" class="btn btn-primary mt-2">IMPORTUJ</button>
+                    <label for="csvFileInput" class="form-label">IMPORTUJ PLIK CSV</label>
+                    <input type="file" id="csvFileInput" accept=".csv" class="form-control" aria-describedby="csvFileInputHelp">
+                    <div id="csvFileInputHelp" class="form-text">Wybierz plik CSV do zaimportowania.</div>
                 </div>
 
-                <!-- Tabela z danymi -->
                 <div id="excelTable" class="data-table-wrapper"></div>
-                
-                <!-- Przycisk do generowania raportu -->
-                <button id="generateReportButton" class="btn btn-success mt-2">Generuj Raport</button>
-                
-                <!-- Tabela z raportem -->
+
+                <div id="reportsContainer" class="mt-3">
+                    <label for="reportType" class="form-label">WYBIERZ TYP RAPORTU:</label>
+                    <select id="reportType" class="form-select">
+                        <option value="">Wybierz raport</option>
+                        <option value="decrease">Spadki</option>
+                        <option value="increase">Wzrosty</option>
+                    </select>
+                </div>
+
                 <div id="reportTable" class="data-table-wrapper"></div>
-                
-                <!-- Przycisk do zapisu do CSV -->
-                <button id="saveCsvButton" class="btn btn-primary mt-2">Zapisz do CSV</button>
+
+                <div class="button-container">
+                    <button onclick="saveToExcelFile()" class="btn btn-success">Zapisz do Excel</button>
+                </div>
             </div>
-
-            <div class="spacer"></div>
-
         </div>
+    </main>
 
-    </div>
-
-    <!-- FOOTER -->
-    <div class="footer">
+    <footer class="footer">
         Strona stworzona przez MSZCorporation
-    </div>
+    </footer>
 
-    <script src="raporty.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js" integrity="sha512-jDEmOI1izKRSvrYjhpZL4Zgad8A/FIRzBszzKhA8g8MgRokgAZBpGlAgqKb9XGhfGPxoVvJBAiSw2efLNAa4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handsontable@11.0.1/dist/handsontable.full.min.js" integrity="sha256-qYESABqZf4shrPAmWBr5SgPz+9Z5y5WUsbhgREI5xAg=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="raporty-1.js"></script>
 </body>
-
 </html>
