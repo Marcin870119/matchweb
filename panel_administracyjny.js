@@ -1,4 +1,4 @@
-// Linie 1-17
+// panel_administracyjny.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -16,70 +16,72 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-// Linie 19-37
+
 let currentData = []; // Store the current data
 let isTableExpanded = false; // Track table expansion state
-let currentCollection = ""; // Zmienna do przechowywania aktualnie wybranej kolekcji
+let currentCollection = ""; // Store the currently selected collection
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Obsługa menu bocznego ---
+    // --- Sidebar menu handling ---
     const menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach(item => {
         item.addEventListener('click', (event) => {
-            event.preventDefault(); // Zapobiegaj domyślnej akcji linku
+            event.preventDefault(); // Prevent default link behavior
 
-            // Usuń klasę 'active' ze wszystkich elementów menu
+            // Remove 'active' class from all menu items
             menuItems.forEach(i => i.classList.remove('active'));
-            // Dodaj klasę 'active' do klikniętego elementu
+            // Add 'active' class to the clicked item
             event.target.classList.add('active');
 
-            // Pobierz ID klikniętego elementu i utwórz ID kafelka
-            const itemId = event.target.id;
-            const tileId = itemId + '-tile';
-            // Linie 38-59
-            // Pokaż/ukryj kafelki
+            // Get the ID of the clicked item and create the tile ID
+            const itemId = event.target.id || event.target.textContent.toLowerCase().replace(/\s+/g, '-');
+            const tileId = `${itemId}-tile`.toLowerCase();
+            
+            // Show/hide tiles
             const tiles = document.querySelectorAll('.tile');
             tiles.forEach(tile => {
-                tile.style.display = 'none'; // Ukryj wszystkie
+                tile.style.display = 'none'; // Hide all tiles
             });
 
             const targetTile = document.getElementById(tileId);
             if (targetTile) {
-                targetTile.style.display = 'flex'; // Pokaż wybrany, użyj 'flex'
-                // Nie ładuj danych automatycznie po zmianie kafelka - użytkownik musi kliknąć "Load Data"
+                targetTile.style.display = 'flex'; // Show the selected tile
+                // Do not automatically load data after tile change - user must click "Load Data"
             }
         });
     });
-    // Domyślnie pokaż pierwszy kafelek, i zaladuj dane do dropdown.
-    document.querySelector('.menu-item').click();
+
+    // Default: show the first tile and populate the collection dropdown
+    if (menuItems.length > 0) {
+        menuItems[0].click(); // Trigger click on the first menu item
+    }
     populateCollectionSelect();
 
+    // --- Helper functions ---
 
-    // --- Funkcje pomocnicze ---
-    // Linie 60-84
-    // Funkcja do pobierania listy kolekcji z Firebase
+    // Function to fetch the list of collections from Firebase
     async function fetchCollectionList() {
-        const dbRef = ref(database); // Referencja do *korzenia* bazy danych
+        const dbRef = ref(database); // Reference to the root of the database
         try {
-            const snapshot = await get(dbRef); // Użyj get() zamiast onValue()
+            const snapshot = await get(dbRef); // Use get() for a one-time read
             if (snapshot.exists()) {
-                const collections = Object.keys(snapshot.val()); // Pobierz klucze (nazwy kolekcji)
+                const collections = Object.keys(snapshot.val()); // Get collection names
                 return collections;
             } else {
-                return []; // Brak kolekcji
+                return []; // No collections found
             }
         } catch (error) {
             console.error("Error fetching collection list:", error);
             alert("Error fetching collection list: " + error.message);
-            return []; // W przypadku błędu, zwróć pustą tablicę
+            return []; // Return empty array on error
         }
     }
 
-    // Funkcja do wypełniania listy rozwijanej <select>
+    // Function to populate the dropdown <select> with collections
     async function populateCollectionSelect() {
         const select = document.getElementById('collectionSelect');
-        select.innerHTML = '<option value="">(Select a collection)</option>'; // Wyczyść i dodaj domyślną opcję
+        if (!select) return; // Ensure select exists
+        select.innerHTML = '<option value="">(Select a collection)</option>'; // Clear and add default option
 
         const collections = await fetchCollectionList();
         collections.forEach(collectionName => {
@@ -89,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
             select.appendChild(option);
         });
     }
-    // Linie 87-117
-    // --- Obsługa importu danych ---
+
+    // --- Data import handling ---
     const importButtons = document.querySelectorAll('.import-button');
 
     importButtons.forEach(button => {
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const thead = table.querySelector('thead');
             const tbody = table.querySelector('tbody');
             const importDateDiv = tile.querySelector('.import-date');
-            const collectionNameDiv = tile.querySelector('.collection-name'); // Do nazwy kolekcji
+            const collectionNameDiv = tile.querySelector('.collection-name');
 
             const fileInput = document.createElement('input');
             fileInput.type = 'file';
@@ -111,19 +113,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const file = event.target.files[0];
                 if (!file) return;
 
-                //  Pobierz nazwę kolekcji *przed* parsowaniem.
+                // Get collection name before parsing
                 let collectionName = prompt("Please enter a name for this data collection:", "Data");
-                if (!collectionName) return;  // Anulowano
+                if (!collectionName) return; // Cancelled
                 collectionName = collectionName.trim();
                 if (/[.$[\]#/]/.test(collectionName)) {
                     alert("Collection name contains invalid characters (. $ [ ] # /). Import cancelled.");
                     return;
                 }
-                currentCollection = collectionName; // Ustaw aktualną kolekcję.
+                currentCollection = collectionName; // Set the current collection
 
-                // Zapisz nazwę kolekcji w divie
+                // Save collection name in the div
                 collectionNameDiv.textContent = collectionName;
-                // Linie 118-154
+
                 Papa.parse(file, {
                     header: true,
                     dynamicTyping: true,
@@ -141,18 +143,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             return;
                         }
 
-                        // Display data *in the correct tile*
+                        // Display data in the correct tile
                         displayData(data, tile);
 
-                        // Upload to Firebase *with the correct ref*
+                        // Upload to Firebase with the correct ref
                         const dbRef = ref(database, collectionName);
-                        uploadDataToFirebase(data, dbRef); //Upload using set (overwrite)
-
+                        uploadDataToFirebase(data, dbRef); // Upload using set (overwrite)
 
                         const now = new Date();
                         importDateDiv.textContent = `Imported: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
 
-                        // Odśwież listę kolekcji po imporcie
+                        // Refresh collection list after import
                         populateCollectionSelect();
                     },
                     error: function (error) {
@@ -165,15 +166,15 @@ document.addEventListener('DOMContentLoaded', () => {
             fileInput.click();
         });
     });
-    // Linie 157-188
-    // Funkcja do wyświetlania danych w tabeli
-    function displayData(data, tile) {  // Dodano argument 'tile'
-        const table = tile.querySelector('.data-container table'); // Znajdź tabelę w *tym* kafelku
+
+    // --- Display data in table ---
+    function displayData(data, tile) {
+        const table = tile.querySelector('.data-container table');
         const thead = table.querySelector('thead');
         const tbody = table.querySelector('tbody');
         const toggleTableLink = tile.querySelector('#toggle-table');
 
-        thead.innerHTML = '';  // Wyczyść
+        thead.innerHTML = '';
         tbody.innerHTML = '';
 
         if (!data || data.length === 0) {
@@ -186,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const th = document.createElement('th');
             th.textContent = header;
             th.setAttribute('data-key', header);
-            th.addEventListener('click', sortTable);  // Nadal możesz sortować
+            th.addEventListener('click', sortTable);
             thead.appendChild(th);
         });
 
@@ -194,10 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
         actionsHeader.textContent = 'Actions';
         thead.appendChild(actionsHeader);
 
-        // Pokaż określoną liczbę wierszy
+        // Show a limited number of rows
         const initialRows = 3;
         const dataToShow = isTableExpanded ? data : data.slice(0, initialRows);
-        // Linie 189 - 218
+
         dataToShow.forEach((item, rowIndex) => {
             const row = document.createElement('tr');
             headers.forEach(header => {
@@ -213,20 +214,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-            deleteButton.addEventListener('click', () => deleteRow(rowIndex)); // Pass rowIndex
+            deleteButton.addEventListener('click', () => deleteRow(rowIndex));
 
             actionsCell.appendChild(deleteButton);
             row.appendChild(actionsCell);
             tbody.appendChild(row);
         });
+
         if (toggleTableLink) {
             toggleTableLink.textContent = isTableExpanded ? 'Show Less' : 'Show More';
         }
     }
-    // Linie 221-255
-    // Funkcja do zapisu zmian
+
+    // --- Save changes ---
     async function saveChanges() {
-        const table = document.querySelector('.tile:not([style*="display: none"]) .data-container table'); // Znajdź aktywną tabelę
+        const table = document.querySelector('.tile:not([style*="display: none"]) .data-container table');
         if (!table) {
             alert("No active table found to save changes from.");
             return;
@@ -235,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const rows = tbody.querySelectorAll('tr');
         const updatedData = [];
 
-        // Build updatedData array
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
             const cells = row.querySelectorAll('td');
@@ -254,24 +255,27 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hasData) {
                 updatedData.push(rowData);
             }
-        }// Linie 256-280
+        }
+
         if (!currentCollection) {
-            alert("No collection is currently selected.  Please load or import data first.");
+            alert("No collection is currently selected. Please load or import data first.");
             return;
         }
+
         const dbRef = ref(database, currentCollection);
 
         try {
-            await set(dbRef, updatedData);  // Użyj set()
+            await set(dbRef, updatedData);
             console.log('Changes saved successfully!');
             alert('Changes saved successfully to collection: ' + currentCollection);
-            currentData = updatedData;  // Update local data
+            currentData = updatedData; // Update local data
         } catch (error) {
             console.error('Error saving changes:', error);
             alert('Error saving changes: ' + error.message);
         }
     }
-    // Funkcja do usuwania wiersza
+
+    // --- Delete row ---
     async function deleteRow(rowIndex) {
         if (!currentCollection) {
             alert("No collection is currently selected.");
@@ -279,34 +283,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let adjustedRowIndex;
-        // Linie 281-323
         if (!isTableExpanded) {
-            const tableRows = document.querySelectorAll("#data-table tbody tr");
+            const tableRows = document.querySelector('#data-table tbody tr');
             if (rowIndex < tableRows.length) {
-                // If "Show More" is NOT expanded, the displayed row index IS the data index.
                 adjustedRowIndex = rowIndex;
             }
-        }
-        else {
+        } else {
             adjustedRowIndex = rowIndex;
         }
 
         if (confirm('Are you sure you want to delete this row?')) {
             const dbRef = ref(database, currentCollection);
-            // Check if adjustedRowIndex is valid before splicing
             if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData.length) {
                 currentData.splice(adjustedRowIndex, 1);
-                // Find the currently active tile and redisplay data
                 const activeTile = document.querySelector('.tile:not([style*="display: none"])');
                 if (activeTile) {
-                    displayData(currentData, activeTile); //Ponowne wyswietlanie danych.
+                    displayData(currentData, activeTile);
                 }
             }
+
             try {
-                await set(dbRef, currentData); // Save changes to Firebase
+                await set(dbRef, currentData);
                 console.log('Row deleted successfully!');
                 alert('Row deleted successfully!');
-
             } catch (error) {
                 console.error('Error deleting row:', error);
                 alert('Error deleting row: ' + error.message);
@@ -314,25 +313,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Funkcja do przełączania widoczności tabeli (Show More/Less)
+    // --- Toggle table visibility (Show More/Less) ---
     function toggleTable(event) {
         event.preventDefault();
         isTableExpanded = !isTableExpanded;
-        const activeTile = document.querySelector('.tile:not([style*="display: none"])'); // Pobierz aktywny tile
+        const activeTile = document.querySelector('.tile:not([style*="display: none"])');
         if (activeTile) {
-            displayData(currentData, activeTile); // Ponownie wyświetl dane, przekazujac aktywny tile
+            displayData(currentData, activeTile);
         }
-
     }
-    // Linie 325-347
-    // Funkcja do sortowania tabeli
+
+    // --- Sort table ---
     function sortTable(event) {
         const header = event.target.getAttribute('data-key');
         const isAscending = !event.target.classList.contains('sorted-desc');
 
-        // Znajdź wszystkie nagłówki w *aktywnej* tabeli
         const activeTable = document.querySelector('.tile:not([style*="display: none"]) .data-container table');
-        if (!activeTable) return; // Brak aktywnej tabeli
+        if (!activeTable) return;
 
         const headers = activeTable.querySelectorAll('th');
         headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
@@ -345,8 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (valueA > valueB) return isAscending ? 1 : -1;
             return 0;
         });
-        // Linie 348-361
-        // Znajdź aktywny kafelek i wyświetl posortowane dane
+
         const activeTile = document.querySelector('.tile:not([style*="display: none"])');
         if (activeTile) {
             displayData(currentData, activeTile);
@@ -354,7 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         event.target.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
     }
-    //Dodanie obslugi usuwania kolekcji  (Linie 362-389)
+
+    // --- Delete collection ---
     async function deleteCollection() {
         if (!currentCollection) {
             alert("No collection selected to delete.");
@@ -364,22 +361,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confirm(`Are you sure you want to delete the ENTIRE collection "${currentCollection}"? This action cannot be undone.`)) {
             const dbRef = ref(database, currentCollection);
             try {
-                await remove(dbRef); // Użyj remove() do usunięcia całej kolekcji
+                await remove(dbRef);
                 console.log(`Collection "${currentCollection}" deleted successfully.`);
                 alert(`Collection "${currentCollection}" deleted successfully.`);
-                currentData = []; // Wyczyść lokalne dane
+                currentData = [];
                 currentCollection = "";
 
-                // Znajdz aktualnie wyswietlany tile i wyczysc w nim dane
                 const activeTile = document.querySelector('.tile:not([style*="display: none"])');
                 if (activeTile) {
                     displayData([], activeTile);
-                    activeTile.querySelector('.collection-name').textContent = ''; // Wyczyść nazwę kolekcji
-                    activeTile.querySelector('.import-date').textContent = '';   // Wyczyść date
+                    activeTile.querySelector('.collection-name').textContent = '';
+                    activeTile.querySelector('.import-date').textContent = '';
                 }
 
-
-                populateCollectionSelect(); // Odśwież listę kolekcji
+                populateCollectionSelect(); // Refresh collection list
             } catch (error) {
                 console.error("Error deleting collection:", error);
                 alert("Error deleting collection: " + error.message);
@@ -387,10 +382,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
-
     // --- Event Listeners ---
-    //Obsluga load data button  (Linie 391-431)
+
+    // Handle Load Data button
     document.getElementById('load-button').addEventListener('click', async () => {
         const collectionName = document.getElementById('collectionSelect').value;
         if (!collectionName) {
@@ -401,73 +395,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const dbRef = ref(database, collectionName);
         try {
-            const snapshot = await get(dbRef); // Użyj get() do jednorazowego odczytu
+            const snapshot = await get(dbRef);
             if (snapshot.exists()) {
                 currentData = snapshot.val();
-                // Znajdź aktywny kafelek
                 const activeTile = document.querySelector('.tile:not([style*="display: none"])');
                 if (activeTile) {
-                    displayData(currentData, activeTile); // Wyświetl dane w aktywnym
-                    // Ustaw nazwę kolekcji i datę w aktywnym kafelku
+                    displayData(currentData, activeTile);
                     activeTile.querySelector('.collection-name').textContent = collectionName;
                     activeTile.querySelector('.import-date').textContent = "";
-
                 }
-
             } else {
                 console.log(`No data found in collection: ${collectionName}`);
                 alert(`No data found in collection: ${collectionName}`);
                 const activeTile = document.querySelector('.tile:not([style*="display: none"])');
                 if (activeTile) {
-                    displayData([], activeTile); // Pusta tabela
+                    displayData([], activeTile);
                     activeTile.querySelector('.collection-name').textContent = '';
                     activeTile.querySelector('.import-date').textContent = '';
                 }
-
             }
         } catch (error) {
             console.error("Error fetching data: ", error);
             alert("Error fetching data: " + error.message);
         }
-    }); // <--- TO BYŁ BRAKUJĄCY NAWIAS!
+    });
 
-    // Event listener dla przycisku "Save Changes" (Linie 433-434)
+    // Handle Save Changes button
     document.getElementById('save-button').addEventListener('click', saveChanges);
 
-    // Event listener dla przycisku "Export Data" (Linie 436-449)
+    // Handle Export Data button
     document.getElementById('export-button').addEventListener('click', () => {
         const activeTile = document.querySelector('.tile:not([style*="display: none"])');
-        if (activeTile) { // Sprawdz czy jest aktywny
-            if (currentData.length > 0) { // I czy sa dane.
-                //  exportDataToFirebase(); // Jesli tak to eksportuj.  Zakomentowane, bo nie ma tej funkcji zdefiniowanej!
-                alert("Exporting data is not yet implemented."); // Dodaj tymczasowy alert.  Zmień to, gdy dodasz funkcję eksportu.
+        if (activeTile) {
+            if (currentData.length > 0) {
+                alert("Exporting data is not yet implemented.");
             } else {
                 alert("No data to export. Please load or import data first.");
             }
         } else {
             alert("No active tile. Please select a report type from the sidebar.");
         }
-
     });
 
     document.getElementById('delete-collection-button').addEventListener('click', deleteCollection);
 
-    // Dodaj obsługę zdarzenia dla linku "Show More/Less" (Linie 453)
-    document.getElementById('toggle-table').addEventListener('click', toggleTable); //KLUCZOWE!
+    // Handle Show More/Less toggle for each tile
+    document.querySelectorAll('.toggle-table').forEach(toggle => {
+        toggle.addEventListener('click', toggleTable);
+    });
+});
 
-    //Poczatkowe zaladowanie kolekcji.  --  NIE, robimy to przez przycisk "Load Data"
-    // populateCollectionSelect();  // NIE tutaj.  Robimy to w DOMContentLoaded.
-
-
-}); // Koniec DOMContentLoaded
-
-
-// Funkcja do uploadu (używana w handleFileUpload) - JEST OK (Linie 462-472)
+// --- Upload data to Firebase ---
 async function uploadDataToFirebase(data, dbRef) {
     try {
-        await set(dbRef, data); // Użyj set()
+        await set(dbRef, data);
         console.log('Data uploaded successfully!');
-        // alert('Data uploaded successfully!'); // Nie alertuj tutaj, bo to jest część handleFileUpload
     } catch (error) {
         console.error('Error uploading data:', error);
         alert('Error uploading data: ' + error.message);
