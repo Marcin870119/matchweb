@@ -7,83 +7,96 @@ const SPRZEDAZ_START_INDEX = 10; // Indeks kolumny K (początek danych sprzedaż
 const SPRZEDAZ_END_INDEX = 15;  // Indeks kolumny P (koniec *ciągłych* danych sprzedażowych)
 const OSTATNI_MIESIAC_INDEX = 16; // Indeks kolumny Q (sprzedaż ostatniego miesiąca)
 
+
 // Język Handsontable (bez zmian)
-Handsontable.languages.registerLanguageDictionary(Handsontable.languages.pl);
+Handsontable.languages.pl = {
+    languageCode: 'pl-PL',
+    contextMenu: {
+        rowAbove: 'Wstaw wiersz powyżej',
+        rowBelow: 'Wstaw wiersz poniżej',
+        colLeft: 'Wstaw kolumnę po lewej',
+        colRight: 'Wstaw kolumnę po prawej',
+        removeRow: ['Usuń wiersz', 'Usuń wiersze'],
+        removeCol: ['Usuń kolumnę', 'Usuń kolumny'],
+        clearColumn: 'Wyczyść kolumnę',
+        copy: 'Kopiuj',
+        cut: 'Wytnij',
+        paste: 'Wklej',
+        hiddenColumnsShow: 'Pokaż ukryte kolumny',
+        hiddenRowsShow: 'Pokaż ukryte wiersze',
+        filters: {
+            cancel: 'Anuluj',
+            clear: 'Wyczyść',
+            byCondition: 'Filtruj według warunku',
+            byValue: 'Filtruj według wartości',
+            confirm: 'OK',
+            and: 'oraz',
+            or: 'lub',
+            condition: 'Warunek',
+            conditions: {
+                none: 'Brak',
+                empty: 'Puste',
+                not_empty: 'Niepuste',
+                equal: 'Równe',
+                not_equal: 'Nie równe',
+                begins_with: 'Zaczyna się od',
+                ends_with: 'Kończy się na',
+                contains: 'Zawiera',
+                not_contains: 'Nie zawiera',
+                greater_than: 'Większe niż',
+                less_than: 'Mniejsze niż',
+                greater_than_or_equal: 'Większe lub równe',
+                less_than_or_equal: 'Mniejsze lub równe',
+                between: 'Pomiędzy',
+                not_between: 'Poza zakresem'
+            }
+        }
+    }
+};
+
+
 
 // Wczytywanie pliku CSV
 document.getElementById('csvFileInput').addEventListener('change', function (e) {
     var file = e.target.files[0];
-    if (!file) {
-        alert("Nie wybrano pliku.");
-        return;
-    }
-
     var reader = new FileReader();
-
-    reader.onload = function (e) {
-        try {
-            var data = new Uint8Array(reader.result);
-            var workbook = XLSX.read(data, { type: 'array' });
-            var sheet = workbook.Sheets[workbook.SheetNames[0]];
-            var json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
-            console.log('Wczytane dane:', json); // Debug: Sprawdź wczytane dane
-
-            // Walidacja danych: Sprawdź, czy kluczowe kolumny istnieją
-            if (json.length > 0) {
-                const firstRow = json[0];
-                if (firstRow.length <= PRODUCENT_SKROT_INDEX ||
-                    firstRow.length <= KATEGORIA_INDEX ||
-                    firstRow.length <= SPRZEDAZ_START_INDEX ||
-                    firstRow.length <= SPRZEDAZ_END_INDEX ||
-                    firstRow.length <= OSTATNI_MIESIAC_INDEX)
-                 {
-                    alert("Błąd: Struktura pliku CSV jest nieprawidłowa. Brakuje wymaganych kolumn.");
-                    return;
-                }
-            } else {
-                alert("Błąd: Plik CSV jest pusty.");
-                return;
-            }
-
-            // Inicjalizacja tabeli (dane wejściowe)
-            hot = new Handsontable(document.getElementById('excelTable'), {
-                data: json,
-                colHeaders: true,
-                rowHeaders: true,
-                minSpareRows: 1,
-                contextMenu: true,
-                dropdownMenu: true,
-                filters: true,
-                columnSorting: true,
-                manualColumnResize: true,
-                manualRowResize: true,
-                height: '400px',
-                language: 'pl-PL',
-                licenseKey: 'non-commercial-and-evaluation',
-                observeChanges: true
-            });
-        } catch (error) {
-            console.error("Błąd podczas przetwarzania pliku:", error);
-            alert("Wystąpił błąd podczas przetwarzania pliku CSV. Upewnij się, że plik ma prawidłowy format.");
-        }
-    };
-
-    reader.onerror = function (error) {
-        console.error("Błąd odczytu pliku:", error);
-        alert("Wystąpił błąd podczas odczytu pliku.");
-    };
-
     reader.readAsArrayBuffer(file);
+    reader.onload = function (e) {
+        var data = new Uint8Array(reader.result);
+        var workbook = XLSX.read(data, { type: 'array' });
+        var sheet = workbook.Sheets[workbook.SheetNames[0]];
+        var json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+        console.log('Wczytane dane:', json); // Debug: Sprawdź wczytane dane
+
+        // Inicjalizacja tabeli (dane wejściowe)
+        hot = new Handsontable(document.getElementById('excelTable'), {
+            data: json,
+            colHeaders: true,
+            rowHeaders: true,
+            minSpareRows: 1,
+            contextMenu: Handsontable.languages.pl.contextMenu,
+            dropdownMenu: true,
+            filters: true,
+            columnSorting: true,
+            manualColumnResize: true,
+            manualRowResize: true,
+            height: '400px',
+            language: 'pl-PL',
+            licenseKey: 'non-commercial-and-evaluation',
+            rowHeights: () => 23,
+            viewportRowRenderingOffset: 'auto',
+            observeChanges: true
+        });
+    };
 });
+
 
 // Obsługa przycisku generowania raportów (zmodyfikowana)
 document.getElementById('reportsContainer').addEventListener('change', function () {
     var reportType = document.getElementById('reportType').value;
-    if (hot && (reportType === 'decrease' || reportType === 'increase')) {
+    if (reportType === 'decrease' || reportType === 'increase') {
         generateReport(hot.getData(), hot.getColHeader(), reportType);
-    } else if (!hot) {
-        alert('Proszę najpierw zaimportować plik CSV.');
     } else {
         alert('Proszę wybrać rodzaj raportu.');
     }
@@ -105,11 +118,9 @@ function generateReport(data, headers, reportType) {
         // Klucz to kombinacja producenta i kategorii
         var key = `${producer} - ${category}`;
 
-
         if (!producerData[key] && producer !== undefined && producer !== null) {
             producerData[key] = [];
         }
-
         if (producer !== undefined && producer !== null) {
             producerData[key].push(row);
         }
@@ -121,9 +132,12 @@ function generateReport(data, headers, reportType) {
 
     // Przetwarzanie danych dla każdego producenta i kategorii
     Object.keys(producerData).forEach(key => { // Iteruj po kluczach (producent - kategoria)
-        if(key.startsWith("undefined") || key.startsWith("null")) return;
+        if (key.startsWith("undefined") || key === null) return; //pomija undefined
 
         var producerRows = producerData[key];
+        // Dzielimy klucz z powrotem na producenta i kategorię
+        var [producer, category] = key.split(' - ');
+
 
         // Pobierz dane sprzedaży z kolumn K-P
         var salesData = producerRows.map(row => {
@@ -147,9 +161,10 @@ function generateReport(data, headers, reportType) {
                 sum += value;
                 count++;
             });
-             averages.push(sum / count || 0); // Use count, because forEach will iterate all
+            averages.push(sum / count || 0);
         }
-        let averageSales = averages.length > 0? averages.reduce((acc, val) => acc + val, 0) / averages.length : 0;
+
+        let averageSales = averages.length > 0 ? averages.reduce((acc, val) => acc + val, 0) / averages.length : 0;
 
         // Wartość sprzedaży z ostatniego miesiąca (kolumna Q)
         let lastMonthSales = parseFloat(producerRows[0][OSTATNI_MIESIAC_INDEX]) || 0; // Kolumna Q
@@ -187,32 +202,29 @@ function generateReport(data, headers, reportType) {
     // Inicjalizacja lub aktualizacja tabeli raportu
     if (!reportHot) {
         reportHot = new Handsontable(document.getElementById('reportTable'), {
-            data: [reportHeaders, ...reportData], // Include headers in data
-            colHeaders: true, // Set to true, to display column header
+            data: [reportHeaders, ...reportData],
+            colHeaders: true,
             rowHeaders: true,
-            readOnly: true,
+            readOnly: true, // Ustaw tabelę raportu jako tylko do odczytu
             height: '400px',
             language: 'pl-PL',
             licenseKey: 'non-commercial-and-evaluation',
         });
     } else {
         reportHot.updateSettings({
-            data: [reportHeaders, ...reportData] // Include headers in data
+            data: [reportHeaders, ...reportData]
         });
     }
 }
 
-
 // Funkcja zapisu do Excel (dostosowana do zapisu obu tabel)
-function saveToExcelFile() {
+function saveToExcel() {
     var wb = XLSX.utils.book_new();
 
     // Zapisz dane wejściowe
-    if(hot){ // Check if hot exists
-        var dataInput = hot.getData();
-        var wsInput = XLSX.utils.aoa_to_sheet(dataInput);
-        XLSX.utils.book_append_sheet(wb, wsInput, "Dane Wejściowe");
-    }
+    var dataInput = hot.getData();
+    var wsInput = XLSX.utils.aoa_to_sheet(dataInput);
+    XLSX.utils.book_append_sheet(wb, wsInput, "Dane Wejściowe");
 
     // Zapisz dane raportu (jeśli istnieją)
     if (reportHot) {
