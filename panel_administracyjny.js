@@ -1,3 +1,4 @@
+// Linie 1-17
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -15,7 +16,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-
+// Linie 19-37
 let currentData = []; // Store the current data
 let isTableExpanded = false; // Track table expansion state
 let currentCollection = ""; // Zmienna do przechowywania aktualnie wybranej kolekcji
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Pobierz ID klikniętego elementu i utwórz ID kafelka
             const itemId = event.target.id;
             const tileId = itemId + '-tile';
-
+		// Linie 38-59
             // Pokaż/ukryj kafelki
             const tiles = document.querySelectorAll('.tile');
             tiles.forEach(tile => {
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Funkcje pomocnicze ---
-
+			  // Linie 60-84
     // Funkcja do pobierania listy kolekcji z Firebase
     async function fetchCollectionList() {
         const dbRef = ref(database); // Referencja do *korzenia* bazy danych
@@ -88,8 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             select.appendChild(option);
         });
     }
-
-
+	// Linie 87-117
        // --- Obsługa importu danych ---
     const importButtons = document.querySelectorAll('.import-button');
 
@@ -123,8 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Zapisz nazwę kolekcji w divie
                 collectionNameDiv.textContent = collectionName;
-
-
+		    // Linie 118-154
                 Papa.parse(file, {
                     header: true,
                     dynamicTyping: true,
@@ -166,7 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
             fileInput.click();
         });
     });
-	// Funkcja do wyświetlania danych w tabeli
+	// Linie 157-188
+     // Funkcja do wyświetlania danych w tabeli
      function displayData(data, tile) {  // Dodano argument 'tile'
         const table = tile.querySelector('.data-container table'); // Znajdź tabelę w *tym* kafelku
         const thead = table.querySelector('thead');
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
          // Pokaż określoną liczbę wierszy
         const initialRows = 3;
         const dataToShow = isTableExpanded ? data : data.slice(0, initialRows);
-
+	     // Linie 189 - 218
         dataToShow.forEach((item, rowIndex) => {
             const row = document.createElement('tr');
             headers.forEach(header => {
@@ -223,8 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleTableLink.textContent = isTableExpanded ? 'Show Less' : 'Show More';
         }
     }
-
-
+	// Linie 221-255
        // Funkcja do zapisu zmian
     async function saveChanges() {
         const table = document.querySelector('.tile:not([style*="display: none"]) .data-container table'); // Znajdź aktywną tabelę
@@ -255,8 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
              if(hasData){
                  updatedData.push(rowData);
              }
-        }
-
+        }// Linie 256-280
          if (!currentCollection) {
             alert("No collection is currently selected.  Please load or import data first.");
             return;
@@ -281,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
          let adjustedRowIndex;
-
+	    // Linie 281-323
         if(!isTableExpanded) {
                 const tableRows = document.querySelectorAll("#data-table tbody tr");
             if (rowIndex < tableRows.length) {
@@ -326,164 +324,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
     }
-	// Funkcja do wyświetlania danych w tabeli
-     function displayData(data, tile) {  // Dodano argument 'tile'
-        const table = tile.querySelector('.data-container table'); // Znajdź tabelę w *tym* kafelku
-        const thead = table.querySelector('thead');
-        const tbody = table.querySelector('tbody');
-        const toggleTableLink = tile.querySelector('#toggle-table');
+	// Linie 325-347
+   // Funkcja do sortowania tabeli
+    function sortTable(event) {
+        const header = event.target.getAttribute('data-key');
+        const isAscending = !event.target.classList.contains('sorted-desc');
 
-        thead.innerHTML = '';  // Wyczyść
-        tbody.innerHTML = '';
+        // Znajdź wszystkie nagłówki w *aktywnej* tabeli
+        const activeTable = document.querySelector('.tile:not([style*="display: none"]) .data-container table');
+        if (!activeTable) return; // Brak aktywnej tabeli
 
-        if (!data || data.length === 0) {
-             tbody.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
-             return;
-        }
+        const headers = activeTable.querySelectorAll('th');
+        headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
 
-        const headers = Object.keys(data[0]);
-        headers.forEach(header => {
-            const th = document.createElement('th');
-            th.textContent = header;
-            th.setAttribute('data-key', header);
-            th.addEventListener('click', sortTable);  // Nadal możesz sortować
-            thead.appendChild(th);
+        currentData.sort((a, b) => {
+            const valueA = a[header] === null ? '' : String(a[header]).toLowerCase();
+            const valueB = b[header] === null ? '' : String(b[header]).toLowerCase();
+
+            if (valueA < valueB) return isAscending ? -1 : 1;
+            if (valueA > valueB) return isAscending ? 1 : -1;
+            return 0;
         });
-
-        const actionsHeader = document.createElement('th');
-        actionsHeader.textContent = 'Actions';
-        thead.appendChild(actionsHeader);
-
-         // Pokaż określoną liczbę wierszy
-        const initialRows = 3;
-        const dataToShow = isTableExpanded ? data : data.slice(0, initialRows);
-
-        dataToShow.forEach((item, rowIndex) => {
-            const row = document.createElement('tr');
-            headers.forEach(header => {
-                const cell = document.createElement('td');
-                 cell.textContent = item[header] !== null && item[header] !== undefined ? item[header] : '';
-                cell.setAttribute('data-header', header);
-                cell.setAttribute('data-row', rowIndex);
-                cell.contentEditable = true;
-                row.appendChild(cell);
-            });
-
-            const actionsCell = document.createElement('td');
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-             deleteButton.addEventListener('click', () => deleteRow(rowIndex)); // Pass rowIndex
-
-            actionsCell.appendChild(deleteButton);
-            row.appendChild(actionsCell);
-            tbody.appendChild(row);
-        });
-        if (toggleTableLink) {
-            toggleTableLink.textContent = isTableExpanded ? 'Show Less' : 'Show More';
+	    // Linie 348-367
+        // Znajdź aktywny kafelek i wyświetl posortowane dane
+        const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+        if (activeTile) {
+            displayData(currentData, activeTile);
         }
+
+        event.target.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
     }
 
-
-       // Funkcja do zapisu zmian
-    async function saveChanges() {
-        const table = document.querySelector('.tile:not([style*="display: none"]) .data-container table'); // Znajdź aktywną tabelę
-        if (!table) {
-            alert("No active table found to save changes from.");
-            return;
-        }
-        const tbody = table.querySelector('tbody');
-        const rows = tbody.querySelectorAll('tr');
-        const updatedData = [];
-
-        // Build updatedData array
-        for (let i = 0; i < rows.length; i++) {
-            const row = rows[i];
-            const cells = row.querySelectorAll('td');
-            const rowData = {};
-            let hasData = false;
-             for (let j = 0; j < cells.length; j++) {
-                const cell = cells[j];
-                const header = cell.getAttribute('data-header');
-                if (header) {
-                    rowData[header] = cell.textContent.trim();
-                     if(rowData[header] !== ''){
-                        hasData = true;
-                    }
-                }
-            }
-             if(hasData){
-                 updatedData.push(rowData);
-             }
-        }
-
-         if (!currentCollection) {
-            alert("No collection is currently selected.  Please load or import data first.");
-            return;
-        }
-        const dbRef = ref(database, currentCollection);
-
-        try {
-            await set(dbRef, updatedData);  // Użyj set()
-            console.log('Changes saved successfully!');
-            alert('Changes saved successfully to collection: ' + currentCollection);
-            currentData = updatedData;  // Update local data
-        } catch (error) {
-            console.error('Error saving changes:', error);
-            alert('Error saving changes: ' + error.message);
-        }
-    }
-    // Funkcja do usuwania wiersza
-    async function deleteRow(rowIndex) {
-        if (!currentCollection) {
-            alert("No collection is currently selected.");
-            return;
-        }
-
-         let adjustedRowIndex;
-
-        if(!isTableExpanded) {
-                const tableRows = document.querySelectorAll("#data-table tbody tr");
-            if (rowIndex < tableRows.length) {
-                    // If "Show More" is NOT expanded, the displayed row index IS the data index.
-                    adjustedRowIndex = rowIndex;
-            }
-            }
-        else{
-                adjustedRowIndex = rowIndex;
-        }
-
-        if (confirm('Are you sure you want to delete this row?')) {
-            const dbRef = ref(database, currentCollection);
-             // Check if adjustedRowIndex is valid before splicing
-            if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData.length) {
-                currentData.splice(adjustedRowIndex, 1);
-                 // Find the currently active tile and redisplay data
-                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
-                if (activeTile) {
-                     displayData(currentData, activeTile); //Ponowne wyswietlanie danych.
-                }
-            }
-            try {
-                await set(dbRef, currentData); // Save changes to Firebase
-                console.log('Row deleted successfully!');
-                alert('Row deleted successfully!');
-
-            } catch (error) {
-                console.error('Error deleting row:', error);
-                alert('Error deleting row: ' + error.message);
-            }
-        }
-    }
-
-     // Funkcja do przełączania widoczności tabeli (Show More/Less)
-    function toggleTable(event) {
-        event.preventDefault();
-        isTableExpanded = !isTableExpanded;
-        const activeTile = document.querySelector('.tile:not([style*="display: none"])'); // Pobierz aktywny tile
-        if(activeTile){
-            displayData(currentData, activeTile); // Ponownie wyświetl dane, przekazujac aktywny tile
-        }
-
-    }
-	
+    //Dodanie obslugi usuwania kolekcji
+    async function deleteCollection() {
+        if (!
+	    
