@@ -18,48 +18,50 @@ const database = getDatabase(app);
 
 let currentData = []; // Store the current data for editing
 
-// Function to handle file upload and parsing
+// Function to handle file upload and parsing.  NO automatic upload.
 function handleFileUpload(file) {
-    // Ask for the collection name using a dialog box.
-    let collectionName = prompt("Please enter a name for this data collection:", "Data");
-
-    // Validate the collection name.  It CANNOT be empty, and must be a valid Firebase path.
-    if (collectionName === null || collectionName.trim() === "") {
-        alert("Collection name cannot be empty.  Upload cancelled.");
-        return; // Stop the upload process.
-    }
-    // Check for invalid characters.  Firebase paths cannot contain . $ [ ] # /
-    if (/[.$[\]#/]/.test(collectionName)) {
-        alert("Collection name contains invalid characters (. $ [ ] # /). Upload cancelled.");
-        return;
-    }
-    collectionName = collectionName.trim(); // Remove leading/trailing spaces.
-
     Papa.parse(file, {
         header: true,
         dynamicTyping: true,
         complete: function (results) {
             currentData = results.data;
             displayData(currentData);
-            uploadDataToFirebase(currentData, collectionName); // Pass the collection name
+            // Do NOT upload here.
         }
     });
 }
 
+// Function to EXPORT data to Firebase (triggered by button)
+async function exportDataToFirebase() {
+    if (currentData.length === 0) {
+        alert("No data to export. Please upload a CSV file first.");
+        return;
+    }
 
+    let collectionName = prompt("Please enter a name for this data collection:", "Data");
 
-// Function to upload data to Firebase
-async function uploadDataToFirebase(data, collectionName) {
-    const dbRef = ref(database, collectionName); // Use the provided name.
+    if (collectionName === null || collectionName.trim() === "") {
+        alert("Collection name cannot be empty. Export cancelled.");
+        return;
+    }
+    if (/[.$[\]#/]/.test(collectionName)) {
+        alert("Collection name contains invalid characters (. $ [ ] # /). Export cancelled.");
+        return;
+    }
+    collectionName = collectionName.trim();
+
+    const dbRef = ref(database, collectionName);
+
     try {
-        await set(dbRef, data);
-        console.log('Data uploaded successfully!');
-        alert('Data uploaded successfully to collection: ' + collectionName);
+        await set(dbRef, currentData);
+        console.log('Data exported successfully!');
+        alert('Data exported successfully to collection: ' + collectionName);
     } catch (error) {
-        console.error('Error uploading data:', error);
-        alert('Error uploading data: ' + error.message);
+        console.error('Error exporting data:', error);
+        alert('Error exporting data: ' + error.message);
     }
 }
+
 
 // Function to display data in the table (no changes needed here)
 function displayData(data) {
@@ -110,7 +112,8 @@ function displayData(data) {
         tbody.appendChild(row);
     });
 }
-// Function to save changes to Firebase.  Make sure this uses a ref based on user input
+
+// Function to save changes to Firebase.
 async function saveChanges() {
     // Get the data from table.  Same as before.
     const table = document.getElementById('data-table');
@@ -192,7 +195,7 @@ async function deleteRow(rowIndex) {
   }
 }
 
-// Function to sort table by column
+// Function to sort table by column.
 function sortTable(event) {
     const header = event.target.getAttribute('data-key');
     const isAscending = !event.target.classList.contains('sorted-desc');
@@ -222,6 +225,8 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
     }
 });
 
+// Add event listener for the NEW Export button.
+document.getElementById('export-button').addEventListener('click', exportDataToFirebase);
 document.getElementById('save-button').addEventListener('click', saveChanges);
 
 // Initial data load from Firebase.  We need a way to load data from a SPECIFIC collection.
@@ -254,4 +259,5 @@ function loadData() {
 }
 
 // Call loadData() when the page loads, to prompt for a collection.
-loadData();
+// loadData(); // Usuwamy to stad i dodajemy przycisk.
+document.getElementById('load-button').addEventListener('click', loadData);
