@@ -354,7 +354,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         event.target.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
     }
-
     //Dodanie obslugi usuwania kolekcji  (Linie 362-389)
     async function deleteCollection() {
         if (!currentCollection) {
@@ -391,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Event Listeners ---
-    //Obsluga load data button
+    //Obsluga load data button  (Linie 391-431)
     document.getElementById('load-button').addEventListener('click', async () => {
         const collectionName = document.getElementById('collectionSelect').value;
         if (!collectionName) {
@@ -400,4 +399,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         currentCollection = collectionName;
 
-        const dbRef = ref(database, collection
+        const dbRef = ref(database, collectionName);
+        try {
+            const snapshot = await get(dbRef); // Użyj get() do jednorazowego odczytu
+            if (snapshot.exists()) {
+                currentData = snapshot.val();
+                // Znajdź aktywny kafelek
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if (activeTile) {
+                    displayData(currentData, activeTile); // Wyświetl dane w aktywnym
+                    // Ustaw nazwę kolekcji i datę w aktywnym kafelku
+                    activeTile.querySelector('.collection-name').textContent = collectionName;
+                    activeTile.querySelector('.import-date').textContent = "";
+
+                }
+
+            } else {
+                console.log(`No data found in collection: ${collectionName}`);
+                alert(`No data found in collection: ${collectionName}`);
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if (activeTile) {
+                    displayData([], activeTile); // Pusta tabela
+                    activeTile.querySelector('.collection-name').textContent = '';
+                    activeTile.querySelector('.import-date').textContent = '';
+                }
+
+            }
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+            alert("Error fetching data: " + error.message);
+        }
+    });
+
+    // Event listener dla przycisku "Save Changes" (Linie 433-434)
+    document.getElementById('save-button').addEventListener('click', saveChanges);
+
+    // Event listener dla przycisku "Export Data" (Linie 436-449)
+    document.getElementById('export-button').addEventListener('click', () => {
+        const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+        if (activeTile) { // Sprawdz czy jest aktywny
+            if (currentData.length > 0) { // I czy sa dane.
+                //  exportDataToFirebase(); // Jesli tak to eksportuj.  Zakomentowane, bo nie ma tej funkcji zdefiniowanej!
+                alert("Exporting data is not yet implemented."); // Dodaj tymczasowy alert.  Zmień to, gdy dodasz funkcję eksportu.
+            } else {
+                alert("No data to export. Please load or import data first.");
+            }
+        } else {
+            alert("No active tile. Please select a report type from the sidebar.");
+        }
+
+    });
+
+    document.getElementById('delete-collection-button').addEventListener('click', deleteCollection);
+
+    // Dodaj obsługę zdarzenia dla linku "Show More/Less" (Linie 453)
+    document.getElementById('toggle-table').addEventListener('click', toggleTable); //KLUCZOWE!
+
+    //Poczatkowe zaladowanie kolekcji.  --  NIE, robimy to przez przycisk "Load Data"
+    // populateCollectionSelect();  // NIE tutaj.  Robimy to w DOMContentLoaded.
+
+
+}); // Koniec DOMContentLoaded
+
+
+// Funkcja do uploadu (używana w handleFileUpload) - JEST OK (Linie 462-472)
+async function uploadDataToFirebase(data, dbRef) {
+    try {
+        await set(dbRef, data); // Użyj set()
+        console.log('Data uploaded successfully!');
+        // alert('Data uploaded successfully!'); // Nie alertuj tutaj, bo to jest część handleFileUpload
+    } catch (error) {
+        console.error('Error uploading data:', error);
+        alert('Error uploading data: ' + error.message);
+    }
+}
