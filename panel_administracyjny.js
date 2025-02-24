@@ -357,8 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Dodanie obslugi usuwania kolekcji
     async function deleteCollection() {
-        if (!
-	    // Linie 368- (do końca)
+        if (!currentCollection) {  // Poprawiony warunek!  Sprawdź, czy kolekcja jest wybrana.
             alert("No collection selected to delete.");
             return;
         }
