@@ -7,14 +7,7 @@
     <title>Panel Administracyjny</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="panel_administracyjny.css">  <style>
-        /* Dodatkowe style (mogą być przeniesione do raporty-1.css) */
-        #data-table-container {
-            overflow-x: auto;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="panel_administracyjny.css">  </head>
 
 <body>
     <div class="top-bar"></div>
@@ -50,8 +43,10 @@
 
     <div class="wrapper">
         <div class="sidebar">
-            <a href="#" class="active">SPRZEDAŻ PO PRODUCENTACH</a> <a href="#">RABATY KLIENTÓW</a> <a
-                href="#">TOP 305 INDEKSÓW</a> </div>
+            <a href="#" class="active">SPRZEDAŻ PO PRODUCENTACH</a>
+            <a href="#">RABATY KLIENTÓW</a>
+            <a href="#">TOP 305 INDEKSÓW</a>
+        </div>
         <div class="content">
             <div class="container">
                 <h2>Firebase Data Management</h2>
@@ -74,7 +69,7 @@
                 </div>
 
                 <div class="button-container">
-                    <button onclick="saveChanges()" class="btn btn-success">Save changes</button>
+                    <button id="save-button" class="btn btn-success">Save changes</button>
                 </div>
             </div>
         </div>
@@ -83,12 +78,11 @@
     <div class="footer">
         Strona stworzona przez MSZCorporation </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script type="module" src="panel_administracyjny.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="panel_administracyjny.js"></script>  </body>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
 </html>
