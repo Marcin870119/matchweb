@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administracyjny</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="raporty-1.css">  <style>
+        /* Dodatkowe style (mogą być przeniesione do raporty-1.css) */
+        #data-table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"
+                    style="height: 30px; margin-right:5px;"> Panel Administracyjny
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            MATCHPRICE </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">NARZĘDZIA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">RAPORTY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="#" class="active">SPRZEDAŻ PO PRODUCENTACH</a> <a href="#">RABATY KLIENTÓW</a> <a
+                href="#">TOP 305 INDEKSÓW</a> </div>
+        <div class="content">
+            <div class="container">
+                <h2>Firebase Data Management</h2>
+
+                <div class="mb-3">
+                    <label for="fileInput" class="form-label">Upload CSV File:</label>
+                    <input type="file" class="form-control" id="fileInput" accept=".csv">
+                    <button class="btn btn-primary mt-2" id="uploadButton">Upload to Firebase</button>
+                </div>
+
+                <div id="data-table-container">
+                    <table class="table table-striped table-bordered" id="data-table">
+                        <thead>
+                            <tr>
+                                </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="button-container">
+                    <button onclick="saveChanges()" class="btn btn-success">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Strona stworzona przez MSZCorporation </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="panel.js"></script>  </body>
+
+</html>
