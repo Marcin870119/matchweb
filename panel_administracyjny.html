@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administracyjny</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="panel_administracyjny.css">
 </head>
-
 <body>
     <div class="top-bar"></div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"
-                    style="height: 30px; margin-right:5px;"> Panel Administracyjny
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo" style="height: 30px; margin-right:5px;"> Panel Administracyjny
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -24,9 +21,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            MATCHPRICE </a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            MATCHPRICE
+                        </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">MATCH JSON</a></li>
                             <li><a class="dropdown-item" href="#">MATCH CSV</a></li>
@@ -49,31 +46,68 @@
             <a href="#">TOP 305 INDEKSÓW</a>
         </div>
         <div class="content">
-            <div class="container">
-                <h2>Firebase Data Management</h2>
-
-                <div class="mb-3">
-                    <label for="fileInput" class="form-label">Upload CSV File:</label>
-                    <input type="file" class="form-control" id="fileInput" accept=".csv">
-                   </div>
-
-                <div id="data-table-container">
-                    <div id="table-wrapper">
-                        <table class="table table-striped table-bordered" id="data-table">
-                            <thead>
-                                <tr>
-                                    </tr>
-                            </thead>
-                            <tbody>
-                                </tbody>
-                        </table>
+            <h2 class="h2">Firebase Data Management</h2>
+            <div class="grid">
+                <div class="column">
+                    <div class="element-item">
+                        <div class="top-section">
+                            <p class="logo logo-small"><img src="https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png" alt="Firebase Logo"></p>
+                            <h3 class="name name-small">Upload CSV 1</h3>
+                        </div>
+                            <p class="subtitle subtitle-small">Wczytaj plik CSV do edycji</p>  <div class="element-content">
+                            <input type="file" class="form-control file-input" id="fileInput1" accept=".csv">
+                            <div class="button-container">
+                                <button id="save-button1" class="button btn-sm">Save Changes</button>
+                                <button id="load-button1" class="button btn-sm">Load Data</button>
+                                <button id="export-button1" class="button btn-sm">Export Data</button>
+                            </div>
+                        </div>
                     </div>
-                     <a href="#" id="toggle-table">Show More</a>  </div>
 
-                <div class="button-container">
-                    <button id="save-button" class="btn btn-success">Save Changes</button>
-                    <button id="load-button" class="btn btn-info">Load Data</button>
-                    <button id="export-button" class="btn btn-warning">Export Data</button> </div>
+                    <div class="element-item">
+                        <p class="logo"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828490.png" alt="Actions Logo"></p>
+                        <h3 class="name">Akcje 1</h3>
+                        <p class="subtitle">Zarządzaj danymi</p>
+                        <div class="element-content">
+                            <input type="file" class="form-control file-input" id="fileInput2" accept=".csv">
+                            <div class="button-container">
+                                <button  class="button btn-sm">Save Changes</button>
+                                <button  class="button btn-sm">Load Data</button>
+                                <button  class="button btn-sm">Export Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                   <div class="element-item">
+                        <p class="logo"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Table Logo"></p>
+                        <h3 class="name">Dane 1</h3>
+                        <p class="subtitle">Podgląd i edycja danych</p>
+                         <div class="element-content">
+                        <input type="file" class="form-control file-input" id="fileInput3" accept=".csv">
+                        <div class="button-container">
+                            <button class="button btn-sm">Save Changes</button>
+                            <button class="button btn-sm">Load Data</button>
+                            <button class="button btn-sm">Export Data</button>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="element-item">
+                        <p class="logo"><img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" alt="Info Logo"></p>
+                        <h3 class="name">Informacje 1</h3>
+                        <p class="subtitle">Dodatkowe opcje</p>
+                         <div class="element-content">
+                            <input type="file" class="form-control file-input" id="fileInput4" accept=".csv">
+                              <div class="button-container">
+                                <button  class="button btn-sm">Save Changes</button>
+                                <button class="button btn-sm">Load Data</button>
+                                <button  class="button btn-sm">Export Data</button>
+                            </div>
+                         </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -88,5 +122,4 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
