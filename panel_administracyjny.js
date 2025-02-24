@@ -17,6 +17,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 let currentData = []; // Store the current data for editing
+let isTableExpanded = false; // Track table expansion state
 
 // Function to handle file upload and parsing.  NO automatic upload.
 function handleFileUpload(file) {
@@ -63,17 +64,21 @@ async function exportDataToFirebase() {
 }
 
 
-// Function to display data in the table (no changes needed here)
+// Function to display data in the table.  Handles showing only a few rows initially.
 function displayData(data) {
     const table = document.getElementById('data-table');
     const thead = table.querySelector('thead tr');
     const tbody = table.querySelector('tbody');
+    const wrapper = document.getElementById('table-wrapper');
 
     thead.innerHTML = '';
     tbody.innerHTML = '';
+    wrapper.innerHTML = ''; // Clear the wrapper
+
 
     if (!data || data.length === 0) {
         tbody.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
+        wrapper.appendChild(table); // Add the table even if it's empty
         return;
     }
 
@@ -90,7 +95,12 @@ function displayData(data) {
     actionsHeader.textContent = 'Actions';
     thead.appendChild(actionsHeader);
 
-    data.forEach((item, rowIndex) => {
+    // Show only a limited number of rows initially.
+    const initialRows = 3;
+    const dataToShow = isTableExpanded ? data : data.slice(0, initialRows);
+
+
+    dataToShow.forEach((item, rowIndex) => {
         const row = document.createElement('tr');
         headers.forEach(header => {
             const cell = document.createElement('td');
@@ -111,6 +121,11 @@ function displayData(data) {
         row.appendChild(actionsCell);
         tbody.appendChild(row);
     });
+
+    wrapper.appendChild(table); // Add the table to the wrapper
+
+    //Update button text based on the current state.
+    document.getElementById('toggle-table').textContent = isTableExpanded ? 'Show Less' : 'Show More';
 }
 
 // Function to save changes to Firebase.
@@ -121,24 +136,31 @@ async function saveChanges() {
     const rows = tbody.querySelectorAll('tr');
     const updatedData = [];
 
-    rows.forEach(row => {
+     // Build updatedData array, checking for actual changes.
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
         const cells = row.querySelectorAll('td');
         const rowData = {};
         let hasData = false;
 
-        cells.forEach(cell => {
+         for (let j = 0; j < cells.length; j++) {
+            const cell = cells[j];
             const header = cell.getAttribute('data-header');
+
             if (header) {
                 rowData[header] = cell.textContent.trim();
                 if (rowData[header] !== '') {
-                    hasData = true;
+                     hasData = true;
                 }
             }
-        });
-        if (hasData) {
-            updatedData.push(rowData);
         }
-    });
+         if (hasData) {
+                // Only add if there's actual content in the row
+                updatedData.push(rowData);
+            }
+
+    }
+
     // Now, we need to ask user to what collection should we save the changes
     let collectionName = prompt("Please enter the name of the collection to save changes:", "Data");
      if (collectionName === null || collectionName.trim() === "") {
@@ -156,7 +178,7 @@ async function saveChanges() {
         await set(dbRef, updatedData);
         console.log('Changes saved successfully!');
         alert('Changes saved successfully!');
-        currentData = updatedData;
+        currentData = updatedData; // Update currentData
     } catch (error) {
         console.error('Error saving changes:', error);
         alert('Error saving changes: ' + error.message);
@@ -179,9 +201,27 @@ async function deleteRow(rowIndex) {
   collectionName = collectionName.trim();
   const dbRef = ref(database, collectionName);
 
+    //Adjust rowIndex for data array, taking "Show More" into account
+     let adjustedRowIndex;
+
+    if(!isTableExpanded) {
+       const tableRows = document.querySelectorAll("#data-table tbody tr");
+       if (rowIndex < tableRows.length) {
+            // If "Show More" is NOT expanded, the displayed row index IS the data index.
+            adjustedRowIndex = rowIndex;
+       }
+    }
+    else{
+        adjustedRowIndex = rowIndex;
+    }
+
+
   if (confirm('Are you sure you want to delete this row?')) {
-    currentData.splice(rowIndex, 1);
-    displayData(currentData);
+     // Check if adjustedRowIndex is valid before splicing
+        if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData.length) {
+        currentData.splice(adjustedRowIndex, 1); // Remove from local data
+        displayData(currentData);     // Update the table display
+        }
     //  Save changes *after* deleting locally, and to the correct collection.
     try {
         await set(dbRef, currentData); // Use set with the modified data
@@ -215,6 +255,11 @@ function sortTable(event) {
      displayData(currentData);
     event.target.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
 }
+// Function to toggle table expansion
+function toggleTable() {
+    isTableExpanded = !isTableExpanded;  // Toggle the state
+    displayData(currentData); // Re-display the table
+}
 
 
 // Event Listeners
@@ -228,6 +273,8 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
 // Add event listener for the NEW Export button.
 document.getElementById('export-button').addEventListener('click', exportDataToFirebase);
 document.getElementById('save-button').addEventListener('click', saveChanges);
+document.getElementById('toggle-table').addEventListener('click', toggleTable);
+
 
 // Initial data load from Firebase.  We need a way to load data from a SPECIFIC collection.
 function loadData() {
@@ -259,5 +306,5 @@ function loadData() {
 }
 
 // Call loadData() when the page loads, to prompt for a collection.
-// loadData(); // Usuwamy to stad i dodajemy przycisk.
+
 document.getElementById('load-button').addEventListener('click', loadData);
