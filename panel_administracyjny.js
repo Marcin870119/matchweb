@@ -83,6 +83,7 @@ function getCollectionName(defaultName = "Data", action = "perform this action")
     }
     return collectionName.trim();
 }
+
 // --- Data Handling Functions ---
 
 function handleFileUpload(file, inputId) {
@@ -123,7 +124,7 @@ function displayData(data, tableId) {
 
     thead.innerHTML = '';
     tbody.innerHTML = '';
-    // wrapper.innerHTML = ''; // Don't clear entire wrapper, just the table inside!
+  // wrapper.innerHTML = ''; // Don't clear entire wrapper, just the table inside!
 
 
     if (!data || data.length === 0) {
@@ -178,10 +179,22 @@ function displayData(data, tableId) {
 
     // Update "Show More/Less" button text, if it exists.
     const toggleButton = document.getElementById(tableId.replace('data-table', 'toggle-table')); // Correct ID
-    if (toggleButton) {
+    if (toggleButton) {  // *Check if the button exists*
         toggleButton.textContent = expanded ? 'Show Less' : 'Show More';
     }
 }
+
+
+
+//Modyfikujemy toggleTable
+function toggleTable(tableId) {
+  // Pobierz ID fileInput na podstawie ID tabeli
+  const fileInputId = tableId.replace('data-table', 'fileInput');
+    isTableExpanded[fileInputId] = !isTableExpanded[fileInputId]; // Zmień stan dla *konkretnej* tabeli
+    displayData(currentData[fileInputId], tableId); // Wyświetl ponownie *konkretną* tabelę
+
+}
+
 
 
 
@@ -232,14 +245,15 @@ async function deleteRow(rowIndex, tableId) {
 
     // Calculate adjustedRowIndex based on whether *this specific table* is expanded.
     let adjustedRowIndex;
-    if (!isTableExpanded[fileInputId]) { // Use the correct isTableExpanded value
-        const tableRows = document.querySelectorAll(`#${tableId} tbody tr`); // Select rows from *this* table
+     if(!isTableExpanded[fileInputId]) { //Poprawka
+        const tableRows = document.querySelectorAll(`#${tableId} tbody tr`); //Poprawka
         if (rowIndex < tableRows.length) {
             adjustedRowIndex = rowIndex;
         }
-    } else {
-        adjustedRowIndex = rowIndex;
-    }
+      }
+      else{
+           adjustedRowIndex = rowIndex;
+      }
 
 
     if (confirm('Are you sure you want to delete this row?')) {
@@ -266,7 +280,7 @@ async function deleteRow(rowIndex, tableId) {
 function sortTable(header, tableId) {
     const fileInputId = tableId.replace('data-table', 'fileInput'); // Get corresponding fileInputId
 
-    const isAscending = !document.querySelector(`#${tableId} th[data-key="${header}"]`).classList.contains('sorted-desc');
+    const isAscending = !document.querySelector(`#<span class="math-inline">\{tableId\} th\[data\-key\="</span>{header}"]`).classList.contains('sorted-desc');
 
     const headers = document.querySelectorAll(`#${tableId} th`); // Select headers from *this* table
     headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
@@ -281,15 +295,11 @@ function sortTable(header, tableId) {
     });
 
     displayData(currentData[fileInputId], tableId); // Display *this* table
-    document.querySelector(`#${tableId} th[data-key="${header}"]`).classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
+     document.querySelector(`#<span class="math-inline">\{tableId\} th\[data\-key\="</span>{header}"]`).classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
+
 }
 
-// Function to toggle table expansion.  Needs tableId.
-function toggleTable(tableId) {
-    const fileInputId = tableId.replace('data-table', 'fileInput'); // Get corresponding fileInputId
-    isTableExpanded[fileInputId] = !isTableExpanded[fileInputId]; // Toggle *this* table's state
-    displayData(currentData[fileInputId], tableId);  // Re-display *this* table.
-}
+
 
 
 async function exportDataToFirebase() {
@@ -360,6 +370,10 @@ function loadData() {
         alert("Error fetching data: " + error.message);
     });
 }
+
+
+
+
 // --- Event Listeners ---
 
 // Generic function to attach file input listeners
@@ -375,27 +389,4 @@ function attachFileInputListener(inputId) {
 attachFileInputListener('fileInput1');
 attachFileInputListener('fileInput2');
 attachFileInputListener('fileInput3');
-attachFileInputListener('fileInput4');
-
-
-// Event listeners for buttons (using named functions for clarity)
-document.getElementById('export-button1').addEventListener('click', exportDataToFirebase);
-document.getElementById('save-button1').addEventListener('click', saveChanges);
-document.getElementById('load-button1').addEventListener('click', loadData);
-//document.getElementById('toggle-table1').addEventListener('click', () => toggleTable('data-table1')); //Removed, now added dynamically
-
-document.getElementById('export-button2').addEventListener('click', exportDataToFirebase);
-document.getElementById('save-button2').addEventListener('click', saveChanges);
-document.getElementById('load-button2').addEventListener('click', loadData);
-//document.getElementById('toggle-table2').addEventListener('click', () => toggleTable('data-table2'));//Removed, now added dynamically
-
-document.getElementById('export-button3').addEventListener('click', exportDataToFirebase);
-document.getElementById('save-button3').addEventListener('click', saveChanges);
-document.getElementById('load-button3').addEventListener('click', loadData);
-
-document.getElementById('export-button4').addEventListener('click', exportDataToFirebase);
-document.getElementById('save-button4').addEventListener('click', saveChanges);
-document.getElementById('load-button4').addEventListener('click', loadData);
-// --- Initial Setup ---
-
-//
+attachFileInputListener('fileInput
