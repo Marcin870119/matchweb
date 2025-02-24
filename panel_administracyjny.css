@@ -116,28 +116,37 @@ h2 {
   margin-bottom: 1rem !important; /* Zmniejsz przestrzeń pod formularzem */
 }
  #data-table-container {
-        /*  flex: 1;  Usunięto flex: 1;  */
-        overflow: hidden;  /* Initially hide the full table */
-        position: relative; /* Added for absolute positioning of button */
+        overflow: hidden;
+        position: relative;
     }
 
     #table-wrapper {
-        max-height: 200px;  /* Set initial max height */
-        overflow: auto;     /* Enable scrolling */
-        margin-bottom: 10px; /* Space for the button */
-    }
-    #data-table {
-        width: 100%; /* Ensure table takes full width of container */
+        max-height: 200px; /* Początkowa maksymalna wysokość */
+        overflow: auto;    /* Włącz przewijanie */
+        margin-bottom: 10px;
     }
 
-    /* Button positioning */
-    #toggle-table{
-        margin-top: 5px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-
+     #data-table {
+        width: 100%;
+        font-size: 0.9em; /* Mniejsza czcionka w tabeli */
     }
+
+
+    /* Style dla linku "Show More" */
+    #toggle-table {
+        color: #007bff; /* Niebieski kolor linku */
+        text-decoration: none; /* Usuń podkreślenie */
+        cursor: pointer;
+        display: block; /* Blokowy element, aby zajął całą szerokość */
+        text-align: center; /* Wyśrodkowanie tekstu */
+        margin-top: 5px; /* Odstęp od tabeli */
+        font-size: 0.8em; /* Mniejsza czcionka */
+    }
+
+    #toggle-table:hover {
+        text-decoration: underline; /* Podkreślenie przy najechaniu */
+    }
+
 
 .tile {
     padding: 10px;
@@ -319,28 +328,31 @@ h2 {
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 0.2rem;
-}
 
-.btn-warning {
-    color: #212529;
+}
+.btn-warning{
+     color: #212529;
     background-color: #ffc107;
     border-color: #ffc107;
 }
 .btn-warning:hover{
-     color: #212529;
+    color: #212529;
     background-color: #e0a800;
     border-color: #d39e00;
 }
-.btn-secondary{
+
+.btn-secondary {
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
 }
-.btn-secondary:hover{
+
+.btn-secondary:hover {
     color: #fff;
     background-color: #5a6268;
     border-color: #545b62;
 }
+
 
 .button-container {
     display: flex;
