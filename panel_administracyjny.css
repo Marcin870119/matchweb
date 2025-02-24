@@ -1,7 +1,7 @@
 /* Ogólne style */
 body {
     font-family: 'Lato', sans-serif;
-    background-color: #f8f9fa; /* Bardzo jasny szary (prawie biały) */
+    background-color: #f8f9fa;  /* Bardzo jasny szary (prawie biały) */
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@ body {
     align-items: center;
     font-size: 16px;
     font-weight: bold;
-    color: white; /* Biały tekst */
+    color: white;  /* Biały tekst */
 }
 
 .navbar-brand img {
@@ -47,28 +47,29 @@ body {
 }
 
 .dropdown-menu a:hover {
-    background-color: #212529; /* Ciemniejszy szary dla dropdown */
+    background-color: #212529;  /* Ciemniejszy szary dla dropdown */
     color: white;
 }
 
 .wrapper {
     display: flex;
     flex: 1;
-    min-height: 100vh;
+    min-height: calc(100vh - 55px); /* Dostosowanie wysokości */
 }
 
 .sidebar {
     width: 180px;
-    background-color: #2C3E50; /* Oryginalny ciemny niebieski */
+    background-color: #2C3E50;  /* Ciemny niebieski */
     padding: 15px;
     position: sticky;
-    top: 0;
-    height: 100vh;
+    top: 55px;  /* Dostosowanie do wysokości navbar */
+    height: calc(100vh - 55px);   /* Dostosowanie wysokości */
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;  /* Dodanie scrolla, gdy zawartość się nie mieści */
 }
 
 .sidebar a {
-    color: #ECF0F1;  /* Oryginalny jasny kolor dla linków */
+    color: #ECF0F1;  /* Jasny kolor dla linków */
     text-decoration: none;
     display: block;
     padding: 6px 10px;
@@ -80,14 +81,14 @@ body {
 }
 
 .sidebar a:hover {
-    background-color: #1ABC9C; /* Oryginalny  przy hover */
-    color: white;
-}
-.sidebar a.active {
-    background-color: #16A085; /* Oryginalny  dla aktywnego */
+    background-color: #1ABC9C; /* Zielony przy hover */
     color: white;
 }
 
+.sidebar a.active {
+    background-color: #16A085; /* Ciemniejszy zielony dla aktywnego */
+    color: white;
+}
 
 .content {
     flex: 1;
@@ -96,22 +97,40 @@ body {
     flex-direction: column;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Dodanie scrolla dla zawartości */
 }
 
 .container {
-    margin-top: 20px;
+    margin-top: 0;  /* Usunięto margines, aby kontener przylegał do góry */
     flex: 1;
+    display: flex;  /* Używamy flexbox, aby zawartość rozciągała się */
+    flex-direction: column;  /* Elementy ułożone w kolumnę */
+}
+
+h2 {
+    margin-top: 0;  /* Usuń margines z góry */
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;  /* Zmniejsz przestrzeń pod formularzem */
+}
+
+#data-table-container {
+    flex: 1;  /* Pozwól kontenerowi tabeli zająć dostępną przestrzeń */
+    overflow-x: auto;
+    overflow-y: auto;  /* Dodanie scrolla dla tabeli */
+    margin-bottom: 1rem;
 }
 
 .tile {
-   padding: 10px;
+    padding: 10px;
     font-size: 16px;
     font-weight: bold;
     border-radius: 10px;
     text-align: center;
-    background-color: #f8f9fa;  /* Bardzo jasny szary */
+    background-color: #f8f9fa;
     border: 1px solid #dee2e6;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Delikatniejszy cień */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     color: #495057;
     margin-bottom: 20px;
     width: 100%;
@@ -125,7 +144,7 @@ body {
 .tile:hover {
     background-color: #e9ecef;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tile img {
@@ -137,7 +156,7 @@ body {
     background: white;
     padding: 10px;
     border-radius: 10px;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Delikatniejszy cień */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     margin-top: 20px;
 }
 
@@ -157,7 +176,7 @@ body {
 }
 
 .footer {
-     background-color: #343a40;  /* Możesz zostawić ciemny */
+    background-color: #343a40;
     color: white;
     text-align: center;
     padding: 10px 0;
@@ -165,8 +184,9 @@ body {
     bottom: 0;
     width: 100%;
     font-size: 12px;
-    margin-top: 20px;
+    margin-top: auto; /* Kluczowa zmiana: Przesuwa footer na dół */
 }
+
 
 .spacer {
     height: 20px;
@@ -177,120 +197,133 @@ body {
     background: white;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Bardzo delikatny cień */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
     position: relative;
     margin-top: 20px;
 }
 
-/* Style Handsontable */
-.handsontable {
-    font-family: sans-serif;
-    font-size: 13px;
+/* Style dla tabeli (możesz dostosować) */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse; /* Ważne dla spójnego wyglądu */
 }
 
-/* Nagłówki kolumn - Zmieniono na BARDZO jasny szary */
-.handsontable th {
-    background-color: #f8f9fa;  /* Bardzo jasny szary (prawie biały) */
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid #dee2e6; /* Delikatna linia */
-    color: #495057;
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
 }
 
-/* Komórki - białe tło */
-.handsontable td {
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #e9ecef; /* Jasnoszary nagłówek */
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05); /* Delikatne prążkowanie */
+}
+
+.table-bordered th,
+.table-bordered td {
     border: 1px solid #dee2e6;
-    padding: 6px;
-    vertical-align: middle;
-    background-color: white; /* Białe tło */
 }
 
-/* Wiersze parzyste -  białe. */
-.handsontable tr:nth-child(even) td {
-     background-color: white;  /* Białe */
+/* Przyciski */
+.btn {
+    padding: 0.375rem 0.75rem; /* Standardowe paddingi Bootstrap */
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    cursor: pointer; /* Zmień kursor na łapkę */
+    text-align: center; /* Wyśrodkuj tekst */
+    white-space: nowrap; /* Zapobiegaj zawijaniu tekstu */
+    display: inline-block; /* Aby paddingi i marginesy działały poprawnie */
 }
 
-/* Wiersz nagłówka -  Zmieniono na delikatny szary */
-.handsontable thead tr:first-child th {
-    background-color: #ced4da; /* Delikatny szary */
-    color: #495057; /* Ciemnoszary tekst */
-     border-bottom: 1px solid #adb5bd; /* Ciemniejszy szary */
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
-/* Komórki z liczbami */
-.htNumeric {
-   text-align: right;
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
 }
 
-.negative {
-    color: #dc3545;
-    font-weight: bold;
-}
-
-.positive {
-    color: #28a745;
-    font-weight: bold;
-}
-
-.report-label {
-    margin-right: 10px;
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: uppercase;
-    color: #343a40;
-}
-
-#reportsContainer select {
-   font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #495057;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 8px 16px;
-    border: 1px solid #ced4da;
-    border-radius: 20px;
-    background-color: white;
-    cursor: pointer;
-    transition:  border-color 0.3s ease, box-shadow 0.3s ease;
-     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Delikatny cień */
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-     background-image: url('data:image/svg+xml;utf8,<svg fill="%23343a40" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-    background-repeat: no-repeat;
-    background-position-x: 95%;
-    background-position-y: 50%;
-    padding-right: 30px;
-}
-
-#reportsContainer select:hover {
-   border-color: #adb5bd;  /* Nieco ciemniejszy */
-}
-
-#reportsContainer select:focus {
-    outline: none;
-    border-color: #adb5bd;
-     box-shadow: 0 0 0 0.2rem rgba(173, 181, 189, 0.25);  /* Delikatny cień */
-}
-
-/* Dodatkowe style dla lepszego wyglądu */
-.handsontable .ht_clone_top { /* Nagłówek przy przewijaniu */
-    background-color: white; /* Białe tło */
-}
-
-/* Przycisk "Zapisz do Excel" */
 .btn-success {
+    color: #fff;
     background-color: #28a745;
     border-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn-success:hover {
+    color: #fff;
     background-color: #218838;
     border-color: #1e7e34;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 1rem; /* Dodaj margines nad przyciskami */
+}
+
+/* Style dla input file (ukrycie brzydkiego przycisku) */
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-label{
+    font-weight: bold;
 }
