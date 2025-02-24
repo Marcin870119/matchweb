@@ -1,6 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"; // Użyj najnowszej wersji
-import { getDatabase, ref, set, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"; // Użyj najnowszej wersji
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 // Firebase configuration (Replace with your project's config)
 const firebaseConfig = {
@@ -16,53 +15,67 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const dbRef = ref(database, 'myData'); //  'myData' is the "collection" name
 
 let currentData = []; // Store the current data for editing
 
 // Function to handle file upload and parsing
 function handleFileUpload(file) {
+    // Ask for the collection name using a dialog box.
+    let collectionName = prompt("Please enter a name for this data collection:", "Data");
+
+    // Validate the collection name.  It CANNOT be empty, and must be a valid Firebase path.
+    if (collectionName === null || collectionName.trim() === "") {
+        alert("Collection name cannot be empty.  Upload cancelled.");
+        return; // Stop the upload process.
+    }
+    // Check for invalid characters.  Firebase paths cannot contain . $ [ ] # /
+    if (/[.$[\]#/]/.test(collectionName)) {
+        alert("Collection name contains invalid characters (. $ [ ] # /). Upload cancelled.");
+        return;
+    }
+    collectionName = collectionName.trim(); // Remove leading/trailing spaces.
+
     Papa.parse(file, {
         header: true,
         dynamicTyping: true,
         complete: function (results) {
             currentData = results.data;
             displayData(currentData);
-            uploadDataToFirebase(currentData);
+            uploadDataToFirebase(currentData, collectionName); // Pass the collection name
         }
     });
 }
 
 
+
 // Function to upload data to Firebase
-async function uploadDataToFirebase(data) {
+async function uploadDataToFirebase(data, collectionName) {
+    const dbRef = ref(database, collectionName); // Use the provided name.
     try {
         await set(dbRef, data);
         console.log('Data uploaded successfully!');
-        alert('Data uploaded successfully!');
+        alert('Data uploaded successfully to collection: ' + collectionName);
     } catch (error) {
         console.error('Error uploading data:', error);
         alert('Error uploading data: ' + error.message);
     }
 }
 
-// Function to display data in the table
+// Function to display data in the table (no changes needed here)
 function displayData(data) {
     const table = document.getElementById('data-table');
     const thead = table.querySelector('thead tr');
     const tbody = table.querySelector('tbody');
 
-    thead.innerHTML = ''; // Clear existing headers
-    tbody.innerHTML = ''; // Clear existing rows
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
 
-    if (!data || data.length === 0) { //Poprawiony warunek dla pustej tablicy
+    if (!data || data.length === 0) {
         tbody.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
         return;
     }
 
-     // Create table headers
-    const headers = Object.keys(data[0]); // Weź klucze z pierwszego obiektu
-
+    const headers = Object.keys(data[0]);
     headers.forEach(header => {
         const th = document.createElement('th');
         th.textContent = header;
@@ -79,15 +92,13 @@ function displayData(data) {
         const row = document.createElement('tr');
         headers.forEach(header => {
             const cell = document.createElement('td');
-			// Handle null/undefined values correctly.
-			cell.textContent = item[header] !== null && item[header] !== undefined ? item[header] : '';
+            cell.textContent = item[header] !== null && item[header] !== undefined ? item[header] : '';
             cell.setAttribute('data-header', header);
             cell.setAttribute('data-row', rowIndex);
             cell.contentEditable = true;
             row.appendChild(cell);
         });
 
-        // Add delete button
         const actionsCell = document.createElement('td');
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
@@ -99,9 +110,9 @@ function displayData(data) {
         tbody.appendChild(row);
     });
 }
-
-// Function to save changes to Firebase
+// Function to save changes to Firebase.  Make sure this uses a ref based on user input
 async function saveChanges() {
+    // Get the data from table.  Same as before.
     const table = document.getElementById('data-table');
     const tbody = table.querySelector('tbody');
     const rows = tbody.querySelectorAll('tr');
@@ -110,27 +121,39 @@ async function saveChanges() {
     rows.forEach(row => {
         const cells = row.querySelectorAll('td');
         const rowData = {};
-		let hasData = false;
+        let hasData = false;
 
         cells.forEach(cell => {
             const header = cell.getAttribute('data-header');
-             if (header) {
+            if (header) {
                 rowData[header] = cell.textContent.trim();
-				 if (rowData[header] !== '') {
+                if (rowData[header] !== '') {
                     hasData = true;
                 }
             }
         });
-		if(hasData){
-			updatedData.push(rowData);
-		}
+        if (hasData) {
+            updatedData.push(rowData);
+        }
     });
+    // Now, we need to ask user to what collection should we save the changes
+    let collectionName = prompt("Please enter the name of the collection to save changes:", "Data");
+     if (collectionName === null || collectionName.trim() === "") {
+        alert("Collection name cannot be empty.  Save cancelled.");
+        return; // Stop the upload process.
+    }
+    // Check for invalid characters.  Firebase paths cannot contain . $ [ ] # /
+    if (/[.$[\]#/]/.test(collectionName)) {
+        alert("Collection name contains invalid characters (. $ [ ] # /). Save cancelled.");
+        return;
+    }
+    const dbRef = ref(database, collectionName); // Use dynamic name
 
     try {
-        await set(dbRef, updatedData); // Use set() to overwrite data
+        await set(dbRef, updatedData);
         console.log('Changes saved successfully!');
         alert('Changes saved successfully!');
-        currentData = updatedData; // Update currentData
+        currentData = updatedData;
     } catch (error) {
         console.error('Error saving changes:', error);
         alert('Error saving changes: ' + error.message);
@@ -139,19 +162,41 @@ async function saveChanges() {
 
 // Function to delete a row
 async function deleteRow(rowIndex) {
-    if (confirm('Are you sure you want to delete this row?')) {
-        currentData.splice(rowIndex, 1); // Remove from local data
-        displayData(currentData);     // Update the table display
-        await saveChanges();        // Save changes to Firebase
+  // Get the collection name *before* deleting the row locally.
+  let collectionName = prompt("Please enter the collection name to delete from:", "Data");
+
+  if (collectionName === null || collectionName.trim() === "") {
+    alert("Collection name cannot be empty. Delete operation cancelled.");
+    return;
+  }
+  if (/[.$[\]#/]/.test(collectionName)) {
+        alert("Collection name contains invalid characters (. $ [ ] # /). Delete cancelled.");
+        return;
     }
+  collectionName = collectionName.trim();
+  const dbRef = ref(database, collectionName);
+
+  if (confirm('Are you sure you want to delete this row?')) {
+    currentData.splice(rowIndex, 1);
+    displayData(currentData);
+    //  Save changes *after* deleting locally, and to the correct collection.
+    try {
+        await set(dbRef, currentData); // Use set with the modified data
+        console.log('Row deleted successfully!');
+        alert('Row deleted successfully!');
+      } catch (error) {
+        console.error('Error deleting row:', error);
+        alert('Error deleting row: ' + error.message);
+      }
+
+  }
 }
 
-// Function to sort table by column.
+// Function to sort table by column
 function sortTable(event) {
     const header = event.target.getAttribute('data-key');
     const isAscending = !event.target.classList.contains('sorted-desc');
 
-    // Clear previous sort classes
     const headers = document.querySelectorAll('#data-table th');
     headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
 
@@ -179,16 +224,34 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
 
 document.getElementById('save-button').addEventListener('click', saveChanges);
 
-// Initial data load from Firebase (on page load)
-onValue(dbRef, (snapshot) => {
-    if (snapshot.exists()) {
-        currentData = snapshot.val();
-        displayData(currentData);
-    } else {
-        console.log('No data found in Firebase.');
-        displayData([]); // Display an empty table
+// Initial data load from Firebase.  We need a way to load data from a SPECIFIC collection.
+function loadData() {
+    let collectionName = prompt("Please enter the collection name to load:", "Data");
+
+    if (collectionName === null || collectionName.trim() === "") {
+        alert("Collection name cannot be empty. Load operation cancelled.");
+        return;
     }
-}, (error) => { // Add error handling
-    console.error("Error fetching data: ", error);
-    alert("Error fetching data: " + error.message);
-});
+      if (/[.$[\]#/]/.test(collectionName)) {
+        alert("Collection name contains invalid characters (. $ [ ] # /). Load cancelled.");
+        return;
+    }
+     collectionName = collectionName.trim();
+    const dbRef = ref(database, collectionName);
+
+    onValue(dbRef, (snapshot) => {
+        if (snapshot.exists()) {
+            currentData = snapshot.val();
+            displayData(currentData);
+        } else {
+            console.log(`No data found in collection: ${collectionName}`);
+            displayData([]); // Display an empty table
+        }
+    }, (error) => {
+        console.error("Error fetching data: ", error);
+        alert("Error fetching data: " + error.message);
+    });
+}
+
+// Call loadData() when the page loads, to prompt for a collection.
+loadData();
