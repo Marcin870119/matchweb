@@ -3,13 +3,13 @@ import { getDatabase, ref, set, onValue, remove, update, get } from "https://www
 
 // Firebase configuration (Replace with your project's config)
 const firebaseConfig = {
-    apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
-    authDomain: "webmatcher-94f0e.firebaseapp.com",
-    databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "webmatcher-94f0e",
-    storageBucket: "webmatcher-94f0e.firebasestorage.app",
-    messagingSenderId: "970664630623",
-    appId: "G-RMMBEY655B"
+    apiKey: "xxxx,
+    authDomain: "xxxx",
+    databaseURL: "xxxxe.app",
+    projectId: "xxxxe",
+    storageBucket: "webxxxxxge.app",
+    messagingSenderId: "9xxxxx3",
+    appId: "Gxxxxxx5B"
 };
 
 // Initialize Firebase
