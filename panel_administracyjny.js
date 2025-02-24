@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-// Firebase configuration (REPLACE WITH YOUR ACTUAL CONFIGURATION)
+
+// Firebase configuration (Replace with your project's config)
 const firebaseConfig = {
     apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
     authDomain: "webmatcher-94f0e.firebaseapp.com",
@@ -16,377 +17,411 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Store current data for *each* table.  This is an OBJECT, not an array.
-const currentData = {
-    'fileInput1': [],
-    'fileInput2': [],
-    'fileInput3': [],
-    'fileInput4': []
-};
+let currentData = []; // Store the current data
+let isTableExpanded = false; // Track table expansion state
+let currentCollection = ""; // Zmienna do przechowywania aktualnie wybranej kolekcji
 
-// Track table expansion state for *each* table.  Also an OBJECT.
-const isTableExpanded = {
-    'fileInput1': false,
-    'fileInput2': false,
-    'fileInput3': false,
-    'fileInput4': false
-};
+document.addEventListener('DOMContentLoaded', () => {
 
-// --- Helper Functions ---
+    // --- Obsługa menu bocznego ---
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+            event.preventDefault(); // Zapobiegaj domyślnej akcji linku
 
-// Utility function to validate collection names.
-function isValidCollectionName(name) {
-    if (!name || name.trim() === "") {
-        alert("Collection name cannot be empty.");
-        return false;
-    }
-    if (/[.$[\]#/]/.test(name)) {
-        alert("Collection name contains invalid characters (. $ [ ] # /).");
-        return false;
-    }
-    return true;
-}
+            // Usuń klasę 'active' ze wszystkich elementów menu
+            menuItems.forEach(i => i.classList.remove('active'));
+            // Dodaj klasę 'active' do klikniętego elementu
+            event.target.classList.add('active');
 
-// Utility function to get data from the table.  Now takes tableId as argument.
-function getDataFromTable(tableId) {
-    const table = document.getElementById(tableId);
-    const rows = table.querySelectorAll('tbody tr');
-    const updatedData = [];
+            // Pobierz ID klikniętego elementu i utwórz ID kafelka
+            const itemId = event.target.id;
+            const tileId = itemId + '-tile';
 
-    for (const row of rows) {
-        const cells = row.querySelectorAll('td');
-        const rowData = {};
-        let hasData = false;
-
-        for (const cell of cells) {
-            const header = cell.getAttribute('data-header');
-            if (header) {
-                const cellValue = cell.textContent.trim();
-                rowData[header] = cellValue;
-                if (cellValue !== "") {
-                    hasData = true;
-                }
-            }
-        }
-        if (hasData) {
-            updatedData.push(rowData);
-        }
-    }
-    return updatedData;
-}
-
-// Function to show prompt for collection name, with default and validation.
-function getCollectionName(defaultName = "Data", action = "perform this action") {
-    const collectionName = prompt(`Please enter the collection name to ${action}:`, defaultName);
-    if (!isValidCollectionName(collectionName)) {
-        return null; // Return null if invalid or cancelled.
-    }
-    return collectionName.trim();
-}
-
-// --- Data Handling Functions ---
-
-function handleFileUpload(file, inputId) {
-    Papa.parse(file, {
-        header: true,
-        dynamicTyping: true,
-        skipEmptyLines: 'greedy', // Skip completely empty lines
-        complete: function (results) {
-            if (results.errors.length > 0) {
-                console.error("Error parsing CSV:", results.errors);
-                alert("Error parsing CSV file. See console for details.");
-                return;
-            }
-
-            // Filter out empty rows
-            const filteredData = results.data.filter(row => {
-                return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
+            // Pokaż/ukryj kafelki
+            const tiles = document.querySelectorAll('.tile');
+            tiles.forEach(tile => {
+                tile.style.display = 'none'; // Ukryj wszystkie
             });
 
-            // Store data in the correct part of currentData
-            currentData[inputId] = filteredData;
-
-            // Display data in the appropriate table
-            const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
-            displayData(filteredData, tableId);
-        }
+            const targetTile = document.getElementById(tileId);
+            if (targetTile) {
+                targetTile.style.display = 'flex'; // Pokaż wybrany, użyj 'flex'
+                 // Nie ładuj danych automatycznie po zmianie kafelka - użytkownik musi kliknąć "Load Data"
+            }
+        });
     });
-}
+    // Domyślnie pokaż pierwszy kafelek
+    document.querySelector('.menu-item').click();
 
 
+    // --- Funkcje pomocnicze ---
 
-function displayData(data, tableId) {
-    const table = document.getElementById(tableId);
-    const thead = table.querySelector('thead tr');
-    const tbody = table.querySelector('tbody');
-    //  const wrapper = document.getElementById('table-wrapper'); //No needed
-    const wrapper = table.closest('.element-item').querySelector('.preview-container'); //DYNAMIC FIND
-
-    thead.innerHTML = '';
-    tbody.innerHTML = '';
-  // wrapper.innerHTML = ''; // Don't clear entire wrapper, just the table inside!
-
-
-    if (!data || data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
-        // wrapper.appendChild(table); // Table is already there
-        return;
+    // Funkcja do pobierania listy kolekcji z Firebase
+    async function fetchCollectionList() {
+        const dbRef = ref(database); // Referencja do *korzenia* bazy danych
+        try {
+            const snapshot = await get(dbRef); // Użyj get() zamiast onValue()
+            if (snapshot.exists()) {
+                const collections = Object.keys(snapshot.val()); // Pobierz klucze (nazwy kolekcji)
+                return collections;
+            } else {
+                return []; // Brak kolekcji
+            }
+        } catch (error) {
+            console.error("Error fetching collection list:", error);
+            alert("Error fetching collection list: " + error.message);
+            return []; // W przypadku błędu, zwróć pustą tablicę
+        }
     }
 
-    const headers = Object.keys(data[0]);
-    headers.forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        th.setAttribute('data-key', header);
-        th.addEventListener('click', () => sortTable(header, tableId)); // Pass header AND tableId
-        thead.appendChild(th);
+    // Funkcja do wypełniania listy rozwijanej <select>
+    async function populateCollectionSelect() {
+        const select = document.getElementById('collectionSelect');
+        select.innerHTML = '<option value="">(Select a collection)</option>'; // Wyczyść i dodaj domyślną opcję
+
+        const collections = await fetchCollectionList();
+        collections.forEach(collectionName => {
+            const option = document.createElement('option');
+            option.value = collectionName;
+            option.textContent = collectionName;
+            select.appendChild(option);
+        });
+    }
+
+
+       // --- Obsługa importu danych ---
+    const importButtons = document.querySelectorAll('.import-button');
+
+    importButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const tile = event.target.closest('.tile');
+            const dataContainer = tile.querySelector('.data-container');
+            const table = dataContainer.querySelector('table');
+            const thead = table.querySelector('thead');
+            const tbody = table.querySelector('tbody');
+            const importDateDiv = tile.querySelector('.import-date');
+            const collectionNameDiv = tile.querySelector('.collection-name'); // Do nazwy kolekcji
+
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.csv';
+
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                //  Pobierz nazwę kolekcji *przed* parsowaniem.
+                let collectionName = prompt("Please enter a name for this data collection:", "Data");
+                if (!collectionName) return;  // Anulowano
+                collectionName = collectionName.trim();
+                 if (/[.$[\]#/]/.test(collectionName)) {
+                    alert("Collection name contains invalid characters (. $ [ ] # /). Import cancelled.");
+                    return;
+                }
+                currentCollection = collectionName; // Ustaw aktualną kolekcję.
+
+                // Zapisz nazwę kolekcji w divie
+                collectionNameDiv.textContent = collectionName;
+
+
+                Papa.parse(file, {
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        if (results.errors.length > 0) {
+                            console.error("Parsing errors:", results.errors);
+                            alert("There were errors parsing the CSV file. Check the browser console (F12) for more information.");
+                            return;
+                        }
+
+                        const data = results.data;
+						if (!data || data.length === 0) {
+							tbody.innerHTML = '<tr><td colspan="100%">No data to display.</td></tr>';
+							return;
+						}
+
+                        // Display data *in the correct tile*
+                        displayData(data, tile);
+
+                        // Upload to Firebase *with the correct ref*
+                        const dbRef = ref(database, collectionName);
+                        uploadDataToFirebase(data, dbRef); //Upload using set (overwrite)
+
+
+                        const now = new Date();
+                        importDateDiv.textContent = `Imported: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+
+                         // Odśwież listę kolekcji po imporcie
+                        populateCollectionSelect();
+                    },
+                    error: function(error) {
+                        console.error("Parsing error:", error);
+                        alert("An error occurred while parsing the CSV file.");
+                    }
+                });
+            });
+
+            fileInput.click();
+        });
     });
 
-    const actionsHeader = document.createElement('th');
-    actionsHeader.textContent = 'Actions';
-    thead.appendChild(actionsHeader);
+     // Funkcja do wyświetlania danych w tabeli
+     function displayData(data, tile) {
+        const table = tile.querySelector('.data-container table');
+        const thead = table.querySelector('thead');
+        const tbody = table.querySelector('tbody');
+        const toggleTableLink = tile.querySelector('#toggle-table');
 
-    // Get correct isTableExpanded state
-    const fileInputId = tableId.replace('data-table', 'fileInput');
-    const expanded = isTableExpanded[fileInputId];
+        thead.innerHTML = '';
+        tbody.innerHTML = '';
 
-    const initialRows = 3;
-    const dataToShow = expanded ? data : data.slice(0, initialRows);
+        if (!data || data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
+            return;
+        }
 
-    dataToShow.forEach((item, rowIndex) => {
-        const row = document.createElement('tr');
+        const headers = Object.keys(data[0]);
         headers.forEach(header => {
-            const cell = document.createElement('td');
-            cell.textContent = item[header] !== null && item[header] !== undefined ? item[header] : '';
-            cell.setAttribute('data-header', header);
-            cell.setAttribute('data-row', rowIndex);
-            cell.contentEditable = true;
-            row.appendChild(cell);
+            const th = document.createElement('th');
+            th.textContent = header;
+            th.setAttribute('data-key', header);
+            th.addEventListener('click', sortTable);
+            thead.appendChild(th);
         });
 
-        const actionsCell = document.createElement('td');
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-        deleteButton.addEventListener('click', () => deleteRow(rowIndex, tableId)); // Pass rowIndex and tableId
-        actionsCell.appendChild(deleteButton);
-        row.appendChild(actionsCell);
+        const actionsHeader = document.createElement('th');
+        actionsHeader.textContent = 'Actions';
+        thead.appendChild(actionsHeader);
 
-        tbody.appendChild(row);
-    });
+         // Pokaż określoną liczbę wierszy
+        const initialRows = 3;
+        const dataToShow = isTableExpanded ? data : data.slice(0, initialRows);
 
-    // wrapper.appendChild(table); // Table is already in the correct place.
+        dataToShow.forEach((item, rowIndex) => {
+            const row = document.createElement('tr');
+            headers.forEach(header => {
+                const cell = document.createElement('td');
+                 cell.textContent = item[header] !== null && item[header] !== undefined ? item[header] : '';
+                cell.setAttribute('data-header', header);
+                cell.setAttribute('data-row', rowIndex);
+                cell.contentEditable = true;
+                row.appendChild(cell);
+            });
 
-    // Update "Show More/Less" button text, if it exists.
-    const toggleButton = document.getElementById(tableId.replace('data-table', 'toggle-table')); // Correct ID
-    if (toggleButton) {  // *Check if the button exists*
-        toggleButton.textContent = expanded ? 'Show Less' : 'Show More';
-    }
-}
+            const actionsCell = document.createElement('td');
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+             deleteButton.addEventListener('click', () => deleteRow(rowIndex)); // Pass rowIndex
 
-
-
-//Modyfikujemy toggleTable
-function toggleTable(tableId) {
-  // Pobierz ID fileInput na podstawie ID tabeli
-  const fileInputId = tableId.replace('data-table', 'fileInput');
-    isTableExpanded[fileInputId] = !isTableExpanded[fileInputId]; // Zmień stan dla *konkretnej* tabeli
-    displayData(currentData[fileInputId], tableId); // Wyświetl ponownie *konkretną* tabelę
-
-}
-
-
-
-
-async function saveChanges() {
-    // Determine which table's data to save, based on *which* save button was clicked
-    // We'll need to pass an identifier to saveChanges.  Best way is with a closure.
-    // See event listener setup below.
-    // const updatedData = getDataFromTable(); // We need the table ID!  Pass it.
-
-    // Find all preview tables.  This is a bit of a hack, but necessary if we're saving *all* tables
-    // with *one* button press.  A better design would be to have separate save buttons per table.
-    const tables = document.querySelectorAll('.preview-table');
-    const allUpdatedData = {};
-
-    for (const table of tables) {
-        const tableId = table.id;
-        allUpdatedData[tableId] = getDataFromTable(tableId);  // Get data *per table*
-    }
-
-
-    const collectionName = getCollectionName(undefined, "save changes to");
-    if (!collectionName) return;
-
-    const dbRef = ref(database, collectionName);
-
-    try {
-        // Save *all* the updated data.  This will overwrite the entire collection.
-        await set(dbRef, allUpdatedData); // Save the *entire object*
-        console.log('Changes saved successfully!');
-        alert('Changes saved successfully!');
-         // No need to update currentData or displayData here, since we are saving everything.
-        // If you want to update the display, you'll need to re-fetch.
-    } catch (error) {
-        console.error('Error saving changes:', error);
-        alert('Error saving changes: ' + error.message);
-    }
-}
-
-
-
-// Function to delete a row.  Needs rowIndex *and* tableId.
-async function deleteRow(rowIndex, tableId) {
-    const fileInputId = tableId.replace('data-table', 'fileInput'); // Get corresponding fileInputId
-    const collectionName = getCollectionName(undefined, "delete from");
-    if (!collectionName) return;
-
-    const dbRef = ref(database, collectionName);
-
-    // Calculate adjustedRowIndex based on whether *this specific table* is expanded.
-    let adjustedRowIndex;
-     if(!isTableExpanded[fileInputId]) { //Poprawka
-        const tableRows = document.querySelectorAll(`#${tableId} tbody tr`); //Poprawka
-        if (rowIndex < tableRows.length) {
-            adjustedRowIndex = rowIndex;
+            actionsCell.appendChild(deleteButton);
+            row.appendChild(actionsCell);
+            tbody.appendChild(row);
+        });
+        if (toggleTableLink) {
+            toggleTableLink.textContent = isTableExpanded ? 'Show Less' : 'Show More';
         }
-      }
-      else{
-           adjustedRowIndex = rowIndex;
-      }
+    }
 
 
-    if (confirm('Are you sure you want to delete this row?')) {
-         if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData[fileInputId].length) {
-            currentData[fileInputId].splice(adjustedRowIndex, 1); // Delete from the correct data array
-            displayData(currentData[fileInputId], tableId); // Update *this* table
+       // Funkcja do zapisu zmian
+    async function saveChanges() {
+        const table = document.querySelector('.tile:not([style*="display: none"]) .data-container table');
+        if (!table) {
+            alert("No active table found to save changes from.");
+            return;
         }
+        const tbody = table.querySelector('tbody');
+        const rows = tbody.querySelectorAll('tr');
+        const updatedData = [];
+
+        // Build updatedData array
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const cells = row.querySelectorAll('td');
+            const rowData = {};
+            let hasData = false;
+
+             for (let j = 0; j < cells.length; j++) {
+                const cell = cells[j];
+                const header = cell.getAttribute('data-header');
+                if (header) {
+                    rowData[header] = cell.textContent.trim();
+                     if(rowData[header] !== ''){
+                        hasData = true;
+                    }
+                }
+            }
+             if(hasData){
+                 updatedData.push(rowData);
+             }
+        }
+
+         if (!currentCollection) {
+            alert("No collection is currently selected.  Please load or import data first.");
+            return;
+        }
+        const dbRef = ref(database, currentCollection);
 
         try {
-            // After deleting locally, save the changes to Firebase (overwrite).
-            await set(dbRef, currentData[fileInputId] ); // Save only the relevant data
-            console.log('Row deleted successfully!');
-            alert('Row deleted successfully from: ' + collectionName);
-
+            await set(dbRef, updatedData);
+            console.log('Changes saved successfully!');
+            alert('Changes saved successfully to collection: ' + currentCollection);
+            currentData = updatedData;  // Update local data
         } catch (error) {
-            console.error('Error deleting row:', error);
-            alert('Error deleting row: ' + error.message);
+            console.error('Error saving changes:', error);
+            alert('Error saving changes: ' + error.message);
         }
     }
-}
-
-
-// Function to sort table by column.  Needs header *and* tableId.
-function sortTable(header, tableId) {
-    const fileInputId = tableId.replace('data-table', 'fileInput'); // Get corresponding fileInputId
-
-    const isAscending = !document.querySelector(`#<span class="math-inline">\{tableId\} th\[data\-key\="</span>{header}"]`).classList.contains('sorted-desc');
-
-    const headers = document.querySelectorAll(`#${tableId} th`); // Select headers from *this* table
-    headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
-
-    currentData[fileInputId].sort((a, b) => {  // Sort the correct data array
-        const valueA = a[header] === null || a[header] === undefined ? '' : String(a[header]).toLowerCase();
-        const valueB = b[header] === null || b[header] === undefined ? '' : String(b[header]).toLowerCase();
-
-        if (valueA < valueB) return isAscending ? -1 : 1;
-        if (valueA > valueB) return isAscending ? 1 : -1;
-        return 0;
-    });
-
-    displayData(currentData[fileInputId], tableId); // Display *this* table
-     document.querySelector(`#<span class="math-inline">\{tableId\} th\[data\-key\="</span>{header}"]`).classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
-
-}
-
-
-
-
-async function exportDataToFirebase() {
- // Similar to saveChanges - you probably want to export *all* data, not just one table.
- if (Object.keys(currentData).every(key => currentData[key].length === 0)) { // Check if all are empty
-    alert("No data to export. Please upload a CSV file first.");
-    return;
-}
-
-    const collectionName = getCollectionName(undefined, "export to");
-    if (!collectionName) return;
-    const dbRef = ref(database, collectionName);
-
-    try {
-        // Combine all data into one object/array for export.
-        const allData = [];
-        for (const inputId in currentData) {
-            allData.push(...currentData[inputId]); // Add all data from each input
+    // Funkcja do usuwania wiersza
+    async function deleteRow(rowIndex) {
+        if (!currentCollection) {
+            alert("No collection is currently selected.");
+            return;
         }
 
-        await set(dbRef, allData); // Export *all* data.  Or structure it differently if needed.
-        console.log('Data exported successfully!');
-        alert('Data exported successfully to collection: ' + collectionName);
-    } catch (error) {
-        console.error('Error exporting data:', error);
-        alert('Error exporting data: ' + error.message);
-    }
-}
+         let adjustedRowIndex;
 
+        if(!isTableExpanded) {
+                const tableRows = document.querySelectorAll("#data-table tbody tr");
+            if (rowIndex < tableRows.length) {
+                    // If "Show More" is NOT expanded, the displayed row index IS the data index.
+                    adjustedRowIndex = rowIndex;
+            }
+            }
+        else{
+                adjustedRowIndex = rowIndex;
+        }
 
-// Function to load data from Firebase.
-function loadData() {
-    const collectionName = getCollectionName(undefined, "load from");
-    if (!collectionName) return;
-    const dbRef = ref(database, collectionName);
-
-    onValue(dbRef, (snapshot) => {
-        if (snapshot.exists()) {
-            let loadedData = snapshot.val();
-            // Check if the loaded data is an array.  If not, assume it's an object and convert.
-            if (!Array.isArray(loadedData)) {
-              //If it not an array, we assume it is an object
-              //where keys are table ids, and values are array of objects
-              if (typeof loadedData === 'object' && loadedData !== null) {
-                for(let tableId in loadedData){ //Iterate over table ids
-                  const fileInputId = tableId.replace('data-table', 'fileInput'); //Find corresponding file input
-                  if(currentData.hasOwnProperty(fileInputId)){ // Check if we have corresponding file input
-                    currentData[fileInputId] = loadedData[tableId]; // Load data
-                    displayData(loadedData[tableId], tableId); // Display this particular table
-                  }
+        if (confirm('Are you sure you want to delete this row?')) {
+            const dbRef = ref(database, currentCollection);
+             // Check if adjustedRowIndex is valid before splicing
+            if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData.length) {
+                currentData.splice(adjustedRowIndex, 1);
+                 // Find the currently active tile and redisplay data
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if (activeTile) {
+                     displayData(currentData, activeTile); //Ponowne wyswietlanie danych.
                 }
-              }
+            }
+            try {
+                await set(dbRef, currentData); // Save changes to Firebase
+                console.log('Row deleted successfully!');
+                alert('Row deleted successfully!');
+
+            } catch (error) {
+                console.error('Error deleting row:', error);
+                alert('Error deleting row: ' + error.message);
+            }
+        }
+    }
+
+     // Funkcja do przełączania widoczności tabeli (Show More/Less)
+    function toggleTable(event) {
+        event.preventDefault();
+        isTableExpanded = !isTableExpanded;
+        const activeTile = document.querySelector('.tile:not([style*="display: none"])'); // Pobierz aktywny tile
+        if(activeTile){
+            displayData(currentData, activeTile); // Ponownie wyświetl dane, przekazujac aktywny tile
+        }
+
+    }
+
+    // Funkcja do sortowania tabeli
+    function sortTable(event) {
+        const header = event.target.getAttribute('data-key');
+        const isAscending = !event.target.classList.contains('sorted-desc');
+
+        // Znajdź wszystkie nagłówki w *aktywnej* tabeli
+        const activeTable = document.querySelector('.tile:not([style*="display: none"]) .data-container table');
+        if (!activeTable) return; // Brak aktywnej tabeli
+
+        const headers = activeTable.querySelectorAll('th');
+        headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+
+        currentData.sort((a, b) => {
+            const valueA = a[header] === null ? '' : String(a[header]).toLowerCase();
+            const valueB = b[header] === null ? '' : String(b[header]).toLowerCase();
+
+            if (valueA < valueB) return isAscending ? -1 : 1;
+            if (valueA > valueB) return isAscending ? 1 : -1;
+            return 0;
+        });
+
+        // Znajdź aktywny kafelek i wyświetl posortowane dane
+        const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+        if (activeTile) {
+            displayData(currentData, activeTile);
+        }
+
+        event.target.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
+    }
+
+    //Dodanie obslugi usuwania kolekcji
+    async function deleteCollection() {
+        if (!currentCollection) {
+            alert("No collection selected to delete.");
+            return;
+        }
+
+        if (confirm(`Are you sure you want to delete the ENTIRE collection "${currentCollection}"? This action cannot be undone.`)) {
+            const dbRef = ref(database, currentCollection);
+            try {
+                await remove(dbRef); // Użyj remove() do usunięcia całej kolekcji
+                console.log(`Collection "${currentCollection}" deleted successfully.`);
+                alert(`Collection "${currentCollection}" deleted successfully.`);
+                currentData = []; // Wyczyść lokalne dane
+                currentCollection = "";
+
+                // Znajdz aktualnie wyswietlany tile i wyczysc w nim dane
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if(activeTile){
+                    displayData([], activeTile);
+                    activeTile.querySelector('.collection-name').textContent = ''; // Wyczyść nazwę kolekcji
+                    activeTile.querySelector('.import-date').textContent = '';    // Wyczyść date
+                }
+
+
+                populateCollectionSelect(); // Odśwież listę kolekcji
+            } catch (error) {
+                console.error("Error deleting collection:", error);
+                alert("Error deleting collection: " + error.message);
+            }
+        }
+    }
+
+
+    // --- Event Listeners ---
+    //Obsluga load data button
+    document.getElementById('load-button').addEventListener('click', async () => {
+        const collectionName = document.getElementById('collectionSelect').value;
+        if (!collectionName) {
+            alert("Please select a collection to load.");
+            return;
+        }
+		currentCollection = collectionName;
+
+        const dbRef = ref(database, collectionName);
+        try {
+            const snapshot = await get(dbRef); // Użyj get() do jednorazowego odczytu
+            if (snapshot.exists()) {
+                currentData = snapshot.val();
+                // Znajdź aktywny kafelek
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if (activeTile) {
+                    displayData(currentData, activeTile); // Wyświetl dane w aktywnym kafelku
+                    // Ustaw nazwę kolekcji i datę (jeśli chcesz) w aktywnym kafelku
+                    activeTile.querySelector('.collection-name').textContent = collectionName;
+                    activeTile.querySelector('.import-date').textContent = "";
+
+                }
+
             } else {
-                // If loaded data *is* an array, display it in the first table.
-                currentData['fileInput1'] = loadedData;
-                displayData(loadedData, 'data-table1');
-            }
-
-        } else {
-             console.log(`No data found in collection: ${collectionName}`);
-            // If no data was loaded, clear *all* tables.
-             for (const inputId in currentData) {
-               displayData([], inputId.replace('fileInput', 'data-table'));
-            }
-        }
-    }, (error) => {
-        console.error("Error fetching data: ", error);
-        alert("Error fetching data: " + error.message);
-    });
-}
-
-
-
-
-// --- Event Listeners ---
-
-// Generic function to attach file input listeners
-function attachFileInputListener(inputId) {
-    document.getElementById(inputId).addEventListener('change', (event) => {
-        if (event.target.files[0]) {
-            handleFileUpload(event.target.files[0], inputId);
-        }
-    });
-}
-
-// Attach listeners to all file inputs
-attachFileInputListener('fileInput1');
-attachFileInputListener('fileInput2');
-attachFileInputListener('fileInput3');
-attachFileInputListener('fileInput
+                console.log(`No data found in collection: ${collectionName}`);
+                alert(`No data found in collection: ${collectionName}`);
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if(activeTile){
+                   displayData([], activeTile); // P
+                
