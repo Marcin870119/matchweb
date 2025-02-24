@@ -358,4 +358,119 @@ document.addEventListener('DOMContentLoaded', () => {
     //Dodanie obslugi usuwania kolekcji
     async function deleteCollection() {
         if (!
+	    // Linie 368- (do końca)
+            alert("No collection selected to delete.");
+            return;
+        }
+
+        if (confirm(`Are you sure you want to delete the ENTIRE collection "${currentCollection}"? This action cannot be undone.`)) {
+            const dbRef = ref(database, currentCollection);
+            try {
+                await remove(dbRef); // Użyj remove() do usunięcia całej kolekcji
+                console.log(`Collection "${currentCollection}" deleted successfully.`);
+                alert(`Collection "${currentCollection}" deleted successfully.`);
+                currentData = []; // Wyczyść lokalne dane
+                currentCollection = "";
+
+                // Znajdz aktualnie wyswietlany tile i wyczysc w nim dane
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if(activeTile){
+                    displayData([], activeTile);
+                    activeTile.querySelector('.collection-name').textContent = ''; // Wyczyść nazwę kolekcji
+                    activeTile.querySelector('.import-date').textContent = '';    // Wyczyść date
+                }
+
+
+                populateCollectionSelect(); // Odśwież listę kolekcji
+            } catch (error) {
+                console.error("Error deleting collection:", error);
+                alert("Error deleting collection: " + error.message);
+            }
+        }
+    }
+
+
+    // --- Event Listeners ---
+    //Obsluga load data button
+    document.getElementById('load-button').addEventListener('click', async () => {
+        const collectionName = document.getElementById('collectionSelect').value;
+        if (!collectionName) {
+            alert("Please select a collection to load.");
+            return;
+        }
+		currentCollection = collectionName;
+
+        const dbRef = ref(database, collectionName);
+        try {
+            const snapshot = await get(dbRef); // Użyj get() do jednorazowego odczytu
+            if (snapshot.exists()) {
+                currentData = snapshot.val();
+                // Znajdź aktywny kafelek
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if (activeTile) {
+                    displayData(currentData, activeTile); // Wyświetl dane w aktywnym
+                    // Ustaw nazwę kolekcji i datę w aktywnym kafelku
+                    activeTile.querySelector('.collection-name').textContent = collectionName;
+                    activeTile.querySelector('.import-date').textContent = "";
+
+                }
+
+            } else {
+                console.log(`No data found in collection: ${collectionName}`);
+                alert(`No data found in collection: ${collectionName}`);
+                const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+                if(activeTile){
+                   displayData([], activeTile); // Pusta tabela
+                   activeTile.querySelector('.collection-name').textContent = '';
+                   activeTile.querySelector('.import-date').textContent = '';
+                }
+
+            }
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+            alert("Error fetching data: " + error.message);
+        }
+    });
+
+      // Event listener dla przycisku "Save Changes"
+    document.getElementById('save-button').addEventListener('click', saveChanges);
+
+    // Event listener dla przycisku "Export Data"
+    document.getElementById('export-button').addEventListener('click', () => {
+      const activeTile = document.querySelector('.tile:not([style*="display: none"])');
+      if(activeTile){ // Sprawdz czy jest aktywny
+          if(currentData.length > 0){ // I czy sa dane.
+              exportDataToFirebase(); // Jesli tak to eksportuj.
+          } else {
+              alert("No data to export. Please load or import data first.");
+          }
+      } else {
+          alert("No active tile. Please select a report type from the sidebar.");
+      }
+
+    });
+
+    document.getElementById('delete-collection-button').addEventListener('click', deleteCollection);
+
+      // Dodaj obsługę zdarzenia dla linku "Show More/Less"
+    document.getElementById('toggle-table').addEventListener('click', toggleTable); //KLUCZOWE!
+
+    //Poczatkowe zaladowanie kolekcji.  --  NIE, robimy to przez przycisk "Load Data"
+    // populateCollectionSelect();  // NIE tutaj.  Robimy to w DOMContentLoaded.
+
+
+}); // Koniec DOMContentLoaded
+
+
+// Funkcja do uploadu (używana w handleFileUpload) - JEST OK
+async function uploadDataToFirebase(data, dbRef) {
+    try {
+        await set(dbRef, data); // Użyj set()
+        console.log('Data uploaded successfully!');
+        // alert('Data uploaded successfully!'); // Nie alertuj tutaj, bo to jest część handleFileUpload
+    } catch (error) {
+        console.error('Error uploading data:', error);
+        alert('Error uploading data: ' + error.message);
+    }
+}
 	    
