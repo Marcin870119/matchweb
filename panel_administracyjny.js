@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-// Firebase configuration (REPLACE WITH YOUR PROJECT'S CONFIG)
+// Firebase configuration (REPLACE WITH YOUR ACTUAL CONFIGURATION)
 const firebaseConfig = {
     apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
     authDomain: "webmatcher-94f0e.firebaseapp.com",
@@ -16,8 +16,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-let currentData = []; // Store the current data for editing -  Globally
-let isTableExpanded = false; // Track table expansion state - Globally
+// Store current data for *each* table.  This is an OBJECT, not an array.
+const currentData = {
+    'fileInput1': [],
+    'fileInput2': [],
+    'fileInput3': [],
+    'fileInput4': []
+};
+
+// Track table expansion state for *each* table.  Also an OBJECT.
+const isTableExpanded = {
+    'fileInput1': false,
+    'fileInput2': false,
+    'fileInput3': false,
+    'fileInput4': false
+};
 
 // --- Helper Functions ---
 
@@ -34,9 +47,9 @@ function isValidCollectionName(name) {
     return true;
 }
 
-// Utility function to get data from the table.
-function getDataFromTable() {
-    const table = document.getElementById('data-table');
+// Utility function to get data from the table.  Now takes tableId as argument.
+function getDataFromTable(tableId) {
+    const table = document.getElementById(tableId);
     const rows = table.querySelectorAll('tbody tr');
     const updatedData = [];
 
@@ -50,12 +63,12 @@ function getDataFromTable() {
             if (header) {
                 const cellValue = cell.textContent.trim();
                 rowData[header] = cellValue;
-                if(cellValue !== "") { //Check if cell has value
+                if (cellValue !== "") {
                     hasData = true;
                 }
             }
         }
-        if (hasData) { // Only add rows with data
+        if (hasData) {
             updatedData.push(rowData);
         }
     }
@@ -63,64 +76,59 @@ function getDataFromTable() {
 }
 
 // Function to show prompt for collection name, with default and validation.
-function getCollectionName(defaultName = "Data", action = "perform this action") {  //Added action
+function getCollectionName(defaultName = "Data", action = "perform this action") {
     const collectionName = prompt(`Please enter the collection name to ${action}:`, defaultName);
     if (!isValidCollectionName(collectionName)) {
         return null; // Return null if invalid or cancelled.
     }
     return collectionName.trim();
 }
-// Function to handle file upload and parsing.
+// --- Data Handling Functions ---
+
 function handleFileUpload(file, inputId) {
     Papa.parse(file, {
         header: true,
         dynamicTyping: true,
-        skipEmptyLines: 'greedy', //  Skip completely empty lines
+        skipEmptyLines: 'greedy', // Skip completely empty lines
         complete: function (results) {
-            // Handle potential errors during parsing
             if (results.errors.length > 0) {
                 console.error("Error parsing CSV:", results.errors);
-                alert("Error parsing CSV file.  See console for details.");
+                alert("Error parsing CSV file. See console for details.");
                 return;
             }
 
-            //Filter out empty rows (rows where every value is null, undefined, or an empty string)
+            // Filter out empty rows
             const filteredData = results.data.filter(row => {
-              return row && Object.values(row).some(value => value !== null && value !== undefined && value !== '');
+                return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
             });
 
-            currentData = filteredData; // Store the filtered data
+            // Store data in the correct part of currentData
+            currentData[inputId] = filteredData;
 
-            if (inputId === 'fileInput1') {
-                displayData(currentData); // Display data for fileInput1
-            } else if (inputId === 'fileInput2') {
-                console.log("Data from fileInput2:", currentData); // Replace with appropriate logic
-            } else if (inputId === 'fileInput3') {
-                console.log("Data from fileInput3:", currentData); // Replace with appropriate logic
-            } else if (inputId === 'fileInput4') {
-                console.log("Data from fileInput4:", currentData); // Replace with appropriate logic
-            }
+            // Display data in the appropriate table
+            const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
+            displayData(filteredData, tableId);
         }
     });
 }
 
 
 
-// Function to display data in the table.
-function displayData(data) {
-    const table = document.getElementById('data-table');
+function displayData(data, tableId) {
+    const table = document.getElementById(tableId);
     const thead = table.querySelector('thead tr');
     const tbody = table.querySelector('tbody');
-    const wrapper = document.getElementById('table-wrapper'); // Get the wrapper
+    //  const wrapper = document.getElementById('table-wrapper'); //No needed
+    const wrapper = table.closest('.element-item').querySelector('.preview-container'); //DYNAMIC FIND
 
-    thead.innerHTML = ''; // Clear previous headers
-    tbody.innerHTML = ''; // Clear previous data
-    wrapper.innerHTML = '';   // Clear wrapper to re-add the table
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
+    // wrapper.innerHTML = ''; // Don't clear entire wrapper, just the table inside!
 
 
     if (!data || data.length === 0) {
         tbody.innerHTML = '<tr><td colspan="100%">No data available</td></tr>';
-        wrapper.appendChild(table);  // Add the table back, even if empty
+        // wrapper.appendChild(table); // Table is already there
         return;
     }
 
@@ -128,8 +136,8 @@ function displayData(data) {
     headers.forEach(header => {
         const th = document.createElement('th');
         th.textContent = header;
-        th.setAttribute('data-key', header); // For sorting
-        th.addEventListener('click', sortTable);
+        th.setAttribute('data-key', header);
+        th.addEventListener('click', () => sortTable(header, tableId)); // Pass header AND tableId
         thead.appendChild(th);
     });
 
@@ -137,8 +145,12 @@ function displayData(data) {
     actionsHeader.textContent = 'Actions';
     thead.appendChild(actionsHeader);
 
+    // Get correct isTableExpanded state
+    const fileInputId = tableId.replace('data-table', 'fileInput');
+    const expanded = isTableExpanded[fileInputId];
+
     const initialRows = 3;
-    const dataToShow = isTableExpanded ? data : data.slice(0, initialRows);
+    const dataToShow = expanded ? data : data.slice(0, initialRows);
 
     dataToShow.forEach((item, rowIndex) => {
         const row = document.createElement('tr');
@@ -147,43 +159,61 @@ function displayData(data) {
             cell.textContent = item[header] !== null && item[header] !== undefined ? item[header] : '';
             cell.setAttribute('data-header', header);
             cell.setAttribute('data-row', rowIndex);
-            cell.contentEditable = true;  // Make cells editable
+            cell.contentEditable = true;
             row.appendChild(cell);
         });
 
-        // Actions column (Delete button)
         const actionsCell = document.createElement('td');
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
-        deleteButton.classList.add('btn', 'btn-danger', 'btn-sm'); // Bootstrap classes
-        deleteButton.addEventListener('click', () => deleteRow(rowIndex));
+        deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+        deleteButton.addEventListener('click', () => deleteRow(rowIndex, tableId)); // Pass rowIndex and tableId
         actionsCell.appendChild(deleteButton);
         row.appendChild(actionsCell);
 
         tbody.appendChild(row);
     });
 
-    wrapper.appendChild(table); // Add the table to the wrapper element
+    // wrapper.appendChild(table); // Table is already in the correct place.
 
-    //Update "Show More/Less" button text.
-    document.getElementById('toggle-table').textContent = isTableExpanded ? 'Show Less' : 'Show More';
+    // Update "Show More/Less" button text, if it exists.
+    const toggleButton = document.getElementById(tableId.replace('data-table', 'toggle-table')); // Correct ID
+    if (toggleButton) {
+        toggleButton.textContent = expanded ? 'Show Less' : 'Show More';
+    }
 }
 
 
-// Function to save changes to Firebase.
+
 async function saveChanges() {
-    const updatedData = getDataFromTable();
-    const collectionName = getCollectionName(undefined, "save changes to"); // Get collection name.
-    if (!collectionName) return; // Exit if no valid name.
+    // Determine which table's data to save, based on *which* save button was clicked
+    // We'll need to pass an identifier to saveChanges.  Best way is with a closure.
+    // See event listener setup below.
+    // const updatedData = getDataFromTable(); // We need the table ID!  Pass it.
+
+    // Find all preview tables.  This is a bit of a hack, but necessary if we're saving *all* tables
+    // with *one* button press.  A better design would be to have separate save buttons per table.
+    const tables = document.querySelectorAll('.preview-table');
+    const allUpdatedData = {};
+
+    for (const table of tables) {
+        const tableId = table.id;
+        allUpdatedData[tableId] = getDataFromTable(tableId);  // Get data *per table*
+    }
+
+
+    const collectionName = getCollectionName(undefined, "save changes to");
+    if (!collectionName) return;
 
     const dbRef = ref(database, collectionName);
 
     try {
-        await set(dbRef, updatedData);  // Use set, not update.  Overwrite existing data.
+        // Save *all* the updated data.  This will overwrite the entire collection.
+        await set(dbRef, allUpdatedData); // Save the *entire object*
         console.log('Changes saved successfully!');
         alert('Changes saved successfully!');
-        currentData = updatedData;  // Update currentData *after* successful save
-        displayData(currentData);    // Re-display table
+         // No need to update currentData or displayData here, since we are saving everything.
+        // If you want to update the display, you'll need to re-fetch.
     } catch (error) {
         console.error('Error saving changes:', error);
         alert('Error saving changes: ' + error.message);
@@ -191,53 +221,57 @@ async function saveChanges() {
 }
 
 
-// Function to delete a row
-async function deleteRow(rowIndex) {
-      const collectionName = getCollectionName(undefined, "delete from");
+
+// Function to delete a row.  Needs rowIndex *and* tableId.
+async function deleteRow(rowIndex, tableId) {
+    const fileInputId = tableId.replace('data-table', 'fileInput'); // Get corresponding fileInputId
+    const collectionName = getCollectionName(undefined, "delete from");
     if (!collectionName) return;
 
     const dbRef = ref(database, collectionName);
 
+    // Calculate adjustedRowIndex based on whether *this specific table* is expanded.
     let adjustedRowIndex;
-     if(!isTableExpanded) {
-        const tableRows = document.querySelectorAll("#data-table tbody tr");
+    if (!isTableExpanded[fileInputId]) { // Use the correct isTableExpanded value
+        const tableRows = document.querySelectorAll(`#${tableId} tbody tr`); // Select rows from *this* table
         if (rowIndex < tableRows.length) {
             adjustedRowIndex = rowIndex;
         }
-      }
-      else{
-           adjustedRowIndex = rowIndex;
-      }
+    } else {
+        adjustedRowIndex = rowIndex;
+    }
 
 
     if (confirm('Are you sure you want to delete this row?')) {
-        if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData.length) {
-             currentData.splice(adjustedRowIndex, 1); // Remove from *local* data first.
-              displayData(currentData); // Update table *before* Firebase operation.
+         if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData[fileInputId].length) {
+            currentData[fileInputId].splice(adjustedRowIndex, 1); // Delete from the correct data array
+            displayData(currentData[fileInputId], tableId); // Update *this* table
         }
 
-      try {
-            await set(dbRef, currentData);  // Overwrite with set
+        try {
+            // After deleting locally, save the changes to Firebase (overwrite).
+            await set(dbRef, currentData[fileInputId] ); // Save only the relevant data
             console.log('Row deleted successfully!');
-            alert('Row deleted successfully from: '+collectionName);
+            alert('Row deleted successfully from: ' + collectionName);
 
         } catch (error) {
             console.error('Error deleting row:', error);
             alert('Error deleting row: ' + error.message);
         }
-
     }
 }
 
-// Function to sort table by column.
-function sortTable(event) {
-    const header = event.target.getAttribute('data-key');
-    const isAscending = !event.target.classList.contains('sorted-desc');
 
-    const headers = document.querySelectorAll('#data-table th');
+// Function to sort table by column.  Needs header *and* tableId.
+function sortTable(header, tableId) {
+    const fileInputId = tableId.replace('data-table', 'fileInput'); // Get corresponding fileInputId
+
+    const isAscending = !document.querySelector(`#${tableId} th[data-key="${header}"]`).classList.contains('sorted-desc');
+
+    const headers = document.querySelectorAll(`#${tableId} th`); // Select headers from *this* table
     headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
 
-    currentData.sort((a, b) => {
+    currentData[fileInputId].sort((a, b) => {  // Sort the correct data array
         const valueA = a[header] === null || a[header] === undefined ? '' : String(a[header]).toLowerCase();
         const valueB = b[header] === null || b[header] === undefined ? '' : String(b[header]).toLowerCase();
 
@@ -246,30 +280,37 @@ function sortTable(event) {
         return 0;
     });
 
-    displayData(currentData);
-    event.target.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
+    displayData(currentData[fileInputId], tableId); // Display *this* table
+    document.querySelector(`#${tableId} th[data-key="${header}"]`).classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
 }
 
-// Function to toggle table expansion
-function toggleTable() {
-    isTableExpanded = !isTableExpanded;
-    displayData(currentData);
+// Function to toggle table expansion.  Needs tableId.
+function toggleTable(tableId) {
+    const fileInputId = tableId.replace('data-table', 'fileInput'); // Get corresponding fileInputId
+    isTableExpanded[fileInputId] = !isTableExpanded[fileInputId]; // Toggle *this* table's state
+    displayData(currentData[fileInputId], tableId);  // Re-display *this* table.
 }
 
-// Function to EXPORT data to Firebase (triggered by button)
+
 async function exportDataToFirebase() {
-    if (currentData.length === 0) {
-        alert("No data to export. Please upload a CSV file first.");
-        return;
-    }
+ // Similar to saveChanges - you probably want to export *all* data, not just one table.
+ if (Object.keys(currentData).every(key => currentData[key].length === 0)) { // Check if all are empty
+    alert("No data to export. Please upload a CSV file first.");
+    return;
+}
 
-    const collectionName = getCollectionName(undefined, "export to"); // Get collection name
-    if (!collectionName) return; // Exit if invalid or cancelled.
-
+    const collectionName = getCollectionName(undefined, "export to");
+    if (!collectionName) return;
     const dbRef = ref(database, collectionName);
 
     try {
-        await set(dbRef, currentData);
+        // Combine all data into one object/array for export.
+        const allData = [];
+        for (const inputId in currentData) {
+            allData.push(...currentData[inputId]); // Add all data from each input
+        }
+
+        await set(dbRef, allData); // Export *all* data.  Or structure it differently if needed.
         console.log('Data exported successfully!');
         alert('Data exported successfully to collection: ' + collectionName);
     } catch (error) {
@@ -281,23 +322,38 @@ async function exportDataToFirebase() {
 
 // Function to load data from Firebase.
 function loadData() {
-    const collectionName = getCollectionName(undefined, "load from");  // Get collection name.
-    if (!collectionName) return;  // Exit if no name.
+    const collectionName = getCollectionName(undefined, "load from");
+    if (!collectionName) return;
     const dbRef = ref(database, collectionName);
 
     onValue(dbRef, (snapshot) => {
         if (snapshot.exists()) {
             let loadedData = snapshot.val();
-
             // Check if the loaded data is an array.  If not, assume it's an object and convert.
             if (!Array.isArray(loadedData)) {
-                loadedData = Object.values(loadedData);
+              //If it not an array, we assume it is an object
+              //where keys are table ids, and values are array of objects
+              if (typeof loadedData === 'object' && loadedData !== null) {
+                for(let tableId in loadedData){ //Iterate over table ids
+                  const fileInputId = tableId.replace('data-table', 'fileInput'); //Find corresponding file input
+                  if(currentData.hasOwnProperty(fileInputId)){ // Check if we have corresponding file input
+                    currentData[fileInputId] = loadedData[tableId]; // Load data
+                    displayData(loadedData[tableId], tableId); // Display this particular table
+                  }
+                }
+              }
+            } else {
+                // If loaded data *is* an array, display it in the first table.
+                currentData['fileInput1'] = loadedData;
+                displayData(loadedData, 'data-table1');
             }
-            currentData = loadedData; // Update the global currentData
-            displayData(currentData);
+
         } else {
-            console.log(`No data found in collection: ${collectionName}`);
-            displayData([]); // Display an empty table
+             console.log(`No data found in collection: ${collectionName}`);
+            // If no data was loaded, clear *all* tables.
+             for (const inputId in currentData) {
+               displayData([], inputId.replace('fileInput', 'data-table'));
+            }
         }
     }, (error) => {
         console.error("Error fetching data: ", error);
@@ -326,10 +382,20 @@ attachFileInputListener('fileInput4');
 document.getElementById('export-button1').addEventListener('click', exportDataToFirebase);
 document.getElementById('save-button1').addEventListener('click', saveChanges);
 document.getElementById('load-button1').addEventListener('click', loadData);
-document.getElementById('toggle-table').addEventListener('click', toggleTable);
+//document.getElementById('toggle-table1').addEventListener('click', () => toggleTable('data-table1')); //Removed, now added dynamically
 
+document.getElementById('export-button2').addEventListener('click', exportDataToFirebase);
+document.getElementById('save-button2').addEventListener('click', saveChanges);
+document.getElementById('load-button2').addEventListener('click', loadData);
+//document.getElementById('toggle-table2').addEventListener('click', () => toggleTable('data-table2'));//Removed, now added dynamically
 
+document.getElementById('export-button3').addEventListener('click', exportDataToFirebase);
+document.getElementById('save-button3').addEventListener('click', saveChanges);
+document.getElementById('load-button3').addEventListener('click', loadData);
+
+document.getElementById('export-button4').addEventListener('click', exportDataToFirebase);
+document.getElementById('save-button4').addEventListener('click', saveChanges);
+document.getElementById('load-button4').addEventListener('click', loadData);
 // --- Initial Setup ---
 
-// You could optionally load data on page load, or leave it to a button press.
-// loadData(); // Uncomment this line if you want to prompt for a collection on page load.
+//
