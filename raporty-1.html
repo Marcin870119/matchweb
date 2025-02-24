@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATCH SYSTEM - RAPORTY-1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@11.0.1/dist/handsontable.full.min.css">
+    <link rel="stylesheet" href="raporty.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handsontable@11.0.1/dist/handsontable.full.min.js"></script>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="bithubweb.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo"> MATCH SYSTEM
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            MATCHPRICE
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="bithubweb.html" onclick="showMatchJSONPage()">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="matchcsv.html">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="narzedzia.html">NARZĘDZIA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="raporty.html">RAPORTY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <a href="#" class="active" onclick="loadSalesData()">SPRZEDAŻ PO PRODUCENTACH</a>
+            <a href="#">RABATY KLIENTÓW</a>
+            <a href="#">TOP 305 INDEKSÓW</a>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="container">
+                <div class="tile" onclick="loadSalesData()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="icon">
+                    SPRZEDAŻ PO PRODUCENTACH
+                </div>
+
+                <!-- Import CSV -->
+                <div class="import-csv-wrapper">
+                    <h5>IMPORTUJ PLIK CSV</h5>
+                    <input type="file" id="csvFileInput" accept=".csv" class="form-control">
+                    <button id="importCsvButton" class="btn btn-primary mt-2">IMPORTUJ</button>
+                </div>
+
+                <!-- Tabela z danymi -->
+                <div id="excelTable" class="data-table-wrapper"></div>
+                
+                <!-- Przycisk do generowania raportu -->
+                <button id="generateReportButton" class="btn btn-success mt-2">Generuj Raport</button>
+                
+                <!-- Tabela z raportem -->
+                <div id="reportTable" class="data-table-wrapper"></div>
+                
+                <!-- Przycisk do zapisu do CSV -->
+                <button id="saveCsvButton" class="btn btn-primary mt-2">Zapisz do CSV</button>
+            </div>
+
+            <div class="spacer"></div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        Strona stworzona przez MSZCorporation
+    </div>
+
+    <script src="raporty.js"></script>
+</body>
+
+</html>
