@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Error fetching data: ", error);
             alert("Error fetching data: " + error.message);
         }
-    });
+    }); // <--- TO BYŁ BRAKUJĄCY NAWIAS!
 
     // Event listener dla przycisku "Save Changes" (Linie 433-434)
     document.getElementById('save-button').addEventListener('click', saveChanges);
