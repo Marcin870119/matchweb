@@ -102,12 +102,26 @@ function handleFileUpload(file, inputId) {
         complete: function (results) {
             if (results.errors.length > 0) {
                 console.error("Error parsing CSV:", results.errors);
-                alert("Error parsing CSV file. See console for details.");
+                // Sprawdź, czy błąd jest związany z brakiem nagłówków lub złym formatem
+                if (results.errors.some(error => error.code === "UndetectableDelimiter")) {
+                    alert("Error parsing CSV file: Unable to detect delimiter (try using , or ;). See console for details.");
+                } else if (results.errors.some(error => error.code === "TooFewFields")) {
+                    alert("Error parsing CSV file: File may be missing headers or has inconsistent data. See console for details.");
+                } else {
+                    alert("Error parsing CSV file. See console for details.");
+                }
                 return;
             }
 
             // Log the detected delimiter for debugging
             console.log("Detected delimiter in CSV:", results.meta.delimiter);
+
+            // Sprawdź, czy dane mają nagłówki
+            if (!results.meta.fields || results.meta.fields.length === 0) {
+                console.error("No headers found in CSV file.");
+                alert("Error parsing CSV file: No headers found in the file. Ensure the first row contains headers.");
+                return;
+            }
 
             // Filter out empty rows
             const filteredData = results.data.filter(row => {
@@ -125,7 +139,7 @@ function handleFileUpload(file, inputId) {
         },
         error: function (error) {
             console.error('Error processing CSV file:', error);
-            alert('Error processing CSV file: ' + error.message);
+            alert('Error processing CSV file: ' + (error.message || 'Unknown error occurred. See console for details.'));
         }
     });
 }
