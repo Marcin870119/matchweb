@@ -129,13 +129,15 @@ function handleFileUpload(file, inputId) {
         complete: function (results) {
             if (results.errors.length > 0) {
                 console.error("Error parsing CSV:", results.errors);
-                // Sprawdź, czy błąd jest związany z za dużą liczbą pól
-                if (results.errors.some(error => error.code === "TooManyFields")) {
+                // Sprawdź, czy błąd jest związany z auto-detekcją separatora lub formatem
+                if (results.errors.some(error => error.code === "UndetectableDelimiter")) {
+                    alert("Error parsing CSV file: Unable to detect delimiter. Try using a consistent separator (e.g., , or ; or tab). See console for details.");
+                } else if (results.errors.some(error => error.code === "TooManyFields")) {
                     alert("Error parsing CSV file: Too many fields in some rows. Ensure all rows match the number of headers. See console for details.");
-                } else if (results.errors.some(error => error.code === "UndetectableDelimiter")) {
-                    alert("Error parsing CSV file: Unable to detect delimiter. Try using a consistent separator (e.g., , or ;). See console for details.");
                 } else if (results.errors.some(error => error.code === "TooFewFields")) {
                     alert("Error parsing CSV file: Too few fields in some rows. Ensure all rows match the number of headers. See console for details.");
+                } else if (results.errors.some(error => error.type === "Array")) {
+                    alert("Error parsing CSV file: Invalid CSV format or empty file. Ensure the file has headers and data. See console for details.");
                 } else {
                     alert("Error parsing CSV file. See console for details.");
                 }
