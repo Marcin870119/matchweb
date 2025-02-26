@@ -125,17 +125,18 @@ function handleFileUpload(file, inputId) {
         header: true,
         dynamicTyping: true,
         skipEmptyLines: 'greedy', // Skip completely empty lines
-        delimiter: '', // Auto-detect delimiter, ignoring , and ; as default separators
+        delimiter: '', // Auto-detect delimiter, trying to ignore , and ; as default
+        fastMode: false, // Use strict parsing for better accuracy
         complete: function (results) {
             if (results.errors.length > 0) {
                 console.error("Error parsing CSV:", results.errors);
-                // Sprawdź, czy błąd jest związany z auto-detekcją separatora lub formatem
+                // Sprawdź szczegółowe błędy i dostosuj komunikat
                 if (results.errors.some(error => error.code === "UndetectableDelimiter")) {
-                    alert("Error parsing CSV file: Unable to detect delimiter. Try using a consistent separator (e.g., , or ; or tab). See console for details.");
+                    alert("Error parsing CSV file: Unable to detect delimiter. Please ensure a consistent separator (e.g., , ; or tab) is used. See console for details.");
                 } else if (results.errors.some(error => error.code === "TooManyFields")) {
-                    alert("Error parsing CSV file: Too many fields in some rows. Ensure all rows match the number of headers. See console for details.");
+                    alert("Error parsing CSV file: Too many fields in some rows. Please ensure all rows match the number of headers. See console for details.");
                 } else if (results.errors.some(error => error.code === "TooFewFields")) {
-                    alert("Error parsing CSV file: Too few fields in some rows. Ensure all rows match the number of headers. See console for details.");
+                    alert("Error parsing CSV file: Too few fields in some rows. Please ensure all rows match the number of headers. See console for details.");
                 } else if (results.errors.some(error => error.type === "Array")) {
                     alert("Error parsing CSV file: Invalid CSV format or empty file. Ensure the file has headers and data. See console for details.");
                 } else {
@@ -156,14 +157,17 @@ function handleFileUpload(file, inputId) {
 
             // Sprawdź, czy liczba pól w każdym wierszu zgadza się z liczbą nagłówków
             const headerCount = results.meta.fields.length;
-            const hasFieldMismatch = results.data.some(row => {
-                const rowFields = Object.values(row).filter(value => value !== null && value !== undefined).length;
-                return rowFields > headerCount || rowFields < headerCount;
-            });
+            const fieldMismatchDetails = results.data.reduce((acc, row, index) => {
+                const rowFields = Object.values(row).filter(value => value !== null && value !== undefined && value !== "").length;
+                if (rowFields !== headerCount) {
+                    acc.push(`Row ${index + 2} has ${rowFields} fields, but headers have ${headerCount}.`);
+                }
+                return acc;
+            }, []);
 
-            if (hasFieldMismatch) {
-                console.error("Field mismatch detected: Some rows have more or fewer fields than headers.");
-                alert("Error parsing CSV file: Some rows have more or fewer fields than headers. Please ensure all rows match the header structure.");
+            if (fieldMismatchDetails.length > 0) {
+                console.error("Field mismatch detected:", fieldMismatchDetails);
+                alert(`Error parsing CSV file: Some rows have more or fewer fields than headers. Please ensure all rows match the header structure. Details:\n${fieldMismatchDetails.join('\n')}`);
                 return;
             }
 
