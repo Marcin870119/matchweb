@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Wstrzyknięcie skryptu SheetJS po załadowaniu Papa Parse
             if (typeof XLSX === 'undefined') {
                 const xlsxScript = document.createElement('script');
-                xlsxScript.src = 'https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.full.min.js';
+                xlsxScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.19.3/xlsx.full.min.js'; // Alternatywne CDN
                 xlsxScript.async = true;
                 xlsxScript.onload = () => {
                     console.log('SheetJS loaded successfully.');
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Jeśli Papa jest już załadowane, sprawdź SheetJS i zainicjuj
         if (typeof XLSX === 'undefined') {
             const xlsxScript = document.createElement('script');
-            xlsxScript.src = 'https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.full.min.js';
+            xlsxScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.19.3/xlsx.full.min.js'; // Alternatywne CDN
             xlsxScript.async = true;
             xlsxScript.onload = () => {
                 console.log('SheetJS loaded successfully.');
