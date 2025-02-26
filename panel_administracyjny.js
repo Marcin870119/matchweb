@@ -93,13 +93,13 @@ async function handleFileUpload(file, inputId) {
         let parsedData = [];
 
         if (fileExtension === 'csv') {
-            // Parsowanie CSV z ignorem separatorów ; i , (używając domyślnego separatora lub tabulacji)
+            // Parsowanie CSV z obsługą separatorów ; i , (auto-detect lub ręczne ustawienie)
             parsedData = await new Promise((resolve, reject) => {
                 Papa.parse(file, {
                     header: true,
                     dynamicTyping: true,
                     skipEmptyLines: 'greedy', // Pomija puste linie
-                    delimiter: '', // Auto-detect separator (ignoruje ; i ,)
+                    delimiter: [',', ';'], // Explicit obsługa separatorów , i ;
                     complete: function (results) {
                         if (results.errors.length > 0) {
                             console.error("Error parsing CSV:", results.errors);
@@ -127,7 +127,7 @@ async function handleFileUpload(file, inputId) {
 
             // Konwertuj dane na format z nagłówkami jako klucze (podobnie jak CSV)
             if (parsedData.length > 0 && parsedData[0].length > 0) {
-                const headers = parsedData[0];
+                const headers = parsedData[0].map(header => header || `Column${headers.length + 1}`); // Handle empty headers
                 parsedData = parsedData.slice(1).map(row => {
                     const rowData = {};
                     headers.forEach((header, index) => {
@@ -412,5 +412,6 @@ document.getElementById('save-button4').addEventListener('click', saveChanges);
 document.getElementById('load-button4').addEventListener('click', loadData);
 document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
 
-// --- Import SheetJS for XLS/XLSX support ---
+// --- Import SheetJS and Papa Parse for file support ---
 import * as XLSX from 'https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.mjs';
+import * as Papa from 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js';
