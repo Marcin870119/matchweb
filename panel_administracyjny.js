@@ -33,7 +33,7 @@ const isTableExpanded = {
     'fileInput4': false
 };
 
-// Załaduj Papa Parse i SheetJS globalnie (dla przeglądarki)
+// Załaduj Papa Parse globalnie (dla przeglądarki)
 document.addEventListener('DOMContentLoaded', () => {
     // Wstrzyknięcie skryptu Papa Parse
     if (typeof Papa === 'undefined') {
@@ -42,23 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         papaScript.async = true;
         papaScript.onload = () => {
             console.log('Papa Parse loaded successfully.');
-            // Wstrzyknięcie skryptu SheetJS po załadowaniu Papa Parse
-            if (typeof XLSX === 'undefined') {
-                const xlsxScript = document.createElement('script');
-                xlsxScript.src = 'https://unpkg.com/xlsx@0.20.0/dist/xlsx.full.min.js'; // Najnowsza wersja z unpkg
-                xlsxScript.async = true;
-                xlsxScript.onload = () => {
-                    console.log('SheetJS loaded successfully.');
-                    initializeEventListeners();
-                };
-                xlsxScript.onerror = () => {
-                    console.error('Failed to load SheetJS.');
-                    alert('Error loading SheetJS library. Please check your internet connection or try refreshing the page.');
-                };
-                document.head.appendChild(xlsxScript);
-            } else {
-                initializeEventListeners();
-            }
+            initializeEventListeners();
         };
         papaScript.onerror = () => {
             console.error('Failed to load Papa Parse.');
@@ -66,27 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         document.head.appendChild(papaScript);
     } else {
-        // Jeśli Papa jest już załadowane, sprawdź SheetJS i zainicjuj
-        if (typeof XLSX === 'undefined') {
-            const xlsxScript = document.createElement('script');
-            xlsxScript.src = 'https://unpkg.com/xlsx@0.20.0/dist/xlsx.full.min.js'; // Najnowsza wersja z unpkg
-            xlsxScript.async = true;
-            xlsxScript.onload = () => {
-                console.log('SheetJS loaded successfully.');
-                initializeEventListeners();
-            };
-            xlsxScript.onerror = () => {
-                console.error('Failed to load SheetJS.');
-                alert('Error loading SheetJS library. Please check your internet connection or try refreshing the page.');
-            };
-            document.head.appendChild(xlsxScript);
-        } else {
-            initializeEventListeners();
-        }
+        initializeEventListeners();
     }
 });
 
-// Funkcja do inicjalizacji event listeners po załadowaniu bibliotek
+// Funkcja do inicjalizacji event listeners po załadowaniu Papa Parse
 function initializeEventListeners() {
     // --- Helper Functions ---
 
@@ -145,61 +113,36 @@ function initializeEventListeners() {
     async function handleFileUpload(file, inputId) {
         const fileExtension = file.name.split('.').pop().toLowerCase();
 
+        if (fileExtension !== 'csv') {
+            alert("Unsupported file format. Please upload only CSV files.");
+            return;
+        }
+
         try {
-            let parsedData = [];
+            // Parsowanie CSV z obsługą separatorów ; i , (auto-detect lub ręczne ustawienie)
+            const parsedData = await new Promise((resolve, reject) => {
+                Papa.parse(file, {
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: 'greedy', // Pomija puste linie
+                    delimiter: [',', ';'], // Explicit obsługa separatorów , i ;
+                    complete: function (results) {
+                        if (results.errors.length > 0) {
+                            console.error("Error parsing CSV:", results.errors);
+                            reject(new Error("Error parsing CSV file."));
+                            return;
+                        }
 
-            if (fileExtension === 'csv') {
-                // Parsowanie CSV z obsługą separatorów ; i , (auto-detect lub ręczne ustawienie)
-                parsedData = await new Promise((resolve, reject) => {
-                    Papa.parse(file, {
-                        header: true,
-                        dynamicTyping: true,
-                        skipEmptyLines: 'greedy', // Pomija puste linie
-                        delimiter: [',', ';'], // Explicit obsługa separatorów , i ;
-                        complete: function (results) {
-                            if (results.errors.length > 0) {
-                                console.error("Error parsing CSV:", results.errors);
-                                reject(new Error("Error parsing CSV file."));
-                                return;
-                            }
-
-                            // Filtruj puste wiersze i wiersze z samymi pustymi wartościami
-                            const filteredData = results.data.filter(row => {
-                                return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
-                            });
-
-                            resolve(filteredData);
-                        },
-                        error: reject
-                    });
-                });
-            } else if (fileExtension === 'xls' || fileExtension === 'xlsx') {
-                // Parsowanie XLS/XLSX przy użyciu SheetJS
-                const arrayBuffer = await file.arrayBuffer();
-                const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
-                parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: true });
-
-                // Konwertuj dane na format z nagłówkami jako klucze (podobnie jak CSV)
-                if (parsedData.length > 0 && parsedData[0].length > 0) {
-                    const headers = parsedData[0].map(header => header || `Column${headers.length + 1}`); // Handle empty headers
-                    parsedData = parsedData.slice(1).map(row => {
-                        const rowData = {};
-                        headers.forEach((header, index) => {
-                            rowData[header] = row[index] !== undefined ? row[index] : '';
+                        // Filtruj puste wiersze i wiersze z samymi pustymi wartościami
+                        const filteredData = results.data.filter(row => {
+                            return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
                         });
-                        return rowData;
-                    });
 
-                    // Filtruj puste wiersze
-                    parsedData = parsedData.filter(row => {
-                        return Object.values(row).some(value => value !== null && value !== undefined && value !== "");
-                    });
-                }
-            } else {
-                throw new Error("Unsupported file format. Please upload CSV, XLS, or XLSX files.");
-            }
+                        resolve(filteredData);
+                    },
+                    error: reject
+                });
+            });
 
             // Store data in the correct part of currentData
             currentData[inputId] = parsedData;
@@ -376,7 +319,7 @@ function initializeEventListeners() {
 
     async function exportDataToFirebase() {
         if (Object.keys(currentData).every(key => currentData[key].length === 0)) {
-            alert("No data to export. Please upload a CSV, XLS, or XLSX file first.");
+            alert("No data to export. Please upload a CSV file first.");
             return;
         }
 
