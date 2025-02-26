@@ -60,9 +60,9 @@
         Strona stworzona przez MSZCorporation
     </div>
 
-    <!-- Firebase SDK (Modular Version 9+) -->
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-database.js"></script>
+    <!-- Firebase SDK (Specific Version 9.23.0 - Update if needed) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -70,7 +70,7 @@
 
     <!-- Firebase Initialization and Data Fetching -->
     <script>
-        // Your Firebase configuration (replace with your actual config from Firebase Console)
+        // Your Firebase configuration (already provided correctly in your code)
         const firebaseConfig = {
             apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
             authDomain: "webmatcher-94f0e.firebaseapp.com",
@@ -81,18 +81,15 @@
             appId: "G-RMMBEY655B"
         };
 
-        // Initialize Firebase
-        import { initializeApp } from 'firebase/app';
-        import { getDatabase, ref, onValue } from 'firebase/database';
-
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+        // Initialize Firebase (using the global Firebase object)
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
         // Reference to the 'data' node in your database
-        const dataRef = ref(database, 'data');
+        const dataRef = database.ref('data');
 
         // Fetch and display data
-        onValue(dataRef, (snapshot) => {
+        dataRef.on('value', (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 renderTable(data);
