@@ -124,7 +124,7 @@ function getDelimiterPrompt() {
 // --- Data Handling Functions ---
 
 function handleFileUpload(file, inputId) {
-    const file Extension = file.name.split('.').pop().toLowerCase();
+    const fileExtension = file.name.split('.').pop().toLowerCase(); // Poprawiona literówka: fileExtension zamiast file Extension
 
     if (fileExtension !== 'csv') {
         alert("Unsupported file format. Please upload only CSV files.");
