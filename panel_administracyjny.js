@@ -385,7 +385,152 @@ function loadData() {
         alert("Error fetching data: " + error.message);
     });
 }
-// ***** PART 3: Event Listeners and Initialization *****
+// ***** PART 3: Data Modification, Firebase Interaction, Event Listeners *****
+
+async function saveChanges() {
+    const tables = document.querySelectorAll('.preview-table');
+    const allUpdatedData = {};
+
+    for (const table of tables) {
+        const tableId = table.id;
+        const fileInputId = tableId.replace('data-table', 'fileInput');
+        allUpdatedData[fileInputId] = getDataFromTable(tableId);
+    }
+
+    const collectionName = getCollectionName(undefined, "save changes to");
+    if (!collectionName) return;
+
+    const dbRef = ref(database, collectionName);
+
+    try {
+        await set(dbRef, allUpdatedData);
+        console.log('Changes saved successfully!');
+        alert('Changes saved successfully!');
+    } catch (error) {
+        console.error('Error saving changes:', error);
+        alert('Error saving changes: ' + error.message);
+    }
+}
+
+
+
+async function deleteRow(rowIndex, tableId) {
+    const fileInputId = tableId.replace('data-table', 'fileInput');
+
+    if (confirm('Are you sure you want to delete this row?')) {
+        let actualRowIndex = rowIndex;
+        if (!isTableExpanded[fileInputId]) {
+            actualRowIndex = rowIndex;
+        }
+
+        if (actualRowIndex >= 0 && actualRowIndex < currentData[fileInputId].length) {
+            currentData[fileInputId].splice(actualRowIndex, 1);
+            displayData(currentData[fileInputId], tableId);
+        }
+    }
+}
+
+
+function sortTable(header, tableId) {
+    const fileInputId = tableId.replace('data-table', 'fileInput');
+     const table = document.getElementById(tableId);
+    const th = table.querySelector(`th[data-key="${header}"]`);
+
+    const isAscending = !th.classList.contains('sorted-desc');
+
+    const headers = table.querySelectorAll('th'); // Select ONLY within the current table
+    headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+
+    currentData[fileInputId].sort((a, b) => {
+        const valueA = (a[header] === null || a[header] === undefined) ? '' : String(a[header]).toLowerCase();
+        const valueB = (b[header] === null || b[header] === undefined) ? '' : String(b[header]).toLowerCase();
+
+        if (valueA < valueB) return isAscending ? -1 : 1;
+        if (valueA > valueB) return isAscending ? 1 : -1;
+        return 0;
+    });
+
+    displayData(currentData[fileInputId], tableId);
+     th.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
+}
+
+function toggleTable(tableId) {
+    const fileInputId = tableId.replace('data-table', 'fileInput');
+    isTableExpanded[fileInputId] = !isTableExpanded[fileInputId];
+     const wrapper = document.getElementById(tableId).closest('.element-item').querySelector('.preview-container');
+      if (isTableExpanded[fileInputId]) {
+        wrapper.classList.add('expanded');
+      } else {
+        wrapper.classList.remove('expanded');
+      }
+    displayData(currentData[fileInputId], tableId);
+}
+
+
+async function exportDataToFirebase() {
+    if (Object.keys(currentData).every(key => currentData[key].length === 0)) {
+        alert("No data to export. Please upload a CSV file first.");
+        return;
+    }
+
+    const collectionName = getCollectionName(undefined, "export to");
+    if (!collectionName) return;
+    const dbRef = ref(database, collectionName);
+
+    try {
+        const allData = {}; // Use an object to store data for each table
+        for (const inputId in currentData) {
+             if(currentData.hasOwnProperty(inputId)) {
+                allData[inputId] = currentData[inputId]; // Store data under its fileInputId
+             }
+        }
+        await set(dbRef, allData);
+        console.log('Data exported successfully!');
+        alert('Data exported successfully to collection: ' + collectionName);
+    } catch (error) {
+        console.error('Error exporting data:', error);
+        alert('Error exporting data: ' + error.message);
+    }
+}
+
+
+
+function loadData() {
+    const collectionName = getCollectionName(undefined, "load from");
+    if (!collectionName) return;
+    const dbRef = ref(database, collectionName);
+
+     onValue(dbRef, (snapshot) => {
+        if (snapshot.exists()) {
+            let loadedData = snapshot.val();
+            // Determine if loaded data is in the old array format or the new object format.
+            if (Array.isArray(loadedData)) {
+                // Old format:  Assume it's for table 1
+                currentData['fileInput1'] = loadedData;
+                displayData(loadedData, 'data-table1');
+            } else if (typeof loadedData === 'object' && loadedData !== null) {
+                // New format: Data is an object, keyed by fileInputId
+                for (let fileInputId in loadedData) {
+                    if (currentData.hasOwnProperty(fileInputId)) {
+                        currentData[fileInputId] = loadedData[fileInputId];
+                        const tableId = fileInputId.replace('fileInput', 'data-table');
+                        displayData(currentData[fileInputId], tableId);
+                    }
+                }
+            }
+        } else {
+            console.log(`No data found in collection: ${collectionName}`);
+              for (const inputId in currentData) {
+                displayData([], inputId.replace('fileInput', 'data-table'));
+            }
+        }
+    }, (error) => {
+        console.error("Error fetching data: ", error);
+        alert("Error fetching data: " + error.message);
+    });
+}
+
+// --- Event Listeners ---
 
 function attachFileInputListener(inputId) {
     document.getElementById(inputId).addEventListener('change', (event) => {
@@ -395,7 +540,7 @@ function attachFileInputListener(inputId) {
     });
 }
 
-// Attach listeners to all file input elements
+// Attach listeners to ALL file input elements
 attachFileInputListener('fileInput1');
 attachFileInputListener('fileInput2');
 attachFileInputListener('fileInput3');
@@ -424,3 +569,12 @@ document.getElementById('export-button4').addEventListener('click', exportDataTo
 document.getElementById('save-button4').addEventListener('click', saveChanges);
 document.getElementById('load-button4').addEventListener('click', loadData);
 document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
+
+// --- Clear variables (helps prevent truncation) ---
+let saveChanges = null;
+let deleteRow = null;
+let sortTable = null;
+let toggleTable = null;
+let exportDataToFirebase = null;
+let loadData = null;
+let attachFileInputListener = null;
