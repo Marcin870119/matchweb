@@ -367,5 +367,3 @@ document.getElementById('export-button4').addEventListener('click', exportDataTo
 document.getElementById('save-button4').addEventListener('click', saveChanges);
 document.getElementById('load-button4').addEventListener('click', loadData);
 document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
-
-// --- Initial Setup ---
