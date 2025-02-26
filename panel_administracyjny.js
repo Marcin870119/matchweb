@@ -86,31 +86,75 @@ function getCollectionName(defaultName = "Data", action = "perform this action")
 
 // --- Data Handling Functions ---
 
-function handleFileUpload(file, inputId) {
-    Papa.parse(file, {
-        header: true,
-        dynamicTyping: true,
-        skipEmptyLines: 'greedy', // Skip completely empty lines
-        complete: function (results) {
-            if (results.errors.length > 0) {
-                console.error("Error parsing CSV:", results.errors);
-                alert("Error parsing CSV file. See console for details.");
-                return;
-            }
+async function handleFileUpload(file, inputId) {
+    const fileExtension = file.name.split('.').pop().toLowerCase();
 
-            // Filter out empty rows
-            const filteredData = results.data.filter(row => {
-                return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
+    try {
+        let parsedData = [];
+
+        if (fileExtension === 'csv') {
+            // Parsowanie CSV z ignorem separatorów ; i , (używając domyślnego separatora lub tabulacji)
+            parsedData = await new Promise((resolve, reject) => {
+                Papa.parse(file, {
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: 'greedy', // Pomija puste linie
+                    delimiter: '', // Auto-detect separator (ignoruje ; i ,)
+                    complete: function (results) {
+                        if (results.errors.length > 0) {
+                            console.error("Error parsing CSV:", results.errors);
+                            reject(new Error("Error parsing CSV file."));
+                            return;
+                        }
+
+                        // Filtruj puste wiersze i wiersze z samymi pustymi wartościami
+                        const filteredData = results.data.filter(row => {
+                            return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
+                        });
+
+                        resolve(filteredData);
+                    },
+                    error: reject
+                });
             });
+        } else if (fileExtension === 'xls' || fileExtension === 'xlsx') {
+            // Parsowanie XLS/XLSX przy użyciu SheetJS
+            const arrayBuffer = await file.arrayBuffer();
+            const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: true });
 
-            // Store data in the correct part of currentData
-            currentData[inputId] = filteredData;
+            // Konwertuj dane na format z nagłówkami jako klucze (podobnie jak CSV)
+            if (parsedData.length > 0 && parsedData[0].length > 0) {
+                const headers = parsedData[0];
+                parsedData = parsedData.slice(1).map(row => {
+                    const rowData = {};
+                    headers.forEach((header, index) => {
+                        rowData[header] = row[index] !== undefined ? row[index] : '';
+                    });
+                    return rowData;
+                });
 
-            // Display data in the appropriate table
-            const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
-            displayData(filteredData, tableId);
+                // Filtruj puste wiersze
+                parsedData = parsedData.filter(row => {
+                    return Object.values(row).some(value => value !== null && value !== undefined && value !== "");
+                });
+            }
+        } else {
+            throw new Error("Unsupported file format. Please upload CSV, XLS, or XLSX files.");
         }
-    });
+
+        // Store data in the correct part of currentData
+        currentData[inputId] = parsedData;
+
+        // Display data in the appropriate table
+        const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
+        displayData(parsedData, tableId);
+    } catch (error) {
+        console.error('Error processing file:', error);
+        alert('Error processing file: ' + error.message);
+    }
 }
 
 function displayData(data, tableId) {
@@ -127,7 +171,7 @@ function displayData(data, tableId) {
         return;
     }
 
-    const headers = Object.keys(data[0]);
+    const headers = Object.keys(data[0] || {});
     headers.forEach(header => {
         const th = document.createElement('th');
         th.textContent = header;
@@ -276,7 +320,7 @@ function toggleTable(tableId) {
 
 async function exportDataToFirebase() {
     if (Object.keys(currentData).every(key => currentData[key].length === 0)) {
-        alert("No data to export. Please upload a CSV file first.");
+        alert("No data to export. Please upload a CSV, XLS, or XLSX file first.");
         return;
     }
 
@@ -368,4 +412,5 @@ document.getElementById('save-button4').addEventListener('click', saveChanges);
 document.getElementById('load-button4').addEventListener('click', loadData);
 document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
 
-// --- Initial Setup ---
+// --- Import SheetJS for XLS/XLSX support ---
+import * as XLSX from 'https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.mjs';
