@@ -111,6 +111,15 @@ function getCollectionName(defaultName = "Data", action = "perform this action")
     return collectionName.trim();
 }
 
+// Function to prompt for delimiter if auto-detection fails.
+function getDelimiterPrompt() {
+    const delimiter = prompt("Unable to detect delimiter automatically. Please enter the delimiter (e.g., ',' for comma, ';' for semicolon, or 'tab' for tab):", ",");
+    if (!delimiter || delimiter.trim() === "") {
+        return null;
+    }
+    return delimiter.trim() === "tab" ? "\t" : delimiter.trim();
+}
+
 // --- Data Handling Functions ---
 
 function handleFileUpload(file, inputId) {
@@ -121,117 +130,149 @@ function handleFileUpload(file, inputId) {
         return;
     }
 
+    // Try parsing with auto-detection first
     Papa.parse(file, {
         header: true,
         dynamicTyping: true,
         skipEmptyLines: 'greedy', // Skip completely empty lines
-        delimiter: '', // Auto-detect delimiter, trying to ignore , and ; as default
+        delimiter: '', // Auto-detect delimiter
         fastMode: false, // Use strict parsing for better accuracy
         complete: function (results) {
-            if (results.errors.length > 0) {
-                console.error("Error parsing CSV:", results.errors);
-                // Sprawdź szczegółowe błędy i dostosuj komunikat
-                if (results.errors.some(error => error.code === "UndetectableDelimiter")) {
-                    alert("Error parsing CSV file: Unable to detect delimiter. Please ensure a consistent separator (e.g., , ; or tab) is used. See console for details.");
-                } else if (results.errors.some(error => error.code === "TooManyFields")) {
-                    alert("Error parsing CSV file: Too many fields in some rows. Please ensure all rows match the number of headers. See console for details.");
-                } else if (results.errors.some(error => error.code === "TooFewFields")) {
-                    alert("Error parsing CSV file: Too few fields in some rows. Please ensure all rows match the number of headers. See console for details.");
-                } else if (results.errors.some(error => error.type === "Array")) {
-                    alert("Error parsing CSV file: Invalid CSV format or empty file. Ensure the file has headers and data. See console for details.");
-                } else {
-                    alert("Error parsing CSV file. See console for details.");
-                }
-                return;
-            }
-
-            // Log the detected delimiter for debugging
-            console.log("Detected delimiter in CSV:", results.meta.delimiter);
-
-            // Sprawdź, czy dane mają nagłówki
-            if (!results.meta.fields || results.meta.fields.length === 0) {
-                console.error("No headers found in CSV file.");
-                alert("Error parsing CSV file: No headers found in the file. Ensure the first row contains headers.");
-                return;
-            }
-
-            // Sprawdź, czy liczba pól w każdym wierszu zgadza się z liczbą nagłówków
-            const headerCount = results.meta.fields.length;
-            const fieldMismatchDetails = results.data.reduce((acc, row, index) => {
-                const rowFields = Object.values(row).filter(value => value !== null && value !== undefined && value !== "").length;
-                if (rowFields !== headerCount) {
-                    acc.push(`Row ${index + 2} has ${rowFields} fields, but headers have ${headerCount}.`);
-                }
-                return acc;
-            }, []);
-
-            if (fieldMismatchDetails.length > 0) {
-                console.error("Field mismatch detected:", fieldMismatchDetails);
-                alert(`Error parsing CSV file: Some rows have more or fewer fields than headers. Please ensure all rows match the header structure. Details:\n${fieldMismatchDetails.join('\n')}`);
-                return;
-            }
-
-            // Check for invalid headers *before* creating the data
-            const invalidHeaders = results.meta.fields.filter(header => !isValidDataKey(header));
-            if (invalidHeaders.length > 0) {
-                const sanitizedHeaders = results.meta.fields.map(sanitizeKey).filter(isValidDataKey);
-                if (sanitizedHeaders.length === 0) {
-                    alert(`Invalid headers found in CSV: ${invalidHeaders.join(', ')}. Please fix the CSV file.`);
+            if (results.errors.length > 0 && results.errors.some(error => error.code === "UndetectableDelimiter")) {
+                // If auto-detection fails, prompt for delimiter
+                const customDelimiter = getDelimiterPrompt();
+                if (!customDelimiter) {
+                    alert("No delimiter provided. Please try again with a valid delimiter.");
                     return;
                 }
-                console.warn("Sanitizing invalid headers:", { original: results.meta.fields, sanitized: sanitizedHeaders });
-                results.meta.fields = sanitizedHeaders;
+
+                // Retry parsing with the user-provided delimiter
+                Papa.parse(file, {
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: 'greedy',
+                    delimiter: customDelimiter,
+                    fastMode: false,
+                    complete: handleParseResults(results, inputId),
+                    error: function (error) {
+                        console.error('Error processing CSV file with custom delimiter:', error);
+                        alert('Error processing CSV file with custom delimiter: ' + (error.message || 'Unknown error occurred. See console for details.'));
+                    }
+                });
+                return;
             }
 
-            // Adjust data rows to use sanitized headers
-            const headerMap = {};
-            results.meta.fields.forEach((sanitizedHeader, index) => {
-                headerMap[results.meta.fields[index]] = sanitizedHeader;
-            });
-
-            const adjustedData = results.data.map(row => {
-                const newRow = {};
-                for (let key in row) {
-                    if (isValidDataKey(key)) {
-                        newRow[key] = row[key];
-                    } else {
-                        const sanitizedKey = sanitizeKey(key);
-                        if (isValidDataKey(sanitizedKey)) {
-                            newRow[sanitizedKey] = row[key];
-                        }
-                    }
-                }
-                return newRow;
-            });
-
-            // Filter out empty rows AND rows with invalid keys
-            const filteredData = adjustedData.filter(row => {
-                if (!row) return false; // Skip null/undefined rows
-
-                // Check if every key in the row is valid
-                for (const key in row) {
-                    if (!isValidDataKey(key)) {
-                        return false;
-                    }
-                }
-
-                return Object.values(row).some(value => value !== null && value !== undefined && value !== "");
-            });
-
-            console.log("Parsed and filtered CSV data with sanitized keys:", filteredData);
-
-            // Store data in the correct part of currentData
-            currentData[inputId] = filteredData;
-
-            // Display data in the appropriate table
-            const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
-            displayData(filteredData, tableId);
+            handleParseResults(results, inputId)();
         },
         error: function (error) {
             console.error('Error processing CSV file:', error);
             alert('Error processing CSV file: ' + (error.message || 'Unknown error occurred. See console for details.'));
         }
     });
+}
+
+// Helper function to handle parsing results
+function handleParseResults(results, inputId) {
+    return function () {
+        if (results.errors.length > 0) {
+            console.error("Error parsing CSV:", results.errors);
+            // Sprawdź szczegółowe błędy i dostosuj komunikat
+            if (results.errors.some(error => error.code === "UndetectableDelimiter")) {
+                alert("Error parsing CSV file: Unable to detect delimiter. Please try specifying a delimiter (e.g., , ; or tab). See console for details.");
+            } else if (results.errors.some(error => error.code === "TooManyFields")) {
+                alert("Error parsing CSV file: Too many fields in some rows. Please ensure all rows match the number of headers. See console for details.");
+            } else if (results.errors.some(error => error.code === "TooFewFields")) {
+                alert("Error parsing CSV file: Too few fields in some rows. Please ensure all rows match the number of headers. See console for details.");
+            } else if (results.errors.some(error => error.type === "Array")) {
+                alert("Error parsing CSV file: Invalid CSV format or empty file. Ensure the file has headers and data. See console for details.");
+            } else {
+                alert("Error parsing CSV file. See console for details.");
+            }
+            return;
+        }
+
+        // Log the detected delimiter for debugging
+        console.log("Detected delimiter in CSV:", results.meta.delimiter);
+
+        // Sprawdź, czy dane mają nagłówki
+        if (!results.meta.fields || results.meta.fields.length === 0) {
+            console.error("No headers found in CSV file.");
+            alert("Error parsing CSV file: No headers found in the file. Ensure the first row contains headers.");
+            return;
+        }
+
+        // Sprawdź, czy liczba pól w każdym wierszu zgadza się z liczbą nagłówków
+        const headerCount = results.meta.fields.length;
+        const fieldMismatchDetails = results.data.reduce((acc, row, index) => {
+            const rowFields = Object.values(row).filter(value => value !== null && value !== undefined && value !== "").length;
+            if (rowFields !== headerCount) {
+                acc.push(`Row ${index + 2} has ${rowFields} fields, but headers have ${headerCount}.`);
+            }
+            return acc;
+        }, []);
+
+        if (fieldMismatchDetails.length > 0) {
+            console.error("Field mismatch detected:", fieldMismatchDetails);
+            alert(`Error parsing CSV file: Some rows have more or fewer fields than headers. Please ensure all rows match the header structure. Details:\n${fieldMismatchDetails.join('\n')}`);
+            return;
+        }
+
+        // Check for invalid headers *before* creating the data
+        const invalidHeaders = results.meta.fields.filter(header => !isValidDataKey(header));
+        if (invalidHeaders.length > 0) {
+            const sanitizedHeaders = results.meta.fields.map(sanitizeKey).filter(isValidDataKey);
+            if (sanitizedHeaders.length === 0) {
+                alert(`Invalid headers found in CSV: ${invalidHeaders.join(', ')}. Please fix the CSV file.`);
+                return;
+            }
+            console.warn("Sanitizing invalid headers:", { original: results.meta.fields, sanitized: sanitizedHeaders });
+            results.meta.fields = sanitizedHeaders;
+        }
+
+        // Adjust data rows to use sanitized headers
+        const headerMap = {};
+        results.meta.fields.forEach((sanitizedHeader, index) => {
+            headerMap[results.meta.fields[index]] = sanitizedHeader;
+        });
+
+        const adjustedData = results.data.map(row => {
+            const newRow = {};
+            for (let key in row) {
+                if (isValidDataKey(key)) {
+                    newRow[key] = row[key];
+                } else {
+                    const sanitizedKey = sanitizeKey(key);
+                    if (isValidDataKey(sanitizedKey)) {
+                        newRow[sanitizedKey] = row[key];
+                    }
+                }
+            }
+            return newRow;
+        });
+
+        // Filter out empty rows AND rows with invalid keys
+        const filteredData = adjustedData.filter(row => {
+            if (!row) return false; // Skip null/undefined rows
+
+            // Check if every key in the row is valid
+            for (const key in row) {
+                if (!isValidDataKey(key)) {
+                    return false;
+                }
+            }
+
+            return Object.values(row).some(value => value !== null && value !== undefined && value !== "");
+        });
+
+        console.log("Parsed and filtered CSV data with sanitized keys:", filteredData);
+
+        // Store data in the correct part of currentData
+        currentData[inputId] = filteredData;
+
+        // Display data in the appropriate table
+        const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
+        displayData(filteredData, tableId);
+    };
 }
 
 function displayData(data, tableId) {
