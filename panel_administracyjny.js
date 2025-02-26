@@ -1,5 +1,6 @@
+// Import Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -16,7 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Store current data for *each* table.  This is an OBJECT, not an array.
+// Store current data for each table. This is an OBJECT, not an array.
 const currentData = {
     'fileInput1': [],
     'fileInput2': [],
@@ -24,7 +25,7 @@ const currentData = {
     'fileInput4': []
 };
 
-// Track table expansion state for *each* table.  Also an OBJECT.
+// Track table expansion state for each table. Also an OBJECT.
 const isTableExpanded = {
     'fileInput1': false,
     'fileInput2': false,
@@ -64,7 +65,7 @@ function sanitizeKey(key) {
     return key.replace(/[.$[\]#/]/g, '_').trim();
 }
 
-// Utility function to get data from the table.  Now takes tableId as argument.
+// Utility function to get data from the table. Now takes tableId as argument.
 function getDataFromTable(tableId) {
     const table = document.getElementById(tableId);
     const rows = table.querySelectorAll('tbody tr');
@@ -602,3 +603,26 @@ document.getElementById('load-button4').addEventListener('click', loadData);
 document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
 
 // --- Initial Setup ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Dynamiczne ładowanie Papa Parse
+    if (typeof Papa === 'undefined') {
+        const papaScript = document.createElement('script');
+        papaScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js';
+        papaScript.async = true;
+        papaScript.onload = () => {
+            console.log('Papa Parse loaded successfully.');
+            initializeEventListeners();
+        };
+        papaScript.onerror = () => {
+            console.error('Failed to load Papa Parse.');
+            alert('Error loading Papa Parse library. Please check your internet connection or try refreshing the page.');
+        };
+        document.head.appendChild(papaScript);
+    } else {
+        initializeEventListeners();
+    }
+});
+
+function initializeEventListeners() {
+    // Event listeners for file inputs and buttons are already defined above
+}
