@@ -124,52 +124,63 @@ function getDelimiterPrompt() {
 // --- Data Handling Functions ---
 
 function handleFileUpload(file, inputId) {
-    const fileExtension = file.name.split('.').pop().toLowerCase();
+    const file Extension = file.name.split('.').pop().toLowerCase();
 
     if (fileExtension !== 'csv') {
         alert("Unsupported file format. Please upload only CSV files.");
         return;
     }
 
-    // Try parsing with auto-detection first
-    Papa.parse(file, {
-        header: true,
-        dynamicTyping: true,
-        skipEmptyLines: 'greedy', // Skip completely empty lines
-        delimiter: '', // Auto-detect delimiter
-        fastMode: false, // Use strict parsing for better accuracy
-        complete: function (results) {
-            if (results.errors.length > 0 && results.errors.some(error => error.code === "UndetectableDelimiter")) {
-                // If auto-detection fails, prompt for delimiter
-                const customDelimiter = getDelimiterPrompt();
-                if (!customDelimiter) {
-                    alert("No delimiter provided. Please try again with a valid delimiter.");
+    // Try parsing with auto-detection first, with fallback to common delimiters
+    const tryDelimiters = ['', ',', ';', '\t']; // Try auto-detect, then comma, semicolon, and tab
+    let parsedSuccessfully = false;
+
+    for (const delimiter of tryDelimiters) {
+        Papa.parse(file, {
+            header: true,
+            dynamicTyping: true,
+            skipEmptyLines: 'greedy', // Skip completely empty lines
+            delimiter: delimiter, // Try each delimiter
+            fastMode: false, // Use strict parsing for better accuracy
+            complete: function (results) {
+                if (results.errors.length > 0 && !parsedSuccessfully) {
+                    if (delimiter === tryDelimiters[tryDelimiters.length - 1]) {
+                        // If we've tried all delimiters, prompt for custom delimiter
+                        const customDelimiter = getDelimiterPrompt();
+                        if (!customDelimiter) {
+                            alert("No delimiter provided. Please try again with a valid delimiter.");
+                            return;
+                        }
+
+                        // Retry with user-provided delimiter
+                        Papa.parse(file, {
+                            header: true,
+                            dynamicTyping: true,
+                            skipEmptyLines: 'greedy',
+                            delimiter: customDelimiter,
+                            fastMode: false,
+                            complete: handleParseResults(results, inputId),
+                            error: function (error) {
+                                console.error('Error processing CSV file with custom delimiter:', error);
+                                alert('Error processing CSV file with custom delimiter: ' + (error.message || 'Unknown error occurred. See console for details.'));
+                            }
+                        });
+                    }
                     return;
                 }
 
-                // Retry parsing with the user-provided delimiter
-                Papa.parse(file, {
-                    header: true,
-                    dynamicTyping: true,
-                    skipEmptyLines: 'greedy',
-                    delimiter: customDelimiter,
-                    fastMode: false,
-                    complete: handleParseResults(results, inputId),
-                    error: function (error) {
-                        console.error('Error processing CSV file with custom delimiter:', error);
-                        alert('Error processing CSV file with custom delimiter: ' + (error.message || 'Unknown error occurred. See console for details.'));
-                    }
-                });
-                return;
+                parsedSuccessfully = true;
+                handleParseResults(results, inputId)();
+            },
+            error: function (error) {
+                console.error(`Error processing CSV file with delimiter '${delimiter}':`, error);
+                if (delimiter === tryDelimiters[tryDelimiters.length - 1] && !parsedSuccessfully) {
+                    alert('Error processing CSV file: Unable to parse with default delimiters. Please specify a delimiter. See console for details.');
+                }
             }
-
-            handleParseResults(results, inputId)();
-        },
-        error: function (error) {
-            console.error('Error processing CSV file:', error);
-            alert('Error processing CSV file: ' + (error.message || 'Unknown error occurred. See console for details.'));
-        }
-    });
+        });
+        if (parsedSuccessfully) break;
+    }
 }
 
 // Helper function to handle parsing results
@@ -180,10 +191,19 @@ function handleParseResults(results, inputId) {
             // Sprawdź szczegółowe błędy i dostosuj komunikat
             if (results.errors.some(error => error.code === "UndetectableDelimiter")) {
                 alert("Error parsing CSV file: Unable to detect delimiter. Please try specifying a delimiter (e.g., , ; or tab). See console for details.");
-            } else if (results.errors.some(error => error.code === "TooManyFields")) {
-                alert("Error parsing CSV file: Too many fields in some rows. Please ensure all rows match the number of headers. See console for details.");
-            } else if (results.errors.some(error => error.code === "TooFewFields")) {
-                alert("Error parsing CSV file: Too few fields in some rows. Please ensure all rows match the number of headers. See console for details.");
+            } else if (results.errors.some(error => error.code === "TooManyFields" || error.code === "TooFewFields")) {
+                // Sprawdź szczegółowe dane o niezgodnościach
+                const fieldMismatchDetails = results.data.reduce((acc, row, index) => {
+                    const headerCount = results.meta.fields.length;
+                    const rowFields = Object.values(row).filter(value => value !== null && value !== undefined && value !== "").length;
+                    if (rowFields !== headerCount) {
+                        acc.push(`Row ${index + 2} has ${rowFields} fields, but headers have ${headerCount}.`);
+                    }
+                    return acc;
+                }, []);
+
+                console.error("Field mismatch details:", fieldMismatchDetails);
+                alert(`Error parsing CSV file: Some rows have more or fewer fields than headers. Please ensure all rows match the header structure. Details:\n${fieldMismatchDetails.join('\n')}\nTry adjusting the delimiter or fixing the CSV file (ensure consistent fields and separators).`);
             } else if (results.errors.some(error => error.type === "Array")) {
                 alert("Error parsing CSV file: Invalid CSV format or empty file. Ensure the file has headers and data. See console for details.");
             } else {
@@ -214,7 +234,7 @@ function handleParseResults(results, inputId) {
 
         if (fieldMismatchDetails.length > 0) {
             console.error("Field mismatch detected:", fieldMismatchDetails);
-            alert(`Error parsing CSV file: Some rows have more or fewer fields than headers. Please ensure all rows match the header structure. Details:\n${fieldMismatchDetails.join('\n')}`);
+            alert(`Error parsing CSV file: Some rows have more or fewer fields than headers. Please ensure all rows match the header structure. Details:\n${fieldMismatchDetails.join('\n')}\nTry adjusting the delimiter or fixing the CSV file (ensure consistent fields and separators).`);
             return;
         }
 
