@@ -222,11 +222,12 @@ async function saveChanges() {
     const dbRef = ref(database, collectionName);
 
     try {
+        console.log("Data to be saved:", allUpdatedData); // *** CRITICAL DEBUGGING LINE ***
         await set(dbRef, allUpdatedData); // Save the object
         console.log('Changes saved successfully!');
         alert('Changes saved successfully!');
     } catch (error) {
-        console.error('Error saving changes:', error);
+        console.error('Error saving changes:', error); // Log the full error object
         alert('Error saving changes: ' + error.message);
     }
 }
@@ -299,11 +300,12 @@ async function exportDataToFirebase() {
             allData[tableId] = currentData[inputId];  //  "data-table1": [...]
         }
 
+        console.log("Data to be exported:", allData); // *** CRITICAL DEBUGGING LINE ***
         await set(dbRef, allData);  // Store the *object*, not a giant array
         console.log('Data exported successfully!');
         alert('Data exported successfully to collection: ' + collectionName);
     } catch (error) {
-        console.error('Error exporting data:', error);
+        console.error('Error exporting data:', error); // Log the full error object
         alert('Error exporting data: ' + error.message);
     }
 }
