@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-// Firebase configuration (REPLACE WITH YOUR ACTUAL CONFIGURATION)
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
     authDomain: "webmatcher-94f0e.firebaseapp.com",
@@ -24,7 +24,7 @@ const currentData = {
     'fileInput4': []
 };
 
-// Track table expansion state for *each* table.  Also an OBJECT.
+// Track table expansion state for *each* table.  Also an OBJECT.
 const isTableExpanded = {
     'fileInput1': false,
     'fileInput2': false,
@@ -49,10 +49,22 @@ function isValidCollectionName(name) {
 
 // Utility function to validate data keys (from CSV headers or table headers).
 function isValidDataKey(key) {
-    return key !== null && key !== undefined && key.trim() !== "" && !(/[.$[\]#/]/.test(key));
+    if (!key || key.trim() === "") {
+        return false; // Keys cannot be empty
+    }
+    if (/[.$[\]#/]/.test(key)) {
+        return false; // Keys cannot contain special characters
+    }
+    return true;
 }
 
-// Utility function to get data from the table.  Now takes tableId as argument.
+// Utility function to sanitize keys (replace invalid characters with underscores or remove them).
+function sanitizeKey(key) {
+    if (!key) return "default_key"; // Default if key is empty
+    return key.replace(/[.$[\]#/]/g, '_').trim();
+}
+
+// Utility function to get data from the table.  Now takes tableId as argument.
 function getDataFromTable(tableId) {
     const table = document.getElementById(tableId);
     const rows = table.querySelectorAll('tbody tr');
@@ -73,6 +85,14 @@ function getDataFromTable(tableId) {
                 }
             } else if (header) {
                 console.warn(`Invalid header found in table ${tableId}:`, header);
+                const sanitizedHeader = sanitizeKey(header);
+                if (isValidDataKey(sanitizedHeader)) {
+                    const cellValue = cell.textContent.trim();
+                    rowData[sanitizedHeader] = cellValue;
+                    if (cellValue !== "") {
+                        hasData = true;
+                    }
+                }
             }
         }
         if (hasData) {
@@ -94,10 +114,18 @@ function getCollectionName(defaultName = "Data", action = "perform this action")
 // --- Data Handling Functions ---
 
 function handleFileUpload(file, inputId) {
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+    if (fileExtension !== 'csv') {
+        alert("Unsupported file format. Please upload only CSV files.");
+        return;
+    }
+
     Papa.parse(file, {
         header: true,
         dynamicTyping: true,
         skipEmptyLines: 'greedy', // Skip completely empty lines
+        delimiter: [',', ';'], // Explicit handling of both , and ; separators
         complete: function (results) {
             if (results.errors.length > 0) {
                 console.error("Error parsing CSV:", results.errors);
@@ -108,17 +136,43 @@ function handleFileUpload(file, inputId) {
             // Check for invalid headers *before* creating the data
             const invalidHeaders = results.meta.fields.filter(header => !isValidDataKey(header));
             if (invalidHeaders.length > 0) {
-                alert(`Invalid headers found in CSV: ${invalidHeaders.join(', ')}.  Please fix the CSV file.`);
-                return;
+                const sanitizedHeaders = results.meta.fields.map(sanitizeKey).filter(isValidDataKey);
+                if (sanitizedHeaders.length === 0) {
+                    alert(`Invalid headers found in CSV: ${invalidHeaders.join(', ')}. Please fix the CSV file.`);
+                    return;
+                }
+                console.warn("Sanitizing invalid headers:", { original: results.meta.fields, sanitized: sanitizedHeaders });
+                results.meta.fields = sanitizedHeaders;
             }
 
+            // Adjust data rows to use sanitized headers
+            const headerMap = {};
+            results.meta.fields.forEach((sanitizedHeader, index) => {
+                headerMap[results.meta.fields[index]] = sanitizedHeader;
+            });
+
+            const adjustedData = results.data.map(row => {
+                const newRow = {};
+                for (let key in row) {
+                    if (isValidDataKey(key)) {
+                        newRow[key] = row[key];
+                    } else {
+                        const sanitizedKey = sanitizeKey(key);
+                        if (isValidDataKey(sanitizedKey)) {
+                            newRow[sanitizedKey] = row[key];
+                        }
+                    }
+                }
+                return newRow;
+            });
+
             // Filter out empty rows AND rows with invalid keys
-            const filteredData = results.data.filter(row => {
+            const filteredData = adjustedData.filter(row => {
                 if (!row) return false; // Skip null/undefined rows
 
-                //Check if every key in the row is valid
-                for (const key in row){
-                    if(!isValidDataKey(key)){
+                // Check if every key in the row is valid
+                for (const key in row) {
+                    if (!isValidDataKey(key)) {
                         return false;
                     }
                 }
@@ -126,15 +180,22 @@ function handleFileUpload(file, inputId) {
                 return Object.values(row).some(value => value !== null && value !== undefined && value !== "");
             });
 
+            console.log("Parsed and filtered CSV data with sanitized keys:", filteredData);
+
             // Store data in the correct part of currentData
             currentData[inputId] = filteredData;
 
             // Display data in the appropriate table
             const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
             displayData(filteredData, tableId);
+        },
+        error: function (error) {
+            console.error('Error processing CSV file:', error);
+            alert('Error processing CSV file: ' + (error.message || 'Unknown error occurred. See console for details.'));
         }
     });
 }
+
 function displayData(data, tableId) {
     const table = document.getElementById(tableId);
     const thead = table.querySelector('thead tr');
@@ -150,7 +211,6 @@ function displayData(data, tableId) {
     }
 
     const headers = Object.keys(data[0]);
-     // Add header validation *here* as well, in case data was loaded from Firebase
     const validHeaders = headers.filter(isValidDataKey);
 
     validHeaders.forEach(header => {
@@ -173,7 +233,7 @@ function displayData(data, tableId) {
 
     dataToShow.forEach((item, rowIndex) => {
         const row = document.createElement('tr');
-        validHeaders.forEach(header => { //Use valid headers here
+        validHeaders.forEach(header => {
             const cell = document.createElement('td');
             cell.textContent = item[header] !== null && item[header] !== undefined ? item[header] : '';
             cell.setAttribute('data-header', header);
@@ -193,7 +253,7 @@ function displayData(data, tableId) {
         tbody.appendChild(row);
     });
 
-     // Dodaj scrollowanie dla rozwiniętej tabeli
+    // Dodaj scrollowanie dla rozwiniętej tabeli
     if (expanded) {
         wrapper.classList.add('expanded');
     } else {
@@ -206,14 +266,13 @@ function displayData(data, tableId) {
     }
 }
 
-
 async function saveChanges() {
     const tables = document.querySelectorAll('.preview-table');
-    const allUpdatedData = {};  // Store as an object, not an array
+    const allUpdatedData = {};
 
     for (const table of tables) {
         const tableId = table.id;
-        allUpdatedData[tableId] = getDataFromTable(tableId); // Key by table ID
+        allUpdatedData[tableId] = getDataFromTable(tableId);
     }
 
     const collectionName = getCollectionName(undefined, "save changes to");
@@ -222,30 +281,84 @@ async function saveChanges() {
     const dbRef = ref(database, collectionName);
 
     try {
-        console.log("Data to be saved:", allUpdatedData); // *** CRITICAL DEBUGGING LINE ***
-        await set(dbRef, allUpdatedData); // Save the object
+        // Sanitize all data before saving
+        const sanitizedData = {};
+        for (const tableId in allUpdatedData) {
+            sanitizedData[tableId] = allUpdatedData[tableId].map(row => {
+                const sanitizedRow = {};
+                for (const key in row) {
+                    if (isValidDataKey(key)) {
+                        sanitizedRow[key] = row[key];
+                    } else {
+                        const sanitizedKey = sanitizeKey(key);
+                        if (isValidDataKey(sanitizedKey)) {
+                            sanitizedRow[sanitizedKey] = row[key];
+                        }
+                    }
+                }
+                return sanitizedRow;
+            });
+        }
+
+        console.log("Sanitized data to be saved:", sanitizedData);
+        await set(dbRef, sanitizedData);
         console.log('Changes saved successfully!');
         alert('Changes saved successfully!');
     } catch (error) {
-        console.error('Error saving changes:', error); // Log the full error object
+        console.error('Error saving changes:', error);
         alert('Error saving changes: ' + error.message);
     }
 }
 
-
 async function deleteRow(rowIndex, tableId) {
     const fileInputId = tableId.replace('data-table', 'fileInput');
-    // NO collectionName prompt here.  We're modifying the *in-memory* data.
-    // The saveChanges function will handle saving to Firebase.
+    const collectionName = getCollectionName(undefined, "delete from");
+    if (!collectionName) return;
+
+    const dbRef = ref(database, collectionName);
+
+    let adjustedRowIndex;
+    if (!isTableExpanded[fileInputId]) {
+        const tableRows = document.querySelectorAll(`#${tableId} tbody tr`);
+        if (rowIndex < tableRows.length) {
+            adjustedRowIndex = rowIndex;
+        }
+    } else {
+        adjustedRowIndex = rowIndex;
+    }
 
     if (confirm('Are you sure you want to delete this row?')) {
-      if (rowIndex >= 0 && rowIndex < currentData[fileInputId].length) {
-            currentData[fileInputId].splice(rowIndex, 1);
-            displayData(currentData[fileInputId], tableId); // Re-render the table
+        if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData[fileInputId].length) {
+            currentData[fileInputId].splice(adjustedRowIndex, 1);
+            displayData(currentData[fileInputId], tableId);
+        }
+
+        try {
+            // Sanitize data before saving
+            const sanitizedData = currentData[fileInputId].map(row => {
+                const sanitizedRow = {};
+                for (const key in row) {
+                    if (isValidDataKey(key)) {
+                        sanitizedRow[key] = row[key];
+                    } else {
+                        const sanitizedKey = sanitizeKey(key);
+                        if (isValidDataKey(sanitizedKey)) {
+                            sanitizedRow[sanitizedKey] = row[key];
+                        }
+                    }
+                }
+                return sanitizedRow;
+            });
+
+            await set(dbRef, sanitizedData);
+            console.log('Row deleted successfully!');
+            alert('Row deleted successfully from: ' + collectionName);
+        } catch (error) {
+            console.error('Error deleting row:', error);
+            alert('Error deleting row: ' + error.message);
         }
     }
 }
-
 
 function sortTable(header, tableId) {
     const fileInputId = tableId.replace('data-table', 'fileInput');
@@ -297,15 +410,29 @@ async function exportDataToFirebase() {
         const allData = {};
         for (const inputId in currentData) {
             const tableId = inputId.replace('fileInput', 'data-table');
-            allData[tableId] = currentData[inputId];  //  "data-table1": [...]
+            const sanitizedData = currentData[inputId].map(row => {
+                const sanitizedRow = {};
+                for (const key in row) {
+                    if (isValidDataKey(key)) {
+                        sanitizedRow[key] = row[key];
+                    } else {
+                        const sanitizedKey = sanitizeKey(key);
+                        if (isValidDataKey(sanitizedKey)) {
+                            sanitizedRow[sanitizedKey] = row[key];
+                        }
+                    }
+                }
+                return sanitizedRow;
+            });
+            allData[tableId] = sanitizedData;
         }
 
-        console.log("Data to be exported:", allData); // *** CRITICAL DEBUGGING LINE ***
-        await set(dbRef, allData);  // Store the *object*, not a giant array
+        console.log("Sanitized data to be exported:", allData);
+        await set(dbRef, allData);
         console.log('Data exported successfully!');
         alert('Data exported successfully to collection: ' + collectionName);
     } catch (error) {
-        console.error('Error exporting data:', error); // Log the full error object
+        console.error('Error exporting data:', error);
         alert('Error exporting data: ' + error.message);
     }
 }
@@ -324,15 +451,29 @@ function loadData() {
                 for (let tableId in loadedData) {
                     const fileInputId = tableId.replace('data-table', 'fileInput');
                     if (currentData.hasOwnProperty(fileInputId)) {
-                        currentData[fileInputId] = loadedData[tableId];
-                        displayData(loadedData[tableId], tableId);
+                        // Sanitize loaded data
+                        const sanitizedData = loadedData[tableId].map(row => {
+                            const sanitizedRow = {};
+                            for (const key in row) {
+                                if (isValidDataKey(key)) {
+                                    sanitizedRow[key] = row[key];
+                                } else {
+                                    const sanitizedKey = sanitizeKey(key);
+                                    if (isValidDataKey(sanitizedKey)) {
+                                        sanitizedRow[sanitizedKey] = row[key];
+                                    }
+                                }
+                            }
+                            return sanitizedRow;
+                        });
+                        currentData[fileInputId] = sanitizedData;
+                        displayData(sanitizedData, tableId);
                     }
                 }
             } else {
                 console.error("Loaded data is not in the expected object format.");
-                alert("Error: Loaded data is not in the expected format.  Expected an object with table data.");
+                alert("Error: Loaded data is not in the expected format. Expected an object with table data.");
             }
-
         } else {
             console.log(`No data found in collection: ${collectionName}`);
             // Clear all tables
@@ -345,6 +486,7 @@ function loadData() {
         alert("Error fetching data: " + error.message);
     });
 }
+
 // --- Event Listeners ---
 
 function attachFileInputListener(inputId) {
@@ -379,3 +521,5 @@ document.getElementById('export-button4').addEventListener('click', exportDataTo
 document.getElementById('save-button4').addEventListener('click', saveChanges);
 document.getElementById('load-button4').addEventListener('click', loadData);
 document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
+
+// --- Initial Setup ---
