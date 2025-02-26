@@ -60,9 +60,9 @@
         Strona stworzona przez MSZCorporation
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <!-- Firebase SDK (Modular Version 9+) -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-database.js"></script>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -73,30 +73,33 @@
         // Your Firebase configuration (replace with your actual config from Firebase Console)
         const firebaseConfig = {
             apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
-    authDomain: "webmatcher-94f0e.firebaseapp.com",
-    databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "webmatcher-94f0e",
-    storageBucket: "webmatcher-94f0e.firebasestorage.app",
-    messagingSenderId: "970664630623",
-    appId: "G-RMMBEY655B"
+            authDomain: "webmatcher-94f0e.firebaseapp.com",
+            databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "webmatcher-94f0e",
+            storageBucket: "webmatcher-94f0e.appspot.com",
+            messagingSenderId: "970664630623",
+            appId: "G-RMMBEY655B"
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        import { initializeApp } from 'firebase/app';
+        import { getDatabase, ref, onValue } from 'firebase/database';
 
-        // Get a reference to the database
-        const database = firebase.database();
-        const dataRef = database.ref('/'); // Root reference; adjust if your data is in a specific node like '/data'
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Reference to the 'data' node in your database
+        const dataRef = ref(database, 'data');
 
         // Fetch and display data
-        dataRef.once('value', (snapshot) => {
+        onValue(dataRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 renderTable(data);
             } else {
                 document.getElementById('firebase-data').innerHTML = '<p>Brak danych w bazie.</p>';
             }
-        }).catch((error) => {
+        }, (error) => {
             console.error("Error fetching data: ", error);
             document.getElementById('firebase-data').innerHTML = '<p>Błąd podczas ładowania danych.</p>';
         });
@@ -106,19 +109,20 @@
             const tableHeader = document.getElementById('table-header');
             const tableBody = document.getElementById('table-body');
 
-            // Assuming data is an object or array of objects
-            if (Array.isArray(data)) {
-                const headers = Object.keys(data[0] || {});
-                tableHeader.innerHTML = '<tr>' + headers.map(header => `<th>${header}</th>`).join('') + '</tr>';
-                tableBody.innerHTML = data.map(row => 
-                    '<tr>' + headers.map(header => `<td>${row[header] || ''}</td>`).join('') + '</tr>'
-                ).join('');
-            } else if (typeof data === 'object') {
-                const headers = Object.keys(data);
-                tableHeader.innerHTML = '<tr><th>Klucz</th><th>Wartość</th></tr>';
-                tableBody.innerHTML = headers.map(key => 
-                    `<tr><td>${key}</td><td>${JSON.stringify(data[key])}</td></tr>`
-                ).join('');
+            // Convert the object of data entries into an array of key-value pairs
+            const entries = Object.entries(data);
+            if (entries.length > 0) {
+                // Define headers based on your data structure (ID, Dates, Description)
+                tableHeader.innerHTML = '<tr><th>ID</th><th>Daty</th><th>Opis</th></tr>';
+                
+                // Render each entry as a row
+                tableBody.innerHTML = entries.map(([id, value]) => {
+                    // Parse the value string (e.g., "2024;2024;2024;2025;2025;2025;2025;2025;2025 : KOD KH:NAZWA KH:ABCD:51:52:53:1:2:3:4:5:6:7")
+                    const [dates, description] = value.split(' : ');
+                    return `<tr><td>${id}</td><td>${dates}</td><td>${description}</td></tr>`;
+                }).join('');
+            } else {
+                tableBody.innerHTML = '<tr><td colspan="3">Brak danych do wyświetlenia.</td></tr>';
             }
         }
     </script>
