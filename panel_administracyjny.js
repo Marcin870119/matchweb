@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-import * as XLSX from "https://cdn.sheetjs.com/xlsx-0.18.5/package/xlsx.mjs";
 
 // Firebase configuration (REPLACE WITH YOUR ACTUAL CONFIGURATION)
 const firebaseConfig = {
@@ -88,19 +87,6 @@ function getCollectionName(defaultName = "Data", action = "perform this action")
 // --- Data Handling Functions ---
 
 function handleFileUpload(file, inputId) {
-    const fileName = file.name;
-    const fileExtension = fileName.split('.').pop().toLowerCase();
-
-    if (fileExtension === 'csv') {
-        handleCsvUpload(file, inputId);
-    } else if (fileExtension === 'xls' || fileExtension === 'xlsx') {
-        handleXlsUpload(file, inputId);
-    } else {
-        alert('Unsupported file type. Please upload a CSV or Excel file.');
-    }
-}
-
-function handleCsvUpload(file, inputId) {
     Papa.parse(file, {
         header: true,
         dynamicTyping: true,
@@ -125,31 +111,6 @@ function handleCsvUpload(file, inputId) {
             displayData(filteredData, tableId);
         }
     });
-}
-
-function handleXlsUpload(file, inputId) {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        const data = new Uint8Array(event.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
-
-        // Filter out empty rows
-        const filteredData = jsonData.filter(row => {
-            return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
-        });
-
-        // Store data in the correct part of currentData
-        currentData[inputId] = filteredData;
-
-        // Display data in the appropriate table
-        const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
-        displayData(filteredData, tableId);
-    };
-    reader.readAsArrayBuffer(file);
 }
 
 function displayData(data, tableId) {
@@ -315,7 +276,7 @@ function toggleTable(tableId) {
 
 async function exportDataToFirebase() {
     if (Object.keys(currentData).every(key => currentData[key].length === 0)) {
-        alert("No data to export. Please upload a CSV or Excel file first.");
+        alert("No data to export. Please upload a CSV file first.");
         return;
     }
 
@@ -406,3 +367,5 @@ document.getElementById('export-button4').addEventListener('click', exportDataTo
 document.getElementById('save-button4').addEventListener('click', saveChanges);
 document.getElementById('load-button4').addEventListener('click', loadData);
 document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
+
+// --- Initial Setup ---
