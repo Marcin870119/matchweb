@@ -1,5 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+// panel_administracyjny.js
 
 // Firebase configuration (REPLACE WITH YOUR ACTUAL CONFIGURATION)
 const firebaseConfig = {
@@ -13,6 +12,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
@@ -32,30 +33,60 @@ const isTableExpanded = {
     'fileInput4': false
 };
 
-// Załaduj Papa Parse globalnie (dla przeglądarki)
+// Załaduj Papa Parse i SheetJS globalnie (dla przeglądarki)
 document.addEventListener('DOMContentLoaded', () => {
-    // Wstrzyknięcie skryptu Papa Parse, jeśli nie jest załadowany
+    // Wstrzyknięcie skryptu Papa Parse
     if (typeof Papa === 'undefined') {
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js';
-        script.async = true;
-        script.onload = () => {
+        const papaScript = document.createElement('script');
+        papaScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js';
+        papaScript.async = true;
+        papaScript.onload = () => {
             console.log('Papa Parse loaded successfully.');
-            // Po załadowaniu skryptu, zainicjuj event listeners
-            initializeEventListeners();
+            // Wstrzyknięcie skryptu SheetJS po załadowaniu Papa Parse
+            if (typeof XLSX === 'undefined') {
+                const xlsxScript = document.createElement('script');
+                xlsxScript.src = 'https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.full.min.js';
+                xlsxScript.async = true;
+                xlsxScript.onload = () => {
+                    console.log('SheetJS loaded successfully.');
+                    initializeEventListeners();
+                };
+                xlsxScript.onerror = () => {
+                    console.error('Failed to load SheetJS.');
+                    alert('Error loading SheetJS library. Please check your internet connection or try refreshing the page.');
+                };
+                document.head.appendChild(xlsxScript);
+            } else {
+                initializeEventListeners();
+            }
         };
-        script.onerror = () => {
+        papaScript.onerror = () => {
             console.error('Failed to load Papa Parse.');
             alert('Error loading Papa Parse library. Please check your internet connection or try refreshing the page.');
         };
-        document.head.appendChild(script);
+        document.head.appendChild(papaScript);
     } else {
-        // Jeśli Papa jest już załadowane, zainicjuj od razu
-        initializeEventListeners();
+        // Jeśli Papa jest już załadowane, sprawdź SheetJS i zainicjuj
+        if (typeof XLSX === 'undefined') {
+            const xlsxScript = document.createElement('script');
+            xlsxScript.src = 'https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.full.min.js';
+            xlsxScript.async = true;
+            xlsxScript.onload = () => {
+                console.log('SheetJS loaded successfully.');
+                initializeEventListeners();
+            };
+            xlsxScript.onerror = () => {
+                console.error('Failed to load SheetJS.');
+                alert('Error loading SheetJS library. Please check your internet connection or try refreshing the page.');
+            };
+            document.head.appendChild(xlsxScript);
+        } else {
+            initializeEventListeners();
+        }
     }
 });
 
-// Funkcja do inicjalizacji event listeners po załadowaniu Papa Parse
+// Funkcja do inicjalizacji event listeners po załadowaniu bibliotek
 function initializeEventListeners() {
     // --- Helper Functions ---
 
@@ -436,7 +467,4 @@ function initializeEventListeners() {
     document.getElementById('save-button4').addEventListener('click', saveChanges);
     document.getElementById('load-button4').addEventListener('click', loadData);
     document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
-
-    // --- Import SheetJS for XLS/XLSX support ---
-    import * as XLSX from 'https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.mjs';
 }
