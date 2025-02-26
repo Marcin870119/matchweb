@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raporty 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="raporty2.css">
+</head>
+<body>
+    <div class="top-bar"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo" style="height: 30px; margin-right:5px;"> Panel Administracyjny
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            MATCHPRICE
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">MATCH JSON</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH CSV</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
+                            <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">NARZĘDZIA</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">RAPORTY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <a href="#" class="active">SPRZEDAŻ PO PRODUCENTACH</a>
+            <a href="#">RABATY KLIENTÓW</a>
+            <a href="#">TOP 305 INDEKSÓW</a>
+        </div>
+        <div class="content">
+            <h2 class="h2">RAPORTY 2</h2>
+            <div id="firebase-data">
+                <table class="table table-striped table-bordered" id="data-table">
+                    <thead id="table-header"></thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Strona stworzona przez MSZCorporation
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Firebase Initialization and Data Fetching -->
+    <script>
+        // Your Firebase configuration (replace with your actual config from Firebase Console)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "webmatcher-94f0e.firebaseapp.com",
+            databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "webmatcher-94f0e",
+            storageBucket: "webmatcher-94f0e.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the database
+        const database = firebase.database();
+        const dataRef = database.ref('/'); // Root reference; adjust if your data is in a specific node like '/data'
+
+        // Fetch and display data
+        dataRef.once('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                renderTable(data);
+            } else {
+                document.getElementById('firebase-data').innerHTML = '<p>Brak danych w bazie.</p>';
+            }
+        }).catch((error) => {
+            console.error("Error fetching data: ", error);
+            document.getElementById('firebase-data').innerHTML = '<p>Błąd podczas ładowania danych.</p>';
+        });
+
+        // Function to render data in a table
+        function renderTable(data) {
+            const tableHeader = document.getElementById('table-header');
+            const tableBody = document.getElementById('table-body');
+
+            // Assuming data is an object or array of objects
+            if (Array.isArray(data)) {
+                const headers = Object.keys(data[0] || {});
+                tableHeader.innerHTML = '<tr>' + headers.map(header => `<th>${header}</th>`).join('') + '</tr>';
+                tableBody.innerHTML = data.map(row => 
+                    '<tr>' + headers.map(header => `<td>${row[header] || ''}</td>`).join('') + '</tr>'
+                ).join('');
+            } else if (typeof data === 'object') {
+                const headers = Object.keys(data);
+                tableHeader.innerHTML = '<tr><th>Klucz</th><th>Wartość</th></tr>';
+                tableBody.innerHTML = headers.map(key => 
+                    `<tr><td>${key}</td><td>${JSON.stringify(data[key])}</td></tr>`
+                ).join('');
+            }
+        }
+    </script>
+</body>
+</html>
