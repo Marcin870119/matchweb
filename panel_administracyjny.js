@@ -24,7 +24,7 @@ const currentData = {
     'fileInput4': []
 };
 
-// Track table expansion state for *each* table.  Also an OBJECT.
+// Track table expansion state for *each* table.  Also an OBJECT.
 const isTableExpanded = {
     'fileInput1': false,
     'fileInput2': false,
@@ -47,7 +47,12 @@ function isValidCollectionName(name) {
     return true;
 }
 
-// Utility function to get data from the table.  Now takes tableId as argument.
+// Utility function to validate data keys (from CSV headers or table headers).
+function isValidDataKey(key) {
+    return key !== null && key !== undefined && key.trim() !== "" && !(/[.$[\]#/]/.test(key));
+}
+
+// Utility function to get data from the table.  Now takes tableId as argument.
 function getDataFromTable(tableId) {
     const table = document.getElementById(tableId);
     const rows = table.querySelectorAll('tbody tr');
@@ -60,12 +65,14 @@ function getDataFromTable(tableId) {
 
         for (const cell of cells) {
             const header = cell.getAttribute('data-header');
-            if (header) {
+            if (header && isValidDataKey(header)) { // Validate the header!
                 const cellValue = cell.textContent.trim();
                 rowData[header] = cellValue;
                 if (cellValue !== "") {
                     hasData = true;
                 }
+            } else if (header) {
+                console.warn(`Invalid header found in table ${tableId}:`, header);
             }
         }
         if (hasData) {
@@ -98,9 +105,25 @@ function handleFileUpload(file, inputId) {
                 return;
             }
 
-            // Filter out empty rows
+            // Check for invalid headers *before* creating the data
+            const invalidHeaders = results.meta.fields.filter(header => !isValidDataKey(header));
+            if (invalidHeaders.length > 0) {
+                alert(`Invalid headers found in CSV: ${invalidHeaders.join(', ')}.  Please fix the CSV file.`);
+                return;
+            }
+
+            // Filter out empty rows AND rows with invalid keys
             const filteredData = results.data.filter(row => {
-                return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
+                if (!row) return false; // Skip null/undefined rows
+
+                //Check if every key in the row is valid
+                for (const key in row){
+                    if(!isValidDataKey(key)){
+                        return false;
+                    }
+                }
+
+                return Object.values(row).some(value => value !== null && value !== undefined && value !== "");
             });
 
             // Store data in the correct part of currentData
@@ -112,7 +135,6 @@ function handleFileUpload(file, inputId) {
         }
     });
 }
-
 function displayData(data, tableId) {
     const table = document.getElementById(tableId);
     const thead = table.querySelector('thead tr');
@@ -128,7 +150,10 @@ function displayData(data, tableId) {
     }
 
     const headers = Object.keys(data[0]);
-    headers.forEach(header => {
+     // Add header validation *here* as well, in case data was loaded from Firebase
+    const validHeaders = headers.filter(isValidDataKey);
+
+    validHeaders.forEach(header => {
         const th = document.createElement('th');
         th.textContent = header;
         th.setAttribute('data-key', header);
@@ -148,7 +173,7 @@ function displayData(data, tableId) {
 
     dataToShow.forEach((item, rowIndex) => {
         const row = document.createElement('tr');
-        headers.forEach(header => {
+        validHeaders.forEach(header => { //Use valid headers here
             const cell = document.createElement('td');
             cell.textContent = item[header] !== null && item[header] !== undefined ? item[header] : '';
             cell.setAttribute('data-header', header);
@@ -168,7 +193,7 @@ function displayData(data, tableId) {
         tbody.appendChild(row);
     });
 
-    // Dodaj scrollowanie dla rozwiniętej tabeli
+     // Dodaj scrollowanie dla rozwiniętej tabeli
     if (expanded) {
         wrapper.classList.add('expanded');
     } else {
@@ -181,13 +206,14 @@ function displayData(data, tableId) {
     }
 }
 
+
 async function saveChanges() {
     const tables = document.querySelectorAll('.preview-table');
-    const allUpdatedData = {};
+    const allUpdatedData = {};  // Store as an object, not an array
 
     for (const table of tables) {
         const tableId = table.id;
-        allUpdatedData[tableId] = getDataFromTable(tableId);
+        allUpdatedData[tableId] = getDataFromTable(tableId); // Key by table ID
     }
 
     const collectionName = getCollectionName(undefined, "save changes to");
@@ -196,7 +222,7 @@ async function saveChanges() {
     const dbRef = ref(database, collectionName);
 
     try {
-        await set(dbRef, allUpdatedData);
+        await set(dbRef, allUpdatedData); // Save the object
         console.log('Changes saved successfully!');
         alert('Changes saved successfully!');
     } catch (error) {
@@ -205,39 +231,20 @@ async function saveChanges() {
     }
 }
 
+
 async function deleteRow(rowIndex, tableId) {
     const fileInputId = tableId.replace('data-table', 'fileInput');
-    const collectionName = getCollectionName(undefined, "delete from");
-    if (!collectionName) return;
-
-    const dbRef = ref(database, collectionName);
-
-    let adjustedRowIndex;
-    if (!isTableExpanded[fileInputId]) {
-        const tableRows = document.querySelectorAll(`#${tableId} tbody tr`);
-        if (rowIndex < tableRows.length) {
-            adjustedRowIndex = rowIndex;
-        }
-    } else {
-        adjustedRowIndex = rowIndex;
-    }
+    // NO collectionName prompt here.  We're modifying the *in-memory* data.
+    // The saveChanges function will handle saving to Firebase.
 
     if (confirm('Are you sure you want to delete this row?')) {
-        if (adjustedRowIndex !== undefined && adjustedRowIndex >= 0 && adjustedRowIndex < currentData[fileInputId].length) {
-            currentData[fileInputId].splice(adjustedRowIndex, 1);
-            displayData(currentData[fileInputId], tableId);
-        }
-
-        try {
-            await set(dbRef, currentData[fileInputId]);
-            console.log('Row deleted successfully!');
-            alert('Row deleted successfully from: ' + collectionName);
-        } catch (error) {
-            console.error('Error deleting row:', error);
-            alert('Error deleting row: ' + error.message);
+      if (rowIndex >= 0 && rowIndex < currentData[fileInputId].length) {
+            currentData[fileInputId].splice(rowIndex, 1);
+            displayData(currentData[fileInputId], tableId); // Re-render the table
         }
     }
 }
+
 
 function sortTable(header, tableId) {
     const fileInputId = tableId.replace('data-table', 'fileInput');
@@ -263,14 +270,14 @@ function sortTable(header, tableId) {
 function toggleTable(tableId) {
     const fileInputId = tableId.replace('data-table', 'fileInput');
     isTableExpanded[fileInputId] = !isTableExpanded[fileInputId];
-    
+
     const wrapper = document.getElementById(tableId).closest('.element-item').querySelector('.preview-container');
     if (isTableExpanded[fileInputId]) {
         wrapper.classList.add('expanded');
     } else {
         wrapper.classList.remove('expanded');
     }
-    
+
     displayData(currentData[fileInputId], tableId);
 }
 
@@ -285,12 +292,14 @@ async function exportDataToFirebase() {
     const dbRef = ref(database, collectionName);
 
     try {
-        const allData = [];
+        // Create an object to hold all table data, keyed by table ID
+        const allData = {};
         for (const inputId in currentData) {
-            allData.push(...currentData[inputId]);
+            const tableId = inputId.replace('fileInput', 'data-table');
+            allData[tableId] = currentData[inputId];  //  "data-table1": [...]
         }
 
-        await set(dbRef, allData);
+        await set(dbRef, allData);  // Store the *object*, not a giant array
         console.log('Data exported successfully!');
         alert('Data exported successfully to collection: ' + collectionName);
     } catch (error) {
@@ -307,22 +316,24 @@ function loadData() {
     onValue(dbRef, (snapshot) => {
         if (snapshot.exists()) {
             let loadedData = snapshot.val();
-            if (!Array.isArray(loadedData)) {
-                if (typeof loadedData === 'object' && loadedData !== null) {
-                    for(let tableId in loadedData){
-                        const fileInputId = tableId.replace('data-table', 'fileInput');
-                        if(currentData.hasOwnProperty(fileInputId)){
-                            currentData[fileInputId] = loadedData[tableId];
-                            displayData(loadedData[tableId], tableId);
-                        }
+
+            // Check if the loaded data is an object (as it should be)
+            if (typeof loadedData === 'object' && loadedData !== null) {
+                for (let tableId in loadedData) {
+                    const fileInputId = tableId.replace('data-table', 'fileInput');
+                    if (currentData.hasOwnProperty(fileInputId)) {
+                        currentData[fileInputId] = loadedData[tableId];
+                        displayData(loadedData[tableId], tableId);
                     }
                 }
             } else {
-                currentData['fileInput1'] = loadedData;
-                displayData(loadedData, 'data-table1');
+                console.error("Loaded data is not in the expected object format.");
+                alert("Error: Loaded data is not in the expected format.  Expected an object with table data.");
             }
+
         } else {
             console.log(`No data found in collection: ${collectionName}`);
+            // Clear all tables
             for (const inputId in currentData) {
                 displayData([], inputId.replace('fileInput', 'data-table'));
             }
@@ -332,7 +343,6 @@ function loadData() {
         alert("Error fetching data: " + error.message);
     });
 }
-
 // --- Event Listeners ---
 
 function attachFileInputListener(inputId) {
@@ -367,5 +377,3 @@ document.getElementById('export-button4').addEventListener('click', exportDataTo
 document.getElementById('save-button4').addEventListener('click', saveChanges);
 document.getElementById('load-button4').addEventListener('click', loadData);
 document.getElementById('toggle-table4').addEventListener('click', () => toggleTable('data-table4'));
-
-// --- Initial Setup ---
