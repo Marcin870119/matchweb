@@ -114,17 +114,24 @@ function getCollectionName(defaultName = "Data", action = "perform this action")
 
 // Function to prompt for delimiter if auto-detection fails.
 function getDelimiterPrompt() {
-    const delimiter = prompt("Unable to detect delimiter automatically. Please enter the delimiter (e.g., ',' for comma, ';' for semicolon, or 'tab' for tab):", ",");
+    const delimiter = prompt("Unable to detect delimiter automatically. Please enter the delimiter (e.g., ',' for comma, ';' for semicolon, 'tab' for tab, or 'space' for space):", ",");
     if (!delimiter || delimiter.trim() === "") {
         return null;
     }
-    return delimiter.trim() === "tab" ? "\t" : delimiter.trim();
+    switch (delimiter.trim().toLowerCase()) {
+        case "tab":
+            return "\t";
+        case "space":
+            return " ";
+        default:
+            return delimiter.trim();
+    }
 }
 
 // --- Data Handling Functions ---
 
 function handleFileUpload(file, inputId) {
-    const fileExtension = file.name.split('.').pop().toLowerCase(); // Poprawiona literówka: fileExtension zamiast file Extension
+    const fileExtension = file.name.split('.').pop().toLowerCase();
 
     if (fileExtension !== 'csv') {
         alert("Unsupported file format. Please upload only CSV files.");
@@ -132,7 +139,7 @@ function handleFileUpload(file, inputId) {
     }
 
     // Try parsing with auto-detection first, with fallback to common delimiters
-    const tryDelimiters = ['', ',', ';', '\t']; // Try auto-detect, then comma, semicolon, and tab
+    const tryDelimiters = ['', ',', ';', '\t', ' ']; // Try auto-detect, then comma, semicolon, tab, and space
     let parsedSuccessfully = false;
 
     for (const delimiter of tryDelimiters) {
@@ -190,7 +197,7 @@ function handleParseResults(results, inputId) {
             console.error("Error parsing CSV:", results.errors);
             // Sprawdź szczegółowe błędy i dostosuj komunikat
             if (results.errors.some(error => error.code === "UndetectableDelimiter")) {
-                alert("Error parsing CSV file: Unable to detect delimiter. Please try specifying a delimiter (e.g., , ; or tab). See console for details.");
+                alert("Error parsing CSV file: Unable to detect delimiter. Please try specifying a delimiter (e.g., , ; tab, or space). See console for details.");
             } else if (results.errors.some(error => error.code === "TooManyFields" || error.code === "TooFewFields")) {
                 // Sprawdź szczegółowe dane o niezgodnościach
                 const fieldMismatchDetails = results.data.reduce((acc, row, index) => {
