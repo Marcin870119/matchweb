@@ -87,18 +87,10 @@ function getCollectionName(defaultName = "Data", action = "perform this action")
 // --- Data Handling Functions ---
 
 function handleFileUpload(file, inputId) {
-    const fileExtension = file.name.split('.').pop().toLowerCase();
-
-    if (fileExtension !== 'csv') {
-        alert("Unsupported file format. Please upload only CSV files.");
-        return;
-    }
-
     Papa.parse(file, {
         header: true,
         dynamicTyping: true,
         skipEmptyLines: 'greedy', // Skip completely empty lines
-        delimiter: [',', ';'], // Explicit handling of both , and ; separators
         complete: function (results) {
             if (results.errors.length > 0) {
                 console.error("Error parsing CSV:", results.errors);
@@ -106,15 +98,10 @@ function handleFileUpload(file, inputId) {
                 return;
             }
 
-            // Log the detected delimiter for debugging
-            console.log("Detected delimiter in CSV:", results.meta.delimiter);
-
             // Filter out empty rows
             const filteredData = results.data.filter(row => {
                 return row && Object.values(row).some(value => value !== null && value !== undefined && value !== "");
             });
-
-            console.log("Parsed and filtered CSV data:", filteredData);
 
             // Store data in the correct part of currentData
             currentData[inputId] = filteredData;
@@ -122,10 +109,6 @@ function handleFileUpload(file, inputId) {
             // Display data in the appropriate table
             const tableId = inputId.replace('fileInput', 'data-table'); // e.g., 'fileInput1' -> 'data-table1'
             displayData(filteredData, tableId);
-        },
-        error: function (error) {
-            console.error('Error processing CSV file:', error);
-            alert('Error processing CSV file: ' + error.message);
         }
     });
 }
