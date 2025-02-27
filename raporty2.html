@@ -65,11 +65,8 @@
 
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
-
-    // 🔴 Poprawiona ścieżka do Firebase
     const dataRef = ref(database, 'Data/data-table1');
 
-    // Pobieranie danych z Firebase
     onValue(dataRef, (snapshot) => {
       const data = snapshot.val();
       console.log('Dane pobrane z Firebase:', data);
@@ -88,33 +85,49 @@
       const tableHeader = document.getElementById('table-header');
       const tableBody = document.getElementById('table-body');
 
-      // 🔴 Tworzenie nagłówków tabeli
-      let headers = ["KOD KH", "NAZWA KH", "ABCD", "2024", "2024", "2024", "2025", "2025", "2025", "2025", "2025", "2025", "2025"];
-      tableHeader.innerHTML = "<tr>" + headers.map(h => `<th>${h}</th>`).join('') + "</tr>";
-
       const entries = Object.entries(data);
-
       console.log("Dane do renderowania:", entries);
 
-      tableBody.innerHTML = entries.map(([id, value]) => {
-        // 🔴 Jeśli Firebase zwrócił obiekt/tablicę, konwertujemy je na string
+      let allWeeks = new Set(); // Set do zbierania wszystkich tygodni
+
+      // 🔴 Analizujemy dane, aby dynamicznie znaleźć wszystkie tygodnie
+      entries.forEach(([id, value]) => {
         if (typeof value === "object") {
-            value = Object.values(value).join(';');
+          value = Object.values(value).join(';');
         }
 
-        // 🔴 Teraz wartość jest stringiem i możemy ją podzielić
-        let parts = value.split(';');
+        let parts = value.split(';').map(part => part.trim() === "" ? "0" : part);
+        let weeks = parts.slice(3); // Pobieramy tygodnie (po 3 pierwszych kolumnach)
+        weeks.forEach((_, index) => allWeeks.add(index + 1)); // Zbieramy numery tygodni
+      });
 
-        // 🔴 Zamiana pustych pól (`""`) na `0`
-        parts = parts.map(part => part.trim() === "" ? "0" : part);
+      let sortedWeeks = [...allWeeks].sort((a, b) => a - b); // Sortowanie tygodni
 
-        // 🔴 Dynamiczne generowanie wiersza w tabeli
-        return `<tr>${parts.map(part => `<td>${part}</td>`).join('')}</tr>`;
+      // 🔴 Generowanie nagłówków dynamicznie
+      let headers = ["KOD KH", "NAZWA KH", "ABCD", ...sortedWeeks.map(week => `2025 ${week}`)];
+      tableHeader.innerHTML = "<tr>" + headers.map(h => `<th>${h}</th>`).join('') + "</tr>";
+
+      // 🔴 Generowanie wierszy w tabeli
+      tableBody.innerHTML = entries.map(([id, value]) => {
+        if (typeof value === "object") {
+          value = Object.values(value).join(';');
+        }
+
+        let parts = value.split(';').map(part => part.trim() === "" ? "0" : part);
+
+        // 🔴 Dopasowanie do dynamicznych nagłówków (dodanie brakujących pól, jeśli ich nie ma)
+        let rowData = parts.slice(0, 3); // KOD KH, NAZWA KH, ABCD
+        let weekData = parts.slice(3);
+
+        let fullRow = [...rowData, ...sortedWeeks.map((_, index) => weekData[index] || "0")];
+
+        return `<tr>${fullRow.map(part => `<td>${part}</td>`).join('')}</tr>`;
       }).join('');
     }
   </script>
 </body>
 </html>
+
 
 
 
