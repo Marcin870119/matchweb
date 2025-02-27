@@ -232,6 +232,15 @@ button:hover {
     opacity: 0.8;
 }
 
+.kh-list {
+    overflow-y: auto; /* Włącza pionowe przewijanie */
+    max-height: 120px; /* Ograniczenie wysokości, aby zmieściły się maksymalnie 2 nazwy KH */
+    padding: 10px; /* Dodatkowy odstęp wewnątrz listy */
+    line-height: 1.5; /* Lepsze rozmieszczenie tekstu */
+    font-size: 16px; /* Rozmiar czcionki dla czytelności */
+    color: white; /* Kolor tekstu, aby pasował do tła karty niebieskiego */
+}
+
 .dashboard-card .value {
     font-size: 36px; /* Zwiększenie rozmiaru wartości */
     font-weight: bold;
