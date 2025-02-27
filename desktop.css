@@ -242,6 +242,35 @@ button:hover {
     text-align: left; /* Wyjustowanie tekstu do prawej strony */
 }
 
+.kh-entry {
+    display: flex;
+    justify-content: space-between; /* Rozmieszczenie nazwy i strzałki z odstępem */
+    align-items: center; /* Wyrównanie w pionie */
+    margin-bottom: 5px; /* Odstęp między wpisami */
+}
+
+.kh-name {
+    flex-grow: 1; /* Nazwa zajmuje większość miejsca */
+    text-align: right; /* Wyjustowanie nazwy do prawej strony */
+}
+
+.kh-arrow {
+    margin-left: 10px; /* Odstęp między nazwą a strzałką */
+    font-size: 16px; /* Rozmiar strzałki */
+}
+
+.green-arrow {
+    color: #28a745; /* Zielona strzałka w górę */
+}
+
+.red-arrow {
+    color: #dc3545; /* Czerwona strzałka w dół */
+}
+
+.yellow-equals {
+    color: #ffc107; /* Żółty znak równości */
+}
+
 .dashboard-card .value {
     font-size: 36px; /* Zwiększenie rozmiaru wartości */
     font-weight: bold;
