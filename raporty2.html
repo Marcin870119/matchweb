@@ -1,176 +1,109 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raporty 2</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-     <style>
-    /* Basic styling -  adjust as needed for your design */
-    body {
-        font-family: 'Muli', sans-serif;
-    }
-    .h2 {
-        font-family: 'Montserrat', sans-serif;
-        margin-bottom: 20px;
-    }
-    .wrapper {
-        display: flex;
-    }
-    .sidebar {
-        width: 250px;
-        background-color: #f0f0f0;
-        padding: 20px;
-    }
-    .sidebar a {
-        display: block;
-        padding: 10px;
-        margin-bottom: 5px;
-        text-decoration: none;
-        color: #333;
-        border-left: 3px solid transparent;
-    }
-    .sidebar a.active {
-        border-left-color: #007bff;
-        font-weight: bold;
-    }
-    .content {
-        flex: 1;
-        padding: 20px;
-    }
-    .footer {
-        background-color: #343a40;
-        color: white;
-        text-align: center;
-        padding: 10px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raporty 2</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="raporty2.css">
 </head>
 <body>
-    <div class="top-bar"></div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo" style="height: 30px; margin-right:5px;"> Panel Administracyjny
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            MATCHPRICE
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">MATCH JSON</a></li>
-                            <li><a class="dropdown-item" href="#">MATCH CSV</a></li>
-                            <li><a class="dropdown-item" href="#">MATCH PDF</a></li>
-                            <li><a class="dropdown-item" href="#">MATCH OCR</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#">NARZĘDZIA</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">RAPORTY</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Ustawienia</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="wrapper">
-        <div class="sidebar">
-            <a href="#" class="active">SPRZEDAŻ PO PRODUCENTACH</a>
-            <a href="#">RABATY KLIENTÓW</a>
-            <a href="#">TOP 305 INDEKSÓW</a>
-        </div>
-        <div class="content">
-            <h2 class="h2">RAPORTY 2</h2>
-            <div id="firebase-data">
-                <table class="table table-striped table-bordered" id="data-table">
-                    <thead id="table-header"></thead>
-                    <tbody id="table-body"></tbody>
-                </table>
-            </div>
-        </div>
+  <div class="top-bar"></div>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo" style="height: 30px; margin-right:5px;">
+        Panel Administracyjny
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="#">RAPORTY</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <div class="footer">
-        Strona stworzona przez MSZCorporation
+  <div class="wrapper">
+    <div class="content">
+      <h2 class="h2">RAPORTY 2</h2>
+      <div id="firebase-data">
+        <table class="table table-striped table-bordered" id="data-table">
+          <thead id="table-header"></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
     </div>
+  </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+  <div class="footer">
+    Strona stworzona przez MSZCorporation
+  </div>
 
-        // Your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",  // REPLACE WITH YOUR API KEY
-            authDomain: "webmatcher-94f0e.firebaseapp.com",
-            databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "webmatcher-94f0e",
-            storageBucket: "webmatcher-94f0e.appspot.com",
-            messagingSenderId: "970664630623",
-            appId: "1:970664630623:web:1365b88b9578c181c85743" //REPLACE WITH YOUR APP ID
-        };
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+    const firebaseConfig = {
+      apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+      authDomain: "webmatcher-94f0e.firebaseapp.com",
+      databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "webmatcher-94f0e",
+      storageBucket: "webmatcher-94f0e.appspot.com",
+      messagingSenderId: "970664630623",
+      appId: "G-RMMBEY655B"
+    };
 
-        // Reference to the 'data-table1' node
-        const dataRef = ref(database, 'data/data-table1');
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
 
-        // Fetch and display data
-        onValue(dataRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                renderTable(data);
-            } else {
-                document.getElementById('firebase-data').innerHTML = '<p>Brak danych w bazie.</p>';
-            }
-        }, (error) => {
-            console.error("Błąd pobierania danych: ", error);
-            document.getElementById('firebase-data').innerHTML = '<p>Błąd podczas ładowania danych.</p>';
-        });
+    // 🔴 Poprawiona ścieżka do danych
+    const dataRef = ref(database, 'Data/data-table1');
 
-        function renderTable(data) {
-            const tableHeader = document.getElementById('table-header');
-            const tableBody = document.getElementById('table-body');
+    // Pobieranie danych
+    onValue(dataRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log('Dane pobrane z Firebase:', data);
+      
+      if (data) {
+        renderTable(data);
+      } else {
+        document.getElementById('firebase-data').innerHTML = '<p>Brak danych w bazie.</p>';
+      }
+    }, (error) => {
+      console.error("Błąd pobierania danych: ", error);
+      document.getElementById('firebase-data').innerHTML = '<p>Błąd podczas ładowania danych.</p>';
+    });
 
-            const entries = Object.entries(data);
+    function renderTable(data) {
+      const tableHeader = document.getElementById('table-header');
+      const tableBody = document.getElementById('table-body');
 
-            if (entries.length > 0) {
-                tableHeader.innerHTML = '<tr><th>ID</th><th>Daty</th><th>Opis</th></tr>';
+      tableHeader.innerHTML = '<tr><th>ID</th><th>Daty</th><th>Opis</th></tr>';
 
-                tableBody.innerHTML = entries.map(([id, value]) => {
-                    // Remove leading semicolons and whitespace
-                    let cleanedValue = value.replace(/^;+\s*/, '');
+      const entries = Object.entries(data);
 
-                    // Split the string, handling potential variations
-                    let dates = "";
-                    let description = "";
-
-                    if(cleanedValue.includes(' : ')){
-                       [dates, description] = cleanedValue.split(' : ');
-                    }
-                    else if(cleanedValue.includes(':')){
-                       [dates, description] = cleanedValue.split(':');
-                    }
-
-
-                    return `<tr><td>${id}</td><td>${dates}</td><td>${description}</td></tr>`;
-                }).join('');
-            } else {
-                tableBody.innerHTML = '<tr><td colspan="3">Brak danych do wyświetlenia.</td></tr>';
-            }
-        }
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      tableBody.innerHTML = entries.map(([id, value]) => {
+        const [dates, description] = value.split(' : ');
+        return `
+          <tr>
+            <td>${id}</td>
+            <td>${dates || ''}</td>
+            <td>${description || ''}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+  </script>
 </body>
 </html>
+
