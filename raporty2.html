@@ -66,10 +66,10 @@
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
 
-    // 🔴 Poprawiona ścieżka do danych
+    // 🔴 Poprawiona ścieżka do Twoich danych!
     const dataRef = ref(database, 'Data/data-table1');
 
-    // Pobieranie danych
+    // Pobieranie danych z Firebase
     onValue(dataRef, (snapshot) => {
       const data = snapshot.val();
       console.log('Dane pobrane z Firebase:', data);
@@ -92,18 +92,26 @@
 
       const entries = Object.entries(data);
 
+      console.log("Dane do renderowania:", entries);
+
       tableBody.innerHTML = entries.map(([id, value]) => {
+        if (typeof value !== "string") {
+          console.warn(`Pominięto ID: ${id}, ponieważ wartość nie jest stringiem:`, value);
+          return "";
+        }
+
         const [dates, description] = value.split(' : ');
         return `
-          <tr>
-            <td>${id}</td>
-            <td>${dates || ''}</td>
-            <td>${description || ''}</td>
-          </tr>
+            <tr>
+                <td>${id}</td>
+                <td>${dates || '-'}</td>
+                <td>${description || '-'}</td>
+            </tr>
         `;
       }).join('');
     }
   </script>
 </body>
 </html>
+
 
