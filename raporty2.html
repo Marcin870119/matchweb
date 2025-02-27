@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -8,11 +6,52 @@
     <title>Raporty 2</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="raporty2.css">
+    <link rel="stylesheet" href="raporty2.css">  <style>
+    /* Basic styling -  adjust as needed for your design */
+    body {
+        font-family: 'Muli', sans-serif;
+    }
+    .h2 {
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 20px;
+    }
+    .wrapper {
+        display: flex;
+    }
+    .sidebar {
+        width: 250px;
+        background-color: #f0f0f0;
+        padding: 20px;
+    }
+    .sidebar a {
+        display: block;
+        padding: 10px;
+        margin-bottom: 5px;
+        text-decoration: none;
+        color: #333;
+        border-left: 3px solid transparent;
+    }
+    .sidebar a.active {
+        border-left-color: #007bff;
+        font-weight: bold;
+    }
+    .content {
+        flex: 1;
+        padding: 20px;
+    }
+    .footer {
+        background-color: #343a40;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    </style>
 </head>
 <body>
-    <div class="top-bar"></div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="top-bar"></div>  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo" style="height: 30px; margin-right:5px;"> Panel Administracyjny
@@ -62,36 +101,30 @@
         Strona stworzona przez MSZCorporation
     </div>
 
-    <!-- Firebase SDK (Wersja 9.23.0 - zaktualizuj w razie potrzeby) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
-    <!-- jQuery i Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Inicjalizacja Firebase i pobieranie danych -->
-    <script>
-        // Twoja konfiguracja Firebase (poprawnie podana w Twoim kodzie)
+        // Your Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+            apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",  // REPLACE WITH YOUR API KEY
             authDomain: "webmatcher-94f0e.firebaseapp.com",
             databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
             projectId: "webmatcher-94f0e",
             storageBucket: "webmatcher-94f0e.appspot.com",
             messagingSenderId: "970664630623",
-            appId: "G-RMMBEY655B"
+            appId: "1:970664630623:web:1365b88b9578c181c85743" //REPLACE WITH YOUR APP ID
         };
 
-        // Inicjalizacja Firebase (używanie globalnego obiektu Firebase)
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
 
-        // Referencja do węzła 'data' w Twojej bazie danych
-        const dataRef = database.ref('data');
+        // Reference to the 'data-table1' node (directly, as per your database structure)
+        const dataRef = ref(database, 'data/data-table1'); // Corrected path
 
-        // Pobieranie i wyświetlanie danych
-        dataRef.on('value', (snapshot) => {
+        // Fetch and display data
+        onValue(dataRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 renderTable(data);
@@ -103,27 +136,31 @@
             document.getElementById('firebase-data').innerHTML = '<p>Błąd podczas ładowania danych.</p>';
         });
 
-        // Funkcja do renderowania danych w tabeli
-        function renderTable(data) {
-            const tableHeader = document.getElementById('table-header');
-            const tableBody = document.getElementById('table-body');
+      function renderTable(data) {
+        const tableHeader = document.getElementById('table-header');
+        const tableBody = document.getElementById('table-body');
 
-            // Konwersja obiektu danych na tablicę par klucz-wartość
-            const entries = Object.entries(data);
-            if (entries.length > 0) {
-                // Zdefiniuj nagłówki na podstawie struktury danych (ID, Daty, Opis)
-                tableHeader.innerHTML = '<tr><th>ID</th><th>Daty</th><th>Opis</th></tr>';
-                
-                // Renderuj każdy wpis jako wiersz
-                tableBody.innerHTML = entries.map(([id, value]) => {
-                    // Analizuj ciąg wartości (np. "2024;2024;2024;2025;2025;2025;2025;2025;2025 : KOD KH:NAZWA KH:ABCD:51:52:53:1:2:3:4:5:6:7")
-                    const [dates, description] = value.split(' : ');
-                    return `<tr><td>${id}</td><td>${dates}</td><td>${description}</td></tr>`;
-                }).join('');
-            } else {
-                tableBody.innerHTML = '<tr><td colspan="3">Brak danych do wyświetlenia.</td></tr>';
-            }
+        // Convert data object to an array of key-value pairs
+        const entries = Object.entries(data); // Directly use data, no need for ["data-table1"]
+
+        if (entries.length > 0) {
+            // Define headers
+            tableHeader.innerHTML = '<tr><th>ID</th><th>Daty</th><th>Opis</th></tr>';
+
+            // Render each entry as a row
+            tableBody.innerHTML = entries.map(([id, value]) => {
+                // Split the value string into dates and description
+                const [dates, description] = value.split(' : ');
+                return `<tr><td>${id}</td><td>${dates}</td><td>${description}</td></tr>`;
+            }).join('');
+        } else {
+            tableBody.innerHTML = '<tr><td colspan="3">Brak danych do wyświetlenia.</td></tr>';
         }
+    }
+
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
