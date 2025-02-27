@@ -251,7 +251,7 @@ button:hover {
 
 .kh-name {
     flex-grow: 1; /* Nazwa zajmuje większość miejsca */
-    text-align: right; /* Wyjustowanie nazwy do prawej strony */
+    text-align: left; /* Wyjustowanie nazwy do prawej strony */
 }
 
 .kh-arrow {
