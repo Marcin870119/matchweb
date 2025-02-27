@@ -60,17 +60,17 @@
         Strona stworzona przez MSZCorporation
     </div>
 
-    <!-- Firebase SDK (Specific Version 9.23.0 - Update if needed) -->
+    <!-- Firebase SDK (Wersja 9.23.0 - zaktualizuj w razie potrzeby) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
 
-    <!-- jQuery and Bootstrap JS -->
+    <!-- jQuery i Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Firebase Initialization and Data Fetching -->
+    <!-- Inicjalizacja Firebase i pobieranie danych -->
     <script>
-        // Your Firebase configuration (already provided correctly in your code)
+        // Twoja konfiguracja Firebase (poprawnie podana w Twoim kodzie)
         const firebaseConfig = {
             apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
             authDomain: "webmatcher-94f0e.firebaseapp.com",
@@ -81,14 +81,14 @@
             appId: "G-RMMBEY655B"
         };
 
-        // Initialize Firebase (using the global Firebase object)
+        // Inicjalizacja Firebase (używanie globalnego obiektu Firebase)
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // Reference to the 'data' node in your database
+        // Referencja do węzła 'data' w Twojej bazie danych
         const dataRef = database.ref('data');
 
-        // Fetch and display data
+        // Pobieranie i wyświetlanie danych
         dataRef.on('value', (snapshot) => {
             const data = snapshot.val();
             if (data) {
@@ -97,24 +97,24 @@
                 document.getElementById('firebase-data').innerHTML = '<p>Brak danych w bazie.</p>';
             }
         }, (error) => {
-            console.error("Error fetching data: ", error);
+            console.error("Błąd pobierania danych: ", error);
             document.getElementById('firebase-data').innerHTML = '<p>Błąd podczas ładowania danych.</p>';
         });
 
-        // Function to render data in a table
+        // Funkcja do renderowania danych w tabeli
         function renderTable(data) {
             const tableHeader = document.getElementById('table-header');
             const tableBody = document.getElementById('table-body');
 
-            // Convert the object of data entries into an array of key-value pairs
+            // Konwersja obiektu danych na tablicę par klucz-wartość
             const entries = Object.entries(data);
             if (entries.length > 0) {
-                // Define headers based on your data structure (ID, Dates, Description)
+                // Zdefiniuj nagłówki na podstawie struktury danych (ID, Daty, Opis)
                 tableHeader.innerHTML = '<tr><th>ID</th><th>Daty</th><th>Opis</th></tr>';
                 
-                // Render each entry as a row
+                // Renderuj każdy wpis jako wiersz
                 tableBody.innerHTML = entries.map(([id, value]) => {
-                    // Parse the value string (e.g., "2024;2024;2024;2025;2025;2025;2025;2025;2025 : KOD KH:NAZWA KH:ABCD:51:52:53:1:2:3:4:5:6:7")
+                    // Analizuj ciąg wartości (np. "2024;2024;2024;2025;2025;2025;2025;2025;2025 : KOD KH:NAZWA KH:ABCD:51:52:53:1:2:3:4:5:6:7")
                     const [dates, description] = value.split(' : ');
                     return `<tr><td>${id}</td><td>${dates}</td><td>${description}</td></tr>`;
                 }).join('');
