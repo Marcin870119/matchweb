@@ -236,8 +236,8 @@ button:hover {
     overflow-y: auto; /* Włącza pionowe przewijanie */
     height: 120px; /* Stała wysokość, aby zapewnić przewijanie */
     padding: 10px; /* Dodatkowy odstęp wewnątrz listy */
-    line-height: 1.5; /* Lepsze rozmieszczenie tekstu */
-    font-size: 16px; /* Rozmiar czcionki dla czytelności */
+    line-height: 1.0; /* Lepsze rozmieszczenie tekstu */
+    font-size: 14px; /* Rozmiar czcionki dla czytelności */
     color: white; /* Kolor tekstu, aby pasował do tła karty niebieskiego */
 }
 
