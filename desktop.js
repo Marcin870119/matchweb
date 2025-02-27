@@ -1,28 +1,30 @@
-// Funkcja, która ładuje dane z URL-a (np. raporty2.html) i wyświetla je w oknie 1
-function loadKHData() {
-    // Przykład pobierania danych z URL-a (musisz dostosować do rzeczywistej struktury strony)
-    fetch('https://marcin870119.github.io/matchweb/raporty2.html')
-        .then(response => response.text())
-        .then(html => {
-            // Parsowanie HTML, aby wyciągnąć nazwy KH (prosty przykład – musisz dostosować do rzeczywistej struktury)
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const khNames = Array.from(doc.querySelectorAll('td')) // Zakładam, że nazwy KH są w komórkach tabeli <td>
-                .map(td => td.textContent.trim())
-                .filter(name => name && !name.includes('NAZWA KH')); // Filtrujemy puste lub nagłówkowe wpisy
+// Przykładowe dane KH (symulacja danych z raporty2.html)
+const khData = [
+    "MAJA NORTHOLT",
+    "MAJA EXETER",
+    "DELIKATESY SMACZEK LUTON 3",
+    "PRASHANT PATEL",
+    "DELIKATESY SMACZEK COVENTRY",
+    "POLSKI SKLEP SMACZEK (READING) LIMITED",
+    "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
+    "SMACZEK SLOUGH 2",
+    "LONDEK ILFORD",
+    "SMACZEK SOUTHAMPTON BITTERNE",
+    "NIMIT PATEL !! SAVE MORE",
+    "LONDEK ROMFORD"
+];
 
-            // Wyświetlanie maksymalnie 2 nazw KH w liście
-            const khList = document.querySelector('.kh-list');
-            if (khList) {
-                khList.innerHTML = ''; // Wyczyść istniejącą treść
-                khNames.slice(0, 2).forEach(name => { // Pokaż tylko pierwsze 2 nazwy
-                    const p = document.createElement('p');
-                    p.textContent = name;
-                    khList.appendChild(p);
-                });
-            }
-        })
-        .catch(error => console.error('Błąd pobierania danych:', error));
+// Funkcja, która ładuje i wyświetla dane KH w oknie 1
+function loadKHData() {
+    const khList = document.querySelector('.kh-list');
+    if (khList) {
+        khList.innerHTML = ''; // Wyczyść istniejącą treść
+        khData.slice(0, 2).forEach(name => { // Pokaż tylko pierwsze 2 nazwy
+            const p = document.createElement('p');
+            p.textContent = name;
+            khList.appendChild(p);
+        });
+    }
 }
 
 // Funkcja pokazująca stronę główną (domyślna funkcja, którą miałeś w kodzie)
