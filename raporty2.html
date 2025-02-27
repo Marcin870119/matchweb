@@ -1,188 +1,131 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raporty 2</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-   <style>
-    /* Basic styling -  adjust as needed for your design */
-    body {
-        font-family: 'Muli', sans-serif;
-    }
-    .h2 {
-        font-family: 'Montserrat', sans-serif;
-        margin-bottom: 20px;
-    }
-    .wrapper {
-        display: flex;
-    }
-    .sidebar {
-        width: 250px;
-        background-color: #f0f0f0;
-        padding: 20px;
-    }
-    .sidebar a {
-        display: block;
-        padding: 10px;
-        margin-bottom: 5px;
-        text-decoration: none;
-        color: #333;
-        border-left: 3px solid transparent;
-    }
-    .sidebar a.active {
-        border-left-color: #007bff;
-        font-weight: bold;
-    }
-    .content {
-        flex: 1;
-        padding: 20px;
-    }
-    .footer {
-        background-color: #343a40;
-        color: white;
-        text-align: center;
-        padding: 10px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raporty 2</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="raporty2.css">
 </head>
 <body>
-    <div class="top-bar"></div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo" style="height: 30px; margin-right:5px;"> Panel Administracyjny
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">RAPORTY</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="wrapper">
-        <div class="content">
-            <h2 class="h2">RAPORTY 2</h2>
-            <div id="firebase-data">
-                <table class="table table-striped table-bordered" id="data-table">
-                    <thead id="table-header"></thead>
-                    <tbody id="table-body"></tbody>
-                </table>
-            </div>
-        </div>
+  <div class="top-bar"></div>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="logo" style="height: 30px; margin-right:5px;">
+        Panel Administracyjny
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="#">RAPORTY</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <div class="footer">
-        Strona stworzona przez MSZCorporation
+  <div class="wrapper">
+    <div class="content">
+      <h2 class="h2">RAPORTY 2</h2>
+      <div id="firebase-data">
+        <table class="table table-striped table-bordered" id="data-table">
+          <thead id="table-header"></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
     </div>
+  </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+  <div class="footer">
+    Strona stworzona przez MSZCorporation
+  </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",  // REPLACE WITH YOUR API KEY
-            authDomain: "webmatcher-94f0e.firebaseapp.com",
-            databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "webmatcher-94f0e",
-            storageBucket: "webmatcher-94f0e.appspot.com",
-            messagingSenderId: "970664630623",
-            appId: "1:970664630623:web:1365b88b9578c181c85743" //REPLACE WITH YOUR APP ID
-        };
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-        const dataRef = ref(database, 'Data/data-table1');
+    const firebaseConfig = {
+      apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+      authDomain: "webmatcher-94f0e.firebaseapp.com",
+      databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "webmatcher-94f0e",
+      storageBucket: "webmatcher-94f0e.appspot.com",
+      messagingSenderId: "970664630623",
+      appId: "G-RMMBEY655B"
+    };
 
-        onValue(dataRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                renderTable(data);
-            } else {
-                document.getElementById('firebase-data').innerHTML = '<p>Brak danych w bazie.</p>';
-            }
-        }, (error) => {
-            console.error("Błąd pobierania danych: ", error);
-            document.getElementById('firebase-data').innerHTML = '<p>Błąd podczas ładowania danych.</p>';
-        });
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
 
-        function renderTable(data) {
-            const tableHeader = document.getElementById('table-header');
-            const tableBody = document.getElementById('table-body');
-            tableHeader.innerHTML = '<tr><th>ID</th><th>Daty</th><th>Opis</th></tr>';
-            const entries = Object.entries(data);
-            tableBody.innerHTML = entries.map(([id, value]) => {
+    // 🔴 Poprawiona ścieżka do Firebase
+    const dataRef = ref(database, 'Data/data-table1');
 
-                // 1. Check if value is an object and has a string property
-                if (typeof value === 'object' && value !== null && typeof value === 'string') {
-                    // It's an object. Use .toString() to get the string representation
-                    let stringValue = value;
+    // Pobieranie danych z Firebase
+    onValue(dataRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log('Dane pobrane z Firebase:', data);
+      
+      if (data) {
+        renderTable(data);
+      } else {
+        document.getElementById('firebase-data').innerHTML = '<p>Brak danych w bazie.</p>';
+      }
+    }, (error) => {
+      console.error("Błąd pobierania danych: ", error);
+      document.getElementById('firebase-data').innerHTML = '<p>Błąd podczas ładowania danych.</p>';
+    });
 
-                    // 2. Clean the string: remove leading semicolons and trim whitespace
-                     stringValue = stringValue.replace(/^;+/, '').trim();
-                    
-                     let dates = "";
-                     let description = "";
+    function renderTable(data) {
+      const tableHeader = document.getElementById('table-header');
+      const tableBody = document.getElementById('table-body');
 
-                    // 3. Split the string, handling *both* separators correctly
-                    if (stringValue.includes(' : ')) {
-                        [dates, description] = stringValue.split(' : ');
-                    }
-                    else if(stringValue.includes(':')){
-                        [dates, description] = stringValue.split(':');
-                    }
-                    else {
-                        dates = stringValue; // If no separator, the whole thing is the date
-                        description = "";
-                    }
+      // Nagłówki tabeli
+      tableHeader.innerHTML = '<tr><th>ID</th><th>Daty</th><th>Opis</th></tr>';
 
-                     return `<tr><td>${id}</td><td>${dates}</td><td>${description}</td></tr>`;
+      const entries = Object.entries(data);
 
-                }
-                else if (typeof value === 'string')
-                {
-                  let stringValue = value;
+      console.log("Dane do renderowania:", entries);
 
-                    // 2. Clean the string: remove leading semicolons and trim whitespace
-                     stringValue = stringValue.replace(/^;+/, '').trim();
-
-                     let dates = "";
-                     let description = "";
-                    // 3. Split the string, handling *both* separators correctly
-                    if (stringValue.includes(' : ')) {
-                        [dates, description] = stringValue.split(' : ');
-                    }
-                    else if(stringValue.includes(':')){
-                        [dates, description] = stringValue.split(':');
-                    }
-                    else {
-                        dates = stringValue; // If no separator, the whole thing is the date
-                        description = "";
-                    }
-                     return `<tr><td>${id}</td><td>${dates}</td><td>${description}</td></tr>`;
-
-                }
-
-                 else {
-                    // Handle cases where 'value' is not a string (optional, for robustness)
-                    console.warn(`Unexpected value type for ID ${id}:`, value);
-                    return `<tr><td>${id}</td><td>-</td><td>-</td></tr>`; // Display something, even if it's an error
-                }
-            }).join('');
+      tableBody.innerHTML = entries.map(([id, value]) => {
+        if (typeof value !== "string") {
+            console.warn(`Pominięto ID: ${id}, ponieważ wartość nie jest stringiem:`, value);
+            return "";
         }
-    </script>
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        // 🔴 Nowe parsowanie danych: rozdzielanie wartości średnikiem (;)
+        let parts = value.split(';');
+
+        // 🔴 Zamiana pustych pól (`""`) na `0`
+        parts = parts.map(part => part.trim() === "" ? "0" : part);
+
+        // Pobieramy daty (pierwsze kilka wartości)
+        const dates = parts.slice(3, 13).join(';'); // Pobiera np. 2024;2025;2025...
+
+        // Pobieramy opis (wszystko po datach)
+        const description = parts.slice(13).join(';');
+
+        return `
+            <tr>
+                <td>${id}</td>
+                <td>${dates || '-'}</td>
+                <td>${description || '-'}</td>
+            </tr>
+        `;
+      }).join('');
+    }
+  </script>
 </body>
 </html>
+
 
 
 
