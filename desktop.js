@@ -19,7 +19,7 @@ function loadKHData() {
     const khList = document.querySelector('.kh-list');
     if (khList) {
         khList.innerHTML = ''; // Wyczyść istniejącą treść
-        khData.slice(0, 2).forEach(name => { // Pokaż tylko pierwsze 2 nazwy
+        khData.forEach(name => { // Wyświetl wszystkie nazwy KH, aby umożliwić przewijanie
             const p = document.createElement('p');
             p.textContent = name;
             khList.appendChild(p);
