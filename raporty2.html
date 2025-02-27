@@ -15,6 +15,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="raporty-1.css">
+
+    <!-- Style dla tabeli i uchwytu -->
+    <style>
+        .table-container {
+            position: relative; /* Umożliwia przesuwanie */
+            display: inline-block; /* Dopasowuje się do zawartości */
+            border: 1px solid #ccc; /* Opcjonalna ramka dla widoczności */
+            cursor: move; /* Kursor wskazujący możliwość przeciągania */
+        }
+        .resize-handle {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 15px;
+            height: 15px;
+            background: #666;
+            cursor: se-resize; /* Kursor do zmiany rozmiaru */
+        }
+    </style>
 </head>
 <body>
     <div class="top-bar"></div>
@@ -57,7 +76,11 @@
         <div class="content">
             <div class="container">
                 <h2 class="h2">RAPORTY 2</h2>
-                <div id="excelTable" class="data-table-wrapper"></div>
+                <!-- Kontener na tabelę z uchwytem do zmiany rozmiaru -->
+                <div id="tableContainer" class="table-container">
+                    <div id="excelTable" class="data-table-wrapper"></div>
+                    <div class="resize-handle"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -85,7 +108,7 @@
         const database = getDatabase(app);
         const dataRef = ref(database, 'Data/data-table1');
 
-        let hotInstance; // Zmienna globalna do przechowywania instancji Handsontable
+        let hotInstance;
 
         onValue(dataRef, (snapshot) => {
             const data = snapshot.val();
@@ -110,7 +133,6 @@
 
             let allWeeks = new Set();
 
-            // Znalezienie wszystkich tygodni w danych
             entries.forEach(([id, value]) => {
                 if (typeof value === "object") {
                     value = Object.values(value).join(';');
@@ -123,10 +145,8 @@
 
             let sortedWeeks = [...allWeeks].sort((a, b) => a - b);
 
-            // Tworzenie dynamicznych nagłówków tabeli
             let headers = ["KOD KH", "NAZWA KH", "ABCD", ...sortedWeeks.map(week => `2025 ${week}`)];
 
-            // Tworzenie danych do Handsontable
             let tableData = entries.map(([id, value]) => {
                 if (typeof value === "object") {
                     value = Object.values(value).join(';');
@@ -139,7 +159,6 @@
                 return [...rowData, ...sortedWeeks.map((_, index) => weekData[index] || "0")];
             });
 
-            // Inicjalizacja Handsontable
             hotInstance = new Handsontable(container, {
                 data: tableData,
                 colHeaders: headers,
@@ -152,17 +171,69 @@
                 dropdownMenu: true,
                 columnSorting: true,
                 afterChange: (changes, source) => {
-                    if (source === 'edit') { // Sprawdzamy, czy zmiana pochodzi z edycji
+                    if (source === 'edit') {
                         saveChangesToFirebase(changes, entries, sortedWeeks);
                     }
                 }
+            });
+
+            // Logika przeciągania tabeli
+            const tableContainer = document.getElementById('tableContainer');
+            let isDragging = false;
+            let startX, startY;
+
+            tableContainer.addEventListener('mousedown', (e) => {
+                if (e.target.className !== 'resize-handle') { // Przeciąganie tylko poza uchwytem zmiany rozmiaru
+                    isDragging = true;
+                    startX = e.clientX - tableContainer.offsetLeft;
+                    startY = e.clientY - tableContainer.offsetTop;
+                }
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    tableContainer.style.left = (e.clientX - startX) + 'px';
+                    tableContainer.style.top = (e.clientY - startY) + 'px';
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            // Logika zmiany rozmiaru tabeli
+            const resizeHandle = document.querySelector('.resize-handle');
+            let isResizing = false;
+            let initialWidth, initialHeight;
+
+            resizeHandle.addEventListener('mousedown', (e) => {
+                isResizing = true;
+                initialWidth = tableContainer.offsetWidth;
+                initialHeight = tableContainer.offsetHeight;
+                startX = e.clientX;
+                startY = e.clientY;
+                e.preventDefault(); // Zapobiega zaznaczaniu tekstu
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isResizing) {
+                    const newWidth = initialWidth + (e.clientX - startX);
+                    const newHeight = initialHeight + (e.clientY - startY);
+                    tableContainer.style.width = newWidth + 'px';
+                    tableContainer.style.height = newHeight + 'px';
+                    hotInstance.updateSettings({ width: newWidth, height: newHeight }); // Aktualizacja Handsontable
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isResizing = false;
             });
         }
 
         function saveChangesToFirebase(changes, entries, sortedWeeks) {
             changes.forEach(([row, col, oldValue, newValue]) => {
-                const entryId = entries[row][0]; // ID rekordu w Firebase
-                const originalData = entries[row][1]; // Oryginalne dane (string lub obiekt)
+                const entryId = entries[row][0];
+                const originalData = entries[row][1];
 
                 let parts = typeof originalData === "object" 
                     ? Object.values(originalData).join(';') 
@@ -170,16 +241,12 @@
 
                 parts = parts.split(';').map(part => part.trim() === "" ? "0" : part);
 
-                // Aktualizacja wartości w odpowiedniej kolumnie
                 if (col < 3) {
-                    // Aktualizacja KOD KH, NAZWA KH lub ABCD
                     parts[col] = newValue;
                 } else {
-                    // Aktualizacja danych tygodni (kolumny od 3 wzwyż)
                     parts[3 + (col - 3)] = newValue;
                 }
 
-                // Zapis do Firebase
                 const updatedValue = parts.join(';');
                 set(ref(database, `Data/data-table1/${entryId}`), updatedValue)
                     .then(() => {
