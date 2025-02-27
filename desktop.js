@@ -1,20 +1,24 @@
-// Przykładowe dane zapasowe KH (używane, jeśli pobieranie danych nie powiedzie się)
-const backupKHData = [
-    "MAJA NORTHOLT",
-    "MAJA EXETER",
-    "DELIKATESY SMACZEK LUTON 3",
-    "PRASHANT PATEL",
-    "DELIKATESY SMACZEK COVENTRY",
-    "POLSKI SKLEP SMACZEK (READING) LIMITED",
-    "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
-    "SMACZEK SLOUGH 2",
-    "LONDEK ILFORD",
-    "SMACZEK SOUTHAMPTON BITTERNE",
-    "NIMIT PATEL !! SAVE MORE",
-    "LONDEK ROMFORD"
-];
+// Import Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
-// Funkcja, która ładuje dane z URL-a (np. raporty2.html) i wyświetla je w oknie 1
+// Konfiguracja Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
+    authDomain: "webmatcher-94f0e.firebaseapp.com",
+    databaseURL: "https://webmatcher-94f0e-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "webmatcher-94f0e",
+    storageBucket: "webmatcher-94f0e.appspot.com",
+    messagingSenderId: "970664630623",
+    appId: "G-RMMBEY655B"
+};
+
+// Inicjalizacja Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const dataRef = ref(database, 'Data/data-table1');
+
+// Funkcja, która ładuje i wyświetla tylko nazwy KH z Firebase w oknie 1
 function loadKHData() {
     const khList = document.querySelector('.kh-list');
     if (!khList) {
@@ -22,35 +26,23 @@ function loadKHData() {
         return;
     }
 
-    // Próba pobrania danych z zewnętrznego URL-a
-    fetch('https://marcin870119.github.io/matchweb/raporty2.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Błąd sieciowy: ' + response.status);
-            }
-            return response.text();
-        })
-        .then(html => {
-            // Parsowanie HTML, aby wyciągnąć nazwy KH
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-
-            // Spróbuj znaleźć nazwy KH w komórkach <td> tabeli
-            let khNames = Array.from(doc.querySelectorAll('td'))
-                .map(td => td.textContent.trim())
-                .filter(name => name && !name.toUpperCase().includes('NAZWA KH')); // Filtrujemy puste lub nagłówkowe wpisy
-
-            // Jeśli nie znaleziono w <td>, spróbuj poszukać w innych elementach (np. <p>, <div>, <span>)
-            if (khNames.length === 0) {
-                khNames = Array.from(doc.querySelectorAll('p, div, span'))
-                    .map(element => element.textContent.trim())
-                    .filter(name => name && !name.toUpperCase().includes('NAZWA KH'));
-            }
-
-            // Jeśli nadal nie znaleziono danych, użyj danych zapasowych
-            if (khNames.length === 0) {
-                console.warn('Nie znaleziono danych KH na stronie raporty2.html. Używam danych zapasowych.');
-                khNames = backupKHData;
+    onValue(dataRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            // Przetwarzanie danych z Firebase – wyciąganie tylko "NAZWA KH"
+            let khNames = [];
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const value = data[key];
+                    let parts = typeof value === "object" 
+                        ? Object.values(value).join(';') 
+                        : value;
+                    parts = parts.split(';').map(part => part.trim() === "" ? "0" : part);
+                    const khName = parts[1]; // Zakładam, że "NAZWA KH" jest drugą kolumną (indeks 1)
+                    if (khName && khName !== "0" && !khName.toUpperCase().includes('NAZWA KH')) {
+                        khNames.push(khName);
+                    }
+                }
             }
 
             // Wyświetlanie wszystkich nazw KH w liście (z przewijaniem)
@@ -60,20 +52,57 @@ function loadKHData() {
                 p.textContent = name;
                 khList.appendChild(p);
             });
-        })
-        .catch(error => {
-            console.error('Błąd pobierania danych z raporty2.html:', error);
-            // Użyj danych zapasowych w przypadku błędu (np. CORS)
+        } else {
+            console.warn('Brak danych w Firebase. Używam danych zapasowych.');
+            // Dane zapasowe, jeśli Firebase nie zwróci danych
+            const backupData = [
+                "MAJA NORTHOLT",
+                "MAJA EXETER",
+                "DELIKATESY SMACZEK LUTON 3",
+                "PRASHANT PATEL",
+                "DELIKATESY SMACZEK COVENTRY",
+                "POLSKI SKLEP SMACZEK (READING) LIMITED",
+                "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
+                "SMACZEK SLOUGH 2",
+                "LONDEK ILFORD",
+                "SMACZEK SOUTHAMPTON BITTERNE",
+                "NIMIT PATEL !! SAVE MORE",
+                "LONDEK ROMFORD"
+            ];
             khList.innerHTML = ''; // Wyczyść istniejącą treść
-            backupKHData.forEach(name => {
+            backupData.forEach(name => {
                 const p = document.createElement('p');
                 p.textContent = name;
                 khList.appendChild(p);
             });
+        }
+    }, (error) => {
+        console.error('Błąd pobierania danych z Firebase:', error);
+        // Użyj danych zapasowych w przypadku błędu
+        khList.innerHTML = ''; // Wyczyść istniejącą treść
+        const backupData = [
+            "MAJA NORTHOLT",
+            "MAJA EXETER",
+            "DELIKATESY SMACZEK LUTON 3",
+            "PRASHANT PATEL",
+            "DELIKATESY SMACZEK COVENTRY",
+            "POLSKI SKLEP SMACZEK (READING) LIMITED",
+            "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
+            "SMACZEK SLOUGH 2",
+            "LONDEK ILFORD",
+            "SMACZEK SOUTHAMPTON BITTERNE",
+            "NIMIT PATEL !! SAVE MORE",
+            "LONDEK ROMFORD"
+        ];
+        backupData.forEach(name => {
+            const p = document.createElement('p');
+            p.textContent = name;
+            khList.appendChild(p);
         });
+    });
 }
 
-// Funkcja pokazująca stronę główną (domyślna funkcja, którą miałeś w kodzie)
+// Funkcja pokazująca stronę główną
 function showHomePage() {
     const homePage = document.getElementById('homePage');
     if (homePage) {
@@ -81,7 +110,6 @@ function showHomePage() {
     } else {
         console.error('Nie znaleziono elementu #homePage');
     }
-    // Tutaj możesz dodać więcej logiki, jeśli jest potrzebna
 }
 
 // Funkcja dla MATCH JSON (przykładowa)
@@ -93,5 +121,5 @@ function showMatchJSONPage() {
 // Wywołaj funkcje po załadowaniu strony
 document.addEventListener('DOMContentLoaded', () => {
     showHomePage();
-    loadKHData(); // Ładuj dane KH po załadowaniu strony
+    loadKHData(); // Ładuj dane KH z Firebase po załadowaniu strony
 });
