@@ -239,7 +239,7 @@ button:hover {
     line-height: 1.2; /* Mniejszy odstęp między liniami dla mniejszej czcionki */
     font-size: 14px; /* Zmniejszenie rozmiaru czcionki z 16px na 14px */
     color: white; /* Kolor tekstu, aby pasował do tła karty niebieskiego */
-    text-align: right; /* Wyjustowanie tekstu do prawej strony */
+    text-align: left; /* Wyjustowanie tekstu do prawej strony */
 }
 
 .dashboard-card .value {
