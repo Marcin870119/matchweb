@@ -16,22 +16,26 @@
 
     <link rel="stylesheet" href="raporty-1.css">
 
-    <!-- Style dla tabeli i uchwytu -->
+    <!-- Style dla responsywnej tabeli -->
     <style>
         .table-container {
-            position: relative; /* Umożliwia przesuwanie */
-            display: inline-block; /* Dopasowuje się do zawartości */
-            border: 1px solid #ccc; /* Opcjonalna ramka dla widoczności */
-            cursor: move; /* Kursor wskazujący możliwość przeciągania */
+            position: relative;
+            width: 80%; /* Początkowa szerokość w procentach */
+            max-width: 100%; /* Nie przekracza kontenera */
+            margin: 0 auto; /* Centrowanie */
+            border: 1px solid #ccc;
+            cursor: move;
+            resize: both; /* Wbudowana zmiana rozmiaru */
+            overflow: auto; /* Zapewnia przewijanie przy zmniejszeniu */
         }
-        .resize-handle {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 15px;
-            height: 15px;
-            background: #666;
-            cursor: se-resize; /* Kursor do zmiany rozmiaru */
+        .content {
+            position: relative;
+            min-height: 400px; /* Minimalna wysokość dla przesuwania */
+        }
+        @media (max-width: 768px) {
+            .table-container {
+                width: 90%; /* Mniejsza szerokość na mniejszych ekranach */
+            }
         }
     </style>
 </head>
@@ -76,10 +80,8 @@
         <div class="content">
             <div class="container">
                 <h2 class="h2">RAPORTY 2</h2>
-                <!-- Kontener na tabelę z uchwytem do zmiany rozmiaru -->
                 <div id="tableContainer" class="table-container">
                     <div id="excelTable" class="data-table-wrapper"></div>
-                    <div class="resize-handle"></div>
                 </div>
             </div>
         </div>
@@ -163,7 +165,7 @@
                 data: tableData,
                 colHeaders: headers,
                 rowHeaders: true,
-                width: "100%",
+                width: "100%", // Tabela wypełnia kontener
                 height: "auto",
                 licenseKey: "non-commercial-and-evaluation",
                 stretchH: "all",
@@ -183,17 +185,27 @@
             let startX, startY;
 
             tableContainer.addEventListener('mousedown', (e) => {
-                if (e.target.className !== 'resize-handle') { // Przeciąganie tylko poza uchwytem zmiany rozmiaru
-                    isDragging = true;
-                    startX = e.clientX - tableContainer.offsetLeft;
-                    startY = e.clientY - tableContainer.offsetTop;
-                }
+                isDragging = true;
+                startX = e.clientX - (tableContainer.offsetLeft || 0);
+                startY = e.clientY - (tableContainer.offsetTop || 0);
+                e.preventDefault();
             });
 
             document.addEventListener('mousemove', (e) => {
                 if (isDragging) {
-                    tableContainer.style.left = (e.clientX - startX) + 'px';
-                    tableContainer.style.top = (e.clientY - startY) + 'px';
+                    const parent = tableContainer.parentElement;
+                    const maxX = parent.clientWidth - tableContainer.offsetWidth;
+                    const maxY = parent.clientHeight - tableContainer.offsetHeight;
+                    let newX = e.clientX - startX;
+                    let newY = e.clientY - startY;
+
+                    // Ograniczenie przesuwania do granic kontenera
+                    newX = Math.max(0, Math.min(newX, maxX));
+                    newY = Math.max(0, Math.min(newY, maxY));
+
+                    tableContainer.style.left = newX + 'px';
+                    tableContainer.style.top = newY + 'px';
+                    tableContainer.style.position = 'absolute'; // Umożliwia przesuwanie
                 }
             });
 
@@ -201,32 +213,12 @@
                 isDragging = false;
             });
 
-            // Logika zmiany rozmiaru tabeli
-            const resizeHandle = document.querySelector('.resize-handle');
-            let isResizing = false;
-            let initialWidth, initialHeight;
-
-            resizeHandle.addEventListener('mousedown', (e) => {
-                isResizing = true;
-                initialWidth = tableContainer.offsetWidth;
-                initialHeight = tableContainer.offsetHeight;
-                startX = e.clientX;
-                startY = e.clientY;
-                e.preventDefault(); // Zapobiega zaznaczaniu tekstu
-            });
-
-            document.addEventListener('mousemove', (e) => {
-                if (isResizing) {
-                    const newWidth = initialWidth + (e.clientX - startX);
-                    const newHeight = initialHeight + (e.clientY - startY);
-                    tableContainer.style.width = newWidth + 'px';
-                    tableContainer.style.height = newHeight + 'px';
-                    hotInstance.updateSettings({ width: newWidth, height: newHeight }); // Aktualizacja Handsontable
-                }
-            });
-
-            document.addEventListener('mouseup', () => {
-                isResizing = false;
+            // Aktualizacja rozmiaru tabeli przy zmianie okna
+            window.addEventListener('resize', () => {
+                hotInstance.updateSettings({
+                    width: tableContainer.offsetWidth,
+                    height: tableContainer.offsetHeight
+                });
             });
         }
 
