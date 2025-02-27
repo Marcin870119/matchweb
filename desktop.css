@@ -234,7 +234,7 @@ button:hover {
 
 .kh-list {
     overflow-y: auto; /* Włącza pionowe przewijanie */
-    max-height: 120px; /* Ograniczenie wysokości, aby zmieściły się maksymalnie 2 nazwy KH */
+    height: 120px; /* Stała wysokość, aby zapewnić przewijanie */
     padding: 10px; /* Dodatkowy odstęp wewnątrz listy */
     line-height: 1.5; /* Lepsze rozmieszczenie tekstu */
     font-size: 16px; /* Rozmiar czcionki dla czytelności */
