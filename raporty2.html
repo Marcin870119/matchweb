@@ -69,7 +69,7 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCPZ0OsJmaDpJjkVFl3vGv4WalDYDY23xQ",
@@ -84,6 +84,8 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
         const dataRef = ref(database, 'Data/data-table1');
+
+        let hotInstance; // Zmienna globalna do przechowywania instancji Handsontable
 
         onValue(dataRef, (snapshot) => {
             const data = snapshot.val();
@@ -108,7 +110,7 @@
 
             let allWeeks = new Set();
 
-            // 🔴 Znalezienie wszystkich tygodni w danych
+            // Znalezienie wszystkich tygodni w danych
             entries.forEach(([id, value]) => {
                 if (typeof value === "object") {
                     value = Object.values(value).join(';');
@@ -121,10 +123,10 @@
 
             let sortedWeeks = [...allWeeks].sort((a, b) => a - b);
 
-            // 🔴 Tworzenie dynamicznych nagłówków tabeli
+            // Tworzenie dynamicznych nagłówków tabeli
             let headers = ["KOD KH", "NAZWA KH", "ABCD", ...sortedWeeks.map(week => `2025 ${week}`)];
 
-            // 🔴 Tworzenie danych do Handsontable
+            // Tworzenie danych do Handsontable
             let tableData = entries.map(([id, value]) => {
                 if (typeof value === "object") {
                     value = Object.values(value).join(';');
@@ -137,7 +139,8 @@
                 return [...rowData, ...sortedWeeks.map((_, index) => weekData[index] || "0")];
             });
 
-            new Handsontable(container, {
+            // Inicjalizacja Handsontable
+            hotInstance = new Handsontable(container, {
                 data: tableData,
                 colHeaders: headers,
                 rowHeaders: true,
@@ -145,9 +148,46 @@
                 height: "auto",
                 licenseKey: "non-commercial-and-evaluation",
                 stretchH: "all",
-                filters: true, // 🔴 Włączone filtry!
-                dropdownMenu: true, // 🔴 Menu z opcjami filtrowania
-                columnSorting: true // 🔴 Możliwość sortowania
+                filters: true,
+                dropdownMenu: true,
+                columnSorting: true,
+                afterChange: (changes, source) => {
+                    if (source === 'edit') { // Sprawdzamy, czy zmiana pochodzi z edycji
+                        saveChangesToFirebase(changes, entries, sortedWeeks);
+                    }
+                }
+            });
+        }
+
+        function saveChangesToFirebase(changes, entries, sortedWeeks) {
+            changes.forEach(([row, col, oldValue, newValue]) => {
+                const entryId = entries[row][0]; // ID rekordu w Firebase
+                const originalData = entries[row][1]; // Oryginalne dane (string lub obiekt)
+
+                let parts = typeof originalData === "object" 
+                    ? Object.values(originalData).join(';') 
+                    : originalData;
+
+                parts = parts.split(';').map(part => part.trim() === "" ? "0" : part);
+
+                // Aktualizacja wartości w odpowiedniej kolumnie
+                if (col < 3) {
+                    // Aktualizacja KOD KH, NAZWA KH lub ABCD
+                    parts[col] = newValue;
+                } else {
+                    // Aktualizacja danych tygodni (kolumny od 3 wzwyż)
+                    parts[3 + (col - 3)] = newValue;
+                }
+
+                // Zapis do Firebase
+                const updatedValue = parts.join(';');
+                set(ref(database, `Data/data-table1/${entryId}`), updatedValue)
+                    .then(() => {
+                        console.log(`Zaktualizowano rekord ${entryId} w Firebase: ${updatedValue}`);
+                    })
+                    .catch((error) => {
+                        console.error("Błąd zapisu do Firebase: ", error);
+                    });
             });
         }
     </script>
