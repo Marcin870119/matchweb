@@ -232,13 +232,6 @@ button:hover {
     opacity: 0.8;
 }
 
-.dashboard-logo {
-    width: 100px; /* Rozmiar logo (możesz dostosować) */
-    height: auto; /* Zachowuje proporcje */
-    margin-bottom: 10px; /* Odstęp między logo a listą KH */
-    filter: brightness(0) invert(1); /* Zmiana koloru na biały, jeśli ikona jest czarna */
-}
-
 .kh-list {
     overflow-y: auto; /* Włącza pionowe przewijanie */
     height: 100px; /* Zmniejszenie wysokości, aby zmieścić logo */
