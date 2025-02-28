@@ -194,7 +194,7 @@ button:hover {
 
 .dashboard-card {
     width: 300px;
-    height: 200px;
+    height: 200px; /* Ustandaryzowana wysokość dla wszystkich kart */
     border-radius: 15px;
     color: white;
     text-align: center;
@@ -211,122 +211,186 @@ button:hover {
 }
 
 .okno1 {
-    background-color: #007bff;
+    background-color: #007bff; /* Niebieski – bez zmian */
+    width: 300px;
+    height: 200px; /* Ustandaryzowana wysokość dla spójności z innymi kartami */
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    padding: 15px; /* Zmniejszony padding dla mniejszej czcionki */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Taki sam cień jak w innych kartach */
+    transition: transform 0.3s ease-in-out;
+}
+
+.okno1:hover {
+    transform: scale(1.05);
 }
 
 .okno2 {
-    background-color: #28a745;
+    background-color: #28a745; /* Zielony */
 }
 
 .okno3 {
-    background-color: #ffc107;
+    background-color: #ffc107; /* Żółty */
 }
 
 .okno4 {
-    background-color: #dc3545;
+    background-color: #dc3545; /* Czerwony */
 }
 
 .dashboard-card h3 {
-    font-size: 18px;
-    margin: 0 0 15px 0;
+    font-size: 14px; /* Zmniejszenie rozmiaru nagłówka z 18px na 14px */
+    margin: 0 0 10px 0; /* Mniejszy margines dolny */
     opacity: 0.8;
+    font-weight: bold;
 }
 
-.kh-display {
+.card-title {
+    font-size: 14px; /* Zmniejszenie rozmiaru nagłówka z 24px na 14px */
+    font-weight: bold;
+    margin: 0 0 10px 0; /* Mniejszy margines dolny */
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px; /* Mniejszy odstęp liter */
+}
+
+.kh-navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 15px 0;
     width: 100%;
+    margin: 5px 0; /* Mniejszy margines */
 }
 
 .nav-arrow {
-    background: none;
-    border: none;
-    font-size: 24px;
+    background: rgba(255, 255, 255, 0.1); /* Lekkie tło dla strzałek */
+    border: 1px solid white; /* Zmniejszone obramowanie dla prostoty */
+    border-radius: 50%; /* Okrągły kształt */
+    width: 30px; /* Zmniejszenie rozmiaru przycisków */
+    height: 30px;
+    font-size: 18px; /* Zmniejszenie rozmiaru strzałek z 24px na 18px */
     color: white;
     cursor: pointer;
-    padding: 0 10px;
-    transition: color 0.3s ease-in-out;
-}
-
-.nav-arrow:hover {
-    color: #f0f0f0;
-}
-
-.kh-name-value {
-    flex-grow: 1;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.nav-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Lekkie rozjaśnienie przy hover */
+    transform: scale(1.1); /* Powiększenie przy hover */
+}
+
+.kh-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Mniejszy odstęp między nazwą a wartościami */
+}
+
+.kh-name-trend {
+    display: flex;
+    align-items: center;
+    gap: 2px; /* Mniejszy odstęp między nazwą a strzałką */
+    font-size: 10px; /* Zmniejszenie rozmiaru nazwy z 18px na 12px */
+    font-weight: bold;
 }
 
 .kh-name {
-    font-size: 16px;
     color: white;
     text-align: center;
 }
 
 .kh-arrow {
-    margin-left: 12px; /* Lekko większy odstęp między nazwą a strzałką */
-    font-size: 24px; /* Zwiększenie rozmiaru strzałki z 16px na 24px */
-    font-weight: bold; /* Pogrubienie dla wyrazistości */
-    line-height: 1; /* Ustalenie wysokości linii dla lepszego wyrównania */
+    font-size: 20px; /* Zmniejszenie rozmiaru strzałki trendu z 28px na 20px */
+    font-weight: bold;
+    line-height: 1;
 }
 
 .green-arrow {
-    color: #00cc00; /* Jaśniejszy, bardziej intensywny zielony */
+    color: #00cc00; /* Zachowanie intensywnie zielonego koloru */
 }
 
 .red-arrow {
-    color: #ff3333; /* Jaśniejszy, bardziej intensywny czerwony */
+    color: #ff3333; /* Zachowanie intensywnie czerwonego koloru */
 }
 
 .yellow-equals {
-    color: #ffcc00; /* Jaśniejszy, bardziej intensywny żółty */
+    color: #ffcc00; /* Zachowanie intensywnie żółtego koloru */
 }
 
 .kh-values {
     display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    color: white;
-    margin-top: 10px;
+    flex-direction: column;
+    gap: 8px; /* Mniejszy odstęp między wartościami */
+    width: 100%;
 }
 
-.kh-value {
+.value-item {
+    background: rgba(255, 255, 255, 0.05); /* Bardziej subtelne tło */
+    border-radius: 6px; /* Mniejsze zaokrąglenie dla prostoty */
+    padding: 8px 12px; /* Mniejszy padding dla wartości */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none; /* Usunięcie cienia dla prostoty */
+    transition: transform 0.3s ease-in-out;
+}
+
+.value-item:hover {
+    transform: translateY(-1px); /* Mniejszy efekt uniesienia przy hover */
+}
+
+.value-label {
+    font-size: 10px; /* Zmniejszenie rozmiaru etykiety z 14px na 10px */
+    color: white;
+    font-weight: normal;
+    opacity: 0.7;
+    text-align: left;
+}
+
+.value-number {
+    font-size: 14px; /* Zmniejszenie rozmiaru wartości z 20px na 14px */
     font-weight: bold;
+    color: white;
+    text-align: right;
 }
 
 .dashboard-card .value {
-    font-size: 36px;
+    font-size: 24px; /* Zmniejszenie rozmiaru wartości z 36px na 24px */
     font-weight: bold;
-    margin: 0 0 15px 0;
+    margin: 0 0 8px 0; /* Mniejszy margines dolny */
 }
 
 .dashboard-card .trend {
-    font-size: 16px;
+    font-size: 12px; /* Zmniejszenie rozmiaru trendu z 16px na 12px */
     margin: 0;
-    opacity: 0.9; /* Zwiększenie widoczności z 0.7 na 0.9 */
+    opacity: 0.9;
     display: flex;
-    align-items: center; /* Wyrównanie strzałki i tekstu */
+    align-items: center;
     justify-content: center;
 }
 
 .arrow {
-    font-size: 24px; /* Zwiększenie rozmiaru strzałki z 16px na 24px */
-    font-weight: bold; /* Pogrubienie dla wyrazistości */
-    margin-right: 10px; /* Większy odstęp przed tekstem */
-    line-height: 1; /* Ustalenie wysokości linii dla lepszego wyrównania */
+    font-size: 18px; /* Zmniejszenie rozmiaru strzałki z 24px na 18px */
+    font-weight: bold;
+    margin-right: 5px; /* Mniejszy odstęp przed tekstem */
+    line-height: 1;
 }
 
 .arrow.up::after {
-    content: "▲"; /* Grubsza, bardziej wyrazista strzałka w górę */
+    content: "▲"; /* Zachowanie grubszego symbolu */
     color: #00cc00; /* Intensywny zielony */
 }
 
 .arrow.down::after {
-    content: "▼"; /* Grubsza, bardziej wyrazista strzałka w dół */
+    content: "▼"; /* Zachowanie grubszego symbolu */
     color: #ff3333; /* Intensywny czerwony */
 }
