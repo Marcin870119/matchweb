@@ -228,35 +228,32 @@ button:hover {
 
 .dashboard-card h3 {
     font-size: 18px; /* Zwiększenie rozmiaru tekstu nagłówka */
-    margin: 0 0 15px 0; /* Większy margines dolny */
+    margin: 0 0 10px 0; /* Mniejszy margines dolny, aby zmieścić więcej treści */
     opacity: 0.8;
 }
 
-.kh-list {
-    overflow-y: auto; /* Włącza pionowe przewijanie */
-    height: 120px; /* Stała wysokość, aby zapewnić przewijanie */
-    padding: 10px; /* Dodatkowy odstęp wewnątrz listy */
-    line-height: 1.2; /* Mniejszy odstęp między liniami dla mniejszej czcionki */
-    font-size: 14px; /* Zmniejszenie rozmiaru czcionki z 16px na 14px */
-    color: white; /* Kolor tekstu, aby pasował do tła karty niebieskiego */
-    text-align: left; /* Wyjustowanie tekstu do prawej strony */
+.kh-display {
+    width: 100%;
+    text-align: center;
+    flex-grow: 1; /* Zajmuje dostępną przestrzeń */
 }
 
 .kh-entry {
     display: flex;
-    justify-content: space-between; /* Rozmieszczenie nazwy i strzałki z odstępem */
-    align-items: center; /* Wyrównanie w pionie */
-    margin-bottom: 5px; /* Odstęp między wpisami */
+    justify-content: center; /* Wyśrodkowanie nazwy i strzałki */
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .kh-name {
-    flex-grow: 1; /* Nazwa zajmuje większość miejsca */
-    text-align: left; /* Wyjustowanie nazwy do prawej strony */
+    text-align: center; /* Wyśrodkowanie nazwy KH */
+    font-size: 14px;
+    flex-grow: 1; /* Zajmuje większość miejsca */
 }
 
 .kh-arrow {
-    margin-left: 10px; /* Odstęp między nazwą a strzałką */
-    font-size: 16px; /* Rozmiar strzałki */
+    margin-left: 10px;
+    font-size: 16px;
 }
 
 .green-arrow {
@@ -267,8 +264,43 @@ button:hover {
     color: #dc3545; /* Czerwona strzałka w dół */
 }
 
-.yellow-equals {
-    color: #ffc107; /* Żółty znak równości */
+.nav-arrows {
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie znaków < i > */
+    margin-top: 10px; /* Odstęp od treści powyżej */
+}
+
+.nav-arrow {
+    background: none;
+    border: 1px solid white; /* Ramka, jak na zdjęciu */
+    border-radius: 4px; /* Zaokrąglone rogi */
+    color: white;
+    font-size: 18px; /* Rozmiar znaków < i > */
+    cursor: pointer;
+    padding: 5px 10px; /* Większy odstęp dla klikalności */
+    transition: opacity 0.3s ease-in-out;
+    margin: 0 5px; /* Odstęp między znakami */
+}
+
+.nav-arrow:hover {
+    opacity: 0.7;
+}
+
+.up-arrow, .down-arrow {
+    /* Brak dodatkowych stylów, bo są już zdefiniowane w .nav-arrow */
+}
+
+.kh-values {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    margin-top: auto; /* Przesunięcie wartości jak najniżej w karcie */
+    padding-top: 5px; /* Odstęp od górnej krawędzi */
+}
+
+.average-value, .column-m-value {
+    font-weight: bold;
+    margin: 0 5px; /* Odstęp między wartościami */
 }
 
 .dashboard-card .value {
