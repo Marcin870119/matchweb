@@ -48,18 +48,26 @@
     <div id="homePage">
         <div class="dashboard-container">
             <div class="dashboard-card okno1">
-                <h3>Sprzedaż</h3>
-                <div class="kh-display">
+                <h3 class="card-title">Sprzedaż</h3>
+                <div class="kh-navigation">
                     <button class="nav-arrow" id="prevKH"><</button>
-                    <div class="kh-name-value">
-                        <span class="kh-name" id="currentKH"></span>
-                        <span class="kh-arrow green-arrow" id="khTrend">↑</span>
+                    <div class="kh-details">
+                        <div class="kh-name-trend">
+                            <span class="kh-name" id="currentKH">MAJA NORTHOLT</span>
+                            <span class="kh-arrow green-arrow" id="khTrend">↑</span>
+                        </div>
+                        <div class="kh-values">
+                            <div class="value-item">
+                                <span class="value-label">Bieżąca:</span>
+                                <span class="value-number" id="prevValue">11365.89</span>
+                            </div>
+                            <div class="value-item">
+                                <span class="value-label">Średnia sprzedaż:</span>
+                                <span class="value-number" id="currentValue">8288.41</span>
+                            </div>
+                        </div>
                     </div>
                     <button class="nav-arrow" id="nextKH">></button>
-                </div>
-                <div class="kh-values">
-                    <span class="kh-value" id="prevValue">3500</span>
-                    <span class="kh-value" id="currentValue">3600</span>
                 </div>
             </div>
             <div class="dashboard-card okno2">
