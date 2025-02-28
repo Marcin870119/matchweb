@@ -217,7 +217,7 @@ button:hover {
     border-radius: 15px;
     color: white;
     text-align: center;
-    padding: 15px; /* Zmniejszony padding dla mniejszej czcionki */
+    padding: 15px; /* Zachowanie mniejszego paddingu */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -242,19 +242,19 @@ button:hover {
 }
 
 .dashboard-card h3 {
-    font-size: 14px; /* Zmniejszenie rozmiaru nagłówka z 18px na 14px */
+    font-size: 14px; /* Zachowanie mniejszej czcionki */
     margin: 0 0 10px 0; /* Mniejszy margines dolny */
     opacity: 0.8;
     font-weight: bold;
 }
 
 .card-title {
-    font-size: 14px; /* Zmniejszenie rozmiaru nagłówka z 24px na 14px */
+    font-size: 14px; /* Zachowanie mniejszej czcionki */
     font-weight: bold;
     margin: 0 0 10px 0; /* Mniejszy margines dolny */
     opacity: 0.9;
     text-transform: uppercase;
-    letter-spacing: 0.5px; /* Mniejszy odstęp liter */
+    letter-spacing: 0.5px; /* Zachowanie subtelnego odstępu liter */
 }
 
 .kh-navigation {
@@ -262,28 +262,27 @@ button:hover {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin: 5px 0; /* Mniejszy margines */
+    margin: 5px 0; /* Zachowanie mniejszego marginesu */
 }
 
 .nav-arrow {
-    background: rgba(255, 255, 255, 0.1); /* Lekkie tło dla strzałek */
-    border: 1px solid white; /* Zmniejszone obramowanie dla prostoty */
-    border-radius: 50%; /* Okrągły kształt */
-    width: 30px; /* Zmniejszenie rozmiaru przycisków */
-    height: 30px;
-    font-size: 18px; /* Zmniejszenie rozmiaru strzałek z 24px na 18px */
+    background: none; /* Usunięcie tła */
+    border: none; /* Usunięcie obramowania */
+    width: 24px; /* Zachowanie rozmiaru przycisków */
+    height: 24px;
+    font-size: 16px; /* Zachowanie rozmiaru strzałek */
     color: white;
     cursor: pointer;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .nav-arrow:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Lekkie rozjaśnienie przy hover */
-    transform: scale(1.1); /* Powiększenie przy hover */
+    color: #f0f0f0; /* Lekkie rozjaśnienie koloru przy hover */
+    transform: scale(1.1); /* Zachowanie powiększenia przy hover */
 }
 
 .kh-details {
@@ -292,14 +291,14 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px; /* Mniejszy odstęp między nazwą a wartościami */
+    gap: 10px; /* Zachowanie mniejszego odstępu */
 }
 
 .kh-name-trend {
     display: flex;
     align-items: center;
-    gap: 2px; /* Mniejszy odstęp między nazwą a strzałką */
-    font-size: 10px; /* Zmniejszenie rozmiaru nazwy z 18px na 12px */
+    gap: 10px; /* Zachowanie mniejszego odstępu */
+    font-size: 12px; /* Zachowanie mniejszej czcionki nazwy */
     font-weight: bold;
 }
 
@@ -309,7 +308,7 @@ button:hover {
 }
 
 .kh-arrow {
-    font-size: 20px; /* Zmniejszenie rozmiaru strzałki trendu z 28px na 20px */
+    font-size: 20px; /* Zachowanie rozmiaru strzałki trendu */
     font-weight: bold;
     line-height: 1;
 }
@@ -329,27 +328,27 @@ button:hover {
 .kh-values {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Mniejszy odstęp między wartościami */
+    gap: 8px; /* Zachowanie mniejszego odstępu między wartościami */
     width: 100%;
 }
 
 .value-item {
-    background: rgba(255, 255, 255, 0.05); /* Bardziej subtelne tło */
-    border-radius: 6px; /* Mniejsze zaokrąglenie dla prostoty */
-    padding: 8px 12px; /* Mniejszy padding dla wartości */
+    background: rgba(255, 255, 255, 0.05); /* Zachowanie subtelnego tła */
+    border-radius: 6px; /* Zachowanie mniejszego zaokrąglenia */
+    padding: 8px 12px; /* Zachowanie mniejszego paddingu */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: none; /* Usunięcie cienia dla prostoty */
+    box-shadow: none; /* Zachowanie braku cienia dla prostoty */
     transition: transform 0.3s ease-in-out;
 }
 
 .value-item:hover {
-    transform: translateY(-1px); /* Mniejszy efekt uniesienia przy hover */
+    transform: translateY(-1px); /* Zachowanie mniejszego efektu uniesienia */
 }
 
 .value-label {
-    font-size: 10px; /* Zmniejszenie rozmiaru etykiety z 14px na 10px */
+    font-size: 10px; /* Zachowanie mniejszej czcionki etykiety */
     color: white;
     font-weight: normal;
     opacity: 0.7;
@@ -357,20 +356,20 @@ button:hover {
 }
 
 .value-number {
-    font-size: 14px; /* Zmniejszenie rozmiaru wartości z 20px na 14px */
+    font-size: 14px; /* Zachowanie mniejszej czcionki wartości */
     font-weight: bold;
     color: white;
     text-align: right;
 }
 
 .dashboard-card .value {
-    font-size: 24px; /* Zmniejszenie rozmiaru wartości z 36px na 24px */
+    font-size: 24px; /* Zachowanie mniejszej czcionki wartości */
     font-weight: bold;
-    margin: 0 0 8px 0; /* Mniejszy margines dolny */
+    margin: 0 0 8px 0; /* Zachowanie mniejszego marginesu */
 }
 
 .dashboard-card .trend {
-    font-size: 12px; /* Zmniejszenie rozmiaru trendu z 16px na 12px */
+    font-size: 12px; /* Zachowanie mniejszej czcionki trendu */
     margin: 0;
     opacity: 0.9;
     display: flex;
@@ -379,9 +378,9 @@ button:hover {
 }
 
 .arrow {
-    font-size: 18px; /* Zmniejszenie rozmiaru strzałki z 24px na 18px */
+    font-size: 18px; /* Zachowanie mniejszej czcionki strzałki */
     font-weight: bold;
-    margin-right: 5px; /* Mniejszy odstęp przed tekstem */
+    margin-right: 5px; /* Zachowanie mniejszego odstępu */
     line-height: 1;
 }
 
