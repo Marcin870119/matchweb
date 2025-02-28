@@ -18,26 +18,19 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const dataRef = ref(database, 'Data/data-table1');
 
-// Zmienna globalna do przechowywania listy klientów i bieżącego indeksu
-let khEntries = [];
-let currentIndex = 0;
-
-// Funkcja, która ładuje dane z Firebase i inicjalizuje nawigację
+// Funkcja, która ładuje i wyświetla tylko nazwy KH z Firebase w oknie 1
 function loadKHData() {
-    const khName = document.querySelector('.kh-name');
-    const khArrow = document.querySelector('.kh-arrow');
-    const averageValue = document.querySelector('.average-value');
-    const columnMValue = document.querySelector('.column-m-value');
-
-    if (!khName || !khArrow || !averageValue || !columnMValue) {
-        console.error('Nie znaleziono elementów do wyświetlania danych KH');
+    const khList = document.querySelector('.kh-list');
+    if (!khList) {
+        console.error('Nie znaleziono elementu .kh-list');
         return;
     }
 
     onValue(dataRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {
-            khEntries = [];
+            // Przetwarzanie danych z Firebase – wyciąganie tylko "NAZWA KH"
+            let khNames = [];
             for (const key in data) {
                 if (data.hasOwnProperty(key)) {
                     const value = data[key];
@@ -45,113 +38,68 @@ function loadKHData() {
                         ? Object.values(value).join(';') 
                         : value;
                     parts = parts.split(';').map(part => part.trim() === "" ? "0" : part);
-
-                    const khNameValue = parts[1]; // Nazwa KH (druga kolumna)
-                    if (khNameValue && khNameValue !== "0" && !khNameValue.toUpperCase().includes('NAZWA KH')) {
-                        // Oblicz średnią z kolumn D do L (indeksy 3–10)
-                        const weeklyValues = parts.slice(3, 11).map(Number); // Konwersja na liczby
-                        const average = weeklyValues.reduce((sum, val) => sum + val, 0) / weeklyValues.length || 0;
-                        const columnM = Number(parts[12]) || 0; // Wartość z kolumny M
-
-                        // Porównanie średniej z kolumną M i określenie strzałki
-                        let arrow = '';
-                        let arrowClass = '';
-                        if (average < columnM) {
-                            arrow = '↑'; // Strzałka w górę (zielona)
-                            arrowClass = 'green-arrow';
-                        } else if (average > columnM) {
-                            arrow = '↓'; // Strzałka w dół (czerwona)
-                            arrowClass = 'red-arrow';
-                        }
-
-                        khEntries.push({ name: khNameValue, average: average.toFixed(2), columnM: columnM.toFixed(2), arrow: arrow, arrowClass: arrowClass });
+                    const khName = parts[1]; // Zakładam, że "NAZWA KH" jest drugą kolumną (indeks 1)
+                    if (khName && khName !== "0" && !khName.toUpperCase().includes('NAZWA KH')) {
+                        khNames.push(khName);
                     }
                 }
             }
 
-            // Wyświetl pierwszego klienta, jeśli lista nie jest pusta
-            if (khEntries.length > 0) {
-                currentIndex = 0;
-                updateDisplay();
-            } else {
-                console.warn('Brak danych KH w Firebase. Używam danych zapasowych.');
-                // Dane zapasowe, jeśli Firebase nie zwróci danych
-                khEntries = [
-                    { name: "DELIKATESY SMACZEK LUTON 3", average: "3500", columnM: "3600", arrow: '↑', arrowClass: 'green-arrow' },
-                    { name: "MAJA NORTHOLT", average: "7985.87", columnM: "11365.89", arrow: '↓', arrowClass: 'red-arrow' },
-                    { name: "MAJA EXETER", average: "3000", columnM: "2900", arrow: '↓', arrowClass: 'red-arrow' }
-                ];
-                currentIndex = 0;
-                updateDisplay();
-            }
+            // Wyświetlanie wszystkich nazw KH w liście (z przewijaniem)
+            khList.innerHTML = ''; // Wyczyść istniejącą treść
+            khNames.forEach(name => {
+                const p = document.createElement('p');
+                p.textContent = name;
+                khList.appendChild(p);
+            });
         } else {
             console.warn('Brak danych w Firebase. Używam danych zapasowych.');
-            // Dane zapasowe
-            khEntries = [
-                { name: "DELIKATESY SMACZEK LUTON 3", average: "3500", columnM: "3600", arrow: '↑', arrowClass: 'green-arrow' },
-                { name: "MAJA NORTHOLT", average: "7985.87", columnM: "11365.89", arrow: '↓', arrowClass: 'red-arrow' },
-                { name: "MAJA EXETER", average: "3000", columnM: "2900", arrow: '↓', arrowClass: 'red-arrow' }
+            // Dane zapasowe, jeśli Firebase nie zwróci danych
+            const backupData = [
+                "MAJA NORTHOLT",
+                "MAJA EXETER",
+                "DELIKATESY SMACZEK LUTON 3",
+                "PRASHANT PATEL",
+                "DELIKATESY SMACZEK COVENTRY",
+                "POLSKI SKLEP SMACZEK (READING) LIMITED",
+                "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
+                "SMACZEK SLOUGH 2",
+                "LONDEK ILFORD",
+                "SMACZEK SOUTHAMPTON BITTERNE",
+                "NIMIT PATEL !! SAVE MORE",
+                "LONDEK ROMFORD"
             ];
-            currentIndex = 0;
-            updateDisplay();
+            khList.innerHTML = ''; // Wyczyść istniejącą treść
+            backupData.forEach(name => {
+                const p = document.createElement('p');
+                p.textContent = name;
+                khList.appendChild(p);
+            });
         }
     }, (error) => {
         console.error('Błąd pobierania danych z Firebase:', error);
         // Użyj danych zapasowych w przypadku błędu
-        khEntries = [
-            { name: "DELIKATESY SMACZEK LUTON 3", average: "3500", columnM: "3600", arrow: '↑', arrowClass: 'green-arrow' },
-            { name: "MAJA NORTHOLT", average: "7985.87", columnM: "11365.89", arrow: '↓', arrowClass: 'red-arrow' },
-            { name: "MAJA EXETER", average: "3000", columnM: "2900", arrow: '↓', arrowClass: 'red-arrow' }
+        khList.innerHTML = ''; // Wyczyść istniejącą treść
+        const backupData = [
+            "MAJA NORTHOLT",
+            "MAJA EXETER",
+            "DELIKATESY SMACZEK LUTON 3",
+            "PRASHANT PATEL",
+            "DELIKATESY SMACZEK COVENTRY",
+            "POLSKI SKLEP SMACZEK (READING) LIMITED",
+            "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
+            "SMACZEK SLOUGH 2",
+            "LONDEK ILFORD",
+            "SMACZEK SOUTHAMPTON BITTERNE",
+            "NIMIT PATEL !! SAVE MORE",
+            "LONDEK ROMFORD"
         ];
-        const khName = document.querySelector('.kh-name');
-        const khArrow = document.querySelector('.kh-arrow');
-        const averageValue = document.querySelector('.average-value');
-        const columnMValue = document.querySelector('.column-m-value');
-        if (khName && khArrow && averageValue && columnMValue) {
-            currentIndex = 0;
-            updateDisplay();
-        }
+        backupData.forEach(name => {
+            const p = document.createElement('p');
+            p.textContent = name;
+            khList.appendChild(p);
+        });
     });
-}
-
-// Funkcja aktualizująca wyświetlanie bieżącego klienta
-function updateDisplay() {
-    const khName = document.querySelector('.kh-name');
-    const khArrow = document.querySelector('.kh-arrow');
-    const averageValue = document.querySelector('.average-value');
-    const columnMValue = document.querySelector('.column-m-value');
-    const upArrow = document.querySelector('.up-arrow');
-    const downArrow = document.querySelector('.down-arrow');
-
-    if (khEntries.length > 0 && currentIndex >= 0 && currentIndex < khEntries.length) {
-        const entry = khEntries[currentIndex];
-        khName.textContent = entry.name;
-        khArrow.textContent = entry.arrow;
-        khArrow.className = `kh-arrow ${entry.arrowClass}`;
-        averageValue.textContent = entry.average;
-        columnMValue.textContent = entry.columnM;
-    } else {
-        khName.textContent = 'Brak danych';
-        khArrow.textContent = '';
-        averageValue.textContent = '';
-        columnMValue.textContent = '';
-    }
-
-    // Ukryj strzałki, jeśli jesteśmy na początku lub końcu listy
-    if (upArrow && downArrow) {
-        upArrow.style.display = currentIndex === 0 ? 'none' : 'inline-block';
-        downArrow.style.display = currentIndex === khEntries.length - 1 ? 'none' : 'inline-block';
-    }
-}
-
-// Funkcja nawigacji między klientami (poprzedni lub następny)
-function navigateKH(direction) {
-    if (khEntries.length > 0) {
-        currentIndex += direction;
-        if (currentIndex < 0) currentIndex = khEntries.length - 1; // Powrót na koniec listy, jeśli jesteśmy na początku
-        if (currentIndex >= khEntries.length) currentIndex = 0; // Powrót na początek listy, jeśli jesteśmy na końcu
-        updateDisplay();
-    }
 }
 
 // Funkcja pokazująca stronę główną
