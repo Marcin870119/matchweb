@@ -232,33 +232,40 @@ button:hover {
     opacity: 0.8;
 }
 
-.dashboard-logo {
-    width: 100px; /* Rozmiar logo (możesz dostosować) */
-    height: auto; /* Zachowuje proporcje */
-    margin-bottom: 10px; /* Odstęp między logo a listą KH */
-    filter: brightness(0) invert(1); /* Zmiana koloru na biały, jeśli ikona jest czarna */
-}
-
-.kh-list {
-    overflow-y: auto; /* Włącza pionowe przewijanie */
-    height: 100px; /* Zmniejszenie wysokości, aby zmieścić logo */
-    padding: 10px; /* Dodatkowy odstęp wewnątrz listy */
-    line-height: 1.2; /* Mniejszy odstęp między liniami dla mniejszej czcionki */
-    font-size: 14px; /* Zmniejszenie rozmiaru czcionki z 16px na 14px */
-    color: white; /* Kolor tekstu, aby pasował do tła karty niebieskiego */
-    text-align: right; /* Wyjustowanie tekstu do prawej strony */
-}
-
-.kh-entry {
+.kh-display {
     display: flex;
-    justify-content: space-between; /* Rozmieszczenie nazwy i strzałki z odstępem */
-    align-items: center; /* Wyrównanie w pionie */
-    margin-bottom: 5px; /* Odstęp między wpisami */
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.nav-arrow {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-arrow:hover {
+    color: #f0f0f0;
+}
+
+.kh-name-value {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .kh-name {
-    flex-grow: 1; /* Nazwa zajmuje większość miejsca */
-    text-align: right; /* Wyjustowanie nazwy do prawej strony */
+    font-size: 16px;
+    color: white;
+    text-align: center;
 }
 
 .kh-arrow {
@@ -276,6 +283,18 @@ button:hover {
 
 .yellow-equals {
     color: #ffc107; /* Żółty znak równości */
+}
+
+.kh-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    color: white;
+    margin-top: 10px;
+}
+
+.kh-value {
+    font-weight: bold;
 }
 
 .dashboard-card .value {
