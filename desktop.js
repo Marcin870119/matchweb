@@ -18,183 +18,158 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const dataRef = ref(database, 'Data/data-table1');
 
-// Funkcja, która ładuje i wyświetla nazwy KH z Firebase w oknie 1 z odpowiednimi strzałkami
+// Zmienna globalna do śledzenia bieżącego indeksu klienta
+let currentKHIndex = 0;
+let khData = []; // Tablica do przechowywania przetworzonych danych KH
+
+// Funkcja, która ładuje i wyświetla dane KH z Firebase
 function loadKHData() {
-    const khList = document.querySelector('.kh-list');
-    if (!khList) {
-        console.error('Nie znaleziono elementu .kh-list');
+    const khDisplay = document.getElementById('currentKH');
+    const prevValueDisplay = document.getElementById('prevValue');
+    const currentValueDisplay = document.getElementById('currentValue');
+    const khTrend = document.getElementById('khTrend');
+    const prevButton = document.getElementById('prevKH');
+    const nextButton = document.getElementById('nextKH');
+
+    if (!khDisplay || !prevValueDisplay || !currentValueDisplay || !khTrend || !prevButton || !nextButton) {
+        console.error('Nie znaleziono elementów wyświetlania KH');
         return;
     }
 
     onValue(dataRef, (snapshot) => {
         const data = snapshot.val();
+        khData = []; // Wyczyść istniejące dane
+
         if (data) {
-            // Przetwarzanie danych z Firebase – wyciąganie tylko "NAZWA KH" i obliczanie strzałek
-            let khEntries = [];
+            // Przetwarzanie danych z Firebase
             for (const key in data) {
                 if (data.hasOwnProperty(key)) {
                     const value = data[key];
                     let parts = typeof value === "object" 
                         ? Object.values(value).join(';') 
                         : value;
-                    parts = parts.split(';').map(part => {
-                        // Usuń wszystkie spacje i zamień przecinki na kropki, jeśli istnieją
-                        let cleanedPart = part.trim().replace(',', '.');
-                        return cleanedPart === "" || isNaN(cleanedPart) ? "0" : cleanedPart;
-                    });
+                    parts = parts.split(';').map(part => part.trim() === "" ? "0" : part); // Puste pola jako 0
 
                     const khName = parts[1]; // Nazwa KH (druga kolumna)
                     if (khName && khName !== "0" && !khName.toUpperCase().includes('NAZWA KH')) {
-                        // Oblicz średnią z kolumn D do L (indeksy 3–10)
-                        const weeklyValues = parts.slice(3, 11).map(Number); // Konwersja na liczby
-                        console.log(`Dane dla ${khName}:`, weeklyValues); // Debug: wyświetl wartości tygodniowe
-                        const average = weeklyValues.reduce((sum, val) => sum + val, 0) / weeklyValues.length || 0; // Wróć do oryginalnego dzielenia przez length
+                        // Oblicz średnią z kolumn D–L (indeksy 3–11, 9 wartości)
+                        const weeklyValues = parts.slice(3, 12).map(Number); // 9 wartości
+                        const average = weeklyValues.reduce((sum, val) => sum + val, 0) / weeklyValues.length || 0;
                         const columnM = Number(parts[12]) || 0; // Wartość z kolumny M
 
-                        // Debug: wyświetl obliczenia
-                        console.log(`Średnia dla ${khName}: ${average}, Kolumna M: ${columnM}`);
-
-                        // Porównanie średniej z kolumną M i określenie strzałki
-                        let arrow = '';
-                        let arrowClass = '';
+                        // Określ trend
+                        let trend = '';
                         if (average < columnM) {
-                            arrow = '↑'; // Strzałka w górę (zielona) – wzrost
-                            arrowClass = 'green-arrow';
+                            trend = '↑'; // Wzrost
                         } else if (average > columnM) {
-                            arrow = '↓'; // Strzałka w dół (czerwona) – spadek
-                            arrowClass = 'red-arrow';
+                            trend = '↓'; // Spadek
                         } else {
-                            arrow = '='; // Znak równości (żółty) – brak zmiany
-                            arrowClass = 'yellow-equals';
+                            trend = '='; // Bez zmiany
                         }
 
-                        khEntries.push({ name: khName, arrow: arrow, arrowClass: arrowClass });
+                        // Dodaj dane do tablicy
+                        khData.push({
+                            name: khName,
+                            prevValue: columnM,
+                            currentValue: average,
+                            trend: trend
+                        });
                     }
                 }
             }
 
-            // Wyświetlanie nazw KH z odpowiednimi strzałkami w liście (z przewijaniem)
-            khList.innerHTML = ''; // Wyczyść istniejącą treść
-            if (khEntries.length > 0) {
-                khEntries.forEach(entry => {
-                    const div = document.createElement('div');
-                    div.className = 'kh-entry';
-                    div.innerHTML = `
-                        <span class="kh-name">${entry.name}</span>
-                        <span class="kh-arrow ${entry.arrowClass}">${entry.arrow}</span>
-                    `;
-                    khList.appendChild(div);
-                });
+            // Wyświetl pierwszego klienta, jeśli istnieją dane
+            if (khData.length > 0) {
+                updateDisplay();
             } else {
-                console.warn('Brak danych KH w Firebase po przetworzeniu.');
-                khList.innerHTML = '<div class="kh-entry">Brak danych</div>';
+                console.warn('Brak danych KH w Firebase. Używam danych zapasowych.');
+                useBackupData();
             }
         } else {
             console.warn('Brak danych w Firebase. Używam danych zapasowych.');
-            // Dane zapasowe, jeśli Firebase nie zwróci danych
-            const backupData = [
-                "MAJA NORTHOLT",
-                "MAJA EXETER",
-                "DELIKATESY SMACZEK LUTON 3",
-                "PRASHANT PATEL",
-                "DELIKATESY SMACZEK COVENTRY",
-                "POLSKI SKLEP SMACZEK (READING) LIMITED",
-                "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
-                "SMACZEK SLOUGH 2",
-                "LONDEK ILFORD",
-                "SMACZEK SOUTHAMPTON BITTERNE",
-                "NIMIT PATEL !! SAVE MORE",
-                "LONDEK ROMFORD"
-            ];
-            // Symulacja danych zapasowych z przykładowymi wartościami kolumn D–L i M
-            khList.innerHTML = ''; // Wyczyść istniejącą treść
-            backupData.forEach(name => {
-                // Symulacja danych w formacie tabeli Excel dla każdego klienta
-                const weeklyValues = [
-                    4500, 0, 4500, 4500, 4500, 4500, 4500, 4500, 4500 // Przykładowe wartości D–L (możesz dostosować)
-                ];
-                const columnM = 5000; // Przykładowa wartość kolumny M (możesz dostosować)
-
-                // Oblicz średnią z kolumn D–L (dzieląc sumę przez length, nawet jeśli są puste pola – tu 0 w E)
-                const average = weeklyValues.reduce((sum, val) => sum + val, 0) / weeklyValues.length;
-
-                // Oblicz trend zgodnie z logiką (average < columnM → ↑, average > columnM → ↓, else =)
-                let arrow = '';
-                let arrowClass = '';
-                if (average < columnM) {
-                    arrow = '↑'; // Strzałka w górę (zielona) – wzrost
-                    arrowClass = 'green-arrow';
-                } else if (average > columnM) {
-                    arrow = '↓'; // Strzałka w dół (czerwona) – spadek
-                    arrowClass = 'red-arrow';
-                } else {
-                    arrow = '='; // Znak równości (żółty) – brak zmiany
-                    arrowClass = 'yellow-equals';
-                }
-
-                const div = document.createElement('div');
-                div.className = 'kh-entry';
-                div.innerHTML = `
-                    <span class="kh-name">${name}</span>
-                    <span class="kh-arrow ${arrowClass}">${arrow}</span>
-                `;
-                khList.appendChild(div);
-            });
+            useBackupData();
         }
     }, (error) => {
         console.error('Błąd pobierania danych z Firebase:', error);
-        // Użyj danych zapasowych w przypadku błędu
-        const backupData = [
-            "MAJA NORTHOLT",
-            "MAJA EXETER",
-            "DELIKATESY SMACZEK LUTON 3",
-            "PRASHANT PATEL",
-            "DELIKATESY SMACZEK COVENTRY",
-            "POLSKI SKLEP SMACZEK (READING) LIMITED",
-            "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
-            "SMACZEK SLOUGH 2",
-            "LONDEK ILFORD",
-            "SMACZEK SOUTHAMPTON BITTERNE",
-            "NIMIT PATEL !! SAVE MORE",
-            "LONDEK ROMFORD"
-        ];
-        const khList = document.querySelector('.kh-list');
-        if (khList) {
-            khList.innerHTML = ''; // Wyczyść istniejącą treść
-            backupData.forEach(name => {
-                // Symulacja danych w formacie tabeli Excel dla każdego klienta
-                const weeklyValues = [
-                    4500, 0, 4500, 4500, 4500, 4500, 4500, 4500, 4500 // Przykładowe wartości D–L (możesz dostosować)
-                ];
-                const columnM = 5000; // Przykładowa wartość kolumny M (możesz dostosować)
+        useBackupData();
+    });
 
-                // Oblicz średnią z kolumn D–L (dzieląc sumę przez length, nawet jeśli są puste pola – tu 0 w E)
-                const average = weeklyValues.reduce((sum, val) => sum + val, 0) / weeklyValues.length;
-
-                // Oblicz trend zgodnie z logiką (average < columnM → ↑, average > columnM → ↓, else =)
-                let arrow = '';
-                let arrowClass = '';
-                if (average < columnM) {
-                    arrow = '↑'; // Strzałka w górę (zielona) – wzrost
-                    arrowClass = 'green-arrow';
-                } else if (average > columnM) {
-                    arrow = '↓'; // Strzałka w dół (czerwona) – spadek
-                    arrowClass = 'red-arrow';
-                } else {
-                    arrow = '='; // Znak równości (żółty) – brak zmiany
-                    arrowClass = 'yellow-equals';
-                }
-
-                const div = document.createElement('div');
-                div.className = 'kh-entry';
-                div.innerHTML = `
-                    <span class="kh-name">${name}</span>
-                    <span class="kh-arrow ${arrowClass}">${arrow}</span>
-                `;
-                khList.appendChild(div);
-            });
+    // Obsługa kliknięcia strzałek
+    prevButton.addEventListener('click', () => {
+        if (khData.length > 0) {
+            currentKHIndex = (currentKHIndex - 1 + khData.length) % khData.length;
+            updateDisplay();
         }
     });
+
+    nextButton.addEventListener('click', () => {
+        if (khData.length > 0) {
+            currentKHIndex = (currentKHIndex + 1) % khData.length;
+            updateDisplay();
+        }
+    });
+}
+
+// Funkcja aktualizująca wyświetlanie jednego klienta
+function updateDisplay() {
+    const khDisplay = document.getElementById('currentKH');
+    const prevValueDisplay = document.getElementById('prevValue');
+    const currentValueDisplay = document.getElementById('currentValue');
+    const khTrend = document.getElementById('khTrend');
+
+    if (khData.length > 0 && khDisplay && prevValueDisplay && currentValueDisplay && khTrend) {
+        const kh = khData[currentKHIndex];
+        khDisplay.textContent = kh.name;
+        prevValueDisplay.textContent = kh.prevValue.toFixed(2); // 2 miejsca po przecinku
+        currentValueDisplay.textContent = kh.currentValue.toFixed(2); // 2 miejsca po przecinku
+        khTrend.textContent = kh.trend;
+        khTrend.className = `kh-arrow ${kh.trend === '↑' ? 'green-arrow' : (kh.trend === '↓' ? 'red-arrow' : 'yellow-equals')}`;
+    }
+}
+
+// Funkcja z danymi zapasowymi
+function useBackupData() {
+    khData = [
+        "MAJA NORTHOLT",
+        "MAJA EXETER",
+        "DELIKATESY SMACZEK LUTON 3",
+        "PRASHANT PATEL",
+        "DELIKATESY SMACZEK COVENTRY",
+        "POLSKI SKLEP SMACZEK (READING) LIMITED",
+        "POLSKIE DELIKATesy SMACZEK BASINGSTOKE",
+        "SMACZEK SLOUGH 2",
+        "LONDEK ILFORD",
+        "SMACZEK SOUTHAMPTON BITTERNE",
+        "NIMIT PATEL !! SAVE MORE",
+        "LONDEK ROMFORD",
+        "NASZA BIEDRONKA MARGATE"
+    ].map(name => {
+        if (name === "MAJA NORTHOLT") {
+            return {
+                name: name,
+                prevValue: 11365.89,
+                currentValue: 8288.41, // Poprawiona średnia z Twojego przykładu
+                trend: 8288.41 < 11365.89 ? '↑' : (8288.41 > 11365.89 ? '↓' : '=')
+            };
+        } else if (name === "NASZA BIEDRONKA MARGATE") {
+            return {
+                name: name,
+                prevValue: 6787.33,
+                currentValue: 4458.02,
+                trend: 4458.02 < 6787.33 ? '↑' : (4458.02 > 6787.33 ? '↓' : '=')
+            };
+        } else {
+            return {
+                name: name,
+                prevValue: 0,
+                currentValue: 0,
+                trend: '='
+            };
+        }
+    });
+
+    currentKHIndex = 0;
+    updateDisplay();
 }
 
 // Funkcja pokazująca stronę główną
