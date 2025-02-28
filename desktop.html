@@ -49,8 +49,17 @@
         <div class="dashboard-container">
             <div class="dashboard-card okno1">
                 <h3>Sprzedaż</h3>
-                <div class="kh-list" style="overflow-y: auto; height: 100px;">
-                    <!-- Tu wstawiane będą nazwy KH za pomocą JavaScript -->
+                <div class="kh-display">
+                    <button class="nav-arrow" id="prevKH"><</button>
+                    <div class="kh-name-value">
+                        <span class="kh-name" id="currentKH"></span>
+                        <span class="kh-arrow green-arrow" id="khTrend">↑</span>
+                    </div>
+                    <button class="nav-arrow" id="nextKH">></button>
+                </div>
+                <div class="kh-values">
+                    <span class="kh-value" id="prevValue">3500</span>
+                    <span class="kh-value" id="currentValue">3600</span>
                 </div>
             </div>
             <div class="dashboard-card okno2">
