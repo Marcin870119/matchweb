@@ -232,14 +232,50 @@ button:hover {
     opacity: 0.8;
 }
 
+.dashboard-logo {
+    width: 100px; /* Rozmiar logo (możesz dostosować) */
+    height: auto; /* Zachowuje proporcje */
+    margin-bottom: 10px; /* Odstęp między logo a listą KH */
+    filter: brightness(0) invert(1); /* Zmiana koloru na biały, jeśli ikona jest czarna */
+}
+
 .kh-list {
     overflow-y: auto; /* Włącza pionowe przewijanie */
-    height: 120px; /* Stała wysokość, aby zapewnić przewijanie */
+    height: 100px; /* Zmniejszenie wysokości, aby zmieścić logo */
     padding: 10px; /* Dodatkowy odstęp wewnątrz listy */
     line-height: 1.2; /* Mniejszy odstęp między liniami dla mniejszej czcionki */
     font-size: 14px; /* Zmniejszenie rozmiaru czcionki z 16px na 14px */
     color: white; /* Kolor tekstu, aby pasował do tła karty niebieskiego */
     text-align: right; /* Wyjustowanie tekstu do prawej strony */
+}
+
+.kh-entry {
+    display: flex;
+    justify-content: space-between; /* Rozmieszczenie nazwy i strzałki z odstępem */
+    align-items: center; /* Wyrównanie w pionie */
+    margin-bottom: 5px; /* Odstęp między wpisami */
+}
+
+.kh-name {
+    flex-grow: 1; /* Nazwa zajmuje większość miejsca */
+    text-align: right; /* Wyjustowanie nazwy do prawej strony */
+}
+
+.kh-arrow {
+    margin-left: 10px; /* Odstęp między nazwą a strzałką */
+    font-size: 16px; /* Rozmiar strzałki */
+}
+
+.green-arrow {
+    color: #28a745; /* Zielona strzałka w górę */
+}
+
+.red-arrow {
+    color: #dc3545; /* Czerwona strzałka w dół */
+}
+
+.yellow-equals {
+    color: #ffc107; /* Żółty znak równości */
 }
 
 .dashboard-card .value {
