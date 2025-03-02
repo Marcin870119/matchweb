@@ -1,4 +1,4 @@
-/* Style specyficzne dla desktop1.html (okno 2 – TEAM MEMBERS) */
+/* Style specyficzne dla desktop1.html (okno 2 – TEAM MEMBER) */
 body {
     font-family: 'Arial', sans-serif;
     text-align: center;
@@ -7,110 +7,98 @@ body {
     padding: 0;
 }
 
-/* Kontener główny z siatką Grid */
+/* Kontener główny z Flexbox, zgodny z desktop.css */
 .dashboard-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Automatycznie dopasowuje kolumny, minimalna szerokość 300px */
-    gap: 30px; /* Odstęp między elementami siatki */
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Odstęp zgodny z desktop.css */
     margin-top: 40px;
     padding: 20px;
     border-radius: 10px;
-    justify-items: center; /* Wyśrodkowanie elementów w siatce */
 }
 
-/* Pokaż siatkę Grid dla debugowania – opcjonalne, usuń po testach */
-.dashboard-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(255, 0, 0, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px);
-    background-size: 30px 30px; /* Rozmiar siatki, dostosuj do gap i rozmiaru kart */
-    pointer-events: none; /* Zapewnia, że siatka nie wpływa na interakcje */
-    z-index: 9999; /* Upewnia się, że siatka jest nad innymi elementami */
-}
-
-/* Karta dashboardu z siatką wewnętrzną dla elementów */
+/* Karta dashboardu z Flexbox wewnątrz, zgodna z desktop.css */
 .dashboard-card {
-    width: 300px;
-    height: 200px;
-    border-radius: 15px;
+    width: 300px; /* Zgodna szerokość z desktop.css */
+    height: 200px; /* Zgodna wysokość z desktop.css */
+    border-radius: 15px; /* Zgodne zaokrąglenie z desktop.css */
     color: white;
     text-align: center;
     padding: 20px;
-    display: grid; /* Używanie Grid wewnątrz karty */
-    grid-template-rows: auto 1fr auto; /* Rozkład na trzy rzędy: nagłówek, wartość, trend */
-    justify-items: center; /* Wyśrodkowanie elementów w pionie i poziomie */
-    align-items: center; /* Wyśrodkowanie w pionie */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out;
-    position: relative; /* Potrzebne dla pozycji siatki */
-}
-
-/* Pokaż siatkę Grid dla debugowania wewnątrz karty – opcjonalne, usuń po testach */
-.dashboard-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(255, 0, 0, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px);
-    background-size: 100px 66.67px; /* Rozmiar siatki, dostosuj do wysokości i szerokości karty (200px/3, 300px) */
-    pointer-events: none; /* Zapewnia, że siatka nie wpływa na interakcje */
-    z-index: 9998; /* Niższy z-index niż siatka kontenera, aby nie pokrywać się */
+    display: flex; /* Używanie Flexbox zamiast Grid, zgodne z desktop.css */
+    flex-direction: column;
+    justify-content: center; /* Zgodne z desktop.css */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Zgodny cień z desktop.css */
+    transition: transform 0.3s ease-in-out; /* Zgodna animacja z desktop.css */
 }
 
 .dashboard-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Zgodna animacja przy hover z desktop.css */
 }
 
 .okno2 {
     background-color: #28a745; /* Zielony, zgodny z desktop.css */
 }
 
-.okno2 h3 {
-    font-size: 14px;
-    margin: 0 0 10px 0;
+.okno2 .member-name {
+    font-size: 14px; /* Zgodna czcionka z desktop.css */
+    margin: 0 0 10px 0; /* Zgodny margines z desktop.css */
     opacity: 0.8;
     font-weight: bold;
-    grid-row: 1; /* Umieszczenie nagłówka w pierwszym rzędzie */
 }
 
-.okno2 .value {
-    font-size: 24px;
+.okno2 .plan-value {
+    font-size: 16px; /* Mniejsza czcionka dla "Plan", zgodna z desktop1.css, ale dostosowana do desktop.css */
     font-weight: bold;
-    margin: 0 0 8px 0;
-    grid-row: 2; /* Umieszczenie wartości w środkowym rzędzie */
+    margin: 0 0 8px 0; /* Zgodny margines z desktop.css */
 }
 
-.okno2 .trend {
-    font-size: 12px;
+.okno2 .sales-value {
+    font-size: 24px; /* Większa czcionka dla "Sprzedaż", zgodna z desktop1.css */
+    font-weight: bold;
+    margin: 0 0 8px 0; /* Zgodny margines z desktop.css */
+}
+
+.okno2 .estimate-value {
+    font-size: 16px; /* Standardowa czcionka dla "Estymacja", zgodna z desktop1.css */
+    font-weight: bold;
+    margin: 0 0 8px 0; /* Zgodny margines z desktop.css */
+}
+
+.okno2 .estimate-percentage {
+    font-size: 12px; /* Zgodna czcionka z desktop.css */
     margin: 0;
     opacity: 0.9;
     display: flex;
     align-items: center;
     justify-content: center;
-    grid-row: 3; /* Umieszczenie trendu w ostatnim rzędzie */
 }
 
-.okno2 .arrow {
-    font-size: 18px;
+.okno2 .estimate-percentage .arrow {
+    font-size: 18px; /* Zgodna czcionka strzałki z desktop.css */
     font-weight: bold;
-    margin-right: 5px;
+    margin-right: 5px; /* Zgodny odstęp z desktop.css */
     line-height: 1;
 }
 
-.okno2 .arrow.up::after {
-    content: "▲";
-    color: #00cc00; /* Intensywny zielony */
+.okno2 .estimate-percentage .arrow.down::after {
+    content: "▼";
+    color: #ff3333; /* Intensywny czerwony dla strzałki w dół, zgodny z desktop.css */
 }
 
-.okno2 .arrow.down::after {
-    content: "▼";
-    color: #ff3333; /* Intensywny czerwony */
+/* Ukrywanie strzałki, jeśli estymacja % >= 100% */
+.okno2 .estimate-percentage[data-percentage="100"] .arrow,
+.okno2 .estimate-percentage[data-percentage^="100."] .arrow,
+.okno2 .estimate-percentage[data-percentage^="[1-9][0-9][0-9]"] .arrow {
+    display: none;
+}
+
+/* Domyślnie pokazuj strzałkę dla wartości < 100% */
+.okno2 .estimate-percentage .arrow.down {
+    display: inline-flex;
+}
+
+/* Styl dla wartości procentowej */
+.okno2 .estimate-percentage .percentage-value {
+    margin-left: 5px; /* Odstęp po strzałce */
 }
