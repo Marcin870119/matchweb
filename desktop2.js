@@ -17,32 +17,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Referencje do danych w Firebase pod ścieżkami dla roku 2024 i 2025
-const budget2024Ref = ref(database, 'SPRZEDAZ_2024_2025/data-table1/0');
-const budget2025Ref = ref(database, 'SPRZEDAZ_2024_2025/data-table1/1');
+// Referencja do danych w Firebase pod ścieżką 'SPRZEDAZ_2024_2025/data-table1'
+const totalBudgetRef = ref(database, 'Sprzedaz_2024_2025/data-table1');
 
-// Funkcja normalizująca dane liczbowe (parsuje ciągi znaków na liczby, ignorując , ; i .)
+// Funkcja normalizująca dane liczbowe (obsługuje przecinki, kropki i średniki jako separatory)
 function normalizeNumber(value) {
     if (!value || value.trim() === "") return 0;
-    // Usuń wszystkie znaki niebędące cyframi (ignoruj , ; i .), konwertuj na liczbę całkowitą
-    let normalized = value.replace(/[^0-9]/g, '');
-    return parseInt(normalized) || 0;
+    
+    // Usuń wszystkie znaki niebędące cyframi, przecinkami lub kropkami, a następnie zastąp przecinki kropkami
+    let cleaned = value.replace(/[^0-9.,]/g, ''); // Zachowaj tylko cyfry, kropki i przecinki
+    cleaned = cleaned.replace(/,/g, '.'); // Zamień przecinki na kropki (dla formatu europejskiego)
+    
+    // Parsuj na liczbę, ignorując wielokrotne kropki lub inne niepotrzebne znaki
+    const number = parseFloat(cleaned) || 0;
+    return Math.round(number); // Zaokrąglaj do liczby całkowitej, jeśli potrzebne
 }
 
-// Funkcja obliczająca sumę liczb dla danego roku z ciągu znaków (ignoruje , ; i ., sumuje liczby po roku)
-function calculateSumFromString(dataString, year) {
+// Funkcja obliczająca sumę sprzedaży dla tygodni 1-7 dla danego roku
+function calculateWeeklySales(dataString, year) {
     if (!dataString || typeof dataString !== 'string') return 0;
     
-    // Wydziel dane dla danego roku (sprawdź, czy ciąg zaczyna się od roku)
     const yearStr = year.toString();
     if (!dataString.startsWith(yearStr + ';')) return 0;
 
-    // Pobierz resztę ciągu po roku i separatorze ;, podziel na liczby, ignorując , ; i . i inne niecyfrowe znaki
-    const numbersPart = dataString.substring(yearStr.length + 1); // Pomijamy "2024;" lub "2025;"
-    const numbers = numbersPart.split(';').map(num => normalizeNumber(num));
+    // Pobierz resztę ciągu po roku i separatorze ;, podziel na liczby (tygodnie)
+    const weeksPart = dataString.substring(yearStr.length + 1); // Pomijamy np. "2024;"
+    const weeks = weeksPart.split(';').map(num => normalizeNumber(num));
 
-    // Sumuj wszystkie liczby, ignorując , ; i .
-    const sum = numbers.reduce((acc, num) => acc + num, 0) || 0;
+    // Sumuj tylko pierwsze 7 tygodni (zakładamy, że tygodnie są w kolejności)
+    const validWeeks = weeks.slice(0, 7); // Bierzemy tylko tygodnie 1-7
+    const sum = validWeeks.reduce((acc, num) => acc + num, 0) || 0;
     return sum;
 }
 
@@ -62,45 +66,40 @@ export function initTotalBudget() {
     loadTotalBudgetData();
 }
 
-// Funkcja ładująca dane dla TOTAL BUDGET
+// Funkcja ładująca dane dla TOTAL BUDGET (tygodnie 1-7)
 function loadTotalBudgetData() {
     const budget2024Display = document.getElementById('budget2024Value');
     const budget2025Display = document.getElementById('budget2025Value');
     const budgetTrendDisplay = document.getElementById('budgetTrend');
 
-    // Debugowanie – sprawdź, czy elementy istnieją
-    console.log('budget2024Display:', budget2024Display);
-    console.log('budget2025Display:', budget2025Display);
-    console.log('budgetTrendDisplay:', budgetTrendDisplay);
+    console.log('Sprawdzanie elementów HTML:', { budget2024Display, budget2025Display, budgetTrendDisplay });
 
     if (budget2024Display && budget2025Display && budgetTrendDisplay) {
-        // Pobierz dane dla roku 2024
-        onValue(budget2024Ref, (snapshot2024) => {
-            const data2024 = snapshot2024.val();
-            console.log('Dane z Firebase dla 2024:', data2024);
+        console.log('Próba pobrania danych z Firebase pod ścieżką:', totalBudgetRef.toString());
+        onValue(totalBudgetRef, (snapshot) => {
+            console.log('Otrzymane dane z Firebase:', snapshot.val());
+            const data = snapshot.val();
 
-            // Pobierz dane dla roku 2025
-            onValue(budget2025Ref, (snapshot2025) => {
-                const data2025 = snapshot2025.val();
-                console.log('Dane z Firebase dla 2025:', data2025);
-
+            if (data) {
                 let sum2024 = 0;
                 let sum2025 = 0;
 
-                // Przetwarzaj dane dla roku 2024
-                if (data2024 && typeof data2024.Rok === 'string') {
-                    const year = parseInt(data2024.Rok.split(';')[0]);
-                    const sum = calculateSumFromString(data2024.Rok, year);
-                    console.log(`Rok: ${year}, Suma: ${sum}`);
-                    if (year === 2024) sum2024 = sum;
-                }
-
-                // Przetwarzaj dane dla roku 2025
-                if (data2025 && typeof data2025.Rok === 'string') {
-                    const year = parseInt(data2025.Rok.split(';')[0]);
-                    const sum = calculateSumFromString(data2025.Rok, year);
-                    console.log(`Rok: ${year}, Suma: ${sum}`);
-                    if (year === 2025) sum2025 = sum;
+                // Przetwarzaj dane jako tablicę obiektów
+                if (Array.isArray(data)) {
+                    data.forEach((item, index) => {
+                        console.log(`Przetwarzanie elementu ${index}:`, item);
+                        // Pobierz dane z klucza "1;2;3;4;5;6;7" zamiast pola Rok
+                        const dataString = item["1;2;3;4;5;6;7"];
+                        if (dataString && typeof dataString === 'string') {
+                            const year = parseInt(dataString.split(';')[0]); // Pobierz rok z początku ciągu
+                            const sum = calculateWeeklySales(dataString, year);
+                            console.log(`Rok: ${year}, Suma tygodni 1-7: ${sum}`);
+                            if (year === 2024) sum2024 = sum;
+                            else if (year === 2025) sum2025 = sum;
+                        }
+                    });
+                } else {
+                    console.warn('Dane z Firebase nie są tablicą.');
                 }
 
                 // Wyświetl sumy
@@ -126,11 +125,19 @@ function loadTotalBudgetData() {
 
                 // Ustaw atrybut data-percentage dla stylowania w CSS
                 budgetTrendDisplay.setAttribute('data-percentage', percentageChange.toFixed(2));
-            }, (error) => {
-                console.error('Błąd pobierania danych dla 2025:', error);
-            });
+            } else {
+                console.warn('Brak danych w Firebase dla Total Budget.');
+                budget2024Display.textContent = '2024: 0,00';
+                budget2025Display.textContent = '2025: 0,00';
+                budgetTrendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> Różnica: 0,00, 0.00% DECREASE';
+                budgetTrendDisplay.setAttribute('data-percentage', '0');
+            }
         }, (error) => {
-            console.error('Błąd pobierania danych dla 2024:', error);
+            console.error('Błąd pobierania danych Total Budget:', error);
+            budget2024Display.textContent = '2024: 0,00';
+            budget2025Display.textContent = '2025: 0,00';
+            budgetTrendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> Różnica: 0,00, 0.00% DECREASE';
+            budgetTrendDisplay.setAttribute('data-percentage', '0');
         });
     } else {
         console.error('Nie znaleziono elementów dla Total Budget na stronie.');
