@@ -1,0 +1,85 @@
+/* Style specyficzne dla desktop1.html (okno 2 – TEAM MEMBERS) */
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #1a1a1a; /* Czarne tło dla całej strony, zgodne z desktop.css */
+    margin: 0;
+    padding: 0;
+}
+
+/* Kontener główny z siatką Grid */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Automatycznie dopasowuje kolumny, minimalna szerokość 300px */
+    gap: 30px; /* Odstęp między elementami siatki */
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    justify-items: center; /* Wyśrodkowanie elementów w siatce */
+}
+
+/* Karta dashboardu z siatką wewnętrzną dla elementów */
+.dashboard-card {
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    display: grid; /* Używanie Grid wewnątrz karty */
+    grid-template-rows: auto 1fr auto; /* Rozkład na trzy rzędy: nagłówek, wartość, trend */
+    justify-items: center; /* Wyśrodkowanie elementów w pionie i poziomie */
+    align-items: center; /* Wyśrodkowanie w pionie */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.05);
+}
+
+.okno2 {
+    background-color: #28a745; /* Zielony, zgodny z desktop.css */
+}
+
+.okno2 h3 {
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    opacity: 0.8;
+    font-weight: bold;
+    grid-row: 1; /* Umieszczenie nagłówka w pierwszym rzędzie */
+}
+
+.okno2 .value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    grid-row: 2; /* Umieszczenie wartości w środkowym rzędzie */
+}
+
+.okno2 .trend {
+    font-size: 12px;
+    margin: 0;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 3; /* Umieszczenie trendu w ostatnim rzędzie */
+}
+
+.okno2 .arrow {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+    line-height: 1;
+}
+
+.okno2 .arrow.up::after {
+    content: "▲";
+    color: #00cc00; /* Intensywny zielony */
+}
+
+.okno2 .arrow.down::after {
+    content: "▼";
+    color: #ff3333; /* Intensywny czerwony */
+}
