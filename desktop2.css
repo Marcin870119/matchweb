@@ -1,60 +1,58 @@
-/* Style specyficzne dla desktop2.html (okno 3 – TOTAL BUDGET) */
-body {
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    background-color: #1a1a1a; /* Czarne tło dla całej strony, zgodne z desktop.css */
-    margin: 0;
-    padding: 0;
+body { 
+    font-family: 'Arial', sans-serif; 
+    text-align: center; 
+    background-color: #1a1a1a; /* Czarne tło dla całej strony */
+    margin: 0; 
+    padding: 0; 
 }
 
-/* Kontener główny z Flexbox, zgodny z desktop.css */
+/* Style dla dashboardu */
 .dashboard-container {
     display: flex;
     justify-content: center;
-    gap: 30px; /* Odstęp zgodny z desktop.css */
+    gap: 30px;
     margin-top: 40px;
     padding: 20px;
     border-radius: 10px;
 }
 
-/* Karta dashboardu z Flexbox wewnątrz, zgodna z desktop.css */
 .dashboard-card {
-    width: 300px; /* Zgodna szerokość z desktop.css */
-    height: 200px; /* Zgodna wysokość z desktop.css */
-    border-radius: 15px; /* Zgodne zaokrąglenie z desktop.css */
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
     color: white;
     text-align: center;
     padding: 20px;
-    display: flex; /* Używanie Flexbox zamiast Grid, zgodne z desktop.css */
+    display: flex;
     flex-direction: column;
-    justify-content: center; /* Zgodne z desktop.css */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Zgodny cień z desktop.css */
-    transition: transform 0.3s ease-in-out; /* Zgodna animacja z desktop.css */
+    justify-content: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
 }
 
 .dashboard-card:hover {
-    transform: scale(1.05); /* Zgodna animacja przy hover z desktop.css */
+    transform: scale(1.05);
 }
 
 .okno3 {
-    background-color: #ffc107; /* Żółty, zgodny z desktop.css */
+    background-color: #ffc107; /* Żółty */
 }
 
-.okno3 h3 {
-    font-size: 14px; /* Zgodna czcionka z desktop.css */
-    margin: 0 0 10px 0; /* Zgodny margines z desktop.css */
+.dashboard-card h3 {
+    font-size: 14px;
+    margin: 0 0 10px 0;
     opacity: 0.8;
     font-weight: bold;
 }
 
-.okno3 .budget-value {
-    font-size: 18px; /* Mniejsza czcionka dla wartości, aby zmieścić dwie sumy */
+.dashboard-card .value {
+    font-size: 24px;
     font-weight: bold;
-    margin: 0 0 4px 0; /* Mniejszy margines, aby zmieścić dwie wartości i trend */
+    margin: 0 0 8px 0;
 }
 
-.okno3 .budget-trend {
-    font-size: 12px; /* Zgodna czcionka z desktop.css */
+.dashboard-card .trend {
+    font-size: 12px;
     margin: 0;
     opacity: 0.9;
     display: flex;
@@ -62,38 +60,19 @@ body {
     justify-content: center;
 }
 
-.okno3 .budget-trend .arrow {
-    font-size: 18px; /* Zgodna czcionka strzałki z desktop.css */
+.arrow {
+    font-size: 18px;
     font-weight: bold;
-    margin-right: 5px; /* Zgodny odstęp z desktop.css */
+    margin-right: 5px;
     line-height: 1;
 }
 
-.okno3 .budget-trend .arrow.down::after {
-    content: "▼";
-    color: #ff3333; /* Intensywny czerwony dla strzałki w dół, zgodny z desktop.css */
-}
-
-.okno3 .budget-trend .arrow.up::after {
+.arrow.up::after {
     content: "▲";
-    color: #00cc00; /* Intensywnie zielony dla strzałki w górę */
+    color: #00cc00; /* Intensywny zielony */
 }
 
-/* Ukrywanie strzałki, jeśli procent zmiany = 0 */
-.okno3 .budget-trend[data-percentage="0"] .arrow {
-    display: none;
-}
-
-/* Domyślnie pokazuj strzałkę dla wartości < 0% (spadek) lub > 0% (wzrost) */
-.okno3 .budget-trend .arrow.down {
-    display: inline-flex;
-}
-
-.okno3 .budget-trend .arrow.up {
-    display: inline-flex;
-}
-
-/* Styl dla wartości procentowej */
-.okno3 .budget-trend .percentage-value {
-    margin-left: 5px; /* Odstęp po strzałce */
+.arrow.down::after {
+    content: "▼";
+    color: #ff3333; /* Intensywny czerwony */
 }
