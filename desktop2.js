@@ -17,35 +17,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Referencja do danych w Firebase pod ścieżką 'SPRZEDAZ_2024_2025/data-table1'
-const totalBudgetRef = ref(database, 'SPRZEDAZ_2024_2025/data-table1');
+// Referencja do danych w Firebase dla Sprzedaz_2024_2025/data-table1
+const salesDataRef = ref(database, 'Sprzedaz_2024_2025/data-table1');
 
-// Funkcja normalizująca dane liczbowe (parsuje ciągi znaków na liczby, ignorując , ; i .)
-function normalizeNumber(value) {
-    if (!value || value.trim() === "") return 0;
-    // Usuń wszystkie znaki niebędące cyframi (ignoruj , ; i .), konwertuj na liczbę całkowitą
-    let normalized = value.replace(/[^0-9]/g, '');
-    return parseInt(normalized) || 0;
+// Funkcja sumująca wartości liczbowe z ciągu podzielonego średnikami (np. "2024;245834;257234;...")
+function sumValues(string) {
+    if (!string || typeof string !== 'string') return 0;
+    const values = string.split(';').map(val => parseInt(val) || 0); // Parsowanie na liczby całkowite
+    return values.reduce((sum, val) => sum + val, 0);
 }
 
-// Funkcja obliczająca sumę liczb dla danego roku z ciągu znaków (ignoruje , ; i ., sumuje liczby po roku)
-function calculateSumFromString(dataString, year) {
-    if (!dataString || typeof dataString !== 'string') return 0;
-    
-    // Wydziel dane dla danego roku (sprawdź, czy ciąg zaczyna się od roku)
-    const yearStr = year.toString();
-    if (!dataString.startsWith(yearStr + ';')) return 0;
-
-    // Pobierz resztę ciągu po roku i separatorze ;, podziel na liczby, ignorując , ; i . i inne niecyfrowe znaki
-    const numbersPart = dataString.substring(yearStr.length + 1); // Pomijamy "2024;" lub "2025;"
-    const numbers = numbersPart.split(';').map(num => normalizeNumber(num));
-
-    // Sumuj wszystkie liczby, ignorując , ; i .
-    const sum = numbers.reduce((acc, num) => acc + num, 0) || 0;
-    return sum;
-}
-
-// Funkcja formatująca liczby z kropką jako separatorem tysięcznym i przecinkiem jako dziesiętnym, zawsze z dwoma miejscami po przecinku
+// Funkcja formatująca liczbę z kropką jako separatorem tysięcznym i przecinkiem jako dziesiętnym
 function formatNumberWithDotsAndComma(value) {
     if (value === 0) return '0,00';
     let parts = value.toFixed(2).split('.');
@@ -55,86 +37,85 @@ function formatNumberWithDotsAndComma(value) {
     return `${integerPart},${decimalPart.padEnd(2, '0').substring(0, 2)}`;
 }
 
-// Funkcja inicjalizująca dane Total Budget (bez 'export', ale dostępna globalnie)
-function initTotalBudget() {
-    console.log('Inicjalizacja Total Budget');
-    loadTotalBudgetData();
-}
-
-// Funkcja ładująca dane dla TOTAL BUDGET
+// Funkcja ładująca dane dla TOTAL BUDGET (okno 3)
 function loadTotalBudgetData() {
-    const budget2024Display = document.getElementById('budget2024Value');
-    const budget2025Display = document.getElementById('budget2025Value');
-    const budgetTrendDisplay = document.getElementById('budgetTrend');
+    const valueDisplay = document.getElementById('totalBudgetValue');
+    const trendDisplay = document.getElementById('totalBudgetTrend');
 
-    // Debugowanie – sprawdź, czy elementy istnieją
-    console.log('Sprawdzanie elementów HTML:', {
-        budget2024Display: budget2024Display,
-        budget2025Display: budget2025Display,
-        budgetTrendDisplay: budgetTrendDisplay
-    });
-
-    if (budget2024Display && budget2025Display && budgetTrendDisplay) {
-        onValue(totalBudgetRef, (snapshot) => {
+    if (valueDisplay && trendDisplay) {
+        onValue(salesDataRef, (snapshot) => {
             const data = snapshot.val();
-            console.log('Otrzymane dane z Firebase:', data); // Debugowanie – sprawdź, czy dane są pobierane
+            console.log('Dane z Firebase:', data); // Dodane logowanie do debugowania
 
-            if (data && Array.isArray(data)) {
+            if (data) {
                 let sum2024 = 0;
                 let sum2025 = 0;
 
-                // Przetwarzaj każdy obiekt w tablicy
-                data.forEach((item, index) => {
-                    if (item && typeof item.Rok === 'string') {
-                        const year = parseInt(item.Rok.split(';')[0]); // Pobierz rok z początku ciągu
-                        const sum = calculateSumFromString(item.Rok, year);
-                        console.log(`Przetwarzanie elementu ${index}: Rok: ${year}, Suma: ${sum}`); // Debugowanie – sprawdź sumy
-                        if (year === 2024) sum2024 = sum;
-                        else if (year === 2025) sum2025 = sum;
+                // Przetwarzanie danych dla 2024 i 2025
+                data.forEach(entry => {
+                    const numbers = entry[';1;2;3;4;5;6;7'];
+                    const year = numbers.split(';')[0]; // Pobierz rok z pierwszej wartości w ciągu (np. "2024" lub "2025")
+
+                    console.log(`Rok: ${year}, Liczby: ${numbers}`); // Dodane logowanie do debugowania
+
+                    if (year === '2024') {
+                        sum2024 = sumValues(numbers);
+                    } else if (year === '2025') {
+                        sum2025 = sumValues(numbers);
                     }
                 });
 
-                // Wyświetl sumy
-                budget2024Display.textContent = `2024: ${formatNumberWithDotsAndComma(sum2024)}`;
-                budget2025Display.textContent = `2025: ${formatNumberWithDotsAndComma(sum2025)}`;
+                console.log(`Suma 2024: ${sum2024}, Suma 2025: ${sum2025}`); // Dodane logowanie do debugowania
 
-                // Oblicz różnicę i procent zmiany
+                // Wyświetlanie sum w formacie z kropką i przecinkiem
+                valueDisplay.textContent = `2024: ${formatNumberWithDotsAndComma(sum2024)} | 2025: ${formatNumberWithDotsAndComma(sum2025)}`;
+
+                // Obliczenie różnicy i trendu
                 const difference = sum2024 - sum2025;
-                const percentageChange = sum2024 === 0 ? 0 : ((sum2025 - sum2024) / sum2024) * 100;
+                let trendText = '';
+                let arrowClass = 'down';
+                let arrowSymbol = '↓';
+                let color = '#ff3333'; // Czerwony dla spadku
+                let percentage = 0;
 
-                // Wyświetl trend
                 if (difference > 0) {
-                    // Suma 2024 jest wyższa niż 2025 – spadek
-                    budgetTrendDisplay.innerHTML = `<span class="arrow down" style="color: #ff3333">↓</span> Różnica: ${formatNumberWithDotsAndComma(difference)}, ${percentageChange.toFixed(2)}% DECREASE`;
+                    // 2024 jest wyższy, więc spadek w 2025 (strzałka w dół, czerwona)
+                    percentage = ((difference / sum2024) * 100).toFixed(2) || 0;
+                    trendText = `${formatNumberWithDotsAndComma(difference)} (${percentage}% DECREASE)`;
                 } else if (difference < 0) {
-                    // Suma 2024 jest niższa niż 2025 – wzrost
-                    const absDifference = Math.abs(difference);
-                    budgetTrendDisplay.innerHTML = `<span class="arrow up" style="color: #00cc00">↑</span> Różnica: ${formatNumberWithDotsAndComma(absDifference)}, ${Math.abs(percentageChange).toFixed(2)}% INCREASE`;
+                    // 2025 jest wyższy, więc wzrost (strzałka w górę, zielona)
+                    arrowClass = 'up';
+                    arrowSymbol = '↑';
+                    color = '#00cc00'; // Zielony dla wzrostu
+                    differenceAbs = Math.abs(difference);
+                    percentage = ((differenceAbs / sum2025) * 100).toFixed(2) || 0;
+                    trendText = `${formatNumberWithDotsAndComma(differenceAbs)} (${percentage}% INCREASE)`;
                 } else {
                     // Brak różnicy
-                    budgetTrendDisplay.textContent = `Różnica: 0,00, 0.00%`;
+                    trendText = '0,00 (0% NO CHANGE)';
+                    arrowClass = 'down';
+                    arrowSymbol = '↓';
+                    color = '#ff3333';
                 }
 
-                // Ustaw atrybut data-percentage dla stylowania w CSS
-                budgetTrendDisplay.setAttribute('data-percentage', percentageChange.toFixed(2));
+                // Wyświetlanie trendu z dynamiczną strzałką i kolorem
+                trendDisplay.innerHTML = `<span class="arrow ${arrowClass}" style="color: ${color}">${arrowSymbol}</span> ${trendText}`;
             } else {
-                console.warn('Brak danych w Firebase dla Total Budget lub dane nie są w oczekiwanym formacie (tablica).');
-                budget2024Display.textContent = '2024: 0,00';
-                budget2025Display.textContent = '2025: 0,00';
-                budgetTrendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> Różnica: 0,00, 0.00% DECREASE';
-                budgetTrendDisplay.setAttribute('data-percentage', '0');
+                console.warn('Brak danych w Firebase.');
+                valueDisplay.textContent = '2024: 0,00 | 2025: 0,00';
+                trendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> 0,00 (0% NO CHANGE)';
             }
         }, (error) => {
-            console.error('Błąd pobierania danych Total Budget:', error);
-            budget2024Display.textContent = '2024: 0,00';
-            budget2025Display.textContent = '2025: 0,00';
-            budgetTrendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> Różnica: 0,00, 0.00% DECREASE';
-            budgetTrendDisplay.setAttribute('data-percentage', '0');
+            console.error('Błąd pobierania danych budżetu:', error);
+            valueDisplay.textContent = '2024: 0,00 | 2025: 0,00';
+            trendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> 0,00 (0% NO CHANGE)';
         });
     } else {
         console.error('Nie znaleziono elementów dla Total Budget na stronie.');
     }
 }
 
-// Ustawienie initTotalBudget jako globalnej funkcji, aby była dostępna w module
-window.initTotalBudget = initTotalBudget;
+// Wywołaj funkcję po załadowaniu strony
+document.addEventListener('DOMContentLoaded', () => {
+    loadTotalBudgetData();
+});
