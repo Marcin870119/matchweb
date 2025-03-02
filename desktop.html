@@ -45,7 +45,7 @@
     </nav>
 
     <!-- GŁÓWNA TREŚĆ -->
-    <div id="homePage">
+    <div id="homePage" class="hidden">
         <div class="dashboard-container">
             <div class="dashboard-card okno1">
                 <h3 class="card-title">Sprzedaż</h3>
@@ -53,17 +53,17 @@
                     <button class="nav-arrow" id="prevKH"><</button>
                     <div class="kh-details">
                         <div class="kh-name-trend">
-                            <span class="kh-name" id="currentKH">MAJA NORTHOLT</span>
-                            <span class="kh-arrow green-arrow" id="khTrend">↑</span>
+                            <span class="kh-name" id="currentKH"></span>
+                            <span class="kh-arrow" id="khTrend"></span>
                         </div>
                         <div class="kh-values">
                             <div class="value-item">
                                 <span class="value-label">Bieżąca:</span>
-                                <span class="value-number" id="prevValue">11365.89</span>
+                                <span class="value-number" id="prevValue"></span>
                             </div>
                             <div class="value-item">
                                 <span class="value-label">Średnia sprzedaż:</span>
-                                <span class="value-number" id="currentValue">8288.41</span>
+                                <span class="value-number" id="currentValue"></span>
                             </div>
                         </div>
                     </div>
@@ -72,18 +72,18 @@
             </div>
             <div class="dashboard-card okno2">
                 <h3>TEAM MEMBERS</h3>
-                <p class="value">5,990</p>
-                <p class="trend"><span class="arrow up">↑</span> 4% INCREASE</p>
+                <p class="value" id="teamMembersValue"></p>
+                <p class="trend" id="teamMembersTrend"></p>
             </div>
             <div class="dashboard-card okno3">
                 <h3>TOTAL BUDGET</h3>
-                <p class="value">$80,990</p>
-                <p class="trend"><span class="arrow down">↓</span> 13% DECREASE</p>
+                <p class="value" id="totalBudgetValue"></p>
+                <p class="trend" id="totalBudgetTrend"></p>
             </div>
             <div class="dashboard-card okno4">
                 <h3>NEW CUSTOMERS</h3>
-                <p class="value">3</p>
-                <p class="trend"><span class="arrow down">↓</span> 13% DECREASE</p>
+                <p class="value" id="newCustomersValue"></p>
+                <p class="trend" id="newCustomersTrend"></p>
             </div>
         </div>
     </div>
