@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 // Referencja do danych w Firebase pod ścieżką 'SPRZEDAZ_2024_2025/data-table1'
-const totalBudgetRef = ref(database, 'SPRZEDAZ_2024_2025/data-table1');
+const totalBudgetRef = ref(database, 'Sprzedaz_2024_2025/data-table1');
 
 // Funkcja normalizująca dane liczbowe (obsługuje przecinki, kropki i średniki jako separatory)
 function normalizeNumber(value) {
@@ -79,21 +79,25 @@ function loadTotalBudgetData() {
         onValue(totalBudgetRef, (snapshot) => {
             console.log('Otrzymane dane z Firebase:', snapshot.val());
             const data = snapshot.val();
-            if (data && Array.isArray(data)) {
+
+            if (data) {
                 let sum2024 = 0;
                 let sum2025 = 0;
 
-                // Przetwarzaj każdy obiekt w tablicy
-                data.forEach((item, index) => {
-                    console.log(`Przetwarzanie elementu ${index}:`, item);
-                    if (item && typeof item.Rok === 'string') {
-                        const year = parseInt(item.Rok.split(';')[0]); // Pobierz rok z początku ciągu
-                        const sum = calculateWeeklySales(item.Rok, year);
-                        console.log(`Rok: ${year}, Suma tygodni 1-7: ${sum}`);
-                        if (year === 2024) sum2024 = sum;
-                        else if (year === 2025) sum2025 = sum;
-                    }
-                });
+                // Przetwarzaj dane jako obiekt (nie tablicę), pobierając wartości dla kluczy 0 i 1
+                if (data[0] && typeof data[0].Rok === 'string') {
+                    const year = parseInt(data[0].Rok.split(';')[0]);
+                    const sum = calculateWeeklySales(data[0].Rok, year);
+                    console.log(`Rok: ${year}, Suma tygodni 1-7: ${sum}`);
+                    if (year === 2024) sum2024 = sum;
+                }
+
+                if (data[1] && typeof data[1].Rok === 'string') {
+                    const year = parseInt(data[1].Rok.split(';')[0]);
+                    const sum = calculateWeeklySales(data[1].Rok, year);
+                    console.log(`Rok: ${year}, Suma tygodni 1-7: ${sum}`);
+                    if (year === 2025) sum2025 = sum;
+                }
 
                 // Wyświetl sumy
                 budget2024Display.textContent = `2024: ${formatNumberWithDotsAndComma(sum2024)}`;
@@ -119,7 +123,7 @@ function loadTotalBudgetData() {
                 // Ustaw atrybut data-percentage dla stylowania w CSS
                 budgetTrendDisplay.setAttribute('data-percentage', percentageChange.toFixed(2));
             } else {
-                console.warn('Brak danych w Firebase dla Total Budget lub dane nie są w oczekiwanym formacie (tablica).');
+                console.warn('Brak danych w Firebase dla Total Budget.');
                 budget2024Display.textContent = '2024: 0,00';
                 budget2025Display.textContent = '2025: 0,00';
                 budgetTrendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> Różnica: 0,00, 0.00% DECREASE';
