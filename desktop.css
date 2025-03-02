@@ -393,3 +393,67 @@ button:hover {
     content: "▼"; /* Zachowanie grubszego symbolu */
     color: #ff3333; /* Intensywny czerwony */
 }
+
+/* Style specyficzne dla okna 2 (Team Member), zgodne z desktop1.css */
+.okno2 .member-name {
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+.okno2 .plan-value {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.okno2 .sales-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.okno2 .estimate-value {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.okno2 .estimate-percentage {
+    font-size: 12px;
+    margin: 0;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.okno2 .estimate-percentage .arrow {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+    line-height: 1;
+}
+
+.okno2 .estimate-percentage .arrow.down::after {
+    content: "▼";
+    color: #ff3333; /* Intensywny czerwony dla strzałki w dół */
+}
+
+/* Ukrywanie strzałki, jeśli estymacja % >= 100% */
+.okno2 .estimate-percentage[data-percentage="100"] .arrow,
+.okno2 .estimate-percentage[data-percentage^="100."] .arrow,
+.okno2 .estimate-percentage[data-percentage^="[1-9][0-9][0-9]"] .arrow {
+    display: none;
+}
+
+/* Domyślnie pokazuj strzałkę dla wartości < 100% */
+.okno2 .estimate-percentage .arrow.down {
+    display: inline-flex;
+}
+
+/* Styl dla wartości procentowej */
+.okno2 .estimate-percentage .percentage-value {
+    margin-left: 5px;
+}
