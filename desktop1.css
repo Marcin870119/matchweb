@@ -18,6 +18,21 @@ body {
     justify-items: center; /* Wyśrodkowanie elementów w siatce */
 }
 
+/* Pokaż siatkę Grid dla debugowania – opcjonalne, usuń po testach */
+.dashboard-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px; /* Rozmiar siatki, dostosuj do gap i rozmiaru kart */
+    pointer-events: none; /* Zapewnia, że siatka nie wpływa na interakcje */
+    z-index: 9999; /* Upewnia się, że siatka jest nad innymi elementami */
+}
+
 /* Karta dashboardu z siatką wewnętrzną dla elementów */
 .dashboard-card {
     width: 300px;
@@ -32,6 +47,22 @@ body {
     align-items: center; /* Wyśrodkowanie w pionie */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease-in-out;
+    position: relative; /* Potrzebne dla pozycji siatki */
+}
+
+/* Pokaż siatkę Grid dla debugowania wewnątrz karty – opcjonalne, usuń po testach */
+.dashboard-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px);
+    background-size: 100px 66.67px; /* Rozmiar siatki, dostosuj do wysokości i szerokości karty (200px/3, 300px) */
+    pointer-events: none; /* Zapewnia, że siatka nie wpływa na interakcje */
+    z-index: 9998; /* Niższy z-index niż siatka kontenera, aby nie pokrywać się */
 }
 
 .dashboard-card:hover {
