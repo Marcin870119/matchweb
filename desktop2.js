@@ -71,7 +71,7 @@ function loadTotalBudgetData() {
     console.log('Sprawdzanie elementów HTML:', {
         budget2024Display: budget2024Display,
         budget2025Display: budget2025Display,
-        budgetTrendDisplay: budget2024Display
+        budgetTrendDisplay: budgetTrendDisplay
     });
 
     if (budget2024Display && budget2025Display && budgetTrendDisplay) {
