@@ -214,29 +214,32 @@ body {
 .okno2 .plan-value,
 .okno2 .sales-value,
 .okno2 .estimate-value {
-    font-size: 18px; /* Większa czcionka dla lepszej czytelności */
+    font-size: 18px; /* Mniejszy rozmiar czcionki, aby zmieścić się w karcie */
     font-weight: bold;
-    margin: 0 0 15px 0; /* Większy margines dolny dla większego odstępu */
+    margin: 0 0 10px 0; /* Mniejszy margines dolny, aby zmieścić wszystkie dane */
     color: white;
     text-align: center;
+    overflow-wrap: break-word; /* Zapewnia, że długie słowa przełamią się, jeśli są za długie */
+    max-width: 100%; /* Zapewnia, że tekst nie wychodzi poza szerokość karty */
 }
 
 .okno2 .sales-value {
-    font-size: 24px; /* Większa czcionka dla "Sprzedaż", jak na obrazie */
+    font-size: 20px; /* Nieco większa czcionka dla "Sprzedaż", ale nadal pasująca */
 }
 
 .okno2 .estimate-percentage {
-    font-size: 14px; /* Większa czcionka dla trendu, jak na obrazie */
+    font-size: 14px; /* Rozmiar czcionki dla trendu, jak na trzecim obrazie */
     margin: 0;
     opacity: 0.9;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+    flex-grow: 1; /* Umożliwia rozciągnięcie, aby wypełnić pozostałą przestrzeń */
 }
 
 .okno2 .estimate-percentage .arrow {
-    font-size: 20px; /* Większa strzałka, jak na obrazie */
+    font-size: 20px; /* Rozmiar strzałki, jak na trzecim obrazie */
     font-weight: bold;
     margin-right: 5px;
     line-height: 1;
@@ -262,6 +265,8 @@ body {
     line-height: 1.5; /* Większy odstęp między wierszami */
     white-space: pre-line; /* Zachowuje \n dla dwóch wierszy */
     text-align: center;
+    overflow-wrap: break-word; /* Zapewnia, że długie słowa przełamią się, jeśli są za długie */
+    max-width: 100%; /* Zapewnia, że tekst nie wychodzi poza szerokość karty */
 }
 
 .okno3 .trend {
@@ -272,6 +277,7 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
+    flex-grow: 1; /* Umożliwia rozciągnięcie, aby wypełnić pozostałą przestrzeń */
 }
 
 .arrow {
@@ -298,6 +304,8 @@ body {
     margin: 0 0 15px 0; /* Większy margines dolny dla spójności */
     color: white;
     text-align: center;
+    overflow-wrap: break-word; /* Zapewnia, że długie słowa przełamią się, jeśli są za długie */
+    max-width: 100%; /* Zapewnia, że tekst nie wychodzi poza szerokość karty */
 }
 
 .okno4 .trend {
@@ -308,4 +316,5 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
+    flex-grow: 1; /* Umożliwia rozciągnięcie, aby wypełnić pozostałą przestrzeń */
 }
