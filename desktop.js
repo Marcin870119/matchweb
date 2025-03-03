@@ -114,19 +114,21 @@ function updateKHDisplay() {
     const currentValueDisplay = document.getElementById('currentValue');
     const khTrend = document.getElementById('khTrend');
 
-    if (khData.length > 0 && currentKHIndex >= 0 && currentKHIndex < khData.length) {
-        const kh = khData[currentKHIndex];
-        khDisplay.textContent = kh.name || 'Brak nazwy';
-        prevValueDisplay.textContent = formatNumberWithDotsAndComma(Number(kh.prevValue)) || '0,00';
-        currentValueDisplay.textContent = formatNumberWithDotsAndComma(Number(kh.currentValue)) || '0,00';
-        khTrend.textContent = kh.trend || '=';
-        khTrend.className = `kh-arrow ${kh.trend === '↑' ? 'green-arrow' : (kh.trend === '↓' ? 'red-arrow' : 'yellow-equals')}`;
-    } else {
-        khDisplay.textContent = 'Brak danych';
-        prevValueDisplay.textContent = '0,00';
-        currentValueDisplay.textContent = '0,00';
-        khTrend.textContent = '=';
-        khTrend.className = 'kh-arrow yellow-equals';
+    if (khDisplay && prevValueDisplay && currentValueDisplay && khTrend) {
+        if (khData.length > 0 && currentKHIndex >= 0 && currentKHIndex < khData.length) {
+            const kh = khData[currentKHIndex];
+            khDisplay.textContent = kh.name || 'Brak nazwy';
+            prevValueDisplay.textContent = formatNumberWithDotsAndComma(Number(kh.prevValue)) || '0,00';
+            currentValueDisplay.textContent = formatNumberWithDotsAndComma(Number(kh.currentValue)) || '0,00';
+            khTrend.textContent = kh.trend || '=';
+            khTrend.className = `kh-arrow ${kh.trend === '↑' ? 'green-arrow' : (kh.trend === '↓' ? 'red-arrow' : 'yellow-equals')}`;
+        } else {
+            khDisplay.textContent = 'Brak danych';
+            prevValueDisplay.textContent = '0,00';
+            currentValueDisplay.textContent = '0,00';
+            khTrend.textContent = '=';
+            khTrend.className = 'kh-arrow yellow-equals';
+        }
     }
 }
 
