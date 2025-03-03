@@ -41,8 +41,12 @@ function formatNumberWithDotsAndComma(value) {
 function loadTotalBudgetData() {
     const valueDisplay = document.getElementById('totalBudgetValue');
     const trendDisplay = document.getElementById('totalBudgetTrend');
+    const titleDisplay = document.querySelector('.dashboard-card.okno3 h3'); // Pobranie elementu h3 w oknie 3
 
-    if (valueDisplay && trendDisplay) {
+    if (valueDisplay && trendDisplay && titleDisplay) {
+        // Ustawienie tytułu na "SPRZEDAŻ_2024_2025"
+        titleDisplay.textContent = 'SPRZEDAŻ_2024_2025';
+
         onValue(salesDataRef, (snapshot) => {
             const data = snapshot.val();
             console.log('Dane z Firebase:', data); // Dodane logowanie do debugowania
@@ -68,7 +72,7 @@ function loadTotalBudgetData() {
                 console.log(`Suma 2024: ${sum2024}, Suma 2025: ${sum2025}`); // Dodane logowanie do debugowania
 
                 // Wyświetlanie sum w formacie z kropką i przecinkiem
-                valueDisplay.textContent = `2024: ${formatNumberWithDotsAndComma(sum2024)} | 2025: ${formatNumberWithDotsAndComma(sum2025)}`;
+                valueDisplay.textContent = `2024: ${formatNumberWithDotsAndComma(sum2024)}\n2025: ${formatNumberWithDotsAndComma(sum2025)}`; // Zmiana na dwa wiersze
 
                 // Obliczenie różnicy i trendu
                 const difference = sum2024 - sum2025;
@@ -102,12 +106,12 @@ function loadTotalBudgetData() {
                 trendDisplay.innerHTML = `<span class="arrow ${arrowClass}" style="color: ${color}">${arrowSymbol}</span> ${trendText}`;
             } else {
                 console.warn('Brak danych w Firebase.');
-                valueDisplay.textContent = '2024: 0,00 | 2025: 0,00';
+                valueDisplay.textContent = '2024: 0,00\n2025: 0,00'; // Zmiana na dwa wiersze
                 trendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> 0,00 (0% NO CHANGE)';
             }
         }, (error) => {
             console.error('Błąd pobierania danych budżetu:', error);
-            valueDisplay.textContent = '2024: 0,00 | 2025: 0,00';
+            valueDisplay.textContent = '2024: 0,00\n2025: 0,00'; // Zmiana na dwa wiersze
             trendDisplay.innerHTML = '<span class="arrow down" style="color: #ff3333">↓</span> 0,00 (0% NO CHANGE)';
         });
     } else {
