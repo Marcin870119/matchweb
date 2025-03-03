@@ -95,17 +95,38 @@
                     <p class="trend" id="newCustomersTrend"></p>
                 </div>
             </div>
-            <!-- Usunięcie wykresu, ponieważ jest teraz w desktopcharts.html -->
         </div>
     </div>
 
-    <!-- Skrypt do automatycznego otwierania stron -->
+    <!-- Skrypt do automatycznego otwierania stron z debugowaniem -->
     <script>
-        // Automatyczne otwieranie desktop1.html, desktop2.html i desktopcharts.html w nowych kartach
         window.addEventListener('load', () => {
-            window.open('desktop1.html', '_blank');
-            window.open('desktop2.html', '_blank');
-            window.open('desktopcharts.html', '_blank');
+            console.log('Attempting to open new windows...');
+            try {
+                const desktop1Window = window.open('desktop1.html', '_blank');
+                const desktop2Window = window.open('desktop2.html', '_blank');
+                const desktopChartsWindow = window.open('desktopcharts.html', '_blank');
+
+                if (!desktop1Window || desktop1Window.closed || typeof desktop1Window.closed === 'undefined') {
+                    console.warn('desktop1.html failed to open – browser may have blocked it.');
+                } else {
+                    console.log('desktop1.html opened successfully.');
+                }
+
+                if (!desktop2Window || desktop2Window.closed || typeof desktop2Window.closed === 'undefined') {
+                    console.warn('desktop2.html failed to open – browser may have blocked it.');
+                } else {
+                    console.log('desktop2.html opened successfully.');
+                }
+
+                if (!desktopChartsWindow || desktopChartsWindow.closed || typeof desktopChartsWindow.closed === 'undefined') {
+                    console.warn('desktopcharts.html failed to open – browser may have blocked it.');
+                } else {
+                    console.log('desktopcharts.html opened successfully.');
+                }
+            } catch (error) {
+                console.error('Error opening windows:', error);
+            }
         });
     </script>
 </body>
