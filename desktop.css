@@ -1,12 +1,13 @@
 body { 
     font-family: 'Arial', sans-serif; 
-    text-align: center; 
-    background-color: #1a1a1a; /* Czarne tło dla całej strony */
-    margin: 0; /* Usunięcie marginesów */
-    padding: 0; /* Usunięcie paddingu */
+    background-color: #1a1a1a; /* Ciemne tło, jak w pierwotnej wersji */
+    margin: 0;
+    padding: 0;
+    min-height: 2000px; /* Minimalna wysokość strony, aby umożliwić przewijanie */
+    position: relative; /* Kontekst dla pozycji absolutnej (jeśli potrzebne dla innych elementów) */
 }
 
-/* Style dla nawigacji */
+/* Style dla nawigacji (navbar) */
 .navbar { 
     height: 50px; 
     padding: 5px 10px; 
@@ -22,7 +23,7 @@ body {
 
 .navbar-brand img { 
     height: 30px; 
-    margin-right: 5px; 
+    margin-right: 10px; 
 }
 
 .navbar-nav .nav-link { 
@@ -65,6 +66,7 @@ body {
     justify-content: flex-start; /* Tytuły na górze, zawartość poniżej */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease-in-out;
+    background-color: #2c2c2c; /* Ciemniejsze tło dla kart, jak w poprzedniej wersji */
 }
 
 .dashboard-card:hover {
@@ -213,38 +215,38 @@ body {
 /* Style dla okna 2 (TEAM MEMBER), dostosowane do trzeciego obrazu */
 .okno2 .plan-value,
 .okno2 .estimate-value {
-    font-size: 18px; /* Mniejszy rozmiar czcionki dla "Plan" i "Estymacja" */
+    font-size: 18px; /* Zachowanie rozmiaru czcionki */
     font-weight: bold;
-    margin: 0 0 10px 0; /* Mniejszy margines dolny, aby zmieścić wszystkie dane */
+    margin: 0 0 10px 0; /* Zachowanie marginesu */
     color: white;
     text-align: center;
-    overflow-wrap: break-word; /* Zapewnia, że długie słowa przełamią się, jeśli są za długie */
-    max-width: 100%; /* Zapewnia, że tekst nie wychodzi poza szerokość karty */
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .okno2 .sales-value {
-    font-size: 24px; /* Większa czcionka dla "Sprzedaż", aby wyróżnić £911,700.00 */
+    font-size: 24px; /* Zachowanie większej czcionki dla £911,700.00 */
     font-weight: bold;
-    margin: 0 0 10px 0; /* Mniejszy margines dolny, aby zmieścić wszystkie dane */
+    margin: 0 0 10px 0; /* Zachowanie marginesu */
     color: white;
     text-align: center;
-    overflow-wrap: break-word; /* Zapewnia, że długie słowa przełamią się, jeśli są za długie */
-    max-width: 100%; /* Zapewnia, że tekst nie wychodzi poza szerokość karty */
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .okno2 .estimate-percentage {
-    font-size: 14px; /* Rozmiar czcionki dla trendu, jak na trzecim obrazie */
+    font-size: 14px; /* Zachowanie rozmiaru czcionki dla trendu */
     margin: 0;
     opacity: 0.9;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    flex-grow: 1; /* Umożliwia rozciągnięcie, aby wypełnić pozostałą przestrzeń */
+    flex-grow: 1;
 }
 
 .okno2 .estimate-percentage .arrow {
-    font-size: 20px; /* Rozmiar strzałki, jak na trzecim obrazie */
+    font-size: 20px; /* Zachowanie rozmiaru strzałki */
     font-weight: bold;
     margin-right: 5px;
     line-height: 1;
@@ -263,30 +265,30 @@ body {
 
 /* Style dla okna 3 (TOTAL BUDGET), dostosowane do trzeciego obrazu */
 .okno3 .value {
-    font-size: 18px; /* Większa czcionka dla wartości */
+    font-size: 18px; /* Zachowanie rozmiaru czcionki dla wartości */
     font-weight: bold;
-    margin: 0 0 15px 0; /* Większy margines dolny dla większego odstępu */
+    margin: 0 0 15px 0; /* Zachowanie marginesu */
     color: white;
-    line-height: 1.5; /* Większy odstęp między wierszami */
-    white-space: pre-line; /* Zachowuje \n dla dwóch wierszy */
+    line-height: 1.5; /* Zachowanie odstępu między wierszami */
+    white-space: pre-line;
     text-align: center;
-    overflow-wrap: break-word; /* Zapewnia, że długie słowa przełamią się, jeśli są za długie */
-    max-width: 100%; /* Zapewnia, że tekst nie wychodzi poza szerokość karty */
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .okno3 .trend {
-    font-size: 14px; /* Większa czcionka dla trendu, jak na obrazie */
+    font-size: 12px; /* Zachowanie rozmiaru czcionki dla trendu */
     margin: 0;
     opacity: 0.9;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    flex-grow: 1; /* Umożliwia rozciągnięcie, aby wypełnić pozostałą przestrzeń */
+    flex-grow: 1;
 }
 
 .arrow {
-    font-size: 20px; /* Większa strzałka, jak na obrazie */
+    font-size: 20px; /* Zachowanie rozmiaru strzałki */
     font-weight: bold;
     margin-right: 8px;
     line-height: 1;
@@ -306,20 +308,20 @@ body {
 .okno4 .value {
     font-size: 18px;
     font-weight: bold;
-    margin: 0 0 15px 0; /* Większy margines dolny dla spójności */
+    margin: 0 0 15px 0; /* Zachowanie marginesu */
     color: white;
     text-align: center;
-    overflow-wrap: break-word; /* Zapewnia, że długie słowa przełamią się, jeśli są za długie */
-    max-width: 100%; /* Zapewnia, że tekst nie wychodzi poza szerokość karty */
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .okno4 .trend {
-    font-size: 14px;
+    font-size: 12px;
     margin: 0;
     opacity: 0.9;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    flex-grow: 1; /* Umożliwia rozciągnięcie, aby wypełnić pozostałą przestrzeń */
+    flex-grow: 1;
 }
