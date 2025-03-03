@@ -12,6 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <link href="desktop.css" rel="stylesheet">
     <script type="module" src="desktop.js" defer></script>
+    <script type="module" src="desktop1.js" defer></script> <!-- Dla okna 2 -->
+    <script type="module" src="desktop2.js" defer></script> <!-- Dla okna 3 -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
 </head>
@@ -73,11 +75,11 @@
                 </div>
             </div>
             <div class="dashboard-card okno2">
-                <h3 class="member-name" id="memberName">PH</h3> <!-- Zostanie zastąpione danymi z Firebase -->
-                <p class="value plan-value" id="planValue"></p> <!-- Wartość "Plan" -->
-                <p class="value sales-value" id="salesValue"></p> <!-- Wartość "Sprzedaż" – większa czcionka -->
-                <p class="value estimate-value" id="estimateValue"></p> <!-- Wartość "Estymacja" -->
-                <p class="trend estimate-percentage" id="estimatePercentage"><span class="arrow down" style="color: #ff3333">↓</span><span class="percentage-value" id="percentageValue"></span></p> <!-- Wartość "Estymacja %" z trendem -->
+                <h3 class="member-name" id="memberName">PH</h3>
+                <p class="value plan-value" id="planValue"></p>
+                <p class="value sales-value" id="salesValue"></p>
+                <p class="value estimate-value" id="estimateValue"></p>
+                <p class="trend estimate-percentage" id="estimatePercentage"><span class="arrow down" style="color: #ff3333">↓</span><span class="percentage-value" id="percentageValue"></span></p>
             </div>
             <div class="dashboard-card okno3">
                 <h3>TOTAL BUDGET</h3>
