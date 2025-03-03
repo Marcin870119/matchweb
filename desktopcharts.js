@@ -1,7 +1,16 @@
-// Ładowanie Google Charts i rysowanie wykresu
+// Ładowanie Google Charts i rysowanie wykresu z debugowaniem
 google.charts.load('current', { 'packages': ['bar'] }, {
     callback: function () {
-        drawChart();
+        console.log('Google Charts loaded successfully.');
+        try {
+            drawChart();
+            console.log('Chart drawn successfully.');
+        } catch (error) {
+            console.error('Error drawing chart:', error);
+        }
+    },
+    error: function (error) {
+        console.error('Error loading Google Charts:', error);
     }
 });
 
