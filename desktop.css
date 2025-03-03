@@ -212,9 +212,8 @@ body {
 
 /* Style dla okna 2 (TEAM MEMBER), dostosowane do trzeciego obrazu */
 .okno2 .plan-value,
-.okno2 .sales-value,
 .okno2 .estimate-value {
-    font-size: 18px; /* Mniejszy rozmiar czcionki, aby zmieścić się w karcie */
+    font-size: 18px; /* Mniejszy rozmiar czcionki dla "Plan" i "Estymacja" */
     font-weight: bold;
     margin: 0 0 10px 0; /* Mniejszy margines dolny, aby zmieścić wszystkie dane */
     color: white;
@@ -224,7 +223,13 @@ body {
 }
 
 .okno2 .sales-value {
-    font-size: 20px; /* Nieco większa czcionka dla "Sprzedaż", ale nadal pasująca */
+    font-size: 24px; /* Większa czcionka dla "Sprzedaż", aby wyróżnić £911,700.00 */
+    font-weight: bold;
+    margin: 0 0 10px 0; /* Mniejszy margines dolny, aby zmieścić wszystkie dane */
+    color: white;
+    text-align: center;
+    overflow-wrap: break-word; /* Zapewnia, że długie słowa przełamią się, jeśli są za długie */
+    max-width: 100%; /* Zapewnia, że tekst nie wychodzi poza szerokość karty */
 }
 
 .okno2 .estimate-percentage {
