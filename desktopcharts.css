@@ -1,0 +1,30 @@
+body { 
+    font-family: 'Arial', sans-serif; 
+    background-color: #1a1a1a; /* Ciemne tło, jak w desktop.html */
+    margin: 0;
+    padding: 0;
+    min-height: 2000px; /* Minimalna wysokość strony, aby umożliwić przewijanie */
+    position: relative; /* Kontekst dla pozycji absolutnej .chart-container */
+}
+
+/* Style dla kontenera wykresu, z możliwością przeciągania */
+.chart-container {
+    width: 50%; /* Zachowanie szerokości 50% dla bardziej kwadratowego wyglądu */
+    max-width: 600px; /* Maksymalna szerokość, aby zachować proporcje */
+    margin: 50px 0 0 0; /* Przesunięcie do lewej (usunięcie auto z margin, dodanie 5 cm od góry) */
+    background-color: #1a1a1a; /* Zachowanie ciemnego tła */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Zachowanie cienia */
+    position: absolute; /* Umożliwia przeciąganie */
+    top: 0; /* Początkowa pozycja na górze strony (będzie zmieniana przez JS) */
+    left: 0; /* Początkowe wyrównanie do lewej strony */
+    z-index: 1000; /* Upewnia się, że wykres jest nad innymi elementami */
+    cursor: move; /* Kursor wskazujący, że element można przeciągać */
+}
+
+/* Style dla div wykresu Google Charts */
+#columnchart_material {
+    max-height: 400px; /* Zachowanie wysokości 400px dla bardziej kwadratowego wyglądu */
+    pointer-events: auto; /* Upewnienie się, że zdarzenia myszy są przekazywane do kontenera */
+}
