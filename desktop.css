@@ -1,11 +1,49 @@
 body { 
     font-family: 'Arial', sans-serif; 
     text-align: center; 
-    background-color: #1a1a1a;
-    margin: 0;
-    padding: 0;
+    background-color: #1a1a1a; /* Czarne tło dla całej strony */
+    margin: 0; /* Usunięcie marginesów */
+    padding: 0; /* Usunięcie paddingu */
 }
 
+/* Style dla nawigacji */
+.navbar { 
+    height: 50px; 
+    padding: 5px 10px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+.navbar-brand { 
+    display: flex; 
+    align-items: center; 
+    font-size: 16px; 
+    font-weight: bold; 
+}
+
+.navbar-brand img { 
+    height: 30px; 
+    margin-right: 5px; 
+}
+
+.navbar-nav .nav-link { 
+    font-size: 14px; 
+    font-weight: 500; 
+    color: rgba(255, 255, 255, 0.8); 
+    padding: 6px 12px; 
+    transition: color 0.3s ease-in-out; 
+}
+
+.navbar-nav .nav-link:hover, 
+.navbar-nav .nav-link.active { 
+    color: white; 
+}
+
+.dropdown-menu a:hover { 
+    background-color: #343A40; 
+    color: white; 
+}
+
+/* Style dla dashboardu */
 .dashboard-container {
     display: flex;
     justify-content: center;
@@ -24,7 +62,7 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Zmiana, aby treści zaczynały się od góry */
+    justify-content: flex-start; /* Tytuły na górze, zawartość poniżej */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease-in-out;
 }
@@ -34,51 +72,51 @@ body {
 }
 
 .okno1 {
-    background-color: #007bff;
+    background-color: #007bff; /* Niebieski – okno 1 */
 }
 
 .okno2 {
-    background-color: #28a745;
+    background-color: #28a745; /* Zielony – okno 2 */
 }
 
 .okno3 {
-    background-color: #ffc107;
+    background-color: #ffc107; /* Żółty – okno 3 */
 }
 
 .okno4 {
-    background-color: #dc3545;
+    background-color: #dc3545; /* Czerwony – okno 4 */
 }
 
 /* Ujednolicenie stylów tytułów dla wszystkich okien */
 .dashboard-card h3,
 .card-title,
 .member-name {
-    font-size: 16px; /* Ujednolicony rozmiar czcionki dla spójności */
+    font-size: 16px;
     margin: 0 0 10px 0; /* Jednolity margines dolny, aby zachować odstęp od treści poniżej */
     opacity: 0.9;
     font-weight: bold;
-    text-transform: uppercase; /* Wielkie litery dla spójności */
+    text-transform: uppercase;
     letter-spacing: 0.5px;
     color: white;
     padding-top: 0; /* Usunięcie dodatkowego paddingu u góry */
 }
 
-/* Specyficzne style dla innych elementów w oknach, aby zachować ich pozycje */
+/* Specyficzne style dla innych elementów w oknach */
 .card-title {
-    /* Nie wymaga dodatkowych zmian, bo pasuje do ogólnego stylu h3 */
+    /* Specyficzne dla okna 1, brak dodatkowych zmian */
 }
 
 .member-name {
-    /* Zachowaj specyficzne właściwości, jeśli są potrzebne, ale upewnij się, że margines i padding są zgodne */
     margin: 0 0 10px 0; /* Jednolity margines dolny */
 }
 
+/* Style dla okna 1 (SPRZEDAŻ) */
 .kh-navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin: 5px 0;
+    margin-top: 10px; /* Dodatkowy margines, aby wyrównać z innymi oknami */
 }
 
 .nav-arrow {
@@ -177,6 +215,53 @@ body {
     text-align: right;
 }
 
+/* Style dla okna 2 (TEAM MEMBER) */
+.okno2 .plan-value {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.okno2 .sales-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.okno2 .estimate-value {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.okno2 .estimate-percentage {
+    font-size: 12px;
+    margin: 0;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.okno2 .estimate-percentage .arrow {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+    line-height: 1;
+}
+
+.okno2 .estimate-percentage .arrow.down::after {
+    content: "▼";
+    color: #ff3333;
+}
+
+.okno2 .estimate-percentage[data-percentage="100"] .arrow,
+.okno2 .estimate-percentage[data-percentage^="100."] .arrow,
+.okno2 .estimate-percentage[data-percentage^="[1-9][0-9][0-9]"] .arrow {
+    display: none;
+}
+
+/* Style dla okna 3 (TOTAL BUDGET) */
 .dashboard-card .value {
     font-size: 18px;
     font-weight: bold;
@@ -214,52 +299,4 @@ body {
     color: #ff3333;
 }
 
-/* Style specyficzne dla okna 2 (z desktop1.css) */
-.okno2 .plan-value {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-}
-
-.okno2 .sales-value {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-}
-
-.okno2 .estimate-value {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-}
-
-.okno2 .estimate-percentage {
-    font-size: 12px;
-    margin: 0;
-    opacity: 0.9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.okno2 .estimate-percentage .arrow {
-    font-size: 18px;
-    font-weight: bold;
-    margin-right: 5px;
-    line-height: 1;
-}
-
-.okno2 .estimate-percentage[data-percentage="100"] .arrow,
-.okno2 .estimate-percentage[data-percentage^="100."] .arrow,
-.okno2 .estimate-percentage[data-percentage^="[1-9][0-9][0-9]"] .arrow {
-    display: none;
-}
-
-/* Navbar i inne style pozostają bez zmian */
-.navbar { 
-    height: 50px; 
-    padding: 5px 10px; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-}
-
-/* ... reszta stylów dla navbar itd. ... */
+/* Style dla okna 4 (NEW CUSTOMERS) */
