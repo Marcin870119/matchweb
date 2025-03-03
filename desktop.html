@@ -98,15 +98,17 @@
         </div>
     </div>
 
-    <!-- Skrypt do automatycznego otwierania stron z debugowaniem -->
+    <!-- Skrypt do automatycznego otwierania stron z debugowaniem i alternatywną metodą -->
     <script>
         window.addEventListener('load', () => {
             console.log('Attempting to open new windows...');
             try {
+                // Próba otwarcia w nowych kartach
                 const desktop1Window = window.open('desktop1.html', '_blank');
                 const desktop2Window = window.open('desktop2.html', '_blank');
                 const desktopChartsWindow = window.open('desktopcharts.html', '_blank');
 
+                // Sprawdzenie, czy okna zostały otwarte poprawnie
                 if (!desktop1Window || desktop1Window.closed || typeof desktop1Window.closed === 'undefined') {
                     console.warn('desktop1.html failed to open – browser may have blocked it.');
                 } else {
@@ -121,6 +123,9 @@
 
                 if (!desktopChartsWindow || desktopChartsWindow.closed || typeof desktopChartsWindow.closed === 'undefined') {
                     console.warn('desktopcharts.html failed to open – browser may have blocked it.');
+                    // Alternatywna metoda: otwarcie po kliknięciu (opcjonalne, jeśli blokada persists)
+                    alert('Przeglądarka zablokowała automatyczne otwieranie nowych kart. Kliknij OK, aby otworzyć wykres ręcznie.');
+                    window.open('desktopcharts.html', '_blank');
                 } else {
                     console.log('desktopcharts.html opened successfully.');
                 }
@@ -128,6 +133,12 @@
                 console.error('Error opening windows:', error);
             }
         });
+
+        // Opcjonalna funkcja do ręcznego otwierania (jeśli automatyczne otwieranie jest blokowane)
+        function openChartsManually() {
+            window.open('desktopcharts.html', '_blank');
+            console.log('desktopcharts.html opened manually.');
+        }
     </script>
 </body>
 </html>
