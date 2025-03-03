@@ -1,6 +1,9 @@
-// Ładowanie Google Charts
-google.charts.load('current', { 'packages': ['bar'] });
-google.charts.setOnLoadCallback(drawChart);
+// Ładowanie Google Charts i rysowanie wykresu
+google.charts.load('current', { 'packages': ['bar'] }, {
+    callback: function () {
+        drawChart();
+    }
+});
 
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
@@ -44,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isDragging = false;
     let currentX = parseFloat(localStorage.getItem('chartX')) || 0; // Odczyt pozycji X z localStorage
-    let currentY = parseFloat(localStorage.getItem('chartY')) || 0; // Odczyt pozycji Y z localStorage (domyślnie 0, jeśli nie zapisano)
+    let currentY = parseFloat(localStorage.getItem('chartY')) || 0; // Odczyt pozycji Y z localStorage (domyślnie 0)
     let initialX;
     let initialY;
 
