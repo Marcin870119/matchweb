@@ -92,7 +92,7 @@ body {
 .card-title,
 .member-name {
     font-size: 16px;
-    margin: 0 0 10px 0; /* Jednolity margines dolny, aby zachować odstęp od treści poniżej */
+    margin: 0 0 15px 0; /* Większy margines dolny, aby oddzielić tytuł od danych */
     opacity: 0.9;
     font-weight: bold;
     text-transform: uppercase;
@@ -101,16 +101,11 @@ body {
     padding-top: 0; /* Usunięcie dodatkowego paddingu u góry */
 }
 
-/* Specyficzne style dla innych elementów w oknach */
+/* Style dla okna 1 (SPRZEDAŻ) */
 .card-title {
     /* Specyficzne dla okna 1, brak dodatkowych zmian */
 }
 
-.member-name {
-    margin: 0 0 10px 0; /* Jednolity margines dolny */
-}
-
-/* Style dla okna 1 (SPRZEDAŻ) */
 .kh-navigation {
     display: flex;
     align-items: center;
@@ -215,36 +210,33 @@ body {
     text-align: right;
 }
 
-/* Style dla okna 2 (TEAM MEMBER) */
-.okno2 .plan-value {
-    font-size: 16px;
+/* Style dla okna 2 (TEAM MEMBER), dostosowane do trzeciego obrazu */
+.okno2 .plan-value,
+.okno2 .sales-value,
+.okno2 .estimate-value {
+    font-size: 18px; /* Większa czcionka dla lepszej czytelności */
     font-weight: bold;
-    margin: 0 0 8px 0;
+    margin: 0 0 15px 0; /* Większy margines dolny dla większego odstępu */
+    color: white;
+    text-align: center;
 }
 
 .okno2 .sales-value {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-}
-
-.okno2 .estimate-value {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
+    font-size: 24px; /* Większa czcionka dla "Sprzedaż", jak na obrazie */
 }
 
 .okno2 .estimate-percentage {
-    font-size: 12px;
+    font-size: 14px; /* Większa czcionka dla trendu, jak na obrazie */
     margin: 0;
     opacity: 0.9;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
 }
 
 .okno2 .estimate-percentage .arrow {
-    font-size: 18px;
+    font-size: 20px; /* Większa strzałka, jak na obrazie */
     font-weight: bold;
     margin-right: 5px;
     line-height: 1;
@@ -261,19 +253,19 @@ body {
     display: none;
 }
 
-/* Style dla okna 3 (TOTAL BUDGET) */
-.dashboard-card .value {
-    font-size: 18px;
+/* Style dla okna 3 (TOTAL BUDGET), dostosowane do trzeciego obrazu */
+.okno3 .value {
+    font-size: 18px; /* Większa czcionka dla wartości */
     font-weight: bold;
-    margin: 0 0 5px 0;
+    margin: 0 0 15px 0; /* Większy margines dolny dla większego odstępu */
     color: white;
-    line-height: 1.2;
-    white-space: pre-line;
+    line-height: 1.5; /* Większy odstęp między wierszami */
+    white-space: pre-line; /* Zachowuje \n dla dwóch wierszy */
     text-align: center;
 }
 
-.dashboard-card .trend {
-    font-size: 12px;
+.okno3 .trend {
+    font-size: 14px; /* Większa czcionka dla trendu, jak na obrazie */
     margin: 0;
     opacity: 0.9;
     display: flex;
@@ -283,7 +275,7 @@ body {
 }
 
 .arrow {
-    font-size: 20px;
+    font-size: 20px; /* Większa strzałka, jak na obrazie */
     font-weight: bold;
     margin-right: 8px;
     line-height: 1;
@@ -300,3 +292,20 @@ body {
 }
 
 /* Style dla okna 4 (NEW CUSTOMERS) */
+.okno4 .value {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 15px 0; /* Większy margines dolny dla spójności */
+    color: white;
+    text-align: center;
+}
+
+.okno4 .trend {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
