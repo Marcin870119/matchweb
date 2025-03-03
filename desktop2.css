@@ -35,44 +35,53 @@ body {
 }
 
 .okno3 {
-    background-color: #ffc107; /* Żółty */
+    background-color: #ffc107; /* Żółte tło, jak wcześniej */
+    border-radius: 15px; /* Zachowanie poprzedniego zaokrąglenia */
 }
 
 .dashboard-card h3 {
-    font-size: 14px;
-    margin: 0 0 10px 0;
-    opacity: 0.8;
+    font-size: 16px; /* Zachowanie rozmiaru czcionki */
+    margin: 0 0 10px 0; /* Mniejszy margines dolny, aby zmieścić więcej treści */
+    opacity: 0.9;
     font-weight: bold;
+    text-transform: uppercase; /* Wielkie litery dla tytułu */
+    letter-spacing: 0.5px; /* Subtelny odstęp liter */
+    color: white; /* Biały kolor tekstu, jak wcześniej */
 }
 
 .dashboard-card .value {
-    font-size: 24px;
+    font-size: 18px; /* Większa czcionka dla wartości */
     font-weight: bold;
-    margin: 0 0 8px 0;
+    margin: 0 0 5px 0; /* Mniejszy margines dolny, aby zmieścić trend */
+    color: white; /* Biały kolor tekstu, jak wcześniej */
+    line-height: 1.2; /* Lepsze rozmieszczenie wierszy */
+    white-space: pre-line; /* Zachowuje \n z JavaScript, aby wyświetlać dwa wiersze */
+    text-align: center; /* Wyśrodkowanie tekstu */
 }
 
 .dashboard-card .trend {
-    font-size: 12px;
+    font-size: 12px; /* Mniejsza czcionka dla trendu, jak prosiłeś */
     margin: 0;
     opacity: 0.9;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white; /* Biały kolor tekstu, jak wcześniej */
 }
 
 .arrow {
-    font-size: 18px;
+    font-size: 20px; /* Zachowanie rozmiaru strzałki */
     font-weight: bold;
-    margin-right: 5px;
+    margin-right: 8px; /* Zachowanie odstępu przed tekstem trendu */
     line-height: 1;
 }
 
 .arrow.up::after {
     content: "▲";
-    color: #00cc00; /* Intensywny zielony */
+    color: #00cc00; /* Intensywnie zielony dla wzrostu, jak wcześniej */
 }
 
 .arrow.down::after {
     content: "▼";
-    color: #ff3333; /* Intensywny czerwony */
+    color: #ff3333; /* Intensywnie czerwony dla spadku, jak wcześniej */
 }
