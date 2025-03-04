@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 2000px; /* Minimalna wysokość strony, aby umożliwić przewijanie */
-    position: relative; /* Kontekst dla pozycji absolutnej .chart-container, .circular-charts-container i .charts-container */
+    position: relative; /* Kontekst dla pozycji absolutnej .chart-container, .circular-charts-container */
 }
 
 /* Style dla nawigacji (navbar) */
@@ -327,7 +327,7 @@ body {
     flex-grow: 1;
 }
 
-/* Style dla kontenera wykresu Google Charts, z możliwością przeciągania */
+/* Style dla kontenera wykresu Google Charts z desktopcharts.html, z możliwością przeciągania */
 .chart-container {
     width: 50%; /* Zachowanie szerokości 50% dla bardziej kwadratowego wyglądu */
     max-width: 600px; /* Maksymalna szerokość, aby zachować proporcje */
@@ -430,89 +430,6 @@ body {
 }
 
 .circular-charts-container a:hover {
-    text-decoration: underline;
-}
-
-/* Style dla kontenera wykresów z desktopcharts.html, z możliwością przeciągania */
-.charts-container {
-    position: absolute; /* Umożliwia przeciąganie */
-    text-align: center;
-    cursor: move; /* Kursor wskazujący możliwość przeciągania */
-    z-index: 1000; /* Upewnia się, że kontener jest nad innymi elementami */
-    touch-action: none; /* Włącza obsługę przeciągania na urządzeniach dotykowych */
-    pointer-events: auto; /* Upewnienie się, że zdarzenia myszy są przekazywane do kontenera */
-}
-
-.charts-container ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 4em;
-}
-
-.charts-container .chart {
-    display: inline-block;
-    width: 150px; /* Zachowujemy rozmiar okręgów */
-    height: 150px;
-    position: relative;
-    box-sizing: border-box;
-    pointer-events: none; /* Zapobiega blokowaniu zdarzeń przez canvas */
-}
-
-.charts-container .chart span.number, .charts-container .chart span.label, .charts-container .chart span.status {
-    pointer-events: auto; /* Przywraca nasłuchiwanie zdarzeń dla tekstu */
-}
-
-.charts-container .chart canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-    pointer-events: none; /* Zapobiega przejmowaniu zdarzeń przez canvas */
-}
-
-.charts-container .chart span.number {
-    display: block;
-    font-size: 1.8em; /* Duża czcionka dla procentów */
-    font-weight: bold;
-    color: #ffffff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1;
-}
-
-.charts-container .chart span.label {
-    display: block;
-    font-size: 0.7em; /* Mniejsza czcionka dla tekstu pod liczbą */
-    color: #ffffff;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    max-width: 100%;
-}
-
-.charts-container .chart span.status {
-    display: block;
-    font-size: 0.6em; /* Dodatkowy tekst o stanie realizacji */
-    color: #ffffff;
-    position: absolute;
-    bottom: 25px; /* Pozycja pod etykietą */
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-}
-
-.charts-container a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.charts-container a:hover {
     text-decoration: underline;
 }
 
