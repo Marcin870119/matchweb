@@ -20,7 +20,7 @@
     <script type="module" src="desktop2.js" defer></script>
     <!-- Dodanie jQuery i easyPieChart z poprawionym URL -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js"></script> <!-- Użyj wersji 2.1.6, która jest dostępna -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js"></script> <!-- Użyj wersji 2.1.6 -->
     <script src="desktopcharts.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100" style="background-color: #1a1a1a;">
@@ -120,7 +120,25 @@
 
     <!-- Skrypt do rysowania wykresów kołowych z desktopdiag.html i obsługi przeciągania -->
     <script>
-        // Rysowanie wykresów kołowych z desktopdiag.html
+        // Funkcja aktualizująca status realizacji
+        function updateStatus(percent, element) {
+            const statusElement = element.querySelector('.status');
+            const remaining = 100 - percent;
+            let statusText = '';
+
+            if (percent < 50) {
+                statusText = 'OK - Brakuje ' + remaining + '%';
+            } else if (percent >= 50 && percent < 100) {
+                statusText = 'DOBRZE - Brakuje ' + remaining + '%';
+            } else if (percent === 100) {
+                statusText = '100% - Cel osiągnięty!';
+            }
+
+            if (statusElement) {
+                statusElement.textContent = statusText;
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', function() {
             var chartElements = document.querySelectorAll('.circular-charts-container .chart');
             const circularContainer = document.querySelector('.circular-charts-container');
@@ -128,7 +146,7 @@
             // Odczytanie zapisanej pozycji z localStorage
             const savedPosition = JSON.parse(localStorage.getItem('circularContainerPosition')) || {
                 x: window.innerWidth / 2 - circularContainer.offsetWidth / 2,
-                y: window.innerHeight / 2 - circularContainer.offsetHeight / 2
+                y: window.innerHeight / 2 - circularContainer.offsetHeight / 2 + 200 // Przesunięcie dla uniknięcia nakładania się
             };
 
             // Ustawienie pozycji kontenera na zapisane wartości
