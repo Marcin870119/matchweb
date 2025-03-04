@@ -112,6 +112,15 @@
                 </ul>
                 <a href="https://github.com/rendro/easy-pie-chart" target="_blank">Built with: easy pie chart</a>
             </div>
+            <!-- Dodanie kontenera dla wykresów z desktopcharts.html -->
+            <div class="charts-container">
+                <ul>
+                    <li class="chart" data-percent="70"><span class="number">70%</span><span class="label">CHARTS1</span><span class="status"></span></li>
+                    <li class="chart" data-percent="45"><span class="number">45%</span><span class="label">CHARTS2</span><span class="status"></span></li>
+                    <li class="chart" data-percent="60"><span class="number">60%</span><span class="label">CHARTS3</span><span class="status"></span></li>
+                </ul>
+                <a href="https://github.com/rendro/easy-pie-chart" target="_blank">Built with: easy pie chart</a>
+            </div>
             <!-- Dodanie pustego diva, aby wydłużyć stronę i umożliwić przewijanie -->
             <div class="spacer" style="height: 2000px;"></div>
         </div>
@@ -163,12 +172,12 @@
          * @version 2.0.1
          **/
         !function(){var a=function(a,b){var c=document.createElement("canvas");"undefined"!=typeof G_vmlCanvasManager&&G_vmlCanvasManager.initElement(c);var d=c.getContext("2d");if(c.width=c.height=b.size,a.appendChild(c),window.devicePixelRatio>1){var e=window.devicePixelRatio;c.style.width=c.style.height=[b.size,"px"].join(""),c.width=c.height=b.size*e,d.scale(e,e)}d.translate(b.size/2,b.size/2),d.rotate((-0.5+b.rotate/180)*Math.PI);var f=(b.size-b.lineWidth)/2;b.scaleColor&&b.scaleLength&&(f-=b.scaleLength+2);var g=function(a,b,c){c=Math.min(Math.max(0,c||1),1),d.beginPath(),d.arc(0,0,f,0,2*Math.PI*c,!1),d.strokeStyle=a,d.lineWidth=b,d.stroke()},h=function(){var a,c,e=24;d.lineWidth=1,d.fillStyle=b.scaleColor,d.save();for(var e=24;e>=0;--e)0===e%6?(c=b.scaleLength,a=0):(c=.6*b.scaleLength,a=b.scaleLength-c),d.fillRect(-b.size/2+a,0,c,1),d.rotate(Math.PI/12);d.restore()};Date.now=Date.now||function(){return+new Date};var i=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(a){window.setTimeout(a,1e3/60)}}();this.clear=function(){d.clearRect(b.size/-2,b.size/-2,b.size,b.size)},this.draw=function(a){this.clear(),b.scaleColor&&h(),b.trackColor&&g(b.trackColor,b.lineWidth),d.lineCap=b.lineCap;var c;c="function"==typeof b.barColor?b.barColor(a):b.barColor,a>0&&g(c,b.lineWidth,a/100)}.bind(this),this.animate=function(a,c){var d=Date.now();b.onStart(a,c);var e=function(){var f=Math.min(Date.now()-d,b.animate),g=b.easing(this,f,a,c-a,b.animate);this.draw(g),b.onStep(a,c,g),f>=b.animate?b.onStop(a,c):i(e)}.bind(this);i(e)}.bind(this)},b=function(b,c){var d,e={barColor:"#ef1e25",trackColor:"rgba(255,255,255,0.3)",scaleColor:false,scaleLength:5,lineCap:"round",lineWidth:10,size:150,rotate:0,animate:1000,renderer:a,easing:function(a,b,c,d,e){return(b/=e/2)<1?d/2*b*b+c:-d/2*(--b*(b-2)-1)+c},onStart:function(a, c) {
-            updateStatus(a, b); // Wywołanie funkcji aktualizującej status przy starcie
-          },onStep:function(a, c, g) {
-            updateStatus(g, b); // Aktualizacja statusu podczas animacji
-          },onStop:function(a, c) {
-            updateStatus(a, b); // Aktualizacja statusu po zakończeniu animacji
-          }},f={},g=0,h=function(){this.el=b,this.options=f;for(var a in e)e.hasOwnProperty(a)&&(f[a]=c&&"undefined"!=typeof c[a]?c[a]:e[a],"function"==typeof f[a]&&(f[a]=f[a].bind(this)));f.easing="string"==typeof f.easing&&"undefined"!=typeof jQuery&&jQuery.isFunction(jQuery.easing[f.easing])?jQuery.easing[f.easing]:e.easing,d=new f.renderer(b,f),d.draw(g),b.dataset&&b.dataset.percent&&this.update(parseInt(b.dataset.percent,10))}.bind(this);this.update=function(a){return a=parseInt(a,10),f.animate?d.animate(g,a):d.draw(a/100),g=a,this}.bind(this),h()};window.EasyPieChart=b}();
+                updateStatus(a, b); // Wywołanie funkcji aktualizującej status przy starcie
+              },onStep:function(a, c, g) {
+                updateStatus(g, b); // Aktualizacja statusu podczas animacji
+              },onStop:function(a, c) {
+                updateStatus(a, b); // Aktualizacja statusu po zakończeniu animacji
+              }},f={},g=0,h=function(){this.el=b,this.options=f;for(var a in e)e.hasOwnProperty(a)&&(f[a]=c&&"undefined"!=typeof c[a]?c[a]:e[a],"function"==typeof f[a]&&(f[a]=f[a].bind(this)));f.easing="string"==typeof f.easing&&"undefined"!=typeof jQuery&&jQuery.isFunction(jQuery.easing[f.easing])?jQuery.easing[f.easing]:e.easing,d=new f.renderer(b,f),d.draw(g),b.dataset&&b.dataset.percent&&this.update(parseInt(b.dataset.percent,10))}.bind(this);this.update=function(a){return a=parseInt(a,10),f.animate?d.animate(g,a):d.draw(a/100),g=a,this}.bind(this),h()};window.EasyPieChart=b}();
 
         // Funkcja aktualizująca status realizacji
         function updateStatus(percent, element) {
@@ -219,21 +228,19 @@
         };
 
         window.addEventListener('DOMContentLoaded', function() {
-            var chartElements = document.querySelectorAll('.chart');
-            const circularContainer = document.querySelector('.circular-charts-container');
+            // Inicjalizacja dla wykresów z desktopdiag.html
+            var diagChartElements = document.querySelectorAll('.circular-charts-container .chart');
+            const diagContainer = document.querySelector('.circular-charts-container');
 
-            // Odczytanie zapisanej pozycji z localStorage
-            const savedPosition = JSON.parse(localStorage.getItem('circularContainerPosition')) || {
-                x: window.innerWidth / 2 - circularContainer.offsetWidth / 2,
-                y: window.innerHeight / 2 - circularContainer.offsetHeight / 2
+            const diagSavedPosition = JSON.parse(localStorage.getItem('circularContainerPosition')) || {
+                x: window.innerWidth / 2 - diagContainer.offsetWidth / 2,
+                y: window.innerHeight / 2 - diagContainer.offsetHeight / 2
             };
 
-            // Ustawienie pozycji kontenera na zapisane wartości
-            circularContainer.style.left = savedPosition.x + 'px';
-            circularContainer.style.top = savedPosition.y + 'px';
+            diagContainer.style.left = diagSavedPosition.x + 'px';
+            diagContainer.style.top = diagSavedPosition.y + 'px';
 
-            // Inicjalizacja wykresów kołowych
-            chartElements.forEach((chart, index) => {
+            diagChartElements.forEach((chart, index) => {
                 let options;
                 if (index === 0) options = options1;
                 else if (index === 1) options = options2;
@@ -242,13 +249,11 @@
                 const chartInstance = new EasyPieChart(chart, options);
                 charts.push(chartInstance);
 
-                // Automatyczna aktualizacja po załadowaniu
                 const percent = parseInt(chart.dataset.percent, 10);
                 updateChart(chart, percent);
             });
 
-            // Obserwowanie zmian w atrybucie data-percent
-            const observer = new MutationObserver((mutations) => {
+            const diagObserver = new MutationObserver((mutations) => {
                 mutations.forEach(mutation => {
                     if (mutation.attributeName === 'data-percent') {
                         const element = mutation.target;
@@ -258,37 +263,87 @@
                 });
             });
 
-            // Obserwowanie każdego elementu .chart
-            chartElements.forEach(chart => {
-                observer.observe(chart, { attributes: true, attributeFilter: ['data-percent'] });
+            diagChartElements.forEach(chart => {
+                diagObserver.observe(chart, { attributes: true, attributeFilter: ['data-percent'] });
             });
 
-            // Funkcjonalność przeciągania kontenera z wykresami kołowymi
-            let isDragging = false;
-            let currentX = savedPosition.x;
-            let currentY = savedPosition.y;
-            let initialMouseX;
-            let initialMouseY;
+            let diagIsDragging = false;
+            let diagCurrentX = diagSavedPosition.x;
+            let diagCurrentY = diagSavedPosition.y;
+            let diagInitialMouseX;
+            let diagInitialMouseY;
 
-            // Obsługa myszy
-            circularContainer.addEventListener('mousedown', (e) => startDragging(e));
-            document.addEventListener('mousemove', (e) => drag(e));
-            document.addEventListener('mouseup', stopDragging);
+            diagContainer.addEventListener('mousedown', (e) => startDragging(e, diagContainer, 'circularContainerPosition', diagIsDragging, diagCurrentX, diagCurrentY, diagInitialMouseX, diagInitialMouseY));
+            document.addEventListener('mousemove', (e) => drag(e, diagContainer, diagIsDragging, diagCurrentX, diagCurrentY, diagInitialMouseX, diagInitialMouseY));
+            document.addEventListener('mouseup', () => stopDragging(diagContainer, diagIsDragging, diagCurrentX, diagCurrentY, 'circularContainerPosition'));
 
-            // Obsługa dotyku (dla urządzeń mobilnych)
-            circularContainer.addEventListener('touchstart', (e) => startDragging(e.touches[0]));
-            document.addEventListener('touchmove', (e) => drag(e.touches[0]));
-            document.addEventListener('touchend', stopDragging);
+            diagContainer.addEventListener('touchstart', (e) => startDragging(e.touches[0], diagContainer, 'circularContainerPosition', diagIsDragging, diagCurrentX, diagCurrentY, diagInitialMouseX, diagInitialMouseY));
+            document.addEventListener('touchmove', (e) => drag(e.touches[0], diagContainer, diagIsDragging, diagCurrentX, diagCurrentY, diagInitialMouseX, diagInitialMouseY));
+            document.addEventListener('touchend', () => stopDragging(diagContainer, diagIsDragging, diagCurrentX, diagCurrentY, 'circularContainerPosition'));
 
-            function startDragging(e) {
-                if (e.target.closest('.circular-charts-container')) { // Upewnij się, że kliknięcie/dotyk jest w kontenerze
+            // Inicjalizacja dla wykresów z desktopcharts.html
+            var chartsChartElements = document.querySelectorAll('.charts-container .chart');
+            const chartsContainer = document.querySelector('.charts-container');
+
+            const chartsSavedPosition = JSON.parse(localStorage.getItem('chartsContainerPosition')) || {
+                x: window.innerWidth / 2 - chartsContainer.offsetWidth / 2 + 200, // Przesunięcie dla uniknięcia nakładania się
+                y: window.innerHeight / 2 - chartsContainer.offsetHeight / 2
+            };
+
+            chartsContainer.style.left = chartsSavedPosition.x + 'px';
+            chartsContainer.style.top = chartsSavedPosition.y + 'px';
+
+            chartsChartElements.forEach((chart, index) => {
+                let options;
+                if (index === 0) options = options1;
+                else if (index === 1) options = options2;
+                else options = options3;
+
+                const chartInstance = new EasyPieChart(chart, options);
+                charts.push(chartInstance);
+
+                const percent = parseInt(chart.dataset.percent, 10);
+                updateChart(chart, percent);
+            });
+
+            const chartsObserver = new MutationObserver((mutations) => {
+                mutations.forEach(mutation => {
+                    if (mutation.attributeName === 'data-percent') {
+                        const element = mutation.target;
+                        const newPercent = parseInt(element.dataset.percent, 10);
+                        updateChart(element, newPercent);
+                    }
+                });
+            });
+
+            chartsChartElements.forEach(chart => {
+                chartsObserver.observe(chart, { attributes: true, attributeFilter: ['data-percent'] });
+            });
+
+            let chartsIsDragging = false;
+            let chartsCurrentX = chartsSavedPosition.x;
+            let chartsCurrentY = chartsSavedPosition.y;
+            let chartsInitialMouseX;
+            let chartsInitialMouseY;
+
+            chartsContainer.addEventListener('mousedown', (e) => startDragging(e, chartsContainer, 'chartsContainerPosition', chartsIsDragging, chartsCurrentX, chartsCurrentY, chartsInitialMouseX, chartsInitialMouseY));
+            document.addEventListener('mousemove', (e) => drag(e, chartsContainer, chartsIsDragging, chartsCurrentX, chartsCurrentY, chartsInitialMouseX, chartsInitialMouseY));
+            document.addEventListener('mouseup', () => stopDragging(chartsContainer, chartsIsDragging, chartsCurrentX, chartsCurrentY, 'chartsContainerPosition'));
+
+            chartsContainer.addEventListener('touchstart', (e) => startDragging(e.touches[0], chartsContainer, 'chartsContainerPosition', chartsIsDragging, chartsCurrentX, chartsCurrentY, chartsInitialMouseX, chartsInitialMouseY));
+            document.addEventListener('touchmove', (e) => drag(e.touches[0], chartsContainer, chartsIsDragging, chartsCurrentX, chartsCurrentY, chartsInitialMouseX, chartsInitialMouseY));
+            document.addEventListener('touchend', () => stopDragging(chartsContainer, chartsIsDragging, chartsCurrentX, chartsCurrentY, 'chartsContainerPosition'));
+
+            function startDragging(e, container, storageKey, isDragging, currentX, currentY, initialMouseX, initialMouseY) {
+                if (e.target.closest(`.${container.className.split(' ')[0]}`)) {
                     initialMouseX = e.clientX || e.touches[0].clientX;
                     initialMouseY = e.clientY || e.touches[0].clientY;
                     isDragging = true;
+                    container.style.cursor = 'grabbing';
                 }
             }
 
-            function drag(e) {
+            function drag(e, container, isDragging, currentX, currentY, initialMouseX, initialMouseY) {
                 if (isDragging) {
                     e.preventDefault();
                     const newX = e.clientX || e.touches[0].clientX;
@@ -296,28 +351,30 @@
                     const dx = newX - initialMouseX;
                     const dy = newY - initialMouseY;
 
-                    // Ograniczenie ruchu, aby kontener nie wychodził poza ekran
-                    const maxX = window.innerWidth - circularContainer.offsetWidth;
-                    const maxY = window.innerHeight - circularContainer.offsetHeight;
+                    const maxX = window.innerWidth - container.offsetWidth;
+                    const maxY = window.innerHeight - container.offsetHeight;
                     currentX = Math.max(0, Math.min(maxX, currentX + dx));
                     currentY = Math.max(0, Math.min(maxY, currentY + dy));
 
-                    circularContainer.style.left = currentX + 'px';
-                    circularContainer.style.top = currentY + 'px';
+                    container.style.left = currentX + 'px';
+                    container.style.top = currentY + 'px';
 
                     initialMouseX = newX;
                     initialMouseY = newY;
                 }
             }
 
-            function stopDragging() {
-                isDragging = false;
-                // Zapisanie pozycji do localStorage po zakończeniu przeciągania
-                const position = {
-                    x: currentX,
-                    y: currentY
-                };
-                localStorage.setItem('circularContainerPosition', JSON.stringify(position));
+            function stopDragging(container, isDragging, currentX, currentY, storageKey) {
+                if (isDragging) {
+                    isDragging = false;
+                    container.style.cursor = 'move';
+
+                    const position = {
+                        x: currentX,
+                        y: currentY
+                    };
+                    localStorage.setItem(storageKey, JSON.stringify(position));
+                }
             }
 
             // Funkcja do dynamicznej aktualizacji wykresów
