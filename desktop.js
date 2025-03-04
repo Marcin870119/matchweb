@@ -91,6 +91,8 @@ function loadKHData() {
                 updateKHDisplay();
             }
         }
+    }, {
+        onlyOnce: false // Upewnienie się, że nasłuchiwanie jest aktywne, ale nie blokuje innych zdarzeń
     });
 
     prevButton.addEventListener('click', () => {
@@ -147,6 +149,8 @@ function loadNewCustomersData() {
                 valueDisplay.textContent = '0';
                 trendDisplay.innerHTML = '<span class="arrow down">↓</span> 0% DECREASE';
             }
+        }, {
+            onlyOnce: false // Upewnienie się, że nasłuchiwanie jest aktywne, ale nie blokuje innych zdarzeń
         });
     }
 }
@@ -161,12 +165,8 @@ function showHomePage() {
     }
 }
 
-// Funkcja dla MATCH JSON (przykładowa)
-function showMatchJSONPage() {
-    console.log('Przejście do MATCH JSON');
-}
-
-// Wywołaj funkcje po załadowaniu strony
+// Uruchomienie po załadowaniu DOM, aby uniknąć konfliktów z innymi zdarzeniami
 document.addEventListener('DOMContentLoaded', () => {
     showHomePage();
+    // Upewnienie się, że nie dodajemy żadnych zdarzeń myszy lub dotyku, które mogłyby kolidować
 });
