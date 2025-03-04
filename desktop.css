@@ -327,7 +327,7 @@ body {
     flex-grow: 1;
 }
 
-/* Style dla kontenera wykresu Google Charts z desktopcharts.html, z możliwością przeciągania */
+/* Style dla kontenera wykresu, z możliwością przeciągania */
 .chart-container {
     width: 50%; /* Zachowanie szerokości 50% dla bardziej kwadratowego wyglądu */
     max-width: 600px; /* Maksymalna szerokość, aby zachować proporcje */
