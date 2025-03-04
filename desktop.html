@@ -18,9 +18,10 @@
     <script type="module" src="desktop.js" defer></script>
     <script type="module" src="desktop1.js" defer></script>
     <script type="module" src="desktop2.js" defer></script>
-    <!-- Dodanie easyPieChart -->
+    <!-- Dodanie easyPieChart i desktopcharts.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.7/jquery.easypiechart.min.js"></script>
+    <script src="desktopcharts.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100" style="background-color: #1a1a1a;">
     <!-- Navbar na górze -->
@@ -99,7 +100,7 @@
                     <p class="trend" id="newCustomersTrend"></p>
                 </div>
             </div>
-            <!-- Dodanie istniejącego wykresu Google Charts -->
+            <!-- Dodanie istniejącego wykresu Google Charts z desktopcharts.html -->
             <div class="chart-container">
                 <div id="columnchart_material"></div>
             </div>
@@ -112,15 +113,6 @@
                 </ul>
                 <a href="https://github.com/rendro/easy-pie-chart" target="_blank">Built with: easy pie chart</a>
             </div>
-            <!-- Dodanie kontenera dla wykresów z desktopcharts.html -->
-            <div class="charts-container">
-                <ul>
-                    <li class="chart" data-percent="70"><span class="number">70%</span><span class="label">CHARTS1</span><span class="status"></span></li>
-                    <li class="chart" data-percent="45"><span class="number">45%</span><span class="label">CHARTS2</span><span class="status"></span></li>
-                    <li class="chart" data-percent="60"><span class="number">60%</span><span class="label">CHARTS3</span><span class="status"></span></li>
-                </ul>
-                <a href="https://github.com/rendro/easy-pie-chart" target="_blank">Built with: easy pie chart</a>
-            </div>
             <!-- Dodanie pustego diva, aby wydłużyć stronę i umożliwić przewijanie -->
             <div class="spacer" style="height: 2000px;"></div>
         </div>
@@ -128,41 +120,7 @@
 
     <!-- Skrypt do rysowania wykresów, obsługi przeciągania i zapisywania pozycji -->
     <script>
-        // Rysowanie wykresu Google Charts
-        google.charts.load('current', { 'packages': ['bar'] });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Rok', 'Sprzedaż 2024', 'Sprzedaż 2025'],
-                ['Styczeń', 1000, 800],
-                ['Luty', 1170, 900],
-                ['Marzec', 660, 700],
-                ['Kwiecień', 1030, 950]
-            ]);
-
-            var options = {
-                chart: {
-                    title: 'Porównanie sprzedaży 2024 vs 2025',
-                    subtitle: 'Sprzedaż miesięczna',
-                },
-                bars: 'vertical',
-                colors: ['#4BC0C0', '#FF6384'], // Niebieski dla 2024, czerwony dla 2025
-                height: 400, // Zachowanie wysokości 400px dla bardziej kwadratowego wyglądu
-                width: '100%',
-                bar: { groupWidth: '75%' }, // Proporcjonalne słupki dla kwadratowego wyglądu
-                legend: { position: 'top' },
-                backgroundColor: '#1a1a1a', // Ciemne tło dla wykresu
-                titleTextStyle: { color: '#ffffff' }, // Biały tekst tytułu
-                hAxis: { textStyle: { color: '#ffffff' } }, // Biały tekst osi X
-                vAxis: { textStyle: { color: '#ffffff' } } // Biały tekst osi Y
-            };
-
-            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-            chart.draw(data, google.charts.Bar.convertOptions(options));
-        }
-
-        // Rysowanie wykresów kołowych i obsługa przeciągania
+        // Rysowanie wykresów kołowych z desktopdiag.html i obsługa przeciągania
         /**!
          * easyPieChart
          * Lightweight plugin to render simple, animated and retina optimized pie charts
@@ -281,59 +239,6 @@
             document.addEventListener('touchmove', (e) => drag(e.touches[0], diagContainer, diagIsDragging, diagCurrentX, diagCurrentY, diagInitialMouseX, diagInitialMouseY));
             document.addEventListener('touchend', () => stopDragging(diagContainer, diagIsDragging, diagCurrentX, diagCurrentY, 'circularContainerPosition'));
 
-            // Inicjalizacja dla wykresów z desktopcharts.html
-            var chartsChartElements = document.querySelectorAll('.charts-container .chart');
-            const chartsContainer = document.querySelector('.charts-container');
-
-            const chartsSavedPosition = JSON.parse(localStorage.getItem('chartsContainerPosition')) || {
-                x: window.innerWidth / 2 - chartsContainer.offsetWidth / 2 + 200, // Przesunięcie dla uniknięcia nakładania się
-                y: window.innerHeight / 2 - chartsContainer.offsetHeight / 2
-            };
-
-            chartsContainer.style.left = chartsSavedPosition.x + 'px';
-            chartsContainer.style.top = chartsSavedPosition.y + 'px';
-
-            chartsChartElements.forEach((chart, index) => {
-                let options;
-                if (index === 0) options = options1;
-                else if (index === 1) options = options2;
-                else options = options3;
-
-                const chartInstance = new EasyPieChart(chart, options);
-                charts.push(chartInstance);
-
-                const percent = parseInt(chart.dataset.percent, 10);
-                updateChart(chart, percent);
-            });
-
-            const chartsObserver = new MutationObserver((mutations) => {
-                mutations.forEach(mutation => {
-                    if (mutation.attributeName === 'data-percent') {
-                        const element = mutation.target;
-                        const newPercent = parseInt(element.dataset.percent, 10);
-                        updateChart(element, newPercent);
-                    }
-                });
-            });
-
-            chartsChartElements.forEach(chart => {
-                chartsObserver.observe(chart, { attributes: true, attributeFilter: ['data-percent'] });
-            });
-
-            let chartsIsDragging = false;
-            let chartsCurrentX = chartsSavedPosition.x;
-            let chartsCurrentY = chartsSavedPosition.y;
-            let chartsInitialMouseX;
-            let chartsInitialMouseY;
-
-            chartsContainer.addEventListener('mousedown', (e) => startDragging(e, chartsContainer, 'chartsContainerPosition', chartsIsDragging, chartsCurrentX, chartsCurrentY, chartsInitialMouseX, chartsInitialMouseY));
-            document.addEventListener('mousemove', (e) => drag(e, chartsContainer, chartsIsDragging, chartsCurrentX, chartsCurrentY, chartsInitialMouseX, chartsInitialMouseY));
-            document.addEventListener('mouseup', () => stopDragging(chartsContainer, chartsIsDragging, chartsCurrentX, chartsCurrentY, 'chartsContainerPosition'));
-
-            chartsContainer.addEventListener('touchstart', (e) => startDragging(e.touches[0], chartsContainer, 'chartsContainerPosition', chartsIsDragging, chartsCurrentX, chartsCurrentY, chartsInitialMouseX, chartsInitialMouseY));
-            document.addEventListener('touchmove', (e) => drag(e.touches[0], chartsContainer, chartsIsDragging, chartsCurrentX, chartsCurrentY, chartsInitialMouseX, chartsInitialMouseY));
-            document.addEventListener('touchend', () => stopDragging(chartsContainer, chartsIsDragging, chartsCurrentX, chartsCurrentY, 'chartsContainerPosition'));
-
             function startDragging(e, container, storageKey, isDragging, currentX, currentY, initialMouseX, initialMouseY) {
                 if (e.target.closest(`.${container.className.split(' ')[0]}`)) {
                     initialMouseX = e.clientX || e.touches[0].clientX;
@@ -377,7 +282,7 @@
                 }
             }
 
-            // Funkcja do dynamicznej aktualizacji wykresów
+            // Funkcja do dynamicznej aktualizacji wykresów kołowych
             function updateChart(element, newPercent) {
                 const chart = charts.find(c => c.el === element);
                 if (chart) {
