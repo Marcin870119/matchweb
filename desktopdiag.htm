@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circular Progress with Draggable Container and Position Persistence</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #1a1a1a, #333333); /* Czarne tło */
+      overflow: hidden; /* Zapobiega przewijaniu strony */
+    }
+
+    .container {
+      position: absolute; /* Ustawienie kontenera na absolutne, aby można go było przesuwać */
+      text-align: center;
+      cursor: move; /* Kursor wskazujący możliwość przeciągania */
+      z-index: 1000; /* Zapewnia, że kontener jest na wierzchu */
+      touch-action: none; /* Włącza obsługę przeciągania na urządzeniach dotykowych */
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 4em;
+    }
+
+    .chart {
+      display: inline-block;
+      width: 150px; /* Zachowujemy rozmiar okręgów */
+      height: 150px;
+      position: relative;
+      box-sizing: border-box;
+      pointer-events: none; /* Zapobiega blokowaniu zdarzeń przez canvas */
+    }
+
+    .chart span.number, .chart span.label, .chart span.status {
+      pointer-events: auto; /* Przywraca nasłuchiwanie zdarzeń dla tekstu */
+    }
+
+    .chart canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none; /* Zapobiega przejmowaniu zdarzeń przez canvas */
+    }
+
+    .chart span.number {
+      display: block;
+      font-size: 1.8em; /* Duża czcionka dla procentów */
+      font-weight: bold;
+      color: #ffffff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      line-height: 1;
+    }
+
+    .chart span.label {
+      display: block;
+      font-size: 0.7em; /* Mniejsza czcionka dla tekstu pod liczbą */
+      color: #ffffff;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .chart span.status {
+      display: block;
+      font-size: 0.6em; /* Dodatkowy tekst o stanie realizacji */
+      color: #ffffff;
+      position: absolute;
+      bottom: 25px; /* Pozycja pod etykietą */
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <ul>
+      <li class="chart" data-percent="85"><span class="number">34%</span><span class="label">TARGET</span><span class="status"></span></li>
+      <li class="chart" data-percent="25"><span class="number">34%</span><span class="label">PRODUCENT</span><span class="status"></span></li>
+      <li class="chart" data-percent="34"><span class="number">34%</span><span class="label">MINI ZADANIA</span><span class="status"></span></li>
+    </ul>
+
+    <a href="https://github.com/rendro/easy-pie-chart" target="_blank">Built with: easy pie chart</a>
+  </div>
+
+  <script>
+    /**!
+     * easyPieChart
+     * Lightweight plugin to render simple, animated and retina optimized pie charts
+     *
+     * @license Dual licensed under the MIT and GPL licenses.
+     * @author Robert Fleischmann <rendro87@gmail.com>
+     * @version 2.0.1
+     **/
+    !function(){var a=function(a,b){var c=document.createElement("canvas");"undefined"!=typeof G_vmlCanvasManager&&G_vmlCanvasManager.initElement(c);var d=c.getContext("2d");if(c.width=c.height=b.size,a.appendChild(c),window.devicePixelRatio>1){var e=window.devicePixelRatio;c.style.width=c.style.height=[b.size,"px"].join(""),c.width=c.height=b.size*e,d.scale(e,e)}d.translate(b.size/2,b.size/2),d.rotate((-0.5+b.rotate/180)*Math.PI);var f=(b.size-b.lineWidth)/2;b.scaleColor&&b.scaleLength&&(f-=b.scaleLength+2);var g=function(a,b,c){c=Math.min(Math.max(0,c||1),1),d.beginPath(),d.arc(0,0,f,0,2*Math.PI*c,!1),d.strokeStyle=a,d.lineWidth=b,d.stroke()},h=function(){var a,c,e=24;d.lineWidth=1,d.fillStyle=b.scaleColor,d.save();for(var e=24;e>=0;--e)0===e%6?(c=b.scaleLength,a=0):(c=.6*b.scaleLength,a=b.scaleLength-c),d.fillRect(-b.size/2+a,0,c,1),d.rotate(Math.PI/12);d.restore()};Date.now=Date.now||function(){return+new Date};var i=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(a){window.setTimeout(a,1e3/60)}}();this.clear=function(){d.clearRect(b.size/-2,b.size/-2,b.size,b.size)},this.draw=function(a){this.clear(),b.scaleColor&&h(),b.trackColor&&g(b.trackColor,b.lineWidth),d.lineCap=b.lineCap;var c;c="function"==typeof b.barColor?b.barColor(a):b.barColor,a>0&&g(c,b.lineWidth,a/100)}.bind(this),this.animate=function(a,c){var d=Date.now();b.onStart(a,c);var e=function(){var f=Math.min(Date.now()-d,b.animate),g=b.easing(this,f,a,c-a,b.animate);this.draw(g),b.onStep(a,c,g),f>=b.animate?b.onStop(a,c):i(e)}.bind(this);i(e)}.bind(this)},b=function(b,c){var d,e={barColor:"#ef1e25",trackColor:"rgba(255,255,255,0.3)",scaleColor:false,scaleLength:5,lineCap:"round",lineWidth:10,size:150,rotate:0,animate:1000,renderer:a,easing:function(a,b,c,d,e){return(b/=e/2)<1?d/2*b*b+c:-d/2*(--b*(b-2)-1)+c},onStart:function(a, c) {
+        updateStatus(a, b); // Wywołanie funkcji aktualizującej status przy starcie
+      },onStep:function(a, c, g) {
+        updateStatus(g, b); // Aktualizacja statusu podczas animacji
+      },onStop:function(a, c) {
+        updateStatus(a, b); // Aktualizacja statusu po zakończeniu animacji
+      }},f={},g=0,h=function(){this.el=b,this.options=f;for(var a in e)e.hasOwnProperty(a)&&(f[a]=c&&"undefined"!=typeof c[a]?c[a]:e[a],"function"==typeof f[a]&&(f[a]=f[a].bind(this)));f.easing="string"==typeof f.easing&&"undefined"!=typeof jQuery&&jQuery.isFunction(jQuery.easing[f.easing])?jQuery.easing[f.easing]:e.easing,d=new f.renderer(b,f),d.draw(g),b.dataset&&b.dataset.percent&&this.update(parseInt(b.dataset.percent,10))}.bind(this);this.update=function(a){return a=parseInt(a,10),f.animate?d.animate(g,a):d.draw(a/100),g=a,this}.bind(this),h()};window.EasyPieChart=b}();
+
+    // Funkcja aktualizująca status realizacji
+    function updateStatus(percent, element) {
+      const statusElement = element.querySelector('.status');
+      const remaining = 100 - percent;
+      let statusText = '';
+
+      if (percent < 50) {
+        statusText = 'OK - Brakuje ' + remaining + '%';
+      } else if (percent >= 50 && percent < 100) {
+        statusText = 'DOBRZE - Brakuje ' + remaining + '%';
+      } else if (percent === 100) {
+        statusText = '100% - Cel osiągnięty!';
+      }
+
+      if (statusElement) {
+        statusElement.textContent = statusText;
+      }
+    }
+
+    var charts = [];
+
+    var options1 = {
+      scaleColor: false,
+      trackColor: 'rgba(255,255,255,0.3)',
+      barColor: '#ff0000', // Czerwony dla pierwszego
+      lineWidth: 10,
+      lineCap: 'round',
+      size: 150
+    };
+
+    var options2 = {
+      scaleColor: false,
+      trackColor: 'rgba(255,255,255,0.3)',
+      barColor: '#00ff00', // Zielony dla drugiego
+      lineWidth: 10,
+      lineCap: 'round',
+      size: 150
+    };
+
+    var options3 = {
+      scaleColor: false,
+      trackColor: 'rgba(255,255,255,0.3)',
+      barColor: '#ff0000', // Czerwony dla trzeciego
+      lineWidth: 10,
+      lineCap: 'round',
+      size: 150
+    };
+
+    window.addEventListener('DOMContentLoaded', function() {
+      var chartElements = document.querySelectorAll('.chart');
+      const container = document.querySelector('.container');
+
+      // Odczytanie zapisanej pozycji z localStorage
+      const savedPosition = JSON.parse(localStorage.getItem('containerPosition')) || {
+        x: window.innerWidth / 2 - container.offsetWidth / 2,
+        y: window.innerHeight / 2 - container.offsetHeight / 2
+      };
+
+      // Ustawienie pozycji kontenera na zapisane wartości
+      container.style.left = savedPosition.x + 'px';
+      container.style.top = savedPosition.y + 'px';
+
+      // Inicjalizacja wykresów
+      chartElements.forEach((chart, index) => {
+        let options;
+        if (index === 0) options = options1;
+        else if (index === 1) options = options2;
+        else options = options3;
+
+        const chartInstance = new EasyPieChart(chart, options);
+        charts.push(chartInstance);
+
+        // Automatyczna aktualizacja po załadowaniu
+        const percent = parseInt(chart.dataset.percent, 10);
+        updateChart(chart, percent);
+      });
+
+      // Obserwowanie zmian w atrybucie data-percent
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+          if (mutation.attributeName === 'data-percent') {
+            const element = mutation.target;
+            const newPercent = parseInt(element.dataset.percent, 10);
+            updateChart(element, newPercent);
+          }
+        });
+      });
+
+      // Obserwowanie każdego elementu .chart
+      chartElements.forEach(chart => {
+        observer.observe(chart, { attributes: true, attributeFilter: ['data-percent'] });
+      });
+
+      // Funkcjonalność przeciągania kontenera
+      let isDragging = false;
+      let currentX = savedPosition.x;
+      let currentY = savedPosition.y;
+      let initialMouseX;
+      let initialMouseY;
+
+      // Obsługa myszy
+      container.addEventListener('mousedown', (e) => startDragging(e));
+      document.addEventListener('mousemove', (e) => drag(e));
+      document.addEventListener('mouseup', stopDragging);
+
+      // Obsługa dotyku (dla urządzeń mobilnych)
+      container.addEventListener('touchstart', (e) => startDragging(e.touches[0]));
+      document.addEventListener('touchmove', (e) => drag(e.touches[0]));
+      document.addEventListener('touchend', stopDragging);
+
+      function startDragging(e) {
+        if (e.target.closest('.container')) { // Upewnij się, że kliknięcie/dotyk jest w kontenerze
+          initialMouseX = e.clientX || e.touches[0].clientX;
+          initialMouseY = e.clientY || e.touches[0].clientY;
+          isDragging = true;
+        }
+      }
+
+      function drag(e) {
+        if (isDragging) {
+          e.preventDefault();
+          const newX = e.clientX || e.touches[0].clientX;
+          const newY = e.clientY || e.touches[0].clientY;
+          const dx = newX - initialMouseX;
+          const dy = newY - initialMouseY;
+
+          // Ograniczenie ruchu, aby kontener nie wychodził poza ekran
+          const maxX = window.innerWidth - container.offsetWidth;
+          const maxY = window.innerHeight - container.offsetHeight;
+          currentX = Math.max(0, Math.min(maxX, currentX + dx));
+          currentY = Math.max(0, Math.min(maxY, currentY + dy));
+
+          container.style.left = currentX + 'px';
+          container.style.top = currentY + 'px';
+
+          initialMouseX = newX;
+          initialMouseY = newY;
+        }
+      }
+
+      function stopDragging() {
+        isDragging = false;
+        // Zapisanie pozycji do localStorage po zakończeniu przeciągania
+        const position = {
+          x: currentX,
+          y: currentY
+        };
+        localStorage.setItem('containerPosition', JSON.stringify(position));
+      }
+    });
+
+    // Funkcja do dynamicznej aktualizacji wykresów
+    function updateChart(element, newPercent) {
+      const chart = charts.find(c => c.el === element);
+      if (chart) {
+        element.querySelector('.number').textContent = `${newPercent}%`; // Aktualizacja liczby w środku
+        chart.update(newPercent); // Aktualizacja wykresu – teraz poprawnie skaluje od 0 do 100%
+        updateStatus(newPercent, element);
+      }
+    }
+  </script>
+</body>
+</html>
