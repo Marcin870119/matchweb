@@ -1,0 +1,4070 @@
+[
+  {
+    "SP": 13663,
+    "MM": 10174,
+    "Nazwa": "CHRZAN KRAKUS 180G MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 59093,
+    "MM": 42490,
+    "Nazwa": "DZEM LOWICZ 100% Z OWOCOW CZARNA PORZECZKA 210G",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "SP": 13669,
+    "MM": 42491,
+    "Nazwa": "DZEM LOWICZ 100% Z OWOCOW MALINA CZERW.PORZE. 210G",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "SP": 58138,
+    "MM": 42495,
+    "Nazwa": "DZEM LOWICZ 100% Z OWOCOW TRUSKAWKA 210G MASPEX",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "SP": 58137,
+    "MM": 42488,
+    "Nazwa": "DZEM LOWICZ 100% Z OWOCOW WISNIA 210G MASPEX",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "SP": 13679,
+    "MM": 12300,
+    "Nazwa": "DZEM LOWICZ AGREST KIWI NISKOSLODZONY 280G MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13672,
+    "MM": 4820,
+    "Nazwa": "DZEM LOWICZ ANANASOWY NISKOSLODZONY 280G MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13674,
+    "MM": 4822,
+    "Nazwa": "DZEM LOWICZ BRZOSKWINIOWY NISKOSLODZONY 280G MASPE",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13675,
+    "MM": 4830,
+    "Nazwa": "DZEM LOWICZ BRZOSKWINIOWY NISKOSLODZONY 450G MASPE",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "SP": 13676,
+    "MM": 4823,
+    "Nazwa": "DZEM LOWICZ CZARNA PORZECZKA NISKOSLODZONY 280G",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13677,
+    "MM": 4831,
+    "Nazwa": "DZEM LOWICZ CZARNA PORZECZKA NISKOSLODZONY 450G",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "SP": 13678,
+    "MM": 4824,
+    "Nazwa": "DZEM LOWICZ JAGODOWY NISKOSLODZONY 280G MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13680,
+    "MM": 4825,
+    "Nazwa": "DZEM LOWICZ LESNY WIELOOWOCOWY NISKOSLODZONY 280G",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13682,
+    "MM": 4827,
+    "Nazwa": "DZEM LOWICZ MORELOWY NISKOSLODZONY 280G MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 78109,
+    "MM": 55627,
+    "Nazwa": "DZEM LOWICZ NISKOKALORYCZNY PORZECZKA 200G MASPEX",
+    "promo paletówki": 1.49,
+    "promo 1 grupa": 1.53,
+    "promo 2 grupa": 1.56,
+    "promo 3 grupa": 1.58
+  },
+  {
+    "SP": 78107,
+    "MM": 55624,
+    "Nazwa": "DZEM LOWICZ NISKOKALORYCZNY TRUSKAWKA 200G MASPEX",
+    "promo paletówki": 1.49,
+    "promo 1 grupa": 1.53,
+    "promo 2 grupa": 1.56,
+    "promo 3 grupa": 1.58
+  },
+  {
+    "SP": 78105,
+    "MM": 55619,
+    "Nazwa": "DZEM LOWICZ NISKOKALORYCZNY WISNIA 200G MASPEX",
+    "promo paletówki": 1.49,
+    "promo 1 grupa": 1.53,
+    "promo 2 grupa": 1.56,
+    "promo 3 grupa": 1.58
+  },
+  {
+    "SP": 13683,
+    "MM": 4828,
+    "Nazwa": "DZEM LOWICZ TRUSKAWKOWY NISKOSLODZONY 280G MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13684,
+    "MM": 4832,
+    "Nazwa": "DZEM LOWICZ TRUSKAWKOWY NISKOSLODZONY 450G MASPEX",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "SP": 13685,
+    "MM": 4829,
+    "Nazwa": "DZEM LOWICZ WISNIOWY NISKOSLODZONY 280G MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13686,
+    "MM": 4833,
+    "Nazwa": "DZEM LOWICZ WISNIOWY NISKOSLODZONY 450G MASPEX",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "SP": 18288,
+    "MM": 5338,
+    "Nazwa": "KAKAO DECOMORRENO WIATRAK 150G MASPEX",
+    "promo paletówki": 2.19,
+    "promo 1 grupa": 2.23,
+    "promo 2 grupa": 2.26,
+    "promo 3 grupa": 2.28
+  },
+  {
+    "SP": 18289,
+    "MM": 5339,
+    "Nazwa": "KAKAO DECOMORRENO WIATRAK 80G MASPEX",
+    "promo paletówki": 1.19,
+    "promo 1 grupa": 1.23,
+    "promo 2 grupa": 1.26,
+    "promo 3 grupa": 1.28
+  },
+  {
+    "SP": 28562,
+    "MM": 19862,
+    "Nazwa": "KAPUSTA KWASZONA KRAKUS 900G SLOIK MASPEX",
+    "promo paletówki": 1.49,
+    "promo 1 grupa": 1.53,
+    "promo 2 grupa": 1.56,
+    "promo 3 grupa": 1.58
+  },
+  {
+    "SP": 17261,
+    "MM": 4170,
+    "Nazwa": "KETCHUP KOTLIN CZOSNEK BAZYLIA 450G BUT PLAST MASP",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17262,
+    "MM": 4177,
+    "Nazwa": "KETCHUP KOTLIN LAGODNY 450G BUT PLAST MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 77163,
+    "MM": 11985,
+    "Nazwa": "KETCHUP KOTLIN LAGODNY 60%KCAL MNIEJ 420G BUT PLA",
+    "promo paletówki": 1.15,
+    "promo 1 grupa": 1.19,
+    "promo 2 grupa": 1.22,
+    "promo 3 grupa": 1.24
+  },
+  {
+    "SP": 17263,
+    "MM": 4178,
+    "Nazwa": "KETCHUP KOTLIN LAGODNY 650G BUT PLAST MASPEX",
+    "promo paletówki": 1.22,
+    "promo 1 grupa": 1.26,
+    "promo 2 grupa": 1.29,
+    "promo 3 grupa": 1.31
+  },
+  {
+    "SP": 17264,
+    "MM": 4179,
+    "Nazwa": "KETCHUP KOTLIN LAGODNY 950G BUT PLAST MASPEX",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "SP": 56538,
+    "MM": 38841,
+    "Nazwa": "KETCHUP KOTLIN LAGODNY PREMIUM 450G PET MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "SP": 17267,
+    "MM": 4183,
+    "Nazwa": "KETCHUP KOTLIN PIKANTNY 450G BUT PLAST MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17268,
+    "MM": 4184,
+    "Nazwa": "KETCHUP KOTLIN PIKANTNY 650G BUT PLAST MASPEX",
+    "promo paletówki": 1.22,
+    "promo 1 grupa": 1.26,
+    "promo 2 grupa": 1.29,
+    "promo 3 grupa": 1.31
+  },
+  {
+    "SP": 17269,
+    "MM": 4185,
+    "Nazwa": "KETCHUP KOTLIN PIKANTNY 950G BUT PLAST MASPEX",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "SP": 74897,
+    "MM": 52816,
+    "Nazwa": "KETCHUP KOTLIN POMID MALINOWE LAGODNY 450G MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 74898,
+    "MM": 52817,
+    "Nazwa": "KETCHUP KOTLIN POMID MALINOWE PIKANTNY 450G MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 17273,
+    "MM": 4190,
+    "Nazwa": "KETCHUP KOTLIN Z PIEKLA RODEM 450G BUT PLAST MASPE",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 22072,
+    "MM": 9941,
+    "Nazwa": "KETCHUP WLOCLAWEK LAGODNY BUT 480G MASPEX",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "SP": 22073,
+    "MM": 9940,
+    "Nazwa": "KETCHUP WLOCLAWEK LAGODNY SLOJ 380G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 22075,
+    "MM": 9944,
+    "Nazwa": "KETCHUP WLOCLAWEK PIKANTNY BUT 480G MASPEX",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "SP": 22076,
+    "MM": 9943,
+    "Nazwa": "KETCHUP WLOCLAWEK PIKANTNY SLOJ 380G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 17274,
+    "MM": 4192,
+    "Nazwa": "KONCENTRAT KOTLIN POMIDOROWY 190G SLOIK MASPEX",
+    "promo paletówki": 0.88,
+    "promo 1 grupa": 0.9,
+    "promo 2 grupa": 0.92,
+    "promo 3 grupa": 0.94
+  },
+  {
+    "SP": 13701,
+    "MM": 4231,
+    "Nazwa": "KONCENTRAT KRAKUS BARSZCZ CZERWONY 300ML MASPEX",
+    "promo paletówki": 1.03,
+    "promo 1 grupa": 1.07,
+    "promo 2 grupa": 1.1,
+    "promo 3 grupa": 1.12
+  },
+  {
+    "SP": 16,
+    "MM": 4232,
+    "Nazwa": "KONCENTRAT KRAKUS ZUREK DOMOWY 300ML MASPEX",
+    "promo paletówki": 0.85,
+    "promo 1 grupa": 0.87,
+    "promo 2 grupa": 0.89,
+    "promo 3 grupa": 0.91
+  },
+  {
+    "SP": 31807,
+    "MM": 25673,
+    "Nazwa": "KONCENTRAT LOWICZ POMID 80G SASZETKA MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 13704,
+    "MM": 4844,
+    "Nazwa": "KONCENTRAT LOWICZ POMID 80G SLOIK MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 13702,
+    "MM": 4842,
+    "Nazwa": "KONCENTRAT LOWICZ POMIDOROWY 190G SLOIK MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 13707,
+    "MM": 4851,
+    "Nazwa": "KONFITURA LOWICZ LESNA 240G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13705,
+    "MM": 4846,
+    "Nazwa": "KONFITURA LOWICZ Z BRZOSKWINI 240G MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "SP": 13710,
+    "MM": 4847,
+    "Nazwa": "KONFITURA LOWICZ Z CZARNEJ PORZECZKI 240G MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "SP": 13706,
+    "MM": 4848,
+    "Nazwa": "KONFITURA LOWICZ Z JAGOD 240G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13712,
+    "MM": 4850,
+    "Nazwa": "KONFITURA LOWICZ Z MORELI 240G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13708,
+    "MM": 4852,
+    "Nazwa": "KONFITURA LOWICZ Z TRUSKAWEK 240G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13709,
+    "MM": 4853,
+    "Nazwa": "KONFITURA LOWICZ Z WISNI 240G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 67563,
+    "MM": 42335,
+    "Nazwa": "MAKA LUBELLA KRUPCZATKA PUSZYSTA WZBOGA 1KG MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 65316,
+    "MM": 42332,
+    "Nazwa": "MAKA LUBELLA LUKSUSOWA PUSZYSTA WZBOGACONA 1KG",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 17882,
+    "MM": 4979,
+    "Nazwa": "MAKA LUBELLA PELNE ZIARNO PSZENNA 1KG MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 65544,
+    "MM": 42330,
+    "Nazwa": "MAKA LUBELLA POZNANSKA PUSZYSTA WZBOGACONA 1KG MAS",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 64143,
+    "MM": 42333,
+    "Nazwa": "MAKA LUBELLA TORTOWA PUSZYSTA WZBOGACONA 1KG MASPE",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 65962,
+    "MM": 42334,
+    "Nazwa": "MAKA LUBELLA UNIWERSALNA PUSZYSTA WZBOGACONA 1KG",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 65540,
+    "MM": 42331,
+    "Nazwa": "MAKA LUBELLA WROCLAWSKA PUSZYSTA WZBOGACONA 1KG",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 49582,
+    "MM": 34937,
+    "Nazwa": "MAKARON LUBELLA 10-JAJ PRZEPIORCZYCH NITKI 250G",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 17890,
+    "MM": 4986,
+    "Nazwa": "MAKARON LUBELLA 2-JAJECZNA GWIAZDKI 250G MASPEX",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "SP": 17891,
+    "MM": 4987,
+    "Nazwa": "MAKARON LUBELLA 2-JAJECZNA KORALIKI 250G MASPEX",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "SP": 17892,
+    "MM": 4990,
+    "Nazwa": "MAKARON LUBELLA 2-JAJECZNA KRAJANECZKA 250G MASPEX",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "SP": 17893,
+    "MM": 4991,
+    "Nazwa": "MAKARON LUBELLA 2-JAJECZNA KRAJANKA 250G MASPEX",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "SP": 17894,
+    "MM": 4988,
+    "Nazwa": "MAKARON LUBELLA 2-JAJECZNA RYZ 250G MASPEX",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "SP": 49581,
+    "MM": 34936,
+    "Nazwa": "MAKARON LUBELLA 4-JAJECZNA FALE 250G MASPEX",
+    "promo paletówki": 0.55,
+    "promo 1 grupa": 0.57,
+    "promo 2 grupa": 0.59,
+    "promo 3 grupa": 0.61
+  },
+  {
+    "SP": 49568,
+    "MM": 34935,
+    "Nazwa": "MAKARON LUBELLA 4-JAJECZNA SWIDERKI 250G MASPEX",
+    "promo paletówki": 0.55,
+    "promo 1 grupa": 0.57,
+    "promo 2 grupa": 0.59,
+    "promo 3 grupa": 0.61
+  },
+  {
+    "SP": 32904,
+    "MM": 49715,
+    "Nazwa": "MAKARON LUBELLA 5-JAJECZNA KRAJANKA 400G MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "SP": 32902,
+    "MM": 49713,
+    "Nazwa": "MAKARON LUBELLA 5-JAJECZNA NITKI 250G MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 32903,
+    "MM": 49714,
+    "Nazwa": "MAKARON LUBELLA 5-JAJECZNA NITKI 400G MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "SP": 32905,
+    "MM": 49716,
+    "Nazwa": "MAKARON LUBELLA 5-JAJECZNA WSTAZKI 400G MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "SP": 56272,
+    "MM": 50896,
+    "Nazwa": "MAKARON LUBELLA BUCATINI 400G MASPEX",
+    "promo paletówki": 0.77,
+    "promo 1 grupa": 0.79,
+    "promo 2 grupa": 0.81,
+    "promo 3 grupa": 0.83
+  },
+  {
+    "SP": 17896,
+    "MM": 4992,
+    "Nazwa": "MAKARON LUBELLA FALA 400G MASPEX",
+    "promo paletówki": 0.77,
+    "promo 1 grupa": 0.79,
+    "promo 2 grupa": 0.81,
+    "promo 3 grupa": 0.83
+  },
+  {
+    "SP": 17897,
+    "MM": 4993,
+    "Nazwa": "MAKARON LUBELLA GNIAZDA NITKI 400G MASPEX",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "SP": 17898,
+    "MM": 4994,
+    "Nazwa": "MAKARON LUBELLA GNIAZDA WSTAZKI 400G MASPEX",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "SP": 17888,
+    "MM": 5015,
+    "Nazwa": "MAKARON LUBELLA INSPIRACJE CANNELLONI 250G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 17889,
+    "MM": 5018,
+    "Nazwa": "MAKARON LUBELLA INSPIRACJE LASAGNE 500G MASPEX",
+    "promo paletówki": 1.69,
+    "promo 1 grupa": 1.73,
+    "promo 2 grupa": 1.76,
+    "promo 3 grupa": 1.78
+  },
+  {
+    "SP": 17899,
+    "MM": 4995,
+    "Nazwa": "MAKARON LUBELLA KOKARDKA 400G MASPEX",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "SP": 17900,
+    "MM": 4996,
+    "Nazwa": "MAKARON LUBELLA KOKARDKA MALA 400G MASPEX",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "SP": 60526,
+    "MM": 42077,
+    "Nazwa": "MAKARON LUBELLA KOLANKA OZDOBNE 400G MASPEX",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "SP": 17901,
+    "MM": 4997,
+    "Nazwa": "MAKARON LUBELLA KRAJANKA 400G MASPEX",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "SP": 60514,
+    "MM": 41250,
+    "Nazwa": "MAKARON LUBELLA LAZANKI 400G MASPEX",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 27935,
+    "MM": 21776,
+    "Nazwa": "MAKARON LUBELLA MINI KOKARDKA 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 27939,
+    "MM": 25684,
+    "Nazwa": "MAKARON LUBELLA MINI RURKI Z WARZYWAMI 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 60517,
+    "MM": 41249,
+    "Nazwa": "MAKARON LUBELLA MUSZELKI MALE 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17902,
+    "MM": 4998,
+    "Nazwa": "MAKARON LUBELLA MUSZELKI MORSKIE 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 60527,
+    "MM": 42078,
+    "Nazwa": "MAKARON LUBELLA NITKI CIETE 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17903,
+    "MM": 4999,
+    "Nazwa": "MAKARON LUBELLA PELNE ZIARNO GNIAZDA WSTEGI 400G",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 17904,
+    "MM": 10355,
+    "Nazwa": "MAKARON LUBELLA PELNE ZIARNO KOKARDKA 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17905,
+    "MM": 5001,
+    "Nazwa": "MAKARON LUBELLA PELNE ZIARNO PIORA 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17906,
+    "MM": 5002,
+    "Nazwa": "MAKARON LUBELLA PELNE ZIARNO SPAGHETTI 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17907,
+    "MM": 5003,
+    "Nazwa": "MAKARON LUBELLA PELNE ZIARNO SWIDRY 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 26282,
+    "MM": 13925,
+    "Nazwa": "MAKARON LUBELLA PELNE ZIARNO SWIDRY Z ORKISZ 400G",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17908,
+    "MM": 5004,
+    "Nazwa": "MAKARON LUBELLA PIORA 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 3630,
+    "MM": 40874,
+    "Nazwa": "MAKARON LUBELLA PSI PATROL LITERKI 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 56568,
+    "MM": 40876,
+    "Nazwa": "MAKARON LUBELLA PSI PATROL MINI SWIDEREK 400G MASP",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 29154,
+    "MM": 25685,
+    "Nazwa": "MAKARON LUBELLA SPAGHETTI 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 63291,
+    "MM": 47491,
+    "Nazwa": "MAKARON LUBELLA SPREZYNKI 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17909,
+    "MM": 5005,
+    "Nazwa": "MAKARON LUBELLA SWIDER 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 60528,
+    "MM": 41878,
+    "Nazwa": "MAKARON LUBELLA SWIDERKI 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17920,
+    "MM": 10352,
+    "Nazwa": "MAKARON LUBELLA SWIDERKI KOLOROWE 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 17910,
+    "MM": 5006,
+    "Nazwa": "MAKARON LUBELLA USZKO 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 60525,
+    "MM": 41251,
+    "Nazwa": "MAKARON LUBELLA WSTAZKA CIETA 400G MASPEX",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "SP": 61674,
+    "MM": 50887,
+    "Nazwa": "MUS KUBUS BABY JABL TRUS MARCH 100G SASZ MASPEX",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "SP": 61673,
+    "MM": 33645,
+    "Nazwa": "MUS KUBUS BABY JABLKO BANAN 100G SASZ MASPEX",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "SP": 61672,
+    "MM": 50886,
+    "Nazwa": "MUS KUBUS BABY MAR JAB MANGO 100G SASZ MASPEX",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "SP": 74072,
+    "MM": 50353,
+    "Nazwa": "MUS KUBUS DRUGIE SNIAD JABL-MANG-JAGLY 100G MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 74071,
+    "MM": 50354,
+    "Nazwa": "MUS KUBUS DRUGIE SNIAD JABL-RYZ-CYNAM 100G MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 74073,
+    "MM": 50355,
+    "Nazwa": "MUS KUBUS DRUGIE SNIAD MAL-KASZA MANNA 100G MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 65196,
+    "MM": 39311,
+    "Nazwa": "MUS KUBUS IMMUNO JABL-GRUSZ-CZARNY BEZ 100G MASPEX",
+    "promo paletówki": 0.38,
+    "promo 1 grupa": 0.4,
+    "promo 2 grupa": 0.42,
+    "promo 3 grupa": 0.44
+  },
+  {
+    "SP": 65198,
+    "MM": 39312,
+    "Nazwa": "MUS KUBUS IMMUNO MALINA-DZIKA ROZA 100G MASPEX",
+    "promo paletówki": 0.38,
+    "promo 1 grupa": 0.4,
+    "promo 2 grupa": 0.42,
+    "promo 3 grupa": 0.44
+  },
+  {
+    "SP": 65200,
+    "MM": 39313,
+    "Nazwa": "MUS KUBUS IMMUNO MANGO-ACEROLA 100G MASPEX",
+    "promo paletówki": 0.38,
+    "promo 1 grupa": 0.4,
+    "promo 2 grupa": 0.42,
+    "promo 3 grupa": 0.44
+  },
+  {
+    "SP": 70960,
+    "MM": 49938,
+    "Nazwa": "MUS KUBUS JABLKO 200G SASZ MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 70961,
+    "MM": 49939,
+    "Nazwa": "MUS KUBUS JABLKO BRZOSKWINIA 200G SASZ MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 70963,
+    "MM": 49940,
+    "Nazwa": "MUS KUBUS JABLKO MANGO 200G SASZ MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 18308,
+    "MM": 5340,
+    "Nazwa": "MUS KUBUS Z OWOCOW 100G BANAN JABLKO SASZ MASPEX",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 4060,
+    "MM": 5341,
+    "Nazwa": "MUS KUBUS Z OWOCOW 100G JABLKO BANAN SASZETKA MASP",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 65195,
+    "MM": 50895,
+    "Nazwa": "MUS KUBUS Z OWOCOW 100G JABLKO-ARBUZ-ARONIA SASZET",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 4061,
+    "MM": 5342,
+    "Nazwa": "MUS KUBUS Z OWOCOW 100G TRUSK-MARCH-JABLK-BANAN SA",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 71218,
+    "MM": 49601,
+    "Nazwa": "MUS LOWICZ DESER ALA SERNIK Z BRZOSKWIN 100G SASZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 71213,
+    "MM": 49600,
+    "Nazwa": "MUS LOWICZ DESER ALA SZARLOTKA 100G SASZ MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 71219,
+    "MM": 49602,
+    "Nazwa": "MUS LOWICZ DESER ALA TARTA 100G SASZ MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 56548,
+    "MM": 39057,
+    "Nazwa": "MUS TYMBARK 100% GRUSZKA-BANAN 200G SASZ MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 56541,
+    "MM": 39055,
+    "Nazwa": "MUS TYMBARK 100% MANG-BRZO-BAN 200G SASZ MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 32972,
+    "MM": 25340,
+    "Nazwa": "MUS TYMBARK 100% MANGO-JAB-BAN 120G SASZ MASPEX",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 56547,
+    "MM": 39056,
+    "Nazwa": "MUS TYMBARK 100% MARAKUJA-CYTRYNA 200G SASZ MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 32971,
+    "MM": 25339,
+    "Nazwa": "MUS TYMBARK 100% POM-MARAK-JAB-BAN 120G SASZ MASPE",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 32970,
+    "MM": 25338,
+    "Nazwa": "MUS TYMBARK 100% TRUSK-JAB-BAN-MARCH 120G SASZ",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 59602,
+    "MM": 39307,
+    "Nazwa": "MUS TYMBARK 2 SNIAD. JOGURT OWOCE LESNE 100G SASZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 59601,
+    "MM": 39306,
+    "Nazwa": "MUS TYMBARK 2 SNIAD. JOGURT OWOCE SADU 100G SASZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 59772,
+    "MM": 39309,
+    "Nazwa": "MUS TYMBARK 2 SNIAD. PLATKI OWOCE POLUDN 100G SASZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 76574,
+    "MM": 53863,
+    "Nazwa": "MUS TYMBARK DC AQUAMAN KIWI FEIJOA 170G SASZ MASPE",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 76573,
+    "MM": 53862,
+    "Nazwa": "MUS TYMBARK DC BATMAN PORZECZ PITAJA 170G SASZ MAS",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 76571,
+    "MM": 53865,
+    "Nazwa": "MUS TYMBARK DC SUPERMAN MANGO KAKI 170G SASZ MASPE",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 76570,
+    "MM": 53864,
+    "Nazwa": "MUS TYMBARK DC WONDER WOMAN LICZI 170G SASZ MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 68336,
+    "MM": 48413,
+    "Nazwa": "MUS TYMBARK DELI&FRUIT BANAN KOKOS 170G SASZ MASPE",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 68338,
+    "MM": 48417,
+    "Nazwa": "MUS TYMBARK DELI&FRUIT CHIA MANGO 170G SASZ MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 59600,
+    "MM": 39305,
+    "Nazwa": "MUS TYMBARK JABLKO BANAN KALAMANS 200G SASZ MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 59580,
+    "MM": 39302,
+    "Nazwa": "MUS TYMBARK JABLKO GRUSZKA KAKI 200G SASZ MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 59599,
+    "MM": 39304,
+    "Nazwa": "MUS TYMBARK JABLKO KAKTUS LIMONKA 200G SASZ MASPEX",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "SP": 65753,
+    "MM": 33722,
+    "Nazwa": "MUS TYMBARK WARZ-OWOC JABL GRUSZK PASTER 100G SASZ",
+    "promo paletówki": 0.36,
+    "promo 1 grupa": 0.38,
+    "promo 2 grupa": 0.4,
+    "promo 3 grupa": 0.42
+  },
+  {
+    "SP": 65751,
+    "MM": 33720,
+    "Nazwa": "MUS TYMBARK WARZ-OWOC JABLKO BURAK TRUSK 100G SASZ",
+    "promo paletówki": 0.36,
+    "promo 1 grupa": 0.38,
+    "promo 2 grupa": 0.4,
+    "promo 3 grupa": 0.42
+  },
+  {
+    "SP": 65752,
+    "MM": 33721,
+    "Nazwa": "MUS TYMBARK WARZ-OWOC MANGO DYNIA JABLKO 100G SASZ",
+    "promo paletówki": 0.36,
+    "promo 1 grupa": 0.38,
+    "promo 2 grupa": 0.4,
+    "promo 3 grupa": 0.42
+  },
+  {
+    "SP": 45355,
+    "MM": 25655,
+    "Nazwa": "NAPOJ CAPRIO ANANAS 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 74078,
+    "MM": 25657,
+    "Nazwa": "NAPOJ CAPRIO ANANAS MANGO 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 18310,
+    "MM": 986,
+    "Nazwa": "NAPOJ CAPRIO CZARNA PORZECZKA 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 45357,
+    "MM": 25656,
+    "Nazwa": "NAPOJ CAPRIO GRUSZKA 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 18314,
+    "MM": 990,
+    "Nazwa": "NAPOJ CAPRIO JABLKO 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 74079,
+    "MM": 32948,
+    "Nazwa": "NAPOJ CAPRIO JABLKO TRUSKAWKA 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 18312,
+    "MM": 988,
+    "Nazwa": "NAPOJ CAPRIO JABLKO-ARONIA-WISNIA 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 18313,
+    "MM": 989,
+    "Nazwa": "NAPOJ CAPRIO JABLKO-MALINA 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 18315,
+    "MM": 991,
+    "Nazwa": "NAPOJ CAPRIO MULTIWITAMINA 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 18317,
+    "MM": 993,
+    "Nazwa": "NAPOJ CAPRIO POMARANCZA 2L KART MASPEX",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "SP": 68784,
+    "MM": 50342,
+    "Nazwa": "NAPOJ DR WITT ANANAS CYTRYNA 330ML GAZ PUSZ MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 27899,
+    "MM": 21660,
+    "Nazwa": "NAPOJ DR WITT ANTYOKS 1L CZAR PORZ-GRAN ASEPTIC",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 68786,
+    "MM": 50341,
+    "Nazwa": "NAPOJ DR WITT CYTRUSY 330ML GAZ PUSZ MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 74451,
+    "MM": 52144,
+    "Nazwa": "NAPOJ DR WITT ELEKTROLITY ANANAS POME 750ML MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 74449,
+    "MM": 52137,
+    "Nazwa": "NAPOJ DR WITT ELEKTROLITY WIELOOWOCOW 750ML MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 68787,
+    "MM": 50339,
+    "Nazwa": "NAPOJ DR WITT GRUSZKA LAWEND 330ML GAZ PUSZ MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 44059,
+    "MM": 32141,
+    "Nazwa": "NAPOJ DR WITT JABLKO-WISNIA 1L ASEPTIC PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 44060,
+    "MM": 32142,
+    "Nazwa": "NAPOJ DR WITT MANGO-JABLKO-POM. 1L ASEPTIC PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 18327,
+    "MM": 21663,
+    "Nazwa": "NAPOJ DR WITT METABOLIZM 1L MULTIWIT ZIELONA PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 78580,
+    "MM": 56037,
+    "Nazwa": "NAPOJ DR WITT MULTIWITAMINA CZERWONA 400ML PET",
+    "promo paletówki": 0.5,
+    "promo 1 grupa": 0.52,
+    "promo 2 grupa": 0.54,
+    "promo 3 grupa": 0.56
+  },
+  {
+    "SP": 78579,
+    "MM": 56038,
+    "Nazwa": "NAPOJ DR WITT MULTIWITAMINA POMARNCZOWA 400ML PET",
+    "promo paletówki": 0.5,
+    "promo 1 grupa": 0.52,
+    "promo 2 grupa": 0.54,
+    "promo 3 grupa": 0.56
+  },
+  {
+    "SP": 78581,
+    "MM": 56039,
+    "Nazwa": "NAPOJ DR WITT MULTIWITAMINA ZIELONA 400ML PET",
+    "promo paletówki": 0.5,
+    "promo 1 grupa": 0.52,
+    "promo 2 grupa": 0.54,
+    "promo 3 grupa": 0.56
+  },
+  {
+    "SP": 18328,
+    "MM": 21667,
+    "Nazwa": "NAPOJ DR WITT ODPORNOSC MULTIWIT EXOTIC 1L PET MAS",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 61668,
+    "MM": 42519,
+    "Nazwa": "NAPOJ DR WITT POMARANCZA 1L PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 18326,
+    "MM": 21796,
+    "Nazwa": "NAPOJ DR WITT WITALNOSC MULTIWIT CZERWONA 1L PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 78440,
+    "MM": 56148,
+    "Nazwa": "NAPOJ ENERGET TIGER 500ML NAKED BLUEBERRY PUSZ",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "SP": 78444,
+    "MM": 56149,
+    "Nazwa": "NAPOJ ENERGET TIGER 500ML NAKED CHERRY PUSZ",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "SP": 78449,
+    "MM": 37824,
+    "Nazwa": "NAPOJ ENERGET TIGER 500ML NAKED CITRUS PUSZ",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "SP": 78450,
+    "MM": 37825,
+    "Nazwa": "NAPOJ ENERGET TIGER 500ML NAKED EXOTIC PUSZ",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "SP": 78448,
+    "MM": 37823,
+    "Nazwa": "NAPOJ ENERGET TIGER 500ML NAKED ORANGE MANGO PUSZ",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "SP": 71736,
+    "MM": 50799,
+    "Nazwa": "NAPOJ ENERGET TIGER PURE MARAK LIMONK 500ML MASPEX",
+    "promo paletówki": 0.75,
+    "promo 1 grupa": 0.77,
+    "promo 2 grupa": 0.79,
+    "promo 3 grupa": 0.81
+  },
+  {
+    "SP": 71738,
+    "MM": 50801,
+    "Nazwa": "NAPOJ ENERGET TIGER PURE TRUSKAWKA 500ML MASPEX",
+    "promo paletówki": 0.75,
+    "promo 1 grupa": 0.77,
+    "promo 2 grupa": 0.79,
+    "promo 3 grupa": 0.81
+  },
+  {
+    "SP": 71737,
+    "MM": 50800,
+    "Nazwa": "NAPOJ ENERGET TIGER PURE ZIEL JABLKO 500ML MASPEX",
+    "promo paletówki": 0.75,
+    "promo 1 grupa": 0.77,
+    "promo 2 grupa": 0.79,
+    "promo 3 grupa": 0.81
+  },
+  {
+    "SP": 18329,
+    "MM": 12482,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 0,9L PET MASPEX",
+    "promo paletówki": 0.65,
+    "promo 1 grupa": 0.67,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.71
+  },
+  {
+    "SP": 18330,
+    "MM": 5346,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML BCUK PUSZKA MASPEX",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 34677,
+    "MM": 27096,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML MAX MANGO PUSZ MAS",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "SP": 34676,
+    "MM": 27098,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML MAX PUSZ MASPEX",
+    "promo paletówki": 0.34,
+    "promo 1 grupa": 0.36,
+    "promo 2 grupa": 0.38,
+    "promo 3 grupa": 0.4
+  },
+  {
+    "SP": 69857,
+    "MM": 49604,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML PLACEBO CLASSIC PUS",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 18331,
+    "MM": 5348,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML PUSZKA MASPEX",
+    "promo paletówki": 0.34,
+    "promo 1 grupa": 0.36,
+    "promo 2 grupa": 0.38,
+    "promo 3 grupa": 0.4
+  },
+  {
+    "SP": 78445,
+    "MM": 56146,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML ZERO DRAGON FRUIT",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "SP": 69856,
+    "MM": 49603,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML ZERO MOJITO PUSZ",
+    "promo paletówki": 0.34,
+    "promo 1 grupa": 0.36,
+    "promo 2 grupa": 0.38,
+    "promo 3 grupa": 0.4
+  },
+  {
+    "SP": 69005,
+    "MM": 49975,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML ZERO PEACH PUSZ",
+    "promo paletówki": 0.32,
+    "promo 1 grupa": 0.34,
+    "promo 2 grupa": 0.36,
+    "promo 3 grupa": 0.38
+  },
+  {
+    "SP": 78447,
+    "MM": 56147,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML ZERO PINEAPPLE PUSZ",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "SP": 69007,
+    "MM": 49976,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 250ML ZERO STRAWBERR PUSZ",
+    "promo paletówki": 0.32,
+    "promo 1 grupa": 0.34,
+    "promo 2 grupa": 0.36,
+    "promo 3 grupa": 0.38
+  },
+  {
+    "SP": 53493,
+    "MM": 35474,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 500ML JUICY ARBUZI PUSZ",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "SP": 53471,
+    "MM": 35478,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 500ML NEWSCHOOL PUSZ MASP",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "SP": 73761,
+    "MM": 51203,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER 500ML PUSZKA MASPEX",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "SP": 76638,
+    "MM": 53853,
+    "Nazwa": "NAPOJ ENERGETYCZNY TIGER PARANORM 330ML BUT MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "SP": 18290,
+    "MM": 5351,
+    "Nazwa": "NAPOJ HERBACIANY EKLAND JUNIOR MALINA-TRUSKAWK.250",
+    "promo paletówki": 1.29,
+    "promo 1 grupa": 1.33,
+    "promo 2 grupa": 1.36,
+    "promo 3 grupa": 1.38
+  },
+  {
+    "SP": 18291,
+    "MM": 5354,
+    "Nazwa": "NAPOJ HERBACIANY EKLAND ROZP CYTRYNA 300G TOREBKA",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 18292,
+    "MM": 5355,
+    "Nazwa": "NAPOJ HERBACIANY EKLAND ROZP MALINA 300G TOREBKA M",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 18293,
+    "MM": 5356,
+    "Nazwa": "NAPOJ HERBACIANY EKLAND ROZP MULTIWITAMINA 300G TO",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 18294,
+    "MM": 5357,
+    "Nazwa": "NAPOJ HERBACIANY EKLAND ROZP OWOCE LESNE 300G TOR",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 67590,
+    "MM": 50346,
+    "Nazwa": "NAPOJ IZOT. DR WITT CZER POMARAN 750ML PET MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 67591,
+    "MM": 50345,
+    "Nazwa": "NAPOJ IZOT. DR WITT JABLKO CYTRYN 750ML PET MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 67592,
+    "MM": 50344,
+    "Nazwa": "NAPOJ IZOT. DR WITT KAKTUS 750ML PET MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 75866,
+    "MM": 55664,
+    "Nazwa": "NAPOJ IZOT. DR WITT MAGNEZ MANGO CYTRYNA 550ML PET",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 67593,
+    "MM": 50343,
+    "Nazwa": "NAPOJ IZOT. DR WITT WIELOOWOC 750ML PET MASPEX",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "SP": 75863,
+    "MM": 52146,
+    "Nazwa": "NAPOJ IZOT. DR WITT WIT C OWOCE CYTRUSOW 550ML PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 75864,
+    "MM": 52148,
+    "Nazwa": "NAPOJ IZOT. DR WITT WIT E JABLKO 550ML PET MASPEX",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 78653,
+    "MM": 55663,
+    "Nazwa": "NAPOJ IZOT. DR WITT ZERO CZERWONE JAGODY 550ML PET",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 78652,
+    "MM": 55664,
+    "Nazwa": "NAPOJ IZOT. DR WITT ZERO MANGO CYTRYNA 550ML PET",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 18295,
+    "MM": 5359,
+    "Nazwa": "NAPOJ KAKAOWY PUCHATEK ROZP 150G TORBA MASPEX",
+    "promo paletówki": 1.11,
+    "promo 1 grupa": 1.15,
+    "promo 2 grupa": 1.18,
+    "promo 3 grupa": 1.2
+  },
+  {
+    "SP": 18296,
+    "MM": 5360,
+    "Nazwa": "NAPOJ KAKAOWY PUCHATEK ROZP 300G TORBA MASPEX",
+    "promo paletówki": 1.45,
+    "promo 1 grupa": 1.49,
+    "promo 2 grupa": 1.52,
+    "promo 3 grupa": 1.54
+  },
+  {
+    "SP": 61671,
+    "MM": 50884,
+    "Nazwa": "NAPOJ KUBUS BABY JABL GRUSZ 300ML PET MASPEX",
+    "promo paletówki": 0.63,
+    "promo 1 grupa": 0.65,
+    "promo 2 grupa": 0.67,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 18336,
+    "MM": 11978,
+    "Nazwa": "NAPOJ KUBUS PLAY 400ML ARBUZ LIMETKA NGAZ PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 18338,
+    "MM": 5364,
+    "Nazwa": "NAPOJ KUBUS PLAY 400ML MARCH-CZERES-LIMETKA NGAZ P",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 18339,
+    "MM": 5365,
+    "Nazwa": "NAPOJ KUBUS PLAY 400ML MARCH-CZERW POMAR-LIMETKA N",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 18340,
+    "MM": 5366,
+    "Nazwa": "NAPOJ KUBUS PLAY 400ML MARCH-MALIN-LIMETKA NGAZ PE",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 18341,
+    "MM": 5367,
+    "Nazwa": "NAPOJ KUBUS PLAY 400ML MARCH-TRUSK-LIMONKA NGAZ PE",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 35204,
+    "MM": 25693,
+    "Nazwa": "NAPOJ KUBUS PLAY WODA&OWOCE JABL-BRZOSK 400ML PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 35202,
+    "MM": 25691,
+    "Nazwa": "NAPOJ KUBUS PLAY WODA&OWOCE JABL-MALINA 400ML PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 72459,
+    "MM": 50892,
+    "Nazwa": "NAPOJ KUBUS PLAY WODA&OWOCE JABL-MANGO 400ML PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 78243,
+    "MM": 55655,
+    "Nazwa": "NAPOJ KUBUS POKEMON KAKTUS LIMONKA 200ML KART",
+    "promo paletówki": 0.27,
+    "promo 1 grupa": 0.29,
+    "promo 2 grupa": 0.31,
+    "promo 3 grupa": 0.33
+  },
+  {
+    "SP": 78245,
+    "MM": 55659,
+    "Nazwa": "NAPOJ KUBUS POKEMON MANDARYNKA BRZOSKWI 200ML KART",
+    "promo paletówki": 0.27,
+    "promo 1 grupa": 0.29,
+    "promo 2 grupa": 0.31,
+    "promo 3 grupa": 0.33
+  },
+  {
+    "SP": 78244,
+    "MM": 55657,
+    "Nazwa": "NAPOJ KUBUS POKEMON MANGO MARAKUJA 200ML KART",
+    "promo paletówki": 0.27,
+    "promo 1 grupa": 0.29,
+    "promo 2 grupa": 0.31,
+    "promo 3 grupa": 0.33
+  },
+  {
+    "SP": 78246,
+    "MM": 55660,
+    "Nazwa": "NAPOJ KUBUS POKEMON WIELOOWOCOWY 200ML KART",
+    "promo paletówki": 0.27,
+    "promo 1 grupa": 0.29,
+    "promo 2 grupa": 0.31,
+    "promo 3 grupa": 0.33
+  },
+  {
+    "SP": 78247,
+    "MM": 55662,
+    "Nazwa": "NAPOJ NESTEA 1,5L BRZOSKWINIA ZERO NGAZ PET MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "SP": 74027,
+    "MM": 52147,
+    "Nazwa": "NAPOJ ROSLINNY TYMBARK OWIES KARMEL 1L KART MASPE",
+    "promo paletówki": 1.55,
+    "promo 1 grupa": 1.59,
+    "promo 2 grupa": 1.62,
+    "promo 3 grupa": 1.64
+  },
+  {
+    "SP": 68272,
+    "MM": 8537,
+    "Nazwa": "NAPOJ TARCZYN CZERW GREJPFRUT 300ML BUT BZW MASPEX",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "SP": 68274,
+    "MM": 8534,
+    "Nazwa": "NAPOJ TARCZYN MULTIWITAMINA ZIELONA 300ML BUT BZW",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "SP": 68271,
+    "MM": 8542,
+    "Nazwa": "NAPOJ TARCZYN WISNIA 300ML BUT BZW MASPEX",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "SP": 18355,
+    "MM": 16078,
+    "Nazwa": "NAPOJ TYMBARK 1L JABLK-GRUSZKA KART MASPEX",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 18356,
+    "MM": 9010,
+    "Nazwa": "NAPOJ TYMBARK 1L JABLK-MIETA KART MASPEX",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 70510,
+    "MM": 40554,
+    "Nazwa": "NAPOJ TYMBARK 1L JABLKO-ARBUZ KART MASPEX",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 18354,
+    "MM": 9008,
+    "Nazwa": "NAPOJ TYMBARK 1L JABLKO-BRZOSKWINIA KART MASPEX",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 18358,
+    "MM": 9011,
+    "Nazwa": "NAPOJ TYMBARK 1L POMARANCZA-BRZOSK KART MASPEX",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 18359,
+    "MM": 9012,
+    "Nazwa": "NAPOJ TYMBARK 1L WISNIA-JABLKO KART MASPEX",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 34852,
+    "MM": 26393,
+    "Nazwa": "NAPOJ TYMBARK 250ML ALOES-B.WINOGRONO NGAZ BUT MAS",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 54318,
+    "MM": 36722,
+    "Nazwa": "NAPOJ TYMBARK 250ML ICE TEA BRZOSKW. NGAZ BUT BZW",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 18361,
+    "MM": 9014,
+    "Nazwa": "NAPOJ TYMBARK 250ML JABLK-ARBUZ NGAZ BUT BZW MASPE",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 18362,
+    "MM": 9015,
+    "Nazwa": "NAPOJ TYMBARK 250ML JABLK-BRZOSK NGAZ BUT BZW MASP",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 29755,
+    "MM": 25662,
+    "Nazwa": "NAPOJ TYMBARK 250ML JABLK-KIWI NGAZ BUT BZW MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 18363,
+    "MM": 9016,
+    "Nazwa": "NAPOJ TYMBARK 250ML JABLK-MIET NGAZ BUT BZW MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 18366,
+    "MM": 9019,
+    "Nazwa": "NAPOJ TYMBARK 250ML JABLK-WISNIA NGAZ BUT BZW MAS",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 34863,
+    "MM": 27102,
+    "Nazwa": "NAPOJ TYMBARK 250ML KAKTUS-LIM-JAB NGAZ BUT BZW MA",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 18364,
+    "MM": 9017,
+    "Nazwa": "NAPOJ TYMBARK 250ML MALINA-MIETA NGAZ BUT BZW MASP",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 53368,
+    "MM": 28931,
+    "Nazwa": "NAPOJ TYMBARK 250ML MANGO MIETA NGAZ BUT BZW MASP",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 74068,
+    "MM": 23093,
+    "Nazwa": "NAPOJ TYMBARK 250ML MANGO-JABL-POMAR NGAZ BUT BZW",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 18365,
+    "MM": 9018,
+    "Nazwa": "NAPOJ TYMBARK 250ML POMAR-BRZOSK NGAZ BUT BZW MASP",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 18368,
+    "MM": 15842,
+    "Nazwa": "NAPOJ TYMBARK 2L JABLKO-ARBUZ KART MASPEX",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "SP": 18367,
+    "MM": 9020,
+    "Nazwa": "NAPOJ TYMBARK 2L JABLKO-MIETA KART MASPEX",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "SP": 34465,
+    "MM": 50348,
+    "Nazwa": "NAPOJ TYMBARK 2L MULTIWITAMINA CZERWONA KART MASP",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "SP": 18370,
+    "MM": 13038,
+    "Nazwa": "NAPOJ TYMBARK 2L MULTIWITAMINA KART MASPEX",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "SP": 18371,
+    "MM": 9022,
+    "Nazwa": "NAPOJ TYMBARK 2L WISNIA-JABLKO KART MASPEX",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "SP": 53259,
+    "MM": 32147,
+    "Nazwa": "NAPOJ TYMBARK 330ML ARBUZ GAZ PUSZ MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 72477,
+    "MM": 50866,
+    "Nazwa": "NAPOJ TYMBARK 330ML COLA WISNIA GAZ PUSZ MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 72478,
+    "MM": 50867,
+    "Nazwa": "NAPOJ TYMBARK 330ML CYTRYNA LIMETK GAZ PUSZ MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 45038,
+    "MM": 32147,
+    "Nazwa": "NAPOJ TYMBARK 330ML JABLKO-ARBUZ GAZ PUSZ MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 53254,
+    "MM": 35790,
+    "Nazwa": "NAPOJ TYMBARK 330ML KAKTUS GAZ PUSZ MASPE",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "SP": 53251,
+    "MM": 35789,
+    "Nazwa": "NAPOJ TYMBARK 330ML MANGO GAZ PUSZ MASPE",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 45037,
+    "MM": 32148,
+    "Nazwa": "NAPOJ TYMBARK 330ML POMARANCZ-MANGO GAZ PUSZ MASPE",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "SP": 72476,
+    "MM": 50865,
+    "Nazwa": "NAPOJ TYMBARK 330ML POMARANCZA GAZ PUSZ MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 53256,
+    "MM": 35791,
+    "Nazwa": "NAPOJ TYMBARK 330ML TRUSKAWKA GAZ PUSZ MASPE",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "SP": 67727,
+    "MM": 38029,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 2L JABLKO-ARBUZ NGAZ PET MAS",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "SP": 7981,
+    "MM": 15840,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 2L JABLKO-BIALE WINOGR NGAZ",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "SP": 18372,
+    "MM": 9023,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 2L JABLKO-BRZOSK NGAZ PET MA",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "SP": 18374,
+    "MM": 12417,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 2L JABLKO-GRUSZKA NGAZ PET M",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "SP": 18375,
+    "MM": 9025,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 2L JABLKO-MIETA NGAZ PET MAS",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "SP": 18377,
+    "MM": 9026,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 2L JABLKO-WISN NGAZ PET MASP",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "SP": 42316,
+    "MM": 28930,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 2L MANGO-MIETA NGAZ PET MASP",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "SP": 18378,
+    "MM": 9027,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 2L POMAR-BRZOSK NGAZ PET MAS",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "SP": 18379,
+    "MM": 9028,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML CYTRYNA MIETA NGAZ PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 18380,
+    "MM": 9029,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML JABLK-ARBUZ NGAZ PET M",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 18381,
+    "MM": 9030,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML JABLK-BRZOSK NGAZ PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 18382,
+    "MM": 9031,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML JABLK-MIET NGAZ PET MA",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 29756,
+    "MM": 25663,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML JABLKO-KIWI NGAZ PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 18383,
+    "MM": 9032,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML MALINA MIETA NGAZ PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 41383,
+    "MM": 28928,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML MANGO-MIET NGAZ PET MA",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 18384,
+    "MM": 9033,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML POMAR-BRZOSK NGAZ PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 18385,
+    "MM": 9034,
+    "Nazwa": "NAPOJ TYMBARK ASEPTIC 500ML WISN-JABLK NGAZ PET MA",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 71735,
+    "MM": 50877,
+    "Nazwa": "NAPOJ TYMBARK COLOVE LIMONKA 1,5L PET MASPEX",
+    "promo paletówki": 1.05,
+    "promo 1 grupa": 1.09,
+    "promo 2 grupa": 1.12,
+    "promo 3 grupa": 1.14
+  },
+  {
+    "SP": 72463,
+    "MM": 50872,
+    "Nazwa": "NAPOJ TYMBARK COLOVE LIMONKA 330ML GAZ PUSZ MAS",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 60736,
+    "MM": 49978,
+    "Nazwa": "NAPOJ TYMBARK COLOVE MANGO 330ML GAZ PUSZ MASPEX",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 60734,
+    "MM": 49977,
+    "Nazwa": "NAPOJ TYMBARK COLOVE WISNIA 330ML GAZ PUSZ MASPEX",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "SP": 71730,
+    "MM": 50879,
+    "Nazwa": "NAPOJ TYMBARK COLOVE WISNIA 500ML PET MASPEX",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 71728,
+    "MM": 50873,
+    "Nazwa": "NAPOJ TYMBARK GAZZ JABLKO ARBUZ 500ML PET MASPEX",
+    "promo paletówki": 0.55,
+    "promo 1 grupa": 0.57,
+    "promo 2 grupa": 0.59,
+    "promo 3 grupa": 0.61
+  },
+  {
+    "SP": 71729,
+    "MM": 50874,
+    "Nazwa": "NAPOJ TYMBARK GAZZ POMARAN MANGO 500ML PET MASPEX",
+    "promo paletówki": 0.55,
+    "promo 1 grupa": 0.57,
+    "promo 2 grupa": 0.59,
+    "promo 3 grupa": 0.61
+  },
+  {
+    "SP": 71734,
+    "MM": 50876,
+    "Nazwa": "NAPOJ TYMBARK GAZZZ POMARANC MANGO 1,5L PET MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 77015,
+    "MM": 55796,
+    "Nazwa": "NAPOJ TYMBARK ICE TEA CYTRYNA YUZU 550ML PET MASP",
+    "promo paletówki": 0.47,
+    "promo 1 grupa": 0.49,
+    "promo 2 grupa": 0.51,
+    "promo 3 grupa": 0.53
+  },
+  {
+    "SP": 78584,
+    "MM": 53356,
+    "Nazwa": "NAPOJ TYMBARK ICE TEA CZAR HER CYTRYNA 330ML GAZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 75871,
+    "MM": 53357,
+    "Nazwa": "NAPOJ TYMBARK ICE TEA CZAR HER MANG 330ML GAZ PUSZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 77012,
+    "MM": 55795,
+    "Nazwa": "NAPOJ TYMBARK ICE TEA JABLKO GRUSZKA 550ML PET MAS",
+    "promo paletówki": 0.47,
+    "promo 1 grupa": 0.49,
+    "promo 2 grupa": 0.51,
+    "promo 3 grupa": 0.53
+  },
+  {
+    "SP": 78582,
+    "MM": 53351,
+    "Nazwa": "NAPOJ TYMBARK ICE TEA ZIEL HER BRZOSKWIN 330ML GAZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 75870,
+    "MM": 53354,
+    "Nazwa": "NAPOJ TYMBARK ICE TEA ZIEL HER TRUS 330ML GAZ PUSZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 78073,
+    "MM": 55794,
+    "Nazwa": "NAPOJ TYMBARK LEMONIADA JAB CYTR ARBUZ 330ML GAZ",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 78072,
+    "MM": 55793,
+    "Nazwa": "NAPOJ TYMBARK LEMONIADA JAB CYTR MANGO 330ML GAZ",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "SP": 50188,
+    "MM": 21782,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA ALOES 1L MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 18346,
+    "MM": 9001,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA BANAN-ZIEL-BAN-POMAR 1L",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 77141,
+    "MM": 9002,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA GRANAT 1L MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 18348,
+    "MM": 9003,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA KAKTUS-LIM-JABLK 1L MAS",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 50187,
+    "MM": 15843,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA LICZI 1L MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 18349,
+    "MM": 9005,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA LIM-CYTR-MIETA 1L MASPE",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 18350,
+    "MM": 12152,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA MANGO-JABLK-POM-CYTR 1L",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 50183,
+    "MM": 15844,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA MAR-POM-CYT-JAB 1L MASP",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 18351,
+    "MM": 9006,
+    "Nazwa": "NAPOJ TYMBARK OWOCE SWIATA ZURAWIN-JAGOD-JABLK 1L",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 57188,
+    "MM": 39618,
+    "Nazwa": "NAPOJ TYMBARK POPROSTU KOMPOT JAB-SLIWKA 1,25L PET",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 57187,
+    "MM": 39617,
+    "Nazwa": "NAPOJ TYMBARK POPROSTU KOMPOT JABL-RABAR 1,25L PET",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 18421,
+    "MM": 15828,
+    "Nazwa": "NEKTAR KUBUS 100% MARCH-JAB-BRZO 300ML PET MASEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 49510,
+    "MM": 34234,
+    "Nazwa": "NEKTAR KUBUS 850ML BANAN-JABLKO-BRZOSK PET MASPEX",
+    "promo paletówki": 0.71,
+    "promo 1 grupa": 0.73,
+    "promo 2 grupa": 0.75,
+    "promo 3 grupa": 0.77
+  },
+  {
+    "SP": 49508,
+    "MM": 34231,
+    "Nazwa": "NEKTAR KUBUS 850ML BANAN-MARCH-JABLKO PET MASPEX",
+    "promo paletówki": 0.71,
+    "promo 1 grupa": 0.73,
+    "promo 2 grupa": 0.75,
+    "promo 3 grupa": 0.77
+  },
+  {
+    "SP": 49509,
+    "MM": 34233,
+    "Nazwa": "NEKTAR KUBUS 850ML MARCH-JABLKO-MALINA PET MASPEX",
+    "promo paletówki": 0.71,
+    "promo 1 grupa": 0.73,
+    "promo 2 grupa": 0.75,
+    "promo 3 grupa": 0.77
+  },
+  {
+    "SP": 49511,
+    "MM": 34235,
+    "Nazwa": "NEKTAR KUBUS 850ML MARCHEWKA PET MASPEX",
+    "promo paletówki": 0.71,
+    "promo 1 grupa": 0.73,
+    "promo 2 grupa": 0.75,
+    "promo 3 grupa": 0.77
+  },
+  {
+    "SP": 18419,
+    "MM": 5393,
+    "Nazwa": "NEKTAR KUBUS GO BAN-MARC-JABL 300ML PET MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 18420,
+    "MM": 5394,
+    "Nazwa": "NEKTAR KUBUS GO BANAN-TRUSKAWKA 300ML PET MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 18422,
+    "MM": 5395,
+    "Nazwa": "NEKTAR KUBUS GO MARCH-JABL-MALINA 300ML PET MASPEX",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "SP": 18386,
+    "MM": 8536,
+    "Nazwa": "NEKTAR TARCZYN CZARNA PORZECZKA 300ML BUT BZW MASP",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "SP": 68270,
+    "MM": 51200,
+    "Nazwa": "NEKTAR TARCZYN POMARANCZA 300ML BUT BZW MASPEX",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "SP": 30256,
+    "MM": 9052,
+    "Nazwa": "NEKTAR TYMBARK ANANAS 1L KART MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 18389,
+    "MM": 9040,
+    "Nazwa": "NEKTAR TYMBARK BANAN 1L KART MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.01,
+    "promo 2 grupa": 1.04,
+    "promo 3 grupa": 1.06
+  },
+  {
+    "SP": 18390,
+    "MM": 9041,
+    "Nazwa": "NEKTAR TYMBARK CZARNA PORZECZKA 1L KART MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 18391,
+    "MM": 15837,
+    "Nazwa": "NEKTAR TYMBARK CZARNA PORZECZKA 1L PET MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 18396,
+    "MM": 9049,
+    "Nazwa": "NEKTAR TYMBARK CZARNA PORZECZKA 300ML PET MASPEX",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 34878,
+    "MM": 9054,
+    "Nazwa": "NEKTAR TYMBARK CZERWONY GREJPFRUT 1L KART MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 65745,
+    "MM": 50870,
+    "Nazwa": "NEKTAR TYMBARK JABLKO GRUSZKA 1L KART MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 65744,
+    "MM": 50869,
+    "Nazwa": "NEKTAR TYMBARK JABLKO SLIWKA 1L KART MASPEX",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "SP": 18395,
+    "MM": 16076,
+    "Nazwa": "NEKTAR TYMBARK POMARANCZA 1L KART MASPEX",
+    "promo paletówki": 1.03,
+    "promo 1 grupa": 1.07,
+    "promo 2 grupa": 1.1,
+    "promo 3 grupa": 1.12
+  },
+  {
+    "SP": 65738,
+    "MM": 50350,
+    "Nazwa": "NEKTAR TYMBARK POMARANCZA MANDARYNKA 1L KART MASPE",
+    "promo paletówki": 1.02,
+    "promo 1 grupa": 1.06,
+    "promo 2 grupa": 1.09,
+    "promo 3 grupa": 1.11
+  },
+  {
+    "SP": 26677,
+    "MM": 19864,
+    "Nazwa": "OGORKI KRAKUS KISZONE 840G MASPEX",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "SP": 13716,
+    "MM": 4241,
+    "Nazwa": "OGORKI KRAKUS KONSERWOWE 920G MASPEX",
+    "promo paletówki": 1.35,
+    "promo 1 grupa": 1.39,
+    "promo 2 grupa": 1.42,
+    "promo 3 grupa": 1.44
+  },
+  {
+    "SP": 61477,
+    "MM": 42503,
+    "Nazwa": "OGORKI KRAKUS KONSERWOWE KOZACKIE 870G MASPEX",
+    "promo paletówki": 1.55,
+    "promo 1 grupa": 1.59,
+    "promo 2 grupa": 1.62,
+    "promo 3 grupa": 1.64
+  },
+  {
+    "SP": 27309,
+    "MM": 19540,
+    "Nazwa": "OGORKI KRAKUS KORNISZONY 500G MASPEX",
+    "promo paletówki": 1.75,
+    "promo 1 grupa": 1.79,
+    "promo 2 grupa": 1.82,
+    "promo 3 grupa": 1.84
+  },
+  {
+    "SP": 59015,
+    "MM": 40337,
+    "Nazwa": "OWSIANKA LUBELLA BANAN KAKAO 100G SASZ MASPEX",
+    "promo paletówki": 0.47,
+    "promo 1 grupa": 0.49,
+    "promo 2 grupa": 0.51,
+    "promo 3 grupa": 0.53
+  },
+  {
+    "SP": 63351,
+    "MM": 50352,
+    "Nazwa": "OWSIANKA LUBELLA JABLKO CYNAMON 170G SASZ MASPEX",
+    "promo paletówki": 0.66,
+    "promo 1 grupa": 0.68,
+    "promo 2 grupa": 0.7,
+    "promo 3 grupa": 0.72
+  },
+  {
+    "SP": 59017,
+    "MM": 40338,
+    "Nazwa": "OWSIANKA LUBELLA MALINY DAKTYLE 100G SASZ MASPEX",
+    "promo paletówki": 0.47,
+    "promo 1 grupa": 0.49,
+    "promo 2 grupa": 0.51,
+    "promo 3 grupa": 0.53
+  },
+  {
+    "SP": 59019,
+    "MM": 40339,
+    "Nazwa": "OWSIANKA LUBELLA TRUSKAWKA BANAN 100G SASZ MASPEX",
+    "promo paletówki": 0.47,
+    "promo 1 grupa": 0.49,
+    "promo 2 grupa": 0.51,
+    "promo 3 grupa": 0.53
+  },
+  {
+    "SP": 63350,
+    "MM": 50351,
+    "Nazwa": "OWSIANKA LUBELLA TRUSKAWKA BANAN 170G SASZ MASPEX",
+    "promo paletówki": 0.66,
+    "promo 1 grupa": 0.68,
+    "promo 2 grupa": 0.7,
+    "promo 3 grupa": 0.72
+  },
+  {
+    "SP": 17933,
+    "MM": 13604,
+    "Nazwa": "PALUSZKI LUBELLA Z SEZAMEM 220G MASPEX",
+    "promo paletówki": 0.75,
+    "promo 1 grupa": 0.77,
+    "promo 2 grupa": 0.79,
+    "promo 3 grupa": 0.81
+  },
+  {
+    "SP": 17934,
+    "MM": 5031,
+    "Nazwa": "PALUSZKI LUBELLA Z SOLA 275G MASPEX",
+    "promo paletówki": 0.75,
+    "promo 1 grupa": 0.77,
+    "promo 2 grupa": 0.79,
+    "promo 3 grupa": 0.81
+  },
+  {
+    "SP": 17939,
+    "MM": 5038,
+    "Nazwa": "PLATKI LUBELLA CHOCO KULKI 250G MASPEX",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 17946,
+    "MM": 5043,
+    "Nazwa": "PLATKI LUBELLA CHOCO KULKI 500G MASPEX",
+    "promo paletówki": 1.65,
+    "promo 1 grupa": 1.69,
+    "promo 2 grupa": 1.72,
+    "promo 3 grupa": 1.74
+  },
+  {
+    "SP": 17940,
+    "MM": 5039,
+    "Nazwa": "PLATKI LUBELLA CHOCO MUSZELKI 250G MASPEX",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 17947,
+    "MM": 5044,
+    "Nazwa": "PLATKI LUBELLA CHOCO MUSZELKI 500G MASPEX",
+    "promo paletówki": 1.65,
+    "promo 1 grupa": 1.69,
+    "promo 2 grupa": 1.72,
+    "promo 3 grupa": 1.74
+  },
+  {
+    "SP": 17942,
+    "MM": 10350,
+    "Nazwa": "PLATKI LUBELLA CHOCO PIEGOLAKI 250G MASPEX",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 17949,
+    "MM": 5045,
+    "Nazwa": "PLATKI LUBELLA CHOCO PIEGOLAKI 500G MASPEX",
+    "promo paletówki": 1.65,
+    "promo 1 grupa": 1.69,
+    "promo 2 grupa": 1.72,
+    "promo 3 grupa": 1.74
+  },
+  {
+    "SP": 17938,
+    "MM": 5037,
+    "Nazwa": "PLATKI LUBELLA CORN FLAKES KLASYCZNE 250G MASPEX",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 17945,
+    "MM": 5042,
+    "Nazwa": "PLATKI LUBELLA CORN FLAKES KLASYCZNE 500G MASPEX",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "SP": 17948,
+    "MM": 25682,
+    "Nazwa": "PLATKI LUBELLA CORN FLAKES PELNE ZIARNO 500G MASPE",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "SP": 17937,
+    "MM": 5036,
+    "Nazwa": "PLATKI LUBELLA MIODO KOLKA 250G MASPEX",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 17944,
+    "MM": 5041,
+    "Nazwa": "PLATKI LUBELLA MIODO KOLKA 500G MASPEX",
+    "promo paletówki": 1.69,
+    "promo 1 grupa": 1.73,
+    "promo 2 grupa": 1.76,
+    "promo 3 grupa": 1.78
+  },
+  {
+    "SP": 13717,
+    "MM": 4854,
+    "Nazwa": "POMIDORY LOWICZ CALE W PUSZCE 400G MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.01,
+    "promo 2 grupa": 1.04,
+    "promo 3 grupa": 1.06
+  },
+  {
+    "SP": 13718,
+    "MM": 4855,
+    "Nazwa": "POMIDORY LOWICZ KROJONE W PUSZCE 400G MASPEX",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.01,
+    "promo 2 grupa": 1.04,
+    "promo 3 grupa": 1.06
+  },
+  {
+    "SP": 13719,
+    "MM": 4856,
+    "Nazwa": "POWIDLA SLIWKOWE LOWICZ 290G MASPEX",
+    "promo paletówki": 1.29,
+    "promo 1 grupa": 1.33,
+    "promo 2 grupa": 1.36,
+    "promo 3 grupa": 1.38
+  },
+  {
+    "SP": 70238,
+    "MM": 50792,
+    "Nazwa": "POWIDLA SLIWKOWE LOWICZ XXL 490G MASPEX",
+    "promo paletówki": 1.89,
+    "promo 1 grupa": 1.93,
+    "promo 2 grupa": 1.96,
+    "promo 3 grupa": 1.98
+  },
+  {
+    "SP": 13720,
+    "MM": 4857,
+    "Nazwa": "PRZECIER POMIDOROWY LOWICZ 500G KARTON MASPEX",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 18299,
+    "MM": 5376,
+    "Nazwa": "SMIETANKA DO KAWY CREMONA LIGHT 200G MASPEX",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 18300,
+    "MM": 5377,
+    "Nazwa": "SMIETANKA DO KAWY CREMONA NIEBIESKA 200G MASPEX",
+    "promo paletówki": 1.22,
+    "promo 1 grupa": 1.26,
+    "promo 2 grupa": 1.29,
+    "promo 3 grupa": 1.31
+  },
+  {
+    "SP": 18301,
+    "MM": 5378,
+    "Nazwa": "SMIETANKA DO KAWY CREMONA NIEBIESKA 400G MASPEX",
+    "promo paletówki": 1.99,
+    "promo 1 grupa": 2.03,
+    "promo 2 grupa": 2.06,
+    "promo 3 grupa": 2.08
+  },
+  {
+    "SP": 49515,
+    "MM": 34240,
+    "Nazwa": "SOK KUBUS 100% 850ML BANAN-JABLK-BRZOSK PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 49512,
+    "MM": 34236,
+    "Nazwa": "SOK KUBUS 100% 850ML BANAN-MARCH-JABLKO PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 49517,
+    "MM": 34243,
+    "Nazwa": "SOK KUBUS 100% 850ML BANAN-MARCH-MANGO PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 56523,
+    "MM": 39310,
+    "Nazwa": "SOK KUBUS 100% 850ML JAB.MAR.BANAN JAGODA MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 49516,
+    "MM": 34242,
+    "Nazwa": "SOK KUBUS 100% 850ML JABLKO PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 49514,
+    "MM": 34238,
+    "Nazwa": "SOK KUBUS 100% 850ML MALINA-MARCH-JABLK PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 49521,
+    "MM": 34247,
+    "Nazwa": "SOK KUBUS 100% 850ML MARCH-BRZOS-JABLKO PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 49520,
+    "MM": 34246,
+    "Nazwa": "SOK KUBUS 100% 850ML MARCH-JABLKO-POMAR PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 49519,
+    "MM": 34244,
+    "Nazwa": "SOK KUBUS 100% 850ML TRUSKAWKA-BANAN PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 34194,
+    "MM": 49967,
+    "Nazwa": "SOK KUBUS 100% BANAN-MARCHEW-JAB 300ML PET MASP",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 34196,
+    "MM": 49986,
+    "Nazwa": "SOK KUBUS 100% BANAN-TRUSKAWKA 300ML PET MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 18401,
+    "MM": 13570,
+    "Nazwa": "SOK KUBUS 100% JABLKO 300ML PET MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 34195,
+    "MM": 49969,
+    "Nazwa": "SOK KUBUS 100% MARCH-MALINA-JABLKO 300ML PET MASP",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 18403,
+    "MM": 13571,
+    "Nazwa": "SOK KUBUS 100% MULTIWITAMINA 300ML PET MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 34191,
+    "MM": 13571,
+    "Nazwa": "SOK KUBUS 100% MULTIWITAMINA THICK 300ML PET MASP",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 34193,
+    "MM": 25658,
+    "Nazwa": "SOK KUBUS 100% POMARANCZA-JABLKO 300ML PET MASP",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 18405,
+    "MM": 5380,
+    "Nazwa": "SOK KUBUS 300ML BANAN-MARCH-JABLK BUT BZW MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 18406,
+    "MM": 5382,
+    "Nazwa": "SOK KUBUS 300ML MARCH-BRZOSK-JABLKO BUT BZW MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 18407,
+    "MM": 5383,
+    "Nazwa": "SOK KUBUS 300ML MARCH-JABLKO-MALINA BUT BZW MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 61670,
+    "MM": 49967,
+    "Nazwa": "SOK KUBUS BABY 100% JABL BAN MAR 300ML PET MASPEX",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 61669,
+    "MM": 50882,
+    "Nazwa": "SOK KUBUS BABY 100% JABL MARCH 300ML PET MASPEX",
+    "promo paletówki": 0.65,
+    "promo 1 grupa": 0.67,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.71
+  },
+  {
+    "SP": 50029,
+    "MM": 34423,
+    "Nazwa": "SOK KUBUS IMMUNO 200ML GRUSZ-BAN-CZ.BEZ PET MASPEX",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "SP": 50028,
+    "MM": 34422,
+    "Nazwa": "SOK KUBUS IMMUNO 200ML MAL-DZ.ROZA-ACER PET MASPEX",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "SP": 50030,
+    "MM": 34424,
+    "Nazwa": "SOK KUBUS IMMUNO 200ML POM-MANGO-ACER PET MASPEX",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "SP": 76568,
+    "MM": 53361,
+    "Nazwa": "SOK KUBUS JABLKO CZERWONE WINOGRONO 1L KART MASPEX",
+    "promo paletówki": 1.45,
+    "promo 1 grupa": 1.49,
+    "promo 2 grupa": 1.52,
+    "promo 3 grupa": 1.54
+  },
+  {
+    "SP": 76569,
+    "MM": 53359,
+    "Nazwa": "SOK KUBUS JABLKO MANGO 1L KART MASPEX",
+    "promo paletówki": 1.45,
+    "promo 1 grupa": 1.49,
+    "promo 2 grupa": 1.52,
+    "promo 3 grupa": 1.54
+  },
+  {
+    "SP": 29296,
+    "MM": 8543,
+    "Nazwa": "SOK TARCZYN JABLKO 100% 300ML BUT BZW MASPEX",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 48885,
+    "MM": 8531,
+    "Nazwa": "SOK TARCZYN MULTIWITAMINA 300ML BUT BZW MASPEX",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 34293,
+    "MM": 25669,
+    "Nazwa": "SOK TARCZYN POMIDOR 100% 300ML BUT BZW MASPEX",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 34295,
+    "MM": 25670,
+    "Nazwa": "SOK TARCZYN POMIDOR PIK 100% 300ML BUT BZW MASPEX",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "SP": 18447,
+    "MM": 9068,
+    "Nazwa": "SOK TYMBARK DISNEY JABLKO 100% 200ML KART MASPEX",
+    "promo paletówki": 0.29,
+    "promo 1 grupa": 0.31,
+    "promo 2 grupa": 0.33,
+    "promo 3 grupa": 0.35
+  },
+  {
+    "SP": 18446,
+    "MM": 9067,
+    "Nazwa": "SOK TYMBARK DISNEY JABLKO-BRZOSKWI 100% 200ML KART",
+    "promo paletówki": 0.29,
+    "promo 1 grupa": 0.31,
+    "promo 2 grupa": 0.33,
+    "promo 3 grupa": 0.35
+  },
+  {
+    "SP": 18448,
+    "MM": 9069,
+    "Nazwa": "SOK TYMBARK DISNEY MALIN-JABLK-WISN 100% 200ML KAR",
+    "promo paletówki": 0.29,
+    "promo 1 grupa": 0.31,
+    "promo 2 grupa": 0.33,
+    "promo 3 grupa": 0.35
+  },
+  {
+    "SP": 18449,
+    "MM": 9070,
+    "Nazwa": "SOK TYMBARK DISNEY MULTIWITAMINA 100% 200ML KART",
+    "promo paletówki": 0.29,
+    "promo 1 grupa": 0.31,
+    "promo 2 grupa": 0.33,
+    "promo 3 grupa": 0.35
+  },
+  {
+    "SP": 18431,
+    "MM": 9057,
+    "Nazwa": "SOK TYMBARK JABLKO 100% 1L KART MASPEX",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "SP": 18430,
+    "MM": 12182,
+    "Nazwa": "SOK TYMBARK JABLKO 100% 1L PET MASPEX",
+    "promo paletówki": 1.03,
+    "promo 1 grupa": 1.05,
+    "promo 2 grupa": 1.08,
+    "promo 3 grupa": 1.1
+  },
+  {
+    "SP": 18443,
+    "MM": 10337,
+    "Nazwa": "SOK TYMBARK JABLKO 100% 300ML PET MASPEX",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "SP": 18432,
+    "MM": 15835,
+    "Nazwa": "SOK TYMBARK MULTIWITAMINA 100% 1L PET MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 18433,
+    "MM": 9059,
+    "Nazwa": "SOK TYMBARK MULTIWITAMINA CARROT BCUK 1L KART MASP",
+    "promo paletówki": 1.05,
+    "promo 1 grupa": 1.09,
+    "promo 2 grupa": 1.12,
+    "promo 3 grupa": 1.14
+  },
+  {
+    "SP": 18434,
+    "MM": 9060,
+    "Nazwa": "SOK TYMBARK POMARANCZA 100% 1L KART MASPEX",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "SP": 18435,
+    "MM": 15836,
+    "Nazwa": "SOK TYMBARK POMARANCZA 100% 1L PET MASPEX",
+    "promo paletówki": 1.49,
+    "promo 1 grupa": 1.53,
+    "promo 2 grupa": 1.56,
+    "promo 3 grupa": 1.58
+  },
+  {
+    "SP": 18444,
+    "MM": 10336,
+    "Nazwa": "SOK TYMBARK POMARANCZA 100% 300ML PET MASPEX",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "SP": 77369,
+    "MM": 9060,
+    "Nazwa": "SOK TYMBARK POMARANCZOWY MIX 100% 1L KART MASPEX",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "SP": 18438,
+    "MM": 9064,
+    "Nazwa": "SOK TYMBARK POMIDOR 100% 1L KART MASPEX",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "SP": 18437,
+    "MM": 9063,
+    "Nazwa": "SOK TYMBARK POMIDOR PIKANTNY 100% 1L KART MASPEX",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "SP": 56510,
+    "MM": 39050,
+    "Nazwa": "SOK TYMBARK VEGA POMIDOR 100% 250ML MASPEX",
+    "promo paletówki": 0.54,
+    "promo 1 grupa": 0.56,
+    "promo 2 grupa": 0.58,
+    "promo 3 grupa": 0.6
+  },
+  {
+    "SP": 56511,
+    "MM": 39051,
+    "Nazwa": "SOK TYMBARK VEGA POMIDOR PIKANTNY 250ML MASPEX",
+    "promo paletówki": 0.54,
+    "promo 1 grupa": 0.56,
+    "promo 2 grupa": 0.58,
+    "promo 3 grupa": 0.6
+  },
+  {
+    "SP": 18452,
+    "MM": 9076,
+    "Nazwa": "SOK TYMBARK VEGA PROWANSALSKIE POLA 500ML KART MAS",
+    "promo paletówki": 0.65,
+    "promo 1 grupa": 0.67,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.71
+  },
+  {
+    "SP": 18453,
+    "MM": 9077,
+    "Nazwa": "SOK TYMBARK VEGA SLONECZNY MEKSYK 500ML KART MASPE",
+    "promo paletówki": 0.65,
+    "promo 1 grupa": 0.67,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.71
+  },
+  {
+    "SP": 18454,
+    "MM": 9078,
+    "Nazwa": "SOK TYMBARK VEGA SRODZIEMNOMORSKI OGROD 500ML KART",
+    "promo paletówki": 0.63,
+    "promo 1 grupa": 0.65,
+    "promo 2 grupa": 0.67,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "SP": 27918,
+    "MM": 21768,
+    "Nazwa": "SOK TYMBARK VITAMINI BAN-MAR-JAB 300ML PET MASPEX",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "SP": 27919,
+    "MM": 21769,
+    "Nazwa": "SOK TYMBARK VITAMINI MAR-BRZOS-JAB 300ML PET MASPE",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "SP": 27920,
+    "MM": 21770,
+    "Nazwa": "SOK TYMBARK VITAMINI MAR-JAB-MAL 300ML PET MASPEX",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "SP": 56509,
+    "MM": 42500,
+    "Nazwa": "SOS LOWICZ 8 WARZYW PO PROWANSALSKU 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 56508,
+    "MM": 42497,
+    "Nazwa": "SOS LOWICZ 8 WARZYW PO SRODZIEMNOMORSKU 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13724,
+    "MM": 4868,
+    "Nazwa": "SOS LOWICZ BOLONSKI 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13726,
+    "MM": 4869,
+    "Nazwa": "SOS LOWICZ CHINSKI 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 77218,
+    "MM": 54993,
+    "Nazwa": "SOS LOWICZ DO PIZZY LAGODNY 180G SLOIK MASPEX",
+    "promo paletówki": 0.55,
+    "promo 1 grupa": 0.57,
+    "promo 2 grupa": 0.59,
+    "promo 3 grupa": 0.61
+  },
+  {
+    "SP": 77219,
+    "MM": 54994,
+    "Nazwa": "SOS LOWICZ DO PIZZY PIKANTNY 180G SLOIK MASPEX",
+    "promo paletówki": 0.55,
+    "promo 1 grupa": 0.57,
+    "promo 2 grupa": 0.59,
+    "promo 3 grupa": 0.61
+  },
+  {
+    "SP": 13729,
+    "MM": 4871,
+    "Nazwa": "SOS LOWICZ MEKSYKANSKI 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13730,
+    "MM": 25672,
+    "Nazwa": "SOS LOWICZ NEAPOLITANSKI 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13731,
+    "MM": 4872,
+    "Nazwa": "SOS LOWICZ PIECZARKOWY 500G",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "SP": 13733,
+    "MM": 4874,
+    "Nazwa": "SOS LOWICZ SLODKO-KWASNY 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 74303,
+    "MM": 42505,
+    "Nazwa": "SOS LOWICZ SLODKO-KWASNY Z LIMONKA 500G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 13736,
+    "MM": 4875,
+    "Nazwa": "SOS LOWICZ SPAGHETTI 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 74304,
+    "MM": 42506,
+    "Nazwa": "SOS LOWICZ SPAGHETTI PIKANTNY 500G MASPEX",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "SP": 67113,
+    "MM": 46579,
+    "Nazwa": "SYROP LOWICZ 400ML ARBUZ AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 31018,
+    "MM": 22577,
+    "Nazwa": "SYROP LOWICZ 400ML CYTRYNA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 29366,
+    "MM": 22572,
+    "Nazwa": "SYROP LOWICZ 400ML CZARNA PORZECZKA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 67111,
+    "MM": 46578,
+    "Nazwa": "SYROP LOWICZ 400ML KIWI AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 31019,
+    "MM": 22569,
+    "Nazwa": "SYROP LOWICZ 400ML MALINA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 28960,
+    "MM": 22574,
+    "Nazwa": "SYROP LOWICZ 400ML MALINA Z ZURAWINA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 29589,
+    "MM": 22575,
+    "Nazwa": "SYROP LOWICZ 400ML MALINA-CYTRYNA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 29590,
+    "MM": 22573,
+    "Nazwa": "SYROP LOWICZ 400ML MALINA-LIPA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 67114,
+    "MM": 46580,
+    "Nazwa": "SYROP LOWICZ 400ML MANGO AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 67524,
+    "MM": 22571,
+    "Nazwa": "SYROP LOWICZ 400ML POMARANCZA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 28995,
+    "MM": 22568,
+    "Nazwa": "SYROP LOWICZ 400ML TRUSKAWKA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 28962,
+    "MM": 22570,
+    "Nazwa": "SYROP LOWICZ 400ML WISNIA AGROS NOVA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "SP": 74648,
+    "MM": 51198,
+    "Nazwa": "WAFELEK DECOMORRENO KAKAOWY W CZEK XXL 50G MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 74649,
+    "MM": 51199,
+    "Nazwa": "WAFELEK DECOMORRENO SMIETANK W CZEK XXL 50G MASPEX",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "SP": 18457,
+    "MM": 10895,
+    "Nazwa": "WODA KUBUS WATERRR 1,5L CYTRYNOWA NGAZ PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 18458,
+    "MM": 15830,
+    "Nazwa": "WODA KUBUS WATERRR 1,5L JABLKO NGAZ PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 18459,
+    "MM": 10896,
+    "Nazwa": "WODA KUBUS WATERRR 1,5L MALINA NGAZ PET MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 18460,
+    "MM": 10897,
+    "Nazwa": "WODA KUBUS WATERRR 1,5L TRUSKAWKA NGAZ MASPEX",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 78425,
+    "MM": 55742,
+    "Nazwa": "WODA KUBUS WATERRR 500ML BRZOSK KARAMBOLA NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 64641,
+    "MM": 50335,
+    "Nazwa": "WODA KUBUS WATERRR 500ML BRZOSKWINIA NGAZ PET",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "SP": 18461,
+    "MM": 5397,
+    "Nazwa": "WODA KUBUS WATERRR 500ML CYTR NGAZ PET MASPEX",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 78426,
+    "MM": 55745,
+    "Nazwa": "WODA KUBUS WATERRR 500ML GOLD KIWI LULO NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 18463,
+    "MM": 5398,
+    "Nazwa": "WODA KUBUS WATERRR 500ML JABLKO NGAZ PET MASPEX",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 18464,
+    "MM": 5399,
+    "Nazwa": "WODA KUBUS WATERRR 500ML MALINA NGAZ PET MASPEX",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 78427,
+    "MM": 55749,
+    "Nazwa": "WODA KUBUS WATERRR 500ML MARAK YUZU ICE NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 18465,
+    "MM": 14933,
+    "Nazwa": "WODA KUBUS WATERRR 500ML NGAZ PET MASPEX",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 18466,
+    "MM": 5400,
+    "Nazwa": "WODA KUBUS WATERRR 500ML TRUSK NGAZ PET MASPEX",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 56828,
+    "MM": 50337,
+    "Nazwa": "WODA KUBUS WATERRR 500ML WATERMELON NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "SP": 59405,
+    "MM": 40542,
+    "Nazwa": "WODA KUBUS WATERRR ARBUZ MIETA 1,5L NGAZ PET MASPE",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 59406,
+    "MM": 40543,
+    "Nazwa": "WODA KUBUS WATERRR MANGO MIETA 1,5L NGAZ PET MASPE",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "SP": 53517,
+    "MM": 35358,
+    "Nazwa": "WODA MIN. ALKALICZNA ALCALIA 1,5L NGAZ PET MASPEX",
+    "promo paletówki": 0.75,
+    "promo 1 grupa": 0.77,
+    "promo 2 grupa": 0.79,
+    "promo 3 grupa": 0.81
+  },
+  {
+    "SP": 53516,
+    "MM": 35357,
+    "Nazwa": "WODA MIN. ALKALICZNA ALCALIA 500ML NGAZ PET MASPEX",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "SP": 13749,
+    "MM": 50619,
+    "Nazwa": "ZUPA KRAKUS BARSZCZ CZERWONY 1L KART MASPEX",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "SP": 13751,
+    "MM": 11667,
+    "Nazwa": "ZURAWINA LOWICZ DO MIES I SEROW 230G MASPEX",
+    "promo paletówki": 1.29,
+    "promo 1 grupa": 1.33,
+    "promo 2 grupa": 1.36,
+    "promo 3 grupa": 1.38
+  }
+]
