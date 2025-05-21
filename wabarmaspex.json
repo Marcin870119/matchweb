@@ -1,0 +1,3008 @@
+[
+  {
+    "Wabar": "OGO002370",
+    "MM": 35358,
+    "Nazwa": "ALCALIA WODA ALKALICZNA NIEGAZOWANA 1,5L PET",
+    "promo paletówki": 0.75,
+    "promo 1 grupa": 0.77,
+    "promo 2 grupa": 0.79,
+    "promo 3 grupa": 0.81
+  },
+  {
+    "Wabar": "OGO002369",
+    "MM": 35357,
+    "Nazwa": "ALCALIA WODA ALKALICZNA NIEGAZOWANA 500ML PET",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "Wabar": "NAP003101",
+    "MM": 25655,
+    "Nazwa": "CAPRIO NAPOJ 2L ANANAS KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "NAP000466",
+    "MM": 993,
+    "Nazwa": "CAPRIO NAPOJ 2L POMARANCZA KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "NAP003100",
+    "MM": 25656,
+    "Nazwa": "CAPRIO NAPOJ 2L GRUSZKA KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "NAP000455",
+    "MM": 990,
+    "Nazwa": "CAPRIO NAPOJ 2L JABLKO KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "NAP000464",
+    "MM": 988,
+    "Nazwa": "CAPRIO NAPOJ 2L JABLKO-ARONIA-WISNIA KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "NAP000404",
+    "MM": 989,
+    "Nazwa": "CAPRIO NAPOJ 2L JABLKO-MALINA KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "NAP003103",
+    "MM": 32948,
+    "Nazwa": "CAPRIO NAPOJ 2L JABLKO-TRUSKAWKA KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "NAP000469",
+    "MM": 991,
+    "Nazwa": "CAPRIO NAPOJ 2L MULTIWITAMINA KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "KAT07999",
+    "MM": 5378,
+    "Nazwa": "CREMONA SMIETANKA DO KAWY  NIEBIESKA 400G",
+    "promo paletówki": 1.99,
+    "promo 1 grupa": 2.03,
+    "promo 2 grupa": 2.06,
+    "promo 3 grupa": 2.08
+  },
+  {
+    "Wabar": "KAT05579",
+    "MM": 5376,
+    "Nazwa": "CREMONA SMIETANKA DO KAWY LIGHT 200G",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT00952",
+    "MM": 5377,
+    "Nazwa": "CREMONA SMIETANKA DO KAWY NIEBIESKA 200G",
+    "promo paletówki": 1.22,
+    "promo 1 grupa": 1.26,
+    "promo 2 grupa": 1.29,
+    "promo 3 grupa": 1.31
+  },
+  {
+    "Wabar": "KAT08369",
+    "MM": 5338,
+    "Nazwa": "DECOMORRENO KAKAO 150G WIATRAK",
+    "promo paletówki": 2.19,
+    "promo 1 grupa": 2.23,
+    "promo 2 grupa": 2.26,
+    "promo 3 grupa": 2.28
+  },
+  {
+    "Wabar": "KAT00992",
+    "MM": 5339,
+    "Nazwa": "DECOMORRENO KAKAO 80G WIATRAK",
+    "promo paletówki": 1.19,
+    "promo 1 grupa": 1.23,
+    "promo 2 grupa": 1.26,
+    "promo 3 grupa": 1.28
+  },
+  {
+    "Wabar": "NAP001911",
+    "MM": 21660,
+    "Nazwa": "DR WITT NAPOJ 1L ANTYOKSYDACJA CZAR PORZ-GRANAT PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAB000724",
+    "MM": 21663,
+    "Nazwa": "DR WITT NAPOJ 1L METABOLIZM MULTIWIT ZIELONA PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP000492",
+    "MM": 21667,
+    "Nazwa": "DR WITT NAPOJ 1L ODPORNOSC MULTIWITAMINA PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP000825",
+    "MM": 42519,
+    "Nazwa": "DR WITT NAPOJ 1L POMARANCZA PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP000786",
+    "MM": 21796,
+    "Nazwa": "DR WITT NAPOJ 1L WITALNOSC MULTIWIT CZERWONA PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "KAT06322",
+    "MM": 5351,
+    "Nazwa": "EKLAND JUNIOR NAPOJ HERBACIANY GRANULOWANY 250G MALINA-TRUSKAW",
+    "promo paletówki": 1.29,
+    "promo 1 grupa": 1.33,
+    "promo 2 grupa": 1.36,
+    "promo 3 grupa": 1.38
+  },
+  {
+    "Wabar": "KAT03908",
+    "MM": 5354,
+    "Nazwa": "EKLAND NAPOJ HERBACIANY GRANULOWANY 300G CYTRYNA TOREBKA",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00303",
+    "MM": 5355,
+    "Nazwa": "EKLAND NAPOJ HERBACIANY GRANULOWANY 300G MALINA TOREBKA",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT02041",
+    "MM": 5357,
+    "Nazwa": "EKLAND NAPOJ HERBACIANY GRANULOWANY 300G OWOCE LESNE TOREBKA",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00304",
+    "MM": 5356,
+    "Nazwa": "EKLAND NAPOJ HERBACIANY GRANULOWANY 300G WIELOOWOCOWY TOREBKA",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT03453",
+    "MM": 4170,
+    "Nazwa": "KOTLIN KETCHUP CZOSNEK BAZYLIA 450G BUT PLAST",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT16371",
+    "MM": 11985,
+    "Nazwa": "KOTLIN KETCHUP LAGODN 60% MNIEJ KALO 420G BUT PLAS",
+    "promo paletówki": 1.15,
+    "promo 1 grupa": 1.19,
+    "promo 2 grupa": 1.22,
+    "promo 3 grupa": 1.24
+  },
+  {
+    "Wabar": "KAT00472",
+    "MM": 4177,
+    "Nazwa": "KOTLIN KETCHUP LAGODNY 450G BUT PLAST",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT07979",
+    "MM": 4178,
+    "Nazwa": "KOTLIN KETCHUP LAGODNY 650G BUT PLAST",
+    "promo paletówki": 1.22,
+    "promo 1 grupa": 1.26,
+    "promo 2 grupa": 1.29,
+    "promo 3 grupa": 1.31
+  },
+  {
+    "Wabar": "KAT10227",
+    "MM": 4179,
+    "Nazwa": "KOTLIN KETCHUP LAGODNY 950G BUT PLAST",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "Wabar": "KAT00471",
+    "MM": 4183,
+    "Nazwa": "KOTLIN KETCHUP PIKANTNY 450G BUT PLAST",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT07980",
+    "MM": 4184,
+    "Nazwa": "KOTLIN KETCHUP PIKANTNY 650G BUT PLAST",
+    "promo paletówki": 1.22,
+    "promo 1 grupa": 1.26,
+    "promo 2 grupa": 1.29,
+    "promo 3 grupa": 1.31
+  },
+  {
+    "Wabar": "OGO002611",
+    "MM": 38841,
+    "Nazwa": "KOTLIN KETCHUP PREMIUM LAGODNY 450G",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "Wabar": "KAT06492",
+    "MM": 4185,
+    "Nazwa": "KOTLIN KETCHUP PIKANTNY 950G BUT PLAST",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "Wabar": "KAT00478",
+    "MM": 4231,
+    "Nazwa": "KRAKUS KONCENTRAT BARSZCZ CZERWONY 300ML",
+    "promo paletówki": 1.03,
+    "promo 1 grupa": 1.07,
+    "promo 2 grupa": 1.1,
+    "promo 3 grupa": 1.12
+  },
+  {
+    "Wabar": "KAT09056",
+    "MM": 4232,
+    "Nazwa": "KRAKUS KONCENTRAT ZUREK DOMOWY 300ML",
+    "promo paletówki": 0.85,
+    "promo 1 grupa": 0.87,
+    "promo 2 grupa": 0.89,
+    "promo 3 grupa": 0.91
+  },
+  {
+    "Wabar": "KAT02475",
+    "MM": 4190,
+    "Nazwa": "KOTLIN KETCHUP Z PIEKLA RODEM 450G BUT PLAST",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "OGO000793",
+    "MM": 23204,
+    "Nazwa": "KRAKUS OGORKI KORNISZONE Z OSTRA PAPRYKA 500G",
+    "promo paletówki": 1.69,
+    "promo 1 grupa": 1.73,
+    "promo 2 grupa": 1.76,
+    "promo 3 grupa": 1.78
+  },
+  {
+    "Wabar": "OGO000794",
+    "MM": 23205,
+    "Nazwa": "KRAKUS OGORKI KORNISZONY Z CZOSNKIEM 500G",
+    "promo paletówki": 1.69,
+    "promo 1 grupa": 1.73,
+    "promo 2 grupa": 1.76,
+    "promo 3 grupa": 1.78
+  },
+  {
+    "Wabar": "IMP001155",
+    "MM": 50619,
+    "Nazwa": "KRAKUS ZUPA BARSZCZ CZERWONY 1L",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "Wabar": "IMP007796",
+    "MM": 4253,
+    "Nazwa": "KRAKUS ZUPA ZUREK FAMILIJNY 1,5 L KARTON",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "Wabar": "KAT01981",
+    "MM": 4241,
+    "Nazwa": "KRAKUS OGORKI KONSERWOWE 900ML",
+    "promo paletówki": 1.35,
+    "promo 1 grupa": 1.39,
+    "promo 2 grupa": 1.42,
+    "promo 3 grupa": 1.44
+  },
+  {
+    "Wabar": "NAP003257",
+    "MM": 50887,
+    "Nazwa": "KUBUS BABY MUS 100G JABLKO-TRUSKAWKA-MARCHEW",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "Wabar": "NAP003256",
+    "MM": 50886,
+    "Nazwa": "KUBUS BABY MUS 100G MARCHEW-JABLKO-MANGO",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "Wabar": "DLA000099",
+    "MM": 50884,
+    "Nazwa": "KUBUS BABY NAPOJ 300ML JABLKO-GRUSZKA PET",
+    "promo paletówki": 0.63,
+    "promo 1 grupa": 0.65,
+    "promo 2 grupa": 0.67,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP003867",
+    "MM": 52155,
+    "Nazwa": "KUBUS DESER 100G A'LA GALARETKA JABLKO TRUSKAWKA ARONIA",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "Wabar": "NAP001474",
+    "MM": 5393,
+    "Nazwa": "KUBUS GO SOK 300ML BAN-MARCH-JABL PET",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "Wabar": "NAP003260",
+    "MM": 34423,
+    "Nazwa": "KUBUS IMMUNO SOK GRUSZKA-CZARNY BEZ 200ML PET",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "Wabar": "NAP003259",
+    "MM": 34422,
+    "Nazwa": "KUBUS IMMUNO SOK MALINA-DZIK ROZA 200ML PET",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "Wabar": "NAP003258",
+    "MM": 34424,
+    "Nazwa": "KUBUS IMMUNO SOK MANGO-ACEROLA 200ML PET",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "Wabar": "NAP003700",
+    "MM": 49980,
+    "Nazwa": "KUBUS MUS 100G CZERWONY WINOGRON ARONIA PITHAYA",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "Wabar": "NAP003699",
+    "MM": 49970,
+    "Nazwa": "KUBUS MUS 100G JABLKO KAKTUS LIMONKA",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "Wabar": "NAP001617",
+    "MM": 50895,
+    "Nazwa": "KUBUS MUS 100G JABLKO-ARBUZ",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "Wabar": "IMP001905",
+    "MM": 4833,
+    "Nazwa": "LOWICZ DZEM 450G WISNIA NISKOSLODZ",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "Wabar": "KAT09535",
+    "MM": 5340,
+    "Nazwa": "KUBUS MUS Z OWOCOW 100G BANAN SASZETKA",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "Wabar": "KAT09536",
+    "MM": 5341,
+    "Nazwa": "KUBUS MUS Z OWOCOW 100G JABLKO BANAN SASZET",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "Wabar": "KAT09537",
+    "MM": 5342,
+    "Nazwa": "KUBUS MUS Z OWOCOW 100G TRUSK-MARCH-JABLK-BANAN",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "Wabar": "NAP000355",
+    "MM": 34231,
+    "Nazwa": "KUBUS NEKTAR 850ML BANAN-MAR-JABLK PET",
+    "promo paletówki": 0.71,
+    "promo 1 grupa": 0.73,
+    "promo 2 grupa": 0.75,
+    "promo 3 grupa": 0.77
+  },
+  {
+    "Wabar": "NAP002344",
+    "MM": 34235,
+    "Nazwa": "KUBUS NEKTAR 850ML MARCHEWKA PET",
+    "promo paletówki": 0.71,
+    "promo 1 grupa": 0.73,
+    "promo 2 grupa": 0.75,
+    "promo 3 grupa": 0.77
+  },
+  {
+    "Wabar": "NAP001490",
+    "MM": 11978,
+    "Nazwa": "KUBUS PLAY NAPOJ 400ML ARBUZ NGAZ PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP000230",
+    "MM": 5364,
+    "Nazwa": "KUBUS PLAY NAPOJ 400ML MARCH-CZERES-LIMETKA PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP000221",
+    "MM": 5365,
+    "Nazwa": "KUBUS PLAY NAPOJ 400ML MARCH-CZERW POMAR-LI PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP000220",
+    "MM": 5366,
+    "Nazwa": "KUBUS PLAY NAPOJ 400ML MARCH-MALIN-LIMETKA PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP000622",
+    "MM": 5367,
+    "Nazwa": "KUBUS PLAY NAPOJ 400ML MARCH-TRUSK-LIMETKA PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP002422",
+    "MM": 25693,
+    "Nazwa": "KUBUS PLAY WODA+OWOCE NAPOJ 400ML JABL-BRZOSK PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP002420",
+    "MM": 25691,
+    "Nazwa": "KUBUS PLAY WODA+OWOCE NAPOJ 400ML JABL-MAL PET",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP002418",
+    "MM": 49967,
+    "Nazwa": "KUBUS SOK 100% 300ML BANAN MARCHEW JABLKO PET",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP000005",
+    "MM": 5380,
+    "Nazwa": "KUBUS SOK 100% 300ML BANAN-MARCHEW-JABLKO BUT",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP001670",
+    "MM": 15828,
+    "Nazwa": "KUBUS SOK 100% 300ML BRZOSKW-JABL-MARCH PET",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP001798",
+    "MM": 13570,
+    "Nazwa": "KUBUS SOK 100% 300ML JABLKO MASPEX PET",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP002419",
+    "MM": 49969,
+    "Nazwa": "KUBUS SOK 100% 300ML MALINA MARCHEW JABLKO PET",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP000014",
+    "MM": 5383,
+    "Nazwa": "KUBUS SOK 100% 300ML MALINA-MARCHEW-JABLKO BUT",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP001473",
+    "MM": 49986,
+    "Nazwa": "KUBUS SOK 100% 300ML TRUSKAWKA BANAN PET",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP000349",
+    "MM": 34240,
+    "Nazwa": "KUBUS SOK 100% 850ML BANAN-JAB-BRZOSK PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "IMP001152",
+    "MM": 4844,
+    "Nazwa": "LOWICZ KONCENTRAT 80G POMIDOROWY SLOIK",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP003280",
+    "MM": 34242,
+    "Nazwa": "KUBUS SOK 100% 850ML JABLKO PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP003486",
+    "MM": 39310,
+    "Nazwa": "KUBUS SOK 100% 850ML JABLKO-MARCHEW-BANAN-JAGODA PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP002856",
+    "MM": 34238,
+    "Nazwa": "KUBUS SOK 100% 850ML MALIN-MAR-JABLK PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP000356",
+    "MM": 34247,
+    "Nazwa": "KUBUS SOK 100% 850ML MARCH-BRZOS-JABLK PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP000358",
+    "MM": 34246,
+    "Nazwa": "KUBUS SOK 100% 850ML MARCH-JABLK-POMAR PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP001478",
+    "MM": 34244,
+    "Nazwa": "KUBUS SOK 100% 850ML TRUSK-BANAN PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "KAT28003",
+    "MM": 50335,
+    "Nazwa": "KUBUS WATER 500ML NAPOJ BRZOSKWINIOWY PET",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "NAP001407",
+    "MM": 10895,
+    "Nazwa": "KUBUS WATERRR WODA 1,5L CYTRYNOWA NGAZ PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP001477",
+    "MM": 10897,
+    "Nazwa": "KUBUS WATERRR WODA 1,5L TRUSKAWKA NGAZ PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "NAP001676",
+    "MM": 15830,
+    "Nazwa": "KUBUS WATERRR WODA 1,5L ZIELONE JABL NGAZ PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "KAT03120",
+    "MM": 4853,
+    "Nazwa": "LOWICZ KONFITURA 240G WISNIA",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "NAP000878",
+    "MM": 5397,
+    "Nazwa": "KUBUS WATERRR WODA 500ML CYTR NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "Wabar": "KAT04235",
+    "MM": 4856,
+    "Nazwa": "LOWICZ POWIDLA 290G WEGIERKOWE",
+    "promo paletówki": 1.29,
+    "promo 1 grupa": 1.33,
+    "promo 2 grupa": 1.36,
+    "promo 3 grupa": 1.38
+  },
+  {
+    "Wabar": "KAT14610",
+    "MM": 11525,
+    "Nazwa": "LOWICZ BOROWKA 230G DO MIES I SEROW",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": "",
+    "promo 2 grupa": 0.02,
+    "promo 3 grupa": 0.04
+  },
+  {
+    "Wabar": "KAT10733",
+    "MM": 42490,
+    "Nazwa": "LOWICZ DZEM 100% CZARNA PORZECZKA 210G",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "Wabar": "KAT15935",
+    "MM": 42491,
+    "Nazwa": "LOWICZ DZEM 100% MALINA - CZERWONA PORZECZKA 210G",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "Wabar": "KAT10734",
+    "MM": 42495,
+    "Nazwa": "LOWICZ DZEM 100% TRUSKAWKA 210G",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "Wabar": "KAT03909",
+    "MM": 4874,
+    "Nazwa": "LOWICZ SOS 500G SLODKO-KWASNY",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT00564",
+    "MM": 4822,
+    "Nazwa": "LOWICZ DZEM 280G BRZOSKWINIA NISKOSLODZ",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00045",
+    "MM": 4823,
+    "Nazwa": "LOWICZ DZEM 280G CZARNA PORZECZKA NISKOSLODZ",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00010",
+    "MM": 4824,
+    "Nazwa": "LOWICZ DZEM 280G JAGODA NISKOSLODZ",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT12336",
+    "MM": 12300,
+    "Nazwa": "LOWICZ DZEM 280G KIWI AGREST NISKOSLODZ",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00046",
+    "MM": 4825,
+    "Nazwa": "LOWICZ DZEM 280G LESNY WIELOOWOCOWY NISKOSLODZ",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00057",
+    "MM": 41871,
+    "Nazwa": "LOWICZ DZEM 280G MALINA - CZERWONA PORZECZKA",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00518",
+    "MM": 4827,
+    "Nazwa": "LOWICZ DZEM 280G MORELA NISKOSLODZ",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00048",
+    "MM": 4828,
+    "Nazwa": "LOWICZ DZEM 280G TRUSKAWKA NISKOSLODZ",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00049",
+    "MM": 4829,
+    "Nazwa": "LOWICZ DZEM 280G WISNIA NISKOSLODZ",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "IMP001151",
+    "MM": 4830,
+    "Nazwa": "LOWICZ DZEM 450G BRZOSKWINIA",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "Wabar": "KAT08438",
+    "MM": 4831,
+    "Nazwa": "LOWICZ DZEM 450G CZARNA PORZECZKA",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "Wabar": "KAT06827",
+    "MM": 4832,
+    "Nazwa": "LOWICZ DZEM 450G TRUSKAWKA NISKOSLODZ",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "Wabar": "KAT00704",
+    "MM": 4842,
+    "Nazwa": "LOWICZ KONCENTRAT 190G POMIDOROWY SLOIK",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT02118",
+    "MM": 4994,
+    "Nazwa": "LUBELLA MAKARON 400G GNIAZDA WSTAZKI",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "Wabar": "KAT03119",
+    "MM": 4846,
+    "Nazwa": "LOWICZ KONFITURA 240G BRZOSKWINIA",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "Wabar": "KAT04003",
+    "MM": 4847,
+    "Nazwa": "LOWICZ KONFITURA 240G CZARNA PORZECZKA",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "Wabar": "KAT00701",
+    "MM": 4848,
+    "Nazwa": "LOWICZ KONFITURA 240G JAGODA",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT06800",
+    "MM": 4849,
+    "Nazwa": "LOWICZ KONFITURA 240G MALINA - CZERWONA PORZECZKA",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT08574",
+    "MM": 4850,
+    "Nazwa": "LOWICZ KONFITURA 240G MORELA",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT04062",
+    "MM": 4851,
+    "Nazwa": "LOWICZ KONFITURA 240G OWOCE LESNE",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT02256",
+    "MM": 4852,
+    "Nazwa": "LOWICZ KONFITURA 240G TRUSKAWKA",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "OGO004198",
+    "MM": 49601,
+    "Nazwa": "LOWICZ MUS DESER A LA SERNIK Z BRZOSKIWNIAMI 100G",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "GOT000021",
+    "MM": 5001,
+    "Nazwa": "LUBELLA MAKARON 400G PELNE ZIARNO PIORA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "IMP001153",
+    "MM": 4854,
+    "Nazwa": "LOWICZ POMIDORY CALE 400G",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.01,
+    "promo 2 grupa": 1.04,
+    "promo 3 grupa": 1.06
+  },
+  {
+    "Wabar": "KAT07384",
+    "MM": 4855,
+    "Nazwa": "LOWICZ POMIDORY KROJONE 400G",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.01,
+    "promo 2 grupa": 1.04,
+    "promo 3 grupa": 1.06
+  },
+  {
+    "Wabar": "KAT07870",
+    "MM": 4857,
+    "Nazwa": "LOWICZ PRZECIER POMIDOROWY 500G KARTON",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "OGO002871",
+    "MM": 28652,
+    "Nazwa": "LOWICZ PRZECIER POMIDOROWY Z BAZYLIA 500G KARTON",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT02157",
+    "MM": 4864,
+    "Nazwa": "LOWICZ SOS 350G SPAGHETTI",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT03707",
+    "MM": 4868,
+    "Nazwa": "LOWICZ SOS 500G BOLONSKI",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT04173",
+    "MM": 4869,
+    "Nazwa": "LOWICZ SOS 500G CHINSKI",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT03951",
+    "MM": 4871,
+    "Nazwa": "LOWICZ SOS 500G MEKSYKANSKI",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "KAT20594",
+    "MM": 25672,
+    "Nazwa": "LOWICZ SOS 500G NEAPOLITANSKI",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "IMP001154",
+    "MM": 4872,
+    "Nazwa": "LOWICZ SOS 500G PIECZARKOWY",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "Wabar": "KAT02059",
+    "MM": 5018,
+    "Nazwa": "LUBELLA MAKARON INSPIRACJE 500G LASAGNE",
+    "promo paletówki": 1.69,
+    "promo 1 grupa": 1.73,
+    "promo 2 grupa": 1.76,
+    "promo 3 grupa": 1.78
+  },
+  {
+    "Wabar": "KAT03910",
+    "MM": 4875,
+    "Nazwa": "LOWICZ SOS 500G SPAGHETTI",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "OGO002917",
+    "MM": 42506,
+    "Nazwa": "LOWICZ SOS 500G SPAGHETTI PIKANTNY",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "OGO002636",
+    "MM": 42500,
+    "Nazwa": "LOWICZ SOS 8 WARZYW PO PROWANSALSKU 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "NAP003661",
+    "MM": 46579,
+    "Nazwa": "LOWICZ SYROP 400ML ARBUZ",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "NAP002044",
+    "MM": 22577,
+    "Nazwa": "LOWICZ SYROP 400ML CYTRYNA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT13427",
+    "MM": 22572,
+    "Nazwa": "LOWICZ SYROP 400ML CZARNA PORZECZKA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "NAP003660",
+    "MM": 46578,
+    "Nazwa": "LOWICZ SYROP 400ML KIWI",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT13432",
+    "MM": 22569,
+    "Nazwa": "LOWICZ SYROP 400ML MALINA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT30264",
+    "MM": 22575,
+    "Nazwa": "LOWICZ SYROP 400ML MALINA-CYTRYNA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT30262",
+    "MM": 22573,
+    "Nazwa": "LOWICZ SYROP 400ML MALINA-LIPA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT30263",
+    "MM": 22574,
+    "Nazwa": "LOWICZ SYROP 400ML MALINA-ZURAWINA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "NAP003734",
+    "MM": 46580,
+    "Nazwa": "LOWICZ SYROP 400ML MANGO",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT30260",
+    "MM": 22571,
+    "Nazwa": "LOWICZ SYROP 400ML POMARANCZA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT30261",
+    "MM": 22568,
+    "Nazwa": "LOWICZ SYROP 400ML TRUSKAWKA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT30259",
+    "MM": 22570,
+    "Nazwa": "LOWICZ SYROP 400ML WISNIA",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT14279",
+    "MM": 11667,
+    "Nazwa": "LOWICZ ZURAWINA 230G DO MIESA",
+    "promo paletówki": 1.29,
+    "promo 1 grupa": 1.33,
+    "promo 2 grupa": 1.36,
+    "promo 3 grupa": 1.38
+  },
+  {
+    "Wabar": "OGO004211",
+    "MM": 46863,
+    "Nazwa": "LUBELLA DI RISO PRZEKASKA 100G RYZ MANGO",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "Wabar": "OGO004213",
+    "MM": 46864,
+    "Nazwa": "LUBELLA DI RISO PRZEKASKA 100G RYZ TRUSKAWKA",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "Wabar": "OGO004212",
+    "MM": 46865,
+    "Nazwa": "LUBELLA DI RISO PRZEKASKA 100G RYZ WISNIA",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "Wabar": "OGO004218",
+    "MM": 50352,
+    "Nazwa": "LUBELLA LUBELLA OWSIANKA XXL 170G JABLKO CYNAMON",
+    "promo paletówki": 0.66,
+    "promo 1 grupa": 0.68,
+    "promo 2 grupa": 0.7,
+    "promo 3 grupa": 0.72
+  },
+  {
+    "Wabar": "OGO004217",
+    "MM": 50351,
+    "Nazwa": "LUBELLA LUBELLA OWSIANKA XXL 170G TRUSKAWKA BANAN",
+    "promo paletówki": 0.66,
+    "promo 1 grupa": 0.68,
+    "promo 2 grupa": 0.7,
+    "promo 3 grupa": 0.72
+  },
+  {
+    "Wabar": "KAT05834",
+    "MM": 5037,
+    "Nazwa": "LUBELLA PLATKI CORN FLAKES 250G KUKURYDZIANE",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT07660",
+    "MM": 4979,
+    "Nazwa": "LUBELLA MAKA PELNE ZIARNO 1KG PSZENNA",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT05457",
+    "MM": 42330,
+    "Nazwa": "LUBELLA MAKA POZNANSKA PUSZYSTA 1KG UK",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "DOD000567",
+    "MM": 42333,
+    "Nazwa": "LUBELLA MAKA TORTOWA PUSZYSTA 1KG UK",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "OGÓ000003",
+    "MM": 42334,
+    "Nazwa": "LUBELLA MAKA UNIWERSALNA PUSZYSTA 1KG UK",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "KAT07191",
+    "MM": 4987,
+    "Nazwa": "LUBELLA MAKARON 250G DOMOWY JAJECZNY KORALIKI",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "Wabar": "KAT02119",
+    "MM": 4990,
+    "Nazwa": "LUBELLA MAKARON 250G ROSOLOWY JAJECZNY KRAJANECZKA",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "Wabar": "KAT04023",
+    "MM": 4992,
+    "Nazwa": "LUBELLA MAKARON 400G FALA",
+    "promo paletówki": 0.77,
+    "promo 1 grupa": 0.79,
+    "promo 2 grupa": 0.81,
+    "promo 3 grupa": 0.83
+  },
+  {
+    "Wabar": "KAT01369",
+    "MM": 4993,
+    "Nazwa": "LUBELLA MAKARON 400G GNIAZDA NITKI",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "Wabar": "KAT02519",
+    "MM": 4995,
+    "Nazwa": "LUBELLA MAKARON 400G KOKARDKA",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "Wabar": "KAT08781",
+    "MM": 4996,
+    "Nazwa": "LUBELLA MAKARON 400G KOKARDKA MALA",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "Wabar": "KAT04502",
+    "MM": 42077,
+    "Nazwa": "LUBELLA MAKARON 400G KOLANKA OZDOBNE",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "Wabar": "KAT05429",
+    "MM": 4997,
+    "Nazwa": "LUBELLA MAKARON 400G KRAJANKA",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "Wabar": "KAT00352",
+    "MM": 41250,
+    "Nazwa": "LUBELLA MAKARON 400G LAZANKI",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "Wabar": "KAT04503",
+    "MM": 41249,
+    "Nazwa": "LUBELLA MAKARON 400G MUSZELKA MALA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT06672",
+    "MM": 4998,
+    "Nazwa": "LUBELLA MAKARON 400G MUSZELKI MORSKIE GNOCCHI",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT04504",
+    "MM": 42078,
+    "Nazwa": "LUBELLA MAKARON 400G NITKA CIETA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT09355",
+    "MM": 4999,
+    "Nazwa": "LUBELLA MAKARON 400G PELNE ZIAR GNIAZ WSTAZ 5 ZBOZ",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT09806",
+    "MM": 10355,
+    "Nazwa": "LUBELLA MAKARON 400G PELNE ZIARNO KOKARDKA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT09904",
+    "MM": 5045,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 500G PIEGOLAKI",
+    "promo paletówki": 1.65,
+    "promo 1 grupa": 1.69,
+    "promo 2 grupa": 1.72,
+    "promo 3 grupa": 1.74
+  },
+  {
+    "Wabar": "KAT02091",
+    "MM": 5004,
+    "Nazwa": "LUBELLA MAKARON 400G PIORA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "OGO002640",
+    "MM": 40874,
+    "Nazwa": "LUBELLA MAKARON 400G PSI PATROL LITERKI",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "Nap000010",
+    "MM": 5382,
+    "Nazwa": "KUBUS SOK 100% 300ML MARCHEW-BRZOSKWINIA-JABLKO BUT",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "KAT01153",
+    "MM": 41878,
+    "Nazwa": "LUBELLA MAKARON 400G SWIDERKI EXTRA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "OGO003077",
+    "MM": 41251,
+    "Nazwa": "LUBELLA MAKARON 400G WSTAZKA CIETA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT02097",
+    "MM": 5007,
+    "Nazwa": "LUBELLA MAKARON 400G WSTAZKI DLUGIE",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "Nap001475",
+    "MM": 5395,
+    "Nazwa": "KUBUS GO SOK 300ML MAL-JABL-MARCH PET",
+    "promo paletówki": 0.43,
+    "promo 1 grupa": 0.45,
+    "promo 2 grupa": 0.47,
+    "promo 3 grupa": 0.49
+  },
+  {
+    "Wabar": "OGO004219",
+    "MM": 40337,
+    "Nazwa": "LUBELLA MUS OWSIANKA 100G BANAN KAKAO",
+    "promo paletówki": 0.47,
+    "promo 1 grupa": 0.49,
+    "promo 2 grupa": 0.51,
+    "promo 3 grupa": 0.53
+  },
+  {
+    "Wabar": "OGO004221",
+    "MM": 40338,
+    "Nazwa": "LUBELLA MUS OWSIANKA 100G MALINY Z DAKTYLAMI",
+    "promo paletówki": 0.47,
+    "promo 1 grupa": 0.49,
+    "promo 2 grupa": 0.51,
+    "promo 3 grupa": 0.53
+  },
+  {
+    "Wabar": "OGO004220",
+    "MM": 40339,
+    "Nazwa": "LUBELLA MUS OWSIANKA 100G TRUSKAWKI BANAN",
+    "promo paletówki": 0.47,
+    "promo 1 grupa": 0.49,
+    "promo 2 grupa": 0.51,
+    "promo 3 grupa": 0.53
+  },
+  {
+    "Wabar": "SŁO002405",
+    "MM": 5031,
+    "Nazwa": "LUBELLA PALUSZKI Z SOLA 275G",
+    "promo paletówki": 0.75,
+    "promo 1 grupa": 0.77,
+    "promo 2 grupa": 0.79,
+    "promo 3 grupa": 0.81
+  },
+  {
+    "Wabar": "KAT05334",
+    "MM": 5036,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 250G KOLKA MIODOWE",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT04451",
+    "MM": 5038,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 250G KULECZKI CZEKOLADOWE",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT04210",
+    "MM": 5039,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 250G MUSZELKI CZEKOLADOWE",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT09904",
+    "MM": 10350,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 250G PIEGOLAKI",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 0.97,
+    "promo 2 grupa": 1,
+    "promo 3 grupa": 1.02
+  },
+  {
+    "Wabar": "KAT13677",
+    "MM": 5041,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 500G KOLKA MIODOWE",
+    "promo paletówki": 1.69,
+    "promo 1 grupa": 1.73,
+    "promo 2 grupa": 1.76,
+    "promo 3 grupa": 1.78
+  },
+  {
+    "Wabar": "KAT06904",
+    "MM": 5042,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 500G KUKURYDZIANE",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "Wabar": "KAT13149",
+    "MM": 5043,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 500G KULECZKI CZEKOLADOWE",
+    "promo paletówki": 1.65,
+    "promo 1 grupa": 1.69,
+    "promo 2 grupa": 1.72,
+    "promo 3 grupa": 1.74
+  },
+  {
+    "Wabar": "KAT06159",
+    "MM": 5044,
+    "Nazwa": "LUBELLA PLATKI MLEKOLAKI 500G MUSZELKI CZEKOLADOWE",
+    "promo paletówki": 1.65,
+    "promo 1 grupa": 1.69,
+    "promo 2 grupa": 1.72,
+    "promo 3 grupa": 1.74
+  },
+  {
+    "Wabar": "Nap000879",
+    "MM": 5398,
+    "Nazwa": "KUBUS WATERRR WODA 500ML JABLK NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "Wabar": "KAT04335",
+    "MM": 5359,
+    "Nazwa": "PUCHATEK NAPOJ KAKAOWY ROZP 150G+50GTORBA",
+    "promo paletówki": 1.11,
+    "promo 1 grupa": 1.15,
+    "promo 2 grupa": 1.18,
+    "promo 3 grupa": 1.2
+  },
+  {
+    "Wabar": "KAT02226",
+    "MM": 5360,
+    "Nazwa": "PUCHATEK NAPOJ KAKAOWY ROZP 300G TORBA",
+    "promo paletówki": 1.45,
+    "promo 1 grupa": 1.49,
+    "promo 2 grupa": 1.52,
+    "promo 3 grupa": 1.54
+  },
+  {
+    "Wabar": "KAT23683",
+    "MM": 8537,
+    "Nazwa": "TARCZYN NEKTAR 300ML CZERWONY GREJPFRUT SZKLO",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "Wabar": "NAP000419",
+    "MM": 51200,
+    "Nazwa": "TARCZYN NEKTAR 300ML POMARANCZA SZKLO",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "Wabar": "NAP000257",
+    "MM": 8542,
+    "Nazwa": "TARCZYN NEKTAR 300ML WISNIA SZKLO",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "Wabar": "NAP003105",
+    "MM": 36739,
+    "Nazwa": "TARCZYN SOK 100% 250ML CZERWONY BURAK-JABLKO SZKLO",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP000399",
+    "MM": 8543,
+    "Nazwa": "TARCZYN SOK 100% 300ML JABLKO SZKLO",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "KAT24149",
+    "MM": 25670,
+    "Nazwa": "TARCZYN SOK 100% 300ML PIKANTNY POMIDOR SZKLO",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "IMP001245",
+    "MM": 25669,
+    "Nazwa": "TARCZYN SOK 100% 300ML POMIDOR SZKLO",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP000255",
+    "MM": 8531,
+    "Nazwa": "TARCZYN SOK 300ML WIELOWOCOWY-MARCHEW SZKLO",
+    "promo paletówki": 0.4,
+    "promo 1 grupa": 0.42,
+    "promo 2 grupa": 0.44,
+    "promo 3 grupa": 0.46
+  },
+  {
+    "Wabar": "NAP001503",
+    "MM": 5346,
+    "Nazwa": "TIGER NAPOJ ENERGETYCZNY 250ML BCUK PUSZKA",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "Wabar": "Nap001479",
+    "MM": 5399,
+    "Nazwa": "KUBUS WATERRR WODA 500ML MALINA NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "Wabar": "NAP000347",
+    "MM": 5348,
+    "Nazwa": "TIGER NAPOJ ENERGETYCZNY 250ML PUSZKA",
+    "promo paletówki": 0.34,
+    "promo 1 grupa": 0.36,
+    "promo 2 grupa": 0.38,
+    "promo 3 grupa": 0.4
+  },
+  {
+    "Wabar": "Nap000880",
+    "MM": 5400,
+    "Nazwa": "KUBUS WATERRR WODA 500ML TRUSK NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "Wabar": "NAP003177",
+    "MM": 35475,
+    "Nazwa": "TIGER NAPOJ ENERGETYCZNY 500ML GUMA TURBO PUSZKA",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "Wabar": "Nap000742",
+    "MM": 8534,
+    "Nazwa": "TARCZYN NAPOJ TARCZYN MULTIWITAMINA ZIELONA 300ML SZKLO",
+    "promo paletówki": 0.35,
+    "promo 1 grupa": 0.37,
+    "promo 2 grupa": 0.39,
+    "promo 3 grupa": 0.41
+  },
+  {
+    "Wabar": "OGO000352",
+    "MM": 25340,
+    "Nazwa": "TYMBARK MUS 100% 120G MANGO",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "Wabar": "OGO000351",
+    "MM": 25339,
+    "Nazwa": "TYMBARK MUS 100% 120G POMARANCZA",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "Wabar": "OGO002820",
+    "MM": 39055,
+    "Nazwa": "TYMBARK MUS 200G MANGO BRZOSKWINIA BANAN",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "Wabar": "OGO002821",
+    "MM": 39056,
+    "Nazwa": "TYMBARK MUS 200G MARAKUJA CYTRYNA",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "Wabar": "OGO002822",
+    "MM": 39304,
+    "Nazwa": "TYMBARK MUS ENERGY VIBES 200G JABLKO-LIMONKA-KAKTUS",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "Wabar": "OGO002823",
+    "MM": 39305,
+    "Nazwa": "TYMBARK MUS EXOTIC BOOST 200G JABLKO-BANAN-KALAMANSI",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "Wabar": "OGO002819",
+    "MM": 39302,
+    "Nazwa": "TYMBARK MUS JUNGLE SHOT 200G JABLKO-GRUSZKA-KAKI",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "Wabar": "OGO002631",
+    "MM": 39307,
+    "Nazwa": "TYMBARK MUS PRZEKASKA NA 2 SNIADANIE 100G JOGURT & ZBOZA OWOCE LESNE",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "OGO002632",
+    "MM": 39306,
+    "Nazwa": "TYMBARK MUS PRZEKASKA NA 2 SNIADANIE 100G JOGURT & ZBOZA OWOCE SADU",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "OGO001559",
+    "MM": 39309,
+    "Nazwa": "TYMBARK MUS PRZEKASKA NA 2 SNIADANIE 100G PLATKI OWSIANE OWOCE POLUDNIA",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "OGO002860",
+    "MM": 33720,
+    "Nazwa": "TYMBARK MUS WARZYWA OWOCE 100G BURAK-TRUSKAWKA",
+    "promo paletówki": 0.36,
+    "promo 1 grupa": 0.38,
+    "promo 2 grupa": 0.4,
+    "promo 3 grupa": 0.42
+  },
+  {
+    "Wabar": "NAP000095",
+    "MM": 9008,
+    "Nazwa": "TYMBARK NAPOJ 1L JABLKO-BRZOSKWINIA KARTON",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "Wabar": "NAP001668",
+    "MM": 16078,
+    "Nazwa": "TYMBARK NAPOJ 1L JABLKO-GRUSZKA KARTON",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "Wabar": "NAP000026",
+    "MM": 9010,
+    "Nazwa": "TYMBARK NAPOJ 1L JABLKO-MIETA KARTON",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "Wabar": "NAP000096",
+    "MM": 9011,
+    "Nazwa": "TYMBARK NAPOJ 1L POMARANCZA-BRZOSKWINIA KARTON",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "Wabar": "NAP000163",
+    "MM": 9012,
+    "Nazwa": "TYMBARK NAPOJ 1L WISNIA-JABLKO KARTON",
+    "promo paletówki": 0.59,
+    "promo 1 grupa": 0.61,
+    "promo 2 grupa": 0.63,
+    "promo 3 grupa": 0.65
+  },
+  {
+    "Wabar": "KAT34178",
+    "MM": 26393,
+    "Nazwa": "TYMBARK NAPOJ 250ML BIALE WINOGR-ALOES SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP000980",
+    "MM": 9014,
+    "Nazwa": "TYMBARK NAPOJ 250ML JABLKO-ARBUZ NGAZ SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP000134",
+    "MM": 9015,
+    "Nazwa": "TYMBARK NAPOJ 250ML JABLKO-BRZOSKWINIA NGAZ SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP001972",
+    "MM": 25662,
+    "Nazwa": "TYMBARK NAPOJ 250ML JABLKO-KIWI SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP000157",
+    "MM": 9016,
+    "Nazwa": "TYMBARK NAPOJ 250ML JABLKO-MIETA NGAZ SZKLO BZ",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP003068",
+    "MM": 27102,
+    "Nazwa": "TYMBARK NAPOJ 250ML JABL-LIM-KAKTUS NGAZ SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "Nap000181",
+    "MM": 9005,
+    "Nazwa": "TYMBARK NAPOJ OWOCE SWIATA 1L LIM-CYTR-MIET KARTON",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP002706",
+    "MM": 28931,
+    "Nazwa": "TYMBARK NAPOJ 250ML MANGO-MIETA SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP000159",
+    "MM": 9018,
+    "Nazwa": "TYMBARK NAPOJ 250ML POMARANCZA-BRZOSK NGAZ SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP000135",
+    "MM": 9019,
+    "Nazwa": "TYMBARK NAPOJ 250ML WISNIA-JABLKO NGAZ SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP002841",
+    "MM": 15842,
+    "Nazwa": "TYMBARK NAPOJ 2L JABLKO-ARBUZ KARTON",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "Wabar": "NAP000160",
+    "MM": 9020,
+    "Nazwa": "TYMBARK NAPOJ 2L JABLKO-MIETA KARTON",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "Wabar": "NAP002842",
+    "MM": 50348,
+    "Nazwa": "TYMBARK NAPOJ 2L MULTIFRUIT KARTON",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "Wabar": "NAP002848",
+    "MM": 13038,
+    "Nazwa": "TYMBARK NAPOJ 2L MULTIVITAMINA KARTON",
+    "promo paletówki": 1.59,
+    "promo 1 grupa": 1.63,
+    "promo 2 grupa": 1.66,
+    "promo 3 grupa": 1.68
+  },
+  {
+    "Wabar": "NAP000981",
+    "MM": 15840,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 2L JABL-BIALE WINOGR NGAZ PET",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "Wabar": "NAP001648",
+    "MM": 12417,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 2L JABLK-GRUSZKA NGAZ PET",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "Wabar": "NAP003249",
+    "MM": 38029,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 2L JABLKO-ARBUZ PET",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "Wabar": "Nap000189",
+    "MM": 9006,
+    "Nazwa": "TYMBARK NAPOJ OWOCE SWIATA 1L ZURAWIN-JAGOD-JABLK KARTON",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP000581",
+    "MM": 9025,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 2L JABLKO-MIETA NGAZ PET",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "Wabar": "NAP000582",
+    "MM": 9026,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 2L JABLKO-WISNIA NGAZ PET",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "Wabar": "NAP002708",
+    "MM": 28930,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 2L MANGO-MIETA PET",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "Wabar": "NAP000570",
+    "MM": 9027,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 2L POMARANCZA-BRZOSK NGAZ PET",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "Wabar": "NAP001198",
+    "MM": 9028,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML CYTRYNA-MIETA PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP000983",
+    "MM": 9029,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML JABLKO-ARBUZ NG PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP000252",
+    "MM": 9030,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML JABLKO-BRZOSKWINIA PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP002036",
+    "MM": 25663,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML JABLKO-KIWI PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP000376",
+    "MM": 9031,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML JABLKO-MIETA NGA PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP001199",
+    "MM": 9032,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML MALINA-MIETA NGAZ PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP002707",
+    "MM": 28928,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML MANGO-MIETA PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP000378",
+    "MM": 9033,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML POMARANCZA-BRZOSK NGAZ PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP000277",
+    "MM": 9034,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 500ML WISNIA-JABLKO NGAZ PET",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "NAP002983",
+    "MM": 32147,
+    "Nazwa": "TYMBARK NAPOJ GAZZZOWANY 330ML JABLKO ARBUZ PUSZKA",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "Nap001197",
+    "MM": 9017,
+    "Nazwa": "TYMBARK NAPOJ 250ML MALINA-MIETA NGAZ SZKLO",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "NAP003335",
+    "MM": 21782,
+    "Nazwa": "TYMBARK NAPOJ OWOCE SWIATA 1L ALOE VERA-JABL KARTON",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP000184",
+    "MM": 9001,
+    "Nazwa": "TYMBARK NAPOJ OWOCE SWIATA 1L BANAN-JABL-POM-CYTR KARTON",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP000686",
+    "MM": 9002,
+    "Nazwa": "TYMBARK NAPOJ OWOCE SWIATA 1L GRANAT-WINOGR-GREJ-J KARTON",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP000180",
+    "MM": 9003,
+    "Nazwa": "TYMBARK NAPOJ OWOCE SWIATA 1L KAKTUS-LIM-JABLK KARTON",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP000124",
+    "MM": 9022,
+    "Nazwa": "TYMBARK NAPOJ 2L WISNIA-JABLKO KARTON",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "Wabar": "NAP001532",
+    "MM": 12152,
+    "Nazwa": "TYMBARK NAPOJ OWOCE SWIATA 1L MANGO-JABLK-POM-CYTR KARTON",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP003694",
+    "MM": 15844,
+    "Nazwa": "TYMBARK NAPOJ OWOCE SWIATA 1L MARAKUJA-POM-CYTR KARTON",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "NAP000840",
+    "MM": 9052,
+    "Nazwa": "TYMBARK NEKTAR 1L ANANAS BCUK KARTON",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "NAP001482",
+    "MM": 9040,
+    "Nazwa": "TYMBARK NEKTAR 1L BANAN KARTON",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.01,
+    "promo 2 grupa": 1.04,
+    "promo 3 grupa": 1.06
+  },
+  {
+    "Wabar": "NAP000382",
+    "MM": 9041,
+    "Nazwa": "TYMBARK NEKTAR 1L CZARNA PORZECZKA KARTON",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "NAP002001",
+    "MM": 21768,
+    "Nazwa": "TYMBARK NEKTAR VITAMINI 300ML BANAN-MARCHEW-JABLKO PET",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "Wabar": "IMP007766",
+    "MM": 21769,
+    "Nazwa": "TYMBARK NEKTAR VITAMINI 300ML MARCHEW-BRZOSKWINIA-JABLKO PET",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "Wabar": "IMP007765",
+    "MM": 21770,
+    "Nazwa": "TYMBARK NEKTAR VITAMINI 300ML MARCHEW-JABLKO-MALINA PET",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "Wabar": "NAP003356",
+    "MM": 39617,
+    "Nazwa": "TYMBARK PO PROSTU KOMPOT 1,25L JABLKO RABARBAR PET",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "Nap000626",
+    "MM": 9023,
+    "Nazwa": "TYMBARK NAPOJ ASEPTIC 2L JABLKO-BRZOSKWINIA NGAZ PET",
+    "promo paletówki": 0.86,
+    "promo 1 grupa": 0.88,
+    "promo 2 grupa": 0.9,
+    "promo 3 grupa": 0.92
+  },
+  {
+    "Wabar": "NAP000102",
+    "MM": 12182,
+    "Nazwa": "TYMBARK SOK 1L JABLKO 100% PET",
+    "promo paletówki": 1.03,
+    "promo 1 grupa": 1.05,
+    "promo 2 grupa": 1.08,
+    "promo 3 grupa": 1.1
+  },
+  {
+    "Wabar": "NAP001677",
+    "MM": 9057,
+    "Nazwa": "TYMBARK SOK 1L JABLKO KARTON",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "Wabar": "NAP002862",
+    "MM": 9059,
+    "Nazwa": "TYMBARK SOK 1L MULTIWITAMINA CLASSIC BCUK KARTON",
+    "promo paletówki": 1.05,
+    "promo 1 grupa": 1.09,
+    "promo 2 grupa": 1.12,
+    "promo 3 grupa": 1.14
+  },
+  {
+    "Wabar": "NAP000650",
+    "MM": 15835,
+    "Nazwa": "TYMBARK SOK 1L MULTIWITAMINA PET",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "NAP001050",
+    "MM": 42508,
+    "Nazwa": "TYMBARK SOK 1L POMARANCZA - MANGO KARTON",
+    "promo paletówki": 0.95,
+    "promo 1 grupa": 1,
+    "promo 2 grupa": 1.03,
+    "promo 3 grupa": 1.05
+  },
+  {
+    "Wabar": "NAP001714",
+    "MM": 15836,
+    "Nazwa": "TYMBARK SOK 1L POMARANCZA 100% PET",
+    "promo paletówki": 1.49,
+    "promo 1 grupa": 1.53,
+    "promo 2 grupa": 1.56,
+    "promo 3 grupa": 1.58
+  },
+  {
+    "Wabar": "NAP000150",
+    "MM": 9060,
+    "Nazwa": "TYMBARK SOK 1L POMARANCZA KARTON",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "Wabar": "NAP002415",
+    "MM": 42507,
+    "Nazwa": "TYMBARK SOK 1L POMARANCZA Z MIAZSZ KARTON",
+    "promo paletówki": 0.92,
+    "promo 1 grupa": 0.94,
+    "promo 2 grupa": 0.96,
+    "promo 3 grupa": 0.98
+  },
+  {
+    "Wabar": "NAP000240",
+    "MM": 9063,
+    "Nazwa": "TYMBARK SOK 1L POMIDOR PIKANTNY KARTON",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "Wabar": "NAP000149",
+    "MM": 9064,
+    "Nazwa": "TYMBARK SOK 1L POMIDOR SWIEZY KARTON",
+    "promo paletówki": 0.82,
+    "promo 1 grupa": 0.84,
+    "promo 2 grupa": 0.86,
+    "promo 3 grupa": 0.88
+  },
+  {
+    "Wabar": "NAP003313",
+    "MM": 39051,
+    "Nazwa": "TYMBARK SOK 250ML PIKANTNY POMIDOR SZKLO",
+    "promo paletówki": 0.54,
+    "promo 1 grupa": 0.56,
+    "promo 2 grupa": 0.58,
+    "promo 3 grupa": 0.6
+  },
+  {
+    "Wabar": "NAP003327",
+    "MM": 39050,
+    "Nazwa": "TYMBARK SOK 250ML POMIDOROWY 100% SZKLO",
+    "promo paletówki": 0.54,
+    "promo 1 grupa": 0.56,
+    "promo 2 grupa": 0.58,
+    "promo 3 grupa": 0.6
+  },
+  {
+    "Wabar": "NAP000948",
+    "MM": 10337,
+    "Nazwa": "TYMBARK SOK 300ML JABLKO PET",
+    "promo paletówki": 0.53,
+    "promo 1 grupa": 0.55,
+    "promo 2 grupa": 0.57,
+    "promo 3 grupa": 0.59
+  },
+  {
+    "Wabar": "NAP000139",
+    "MM": 9068,
+    "Nazwa": "TYMBARK SOK KARTOONIK 200ML JABLKO BC KARTON",
+    "promo paletówki": 0.29,
+    "promo 1 grupa": 0.31,
+    "promo 2 grupa": 0.33,
+    "promo 3 grupa": 0.35
+  },
+  {
+    "Wabar": "NAP000479",
+    "MM": 9067,
+    "Nazwa": "TYMBARK SOK KARTOONIK 200ML JABLKO-BRZOSKWINIA KARTON",
+    "promo paletówki": 0.29,
+    "promo 1 grupa": 0.31,
+    "promo 2 grupa": 0.33,
+    "promo 3 grupa": 0.35
+  },
+  {
+    "Wabar": "NAP000990",
+    "MM": 9069,
+    "Nazwa": "TYMBARK SOK KARTOONIK 200ML MALINA-JABLKO-WISNIA KARTON",
+    "promo paletówki": 0.29,
+    "promo 1 grupa": 0.31,
+    "promo 2 grupa": 0.33,
+    "promo 3 grupa": 0.35
+  },
+  {
+    "Wabar": "NAP000571",
+    "MM": 9076,
+    "Nazwa": "TYMBARK SOK VEGA 500ML WARZYWNY PROWANSALSKIE POLE KARTON",
+    "promo paletówki": 0.65,
+    "promo 1 grupa": 0.67,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.71
+  },
+  {
+    "Wabar": "NAP000872",
+    "MM": 9077,
+    "Nazwa": "TYMBARK SOK VEGA 500ML WARZYWNY SLONECZNY MEKSYK KARTON",
+    "promo paletówki": 0.65,
+    "promo 1 grupa": 0.67,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.71
+  },
+  {
+    "Wabar": "NAP000572",
+    "MM": 9078,
+    "Nazwa": "TYMBARK SOK VEGA 500ML WARZYWNY SRODZIEMNOMORSKI KARTON",
+    "promo paletówki": 0.63,
+    "promo 1 grupa": 0.65,
+    "promo 2 grupa": 0.67,
+    "promo 3 grupa": 0.69
+  },
+  {
+    "Wabar": "KAT00532",
+    "MM": 9940,
+    "Nazwa": "WLOCLAWEK KETCHUP LAGODNY 380G SLOIK",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "Nap000172",
+    "MM": 9054,
+    "Nazwa": "TYMBARK NEKTAR 1L GREJPFRUT CZERW BCUK KARTON",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT00227",
+    "MM": 9943,
+    "Nazwa": "WLOCLAWEK KETCHUP PIKANTNY 380G SLOIK",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "Nap000140",
+    "MM": 9070,
+    "Nazwa": "TYMBARK SOK KARTOONIK 200ML MULTIWITAMINA KARTON",
+    "promo paletówki": 0.29,
+    "promo 1 grupa": 0.31,
+    "promo 2 grupa": 0.33,
+    "promo 3 grupa": 0.35
+  },
+  {
+    "Wabar": "Nap000786",
+    "MM": 32141,
+    "Nazwa": "DR WITT NAPOJ 1L JABLKO-WISNIA PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "KAT04716",
+    "MM": 9941,
+    "Nazwa": "WLOCLAWEK KETCHUP LAGODNY 480G BUTELKA",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "Wabar": "KAT04717",
+    "MM": 9944,
+    "Nazwa": "WLOCLAWEK KETCHUP PIKANTNY 480G BUTELKA",
+    "promo paletówki": 0.87,
+    "promo 1 grupa": 0.89,
+    "promo 2 grupa": 0.91,
+    "promo 3 grupa": 0.93
+  },
+  {
+    "Wabar": "KAT11296",
+    "MM": 10174,
+    "Nazwa": "KRAKUS CHRZAN 180G",
+    "promo paletówki": 0.67,
+    "promo 1 grupa": 0.69,
+    "promo 2 grupa": 0.71,
+    "promo 3 grupa": 0.73
+  },
+  {
+    "Wabar": "KAT01684",
+    "MM": 10556,
+    "Nazwa": "KRAKUS ZUPA BARSZCZ CZERWONY FAMILIJNY 1,5L KARTON",
+    "promo paletówki": 1.25,
+    "promo 1 grupa": 1.29,
+    "promo 2 grupa": 1.32,
+    "promo 3 grupa": 1.34
+  },
+  {
+    "Wabar": "KAT10984",
+    "MM": 10352,
+    "Nazwa": "LUBELLA MAKARON 400G SWIDERKI KOLOROWE",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "Nap001404",
+    "MM": 10896,
+    "Nazwa": "KUBUS WATERRR WODA 1,5L MALINA NGAZ PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "KAT18687",
+    "MM": 12482,
+    "Nazwa": "TIGER NAPOJ ENERGETYCZNY 900ML PET",
+    "promo paletówki": 0.65,
+    "promo 1 grupa": 0.67,
+    "promo 2 grupa": 0.69,
+    "promo 3 grupa": 0.71
+  },
+  {
+    "Wabar": "KAT18442",
+    "MM": 12980,
+    "Nazwa": "KRAKUS OGORKI KISZONE 630G",
+    "promo paletówki": 1.29,
+    "promo 1 grupa": 1.33,
+    "promo 2 grupa": 1.36,
+    "promo 3 grupa": 1.38
+  },
+  {
+    "Wabar": "imp002272",
+    "MM": 14933,
+    "Nazwa": "KUBUS WATERRR WODA 500ML  NGAZ PET",
+    "promo paletówki": 0.45,
+    "promo 1 grupa": 0.47,
+    "promo 2 grupa": 0.49,
+    "promo 3 grupa": 0.51
+  },
+  {
+    "Wabar": "Ogo000522",
+    "MM": 21776,
+    "Nazwa": "LUBELLA MAKARON 400G MINI KOKARDKA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "Ogo000353",
+    "MM": 25338,
+    "Nazwa": "TYMBARK MUS 100% 120G TRUSKAWKA",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "Wabar": "Nap003099",
+    "MM": 25657,
+    "Nazwa": "CAPRIO NAPOJ 2L ANANAS-MANGO KARTON",
+    "promo paletówki": 0.91,
+    "promo 1 grupa": 0.93,
+    "promo 2 grupa": 0.95,
+    "promo 3 grupa": 0.97
+  },
+  {
+    "Wabar": "Got000014",
+    "MM": 25685,
+    "Nazwa": "LUBELLA MAKARON 400G SPAGHETTI",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "KAT05429",
+    "MM": 49715,
+    "Nazwa": "LUBELLA 5 JAJ MAKARON 400G KRAJANKA",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "Wabar": "Nap002514",
+    "MM": 27096,
+    "Nazwa": "TIGER NAPOJ ENERGETYCZNY 250ML WIN PUSZKA",
+    "promo paletówki": 0.49,
+    "promo 1 grupa": 0.51,
+    "promo 2 grupa": 0.53,
+    "promo 3 grupa": 0.55
+  },
+  {
+    "Wabar": "KAT13084",
+    "MM": 42331,
+    "Nazwa": "LUBELLA MAKA WROCLAWSKA PUSZYSTA 1KG UK",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "Nap002346",
+    "MM": 27098,
+    "Nazwa": "TIGER NAPOJ ENERGETYCZNY 250ML MAX PUSZKA",
+    "promo paletówki": 0.34,
+    "promo 1 grupa": 0.36,
+    "promo 2 grupa": 0.38,
+    "promo 3 grupa": 0.4
+  },
+  {
+    "Wabar": "Nap002984",
+    "MM": 32148,
+    "Nazwa": "TYMBARK NAPOJ GAZZZOWANY 330ML POMAR MANGO PUSZKA",
+    "promo paletówki": 0.39,
+    "promo 1 grupa": 0.41,
+    "promo 2 grupa": 0.43,
+    "promo 3 grupa": 0.45
+  },
+  {
+    "Wabar": "KAT01153",
+    "MM": 5005,
+    "Nazwa": "LUBELLA MAKARON 400G SWIDER",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "Nap003255",
+    "MM": 33645,
+    "Nazwa": "KUBUS BABY MUS 100G JABLKO-BANAN",
+    "promo paletówki": 0.52,
+    "promo 1 grupa": 0.54,
+    "promo 2 grupa": 0.56,
+    "promo 3 grupa": 0.58
+  },
+  {
+    "Wabar": "Nap002747",
+    "MM": 34243,
+    "Nazwa": "KUBUS SOK 100% 850ML BANAN-JABL-MARCH-MANGO PET",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "KAT04451",
+    "MM": 55410,
+    "Nazwa": "LUBELLA PLATKI CORN FLAKES 400G PSI PATROL KULECZKI",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "Wabar": "KAT02742",
+    "MM": 53869,
+    "Nazwa": "NESTEA NAPOJ NGAZ 1,5L HERBATA BRZOSKWINIOWA PET",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "Wabar": "Nap001262",
+    "MM": 53872,
+    "Nazwa": "NESTEA NAPOJ NGAZ 1,5L HERBATA ZIELONA CYTRYNA PET",
+    "promo paletówki": 0.99,
+    "promo 1 grupa": 1.03,
+    "promo 2 grupa": 1.06,
+    "promo 3 grupa": 1.08
+  },
+  {
+    "Wabar": "Nap003264",
+    "MM": 53866,
+    "Nazwa": "NESTEA NAPOJ NGAZ 500ML HERBATA BRZOSKWINIOWA PET",
+    "promo paletówki": 0.72,
+    "promo 1 grupa": 0.74,
+    "promo 2 grupa": 0.76,
+    "promo 3 grupa": 0.78
+  },
+  {
+    "Wabar": "Nap003355",
+    "MM": 39618,
+    "Nazwa": "TYMBARK PO PROSTU KOMPOT 1,25L JABLKO SLIWKA PET",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "KAT05455",
+    "MM": 42332,
+    "Nazwa": "LUBELLA MAKA LUKSUSOWA PUSZYSTA 1KG UK",
+    "promo paletówki": 0.69,
+    "promo 1 grupa": 0.71,
+    "promo 2 grupa": 0.73,
+    "promo 3 grupa": 0.75
+  },
+  {
+    "Wabar": "Nap003234",
+    "MM": 36722,
+    "Nazwa": "TYMBARK ICE TEA 250ML BRZOSKWINIA BUT",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "Nap003235",
+    "MM": 53356,
+    "Nazwa": "TYMBARK ICE TEA 330ML CZARNA HERBATA - CYTRYNA NGAZ PUSZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "Nap003236",
+    "MM": 53357,
+    "Nazwa": "TYMBARK ICE TEA 330ML CZARNA HERBATA - MANGO NGAZ PUSZ",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "KAT10735",
+    "MM": 42488,
+    "Nazwa": "LOWICZ DZEM 100% WISNIA 210G",
+    "promo paletówki": 1.39,
+    "promo 1 grupa": 1.43,
+    "promo 2 grupa": 1.46,
+    "promo 3 grupa": 1.48
+  },
+  {
+    "Wabar": "Ogo002635",
+    "MM": 42497,
+    "Nazwa": "LOWICZ SOS 8 WARZYW PO SRODZIEMNOMORSKU 500G",
+    "promo paletówki": 1.09,
+    "promo 1 grupa": 1.13,
+    "promo 2 grupa": 1.16,
+    "promo 3 grupa": 1.18
+  },
+  {
+    "Wabar": "Ogo003682",
+    "MM": 47491,
+    "Nazwa": "LUBELLA MAKARON 400G SPREZYNKA",
+    "promo paletówki": 0.79,
+    "promo 1 grupa": 0.81,
+    "promo 2 grupa": 0.83,
+    "promo 3 grupa": 0.85
+  },
+  {
+    "Wabar": "Nap003886",
+    "MM": 35790,
+    "Nazwa": "TYMBARK NAPOJ GAZOWANY 330ML KAKTUS PUSZKA",
+    "promo paletówki": 0.37,
+    "promo 1 grupa": 0.39,
+    "promo 2 grupa": 0.41,
+    "promo 3 grupa": 0.43
+  },
+  {
+    "Wabar": "Nap003887",
+    "MM": 35789,
+    "Nazwa": "TYMBARK NAPOJ GAZOWANY 330ML MANGO PUSZKA",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "Nap003889",
+    "MM": 50865,
+    "Nazwa": "TYMBARK NAPOJ GAZOWANY 330ML POMARANCZA PUSZKA",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  },
+  {
+    "Wabar": "Ogo004199",
+    "MM": 49600,
+    "Nazwa": "LOWICZ MUS DESER A LA SZARLOTKA Z CYNAMONEM 100G",
+    "promo paletówki": 0.42,
+    "promo 1 grupa": 0.44,
+    "promo 2 grupa": 0.46,
+    "promo 3 grupa": 0.48
+  },
+  {
+    "Wabar": "Nap003735",
+    "MM": 49938,
+    "Nazwa": "KUBUS MUS OWOCOWY 200G JABLKO",
+    "promo paletówki": 0.51,
+    "promo 1 grupa": 0.53,
+    "promo 2 grupa": 0.55,
+    "promo 3 grupa": 0.57
+  },
+  {
+    "Wabar": "Nap001668",
+    "MM": 50870,
+    "Nazwa": "TYMBARK NEKTAR 1L JABLKO-GRUSZKA KARTON",
+    "promo paletówki": 0.89,
+    "promo 1 grupa": 0.91,
+    "promo 2 grupa": 0.93,
+    "promo 3 grupa": 0.95
+  },
+  {
+    "Wabar": "Nap000150",
+    "MM": 16076,
+    "Nazwa": "TYMBARK NEKTAR 1L POMARANCZA KARTON",
+    "promo paletówki": 1.03,
+    "promo 1 grupa": 1.07,
+    "promo 2 grupa": 1.1,
+    "promo 3 grupa": 1.12
+  },
+  {
+    "Wabar": "Nap003493",
+    "MM": 49978,
+    "Nazwa": "TYMBARK COLOVE NAPOJ GAZ 330 ML COLA MANGO PUSZKA",
+    "promo paletówki": 0.41,
+    "promo 1 grupa": 0.43,
+    "promo 2 grupa": 0.45,
+    "promo 3 grupa": 0.47
+  },
+  {
+    "Wabar": "Nap003494",
+    "MM": 50866,
+    "Nazwa": "TYMBARK NAPOJ GAZOWANY 330ML COLA-WISNIA PUSZKA",
+    "promo paletówki": 0.33,
+    "promo 1 grupa": 0.35,
+    "promo 2 grupa": 0.37,
+    "promo 3 grupa": 0.39
+  }
+]
